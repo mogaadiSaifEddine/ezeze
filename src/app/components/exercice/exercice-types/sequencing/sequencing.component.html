@@ -1,0 +1,26 @@
+<mat-card *ngIf="exercice.name">
+  <div class="question-container">
+    <mat-card-content style="text-align: center">
+      {{ exercice?.name }}
+    </mat-card-content>
+  </div>
+</mat-card>
+
+<mat-card>
+  <div class="question-container">
+    <mat-card-title [ngStyle]="(exercice['rtl']===true) && {'direction': 'rtl'}">
+      {{ exercice.question }}
+    </mat-card-title>
+
+    <mat-card-content [ngStyle]="(exercice['rtl']===true) && {'direction': 'rtl'}">
+      <div class="field-list" cdkDropList (cdkDropListDropped)="drop($event)">
+        <ng-container *ngFor="let block of exercice.blocks; let index = index">
+          <div *ngIf="block.exerciceBlockType === ExerciceBlockTypes.INPUT_TEXT" class="field-box" cdkDrag class="field">
+            <div class="field-custom-placeholder" *cdkDragPlaceholder></div>
+            <div>{{ block.placeholder }}</div>
+          </div>
+        </ng-container>
+      </div>
+    </mat-card-content>
+  </div>
+</mat-card>

@@ -1,0 +1,62 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image" [ngStyle]="{ 'background-image': 'url(' + clubFeeds.poster_image + ')' }"></div>
+    <mat-card-title>{{ clubFeeds.poster }}</mat-card-title>
+    <mat-card-subtitle>{{ clubFeeds.date | date: 'dd/MM/yyyy' }} </mat-card-subtitle>
+  </mat-card-header>
+  <div class="align-items-center justify-content-center">
+    <img mat-card-image *ngIf="clubFeeds.type === 'Image'" [src]="clubFeeds?.post" alt="Photo of a Shiba Inu" />
+    <!-- <video *ngIf="clubFeeds.type === 'video'" width="560" height="315" controls>
+      <source [src]="clubFeeds.post" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video> !-->
+    <iframe
+      class="align-self-center"
+      *ngIf="clubFeeds.type === 'Video'"
+      width="600"
+      height="315"
+      src="https://www.youtube.com/embed/_ciasFtwkRU"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+
+    <mat-card-content>
+      <p class="description">
+        {{ clubFeeds.description }}
+      </p>
+    </mat-card-content>
+  </div>
+
+  <div class="action">
+    <div class="col-md-6">
+      <button class="btn" mat-button>
+        <mat-icon>thumb_up</mat-icon>
+        <span class="action-button-content">Like</span>
+      </button>
+    </div>
+    <div class="col-md-6">
+      <button class="btn" mat-button (click)="commentFocus()">
+        <mat-icon>insert_comment</mat-icon>
+        <span class="action-button-content">Comment</span>
+      </button>
+    </div>
+  </div>
+
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Comment</mat-label>
+      <input id="clubFeeds.feed_id" class="border-radius" matInput #message maxlength="256" placeholder="Ex. I need help with..." />
+      <mat-icon matSuffix>send</mat-icon>
+      <mat-hint align="start"><strong>Don't disclose personal info</strong> </mat-hint>
+      <mat-hint align="end">{{ message.value.length }} / 256</mat-hint>
+    </mat-form-field>
+  </form>
+  <div class="justify-content-center comment" *ngFor="let comment of clubFeeds.comments | slice: start:end">
+    <app-club-feed-comment [comment]="comment"> </app-club-feed-comment>
+  </div>
+
+  <div class="centered-button">
+    <button *ngIf="this.clubFeeds.comments.length - this.end > 0" class="btn btn-primary" (click)="loadComments()">Load more comments</button>
+  </div>
+</mat-card>

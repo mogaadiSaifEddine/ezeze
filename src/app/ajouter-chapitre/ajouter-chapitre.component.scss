@@ -1,0 +1,35 @@
+table {
+  width: 100%;
+  background-color: #3e4665;
+}
+td,
+th {
+  width: 25%;
+  // color: white;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding-top: 3%;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 3px;
+}
+
+#uploadFile {
+  width: 100%;
+  z-index: 9;
+  opacity: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.trigger-button {
+  display: flex;
+  justify-content: center;
+}

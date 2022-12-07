@@ -1,0 +1,53 @@
+.question-container {
+  padding: 30px;
+  width: 100%;
+  mat-card-title {
+    line-height: 1.2em;
+    font-size: 40px;
+  }
+
+  .answers-container {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.8em;
+    color: #565655;
+    margin-top: 30px;
+    h4 {
+      margin-top: 15px;
+      font-size: 25px;
+      font-weight: bold;
+    }
+    mat-radio-button {
+      margin-bottom: 5px;
+      padding: 15px;
+    }
+
+    mat-radio-button:hover {
+      background-color: #e4f5ff;
+    }
+  }
+}
+
+mat-card {
+  margin: 1%;
+  width: 100%;
+  display: flex;
+  padding: 0px;
+
+  .image-container {
+    img {
+      width: 100%;
+    }
+  }
+}
+@media screen and (max-width: 767px) {
+  mat-card {
+    display: inline-block;
+    padding: 0px;
+    width: 100%;
+  }
+  mat-card-title {
+    line-height: 0.9em;
+    font-size: medium;
+  }
+}

@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="users-bar">
+    <div class="users-bar-container">
+      <form [formGroup]="userBarForm">
+        <mat-form-field style="color: white" class="example-form-field" outline>
+          <mat-label style="color: white; opacity: 0.5">Search for user</mat-label>
+          <div style="display: inline-block"></div>
+          <input [formControl]="userCtrl" matInput type="text" />
+
+          <button matSuffix mat-icon-button aria-label="search">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+        <mat-selection-list formControlName="selectedUser" [multiple]="false">
+          <mat-list-option class="user-container" *ngFor="let user of filteredUsers | async" [value]="user.name">
+            <div class="d-flex">
+              <img class="user-image" [src]="user.photo" />
+              <div class="user-name">
+                <p>{{ user.name }}</p>
+              </div>
+            </div>
+          </mat-list-option>
+        </mat-selection-list>
+      </form>
+    </div>
+  </div>
+  <div class="main">
+    <div class="header">
+      <div>
+        <img class="user-image" [src]="minimizedUsers[0].photo" />
+
+        {{ this.userBarForm.get('selectedUser')?.value }}
+      </div>
+    </div>
+    <div class="body">
+      <div class="messages-display" #myList>
+        <!-- [ngClass]="{'message-container-in':index%2==0,'message-container-out':index%2!=0}" -->
+        <div
+          *ngFor="let message of messagesList; let index = index"
+          [ngClass]="{
+            'message-container-in': this.message.chat_sender.name === this.userBarForm.get('selectedUser').value[0],
+            'message-container-out': this.message.chat_sender.name !== this.userBarForm.get('selectedUser').value[0]
+          }">
+          <!-- [ngClass]="{'message-in':index%2==0,'message-out':index%2!=0}" -->
+          <div
+            *ngIf="!loadingMessages"
+            class="message"
+            [ngClass]="{
+              'message-in': this.message.chat_sender.name === this.userBarForm.get('selectedUser').value[0],
+              'message-out': this.message.chat_sender.name !== this.userBarForm.get('selectedUser').value[0]
+            }">
+            <div class="message-header">{{ message.chat_sender.name }}</div>
+            <div class="message-content">
+              {{ message.message.content }}
+            </div>
+            <div class="message-date">{{ message.created | date: 'HH:MM dd/MM/YYYY' }}</div>
+            <!-- [ngClass]="{'message-triangle-white':index%2==0,'message-triangle-blue':index%2!=0}" -->
+            <!-- {{index%2==0?'Polygone 9':'Tracé 2499'}} -->
+            <img
+              [ngClass]="{ 'message-triangle-white': index % 2 === 0, 'message-triangle-blue': index % 2 !== 0 }"
+              class="message-triangle-white"
+              src="assets/images/icons/{{ index % 2 === 0 ? 'Polygone 9' : 'Tracé 2499' }}.png"
+              alt="" />
+          </div>
+        </div>
+
+        <div class="write-message">
+          <mat-form-field appearance="fill" class="message-input">
+            <mat-label>{{ "Qu'a tu envie de dire " + '!' }}</mat-label>
+            <input matInput />
+
+            <button mat-button mat-raised-button class="publish-btn" matSuffix (click)="sendMessage()" [disabled]="loadingSendMessage">
+              <div>{{ 'Send' }}</div>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

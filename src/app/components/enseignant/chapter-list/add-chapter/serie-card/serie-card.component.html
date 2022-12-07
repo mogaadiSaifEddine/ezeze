@@ -1,0 +1,36 @@
+<mat-panel-description class="add-button">
+  <button mat-raised-button color="primary" (click)="openDialog()">
+    <span class="material-icons">add</span>
+  </button>
+</mat-panel-description>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="ordre">
+    <th mat-header-cell *matHeaderCellDef>Ordre</th>
+
+    <td mat-cell *matCellDef="let element">{{ element?.ex_id }}</td>
+  </ng-container>
+  <ng-container matColumnDef="exercice">
+    <th mat-header-cell *matHeaderCellDef>Exercice</th>
+    <td mat-cell *matCellDef="let element">{{ element?.name }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef>Type</th>
+    <td mat-cell *matCellDef="let element">{{ element?.type }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let element">
+      <button class="icon-button" matTooltip="Edit" (click)="openDialog(element)" matTooltipPosition="left" aria-label="Add New Row">
+        <span class="material-icons"> edit </span>
+      </button>
+      <button class="icon-button" matTooltip="Delete" (click)="deleteExercice(element)" matTooltipPosition="left" aria-label="Add New Row">
+        <span class="material-icons"> delete </span>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

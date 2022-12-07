@@ -1,0 +1,16 @@
+<div class="comment-container">
+  <mat-card-header
+    mat-card-avatar
+    class="example-header-image"
+    [ngStyle]="{ 'background-image': 'url(' + comment.commenter_image + ')' }"
+  >
+  </mat-card-header>
+
+  <mat-card class="comment-card">
+    <span>{{ comment.commenter }}</span>
+
+    <mat-card-content>
+      <p>{{ comment.comment }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

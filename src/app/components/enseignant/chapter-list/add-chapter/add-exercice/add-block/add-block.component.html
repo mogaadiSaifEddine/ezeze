@@ -1,0 +1,35 @@
+<div class="container row">
+  <form [formGroup]="blockForm">
+    <mat-form-field appearance="outline">
+      <mat-select (selectionChange)="checkFieldsToShow()" formControlName="exerciceBlockType" placeholder="{{ 'choose-block-type' | translate }}">
+        <mat-option *ngFor="let type of TYPES_KEYS_MAP" [value]="type.key">{{ type.value }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="!blockForm.get('exerciceBlockType').valid && blockForm.get('exerciceBlockType').touched"> {{ 'please-select-any-item' | translate }} </mat-error>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="showLabel" appearance="outline">
+      <input formControlName="label" matInput [placeholder]="labelHolder" />
+    </mat-form-field>
+
+    <mat-form-field *ngIf="showPlaceholder" appearance="outline">
+      <input formControlName="placeholder" matInput [placeholder]="placeHolder" />
+    </mat-form-field>
+
+    <mat-form-field *ngIf="showCorrectValue" appearance="outline">
+      <input formControlName="correctValue" matInput [placeholder]="correctValueHolder" />
+    </mat-form-field>
+
+    <mat-form-field *ngIf="showValue" appearance="outline">
+      <input formControlName="value" matInput [placeholder]="valueHolder" />
+    </mat-form-field>
+
+    <mat-form-field *ngIf="showOrder" appearance="outline">
+      <input formControlName="blockOrder" matInput placeholder="{{ 'order' | translate }}" />
+    </mat-form-field>
+    <div class="add-button">
+      <button type="submit" class="post-button" (click)="saveBlok()" mat-raised-button>
+        {{ 'ajouter-block' | translate }}
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,23 @@
+<button mat-icon-button class="right close-button" [mat-dialog-close]="false">
+  <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button>
+<mat-dialog-content>
+  <div>
+    <mat-card-header>Ajouter des serie</mat-card-header>
+    <div class="mt-4" *ngFor="let serie of data.series">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> {{ serie.seriesType | translate }}</mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <app-serie-card [serie_id]="serie.id" [chapter_id]="this.data.chapter_id" [serie]="serie.exercices"></app-serie-card>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <div class="add-button">
+      <button [mat-dialog-close]="true" class="post-button" color="primary">Terminer</button>
+    </div>
+  </div>
+</mat-dialog-content>

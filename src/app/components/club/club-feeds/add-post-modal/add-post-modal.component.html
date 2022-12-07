@@ -1,0 +1,89 @@
+<div>
+  <div class="add-title">
+    <h2 class="primary">Ajouter un poste</h2>
+  </div>
+  <div>
+    <form [formGroup]="addCusForm" (change)="formChanged()">
+      <mat-grid-list
+        [cols]="breakpoint"
+        rowHeight="75px"
+        (window:resize)="onResize($event)"
+      >
+        <mat-grid-tile>
+          <div class="text-inside">
+            <mat-form-field>
+              <mat-select
+                placeholder="Choisi un type de poste"
+                [(value)]="selected"
+                formControlName="postType"
+                required
+              >
+                <mat-option value="Text">Text</mat-option>
+                <mat-option value="Image">Image</mat-option>
+                <mat-option value="Video">Video</mat-option>
+              </mat-select>
+
+              <mat-error
+                *ngIf="addCusForm.controls?.['postType'].hasError('required')"
+              >
+                choisissez un type de poste, svp ...
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="text-inside">
+            <mat-form-field class="big-post">
+              <textarea
+                formControlName="description"
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
+                cdkAutosizeMaxRows="5"
+                matInput
+                required
+                placeholder="A quoi pensez vous, {{ userName }}"
+              ></textarea>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <div
+        *ngIf="
+          addCusForm.get('postType').value === 'Video' ||
+          addCusForm.get('postType').value === 'Image'
+        "
+        class="dropzone"
+      >
+        <input
+          type="file"
+          #fileDropRef
+          id="fileDropRef"
+          accept="image/*, video/*"
+        />
+
+        <mat-icon class="mat-icon">cloud_upload</mat-icon>
+      </div>
+      <div class="btn-sec">
+        <button
+          mat-raised-button
+          type="submit"
+          color="primary"
+          class="Update-btn"
+          (click)="onAddCus()"
+        >
+          Ajouter
+        </button>
+        <button
+          mat-raised-button
+          type="button"
+          class="Discard-btn"
+          (click)="openDialog()"
+        >
+          Annuler
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

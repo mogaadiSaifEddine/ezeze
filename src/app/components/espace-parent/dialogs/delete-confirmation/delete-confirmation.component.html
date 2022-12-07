@@ -1,0 +1,25 @@
+<section id="deleteConfirmationDialog">
+    <header>
+        <h2>Delete Student</h2>
+        <button mat-flat-button (click)="close()" color="">
+            <mat-icon>close</mat-icon>
+        </button>
+    </header>
+
+    <main>
+        <p>You are about to delete student: <strong>{{StudentDetails.firstname}}</strong></p>
+
+        <div class="confirmationWarning">
+            <h4>
+                <mat-icon>warning</mat-icon>
+                Warning
+            </h4>
+            <p>If you proceed, this student will be permanently deleted and cannot be restored.</p>
+        </div>
+    </main>
+
+    <div mat-dialog-actions align="end">
+        <button mat-button (click)="close()">Cancel</button>
+        <button mat-flat-button color="warn" (click)="deleteStudent()">I understand, delete</button>
+    </div>
+</section>

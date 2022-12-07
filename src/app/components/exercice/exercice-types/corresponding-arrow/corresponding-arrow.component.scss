@@ -1,0 +1,87 @@
+* {
+  font-family: Lato;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  padding: 2%;
+}
+
+mat-card {
+  margin: 1%;
+}
+
+.question-container {
+  padding: 30px;
+
+  mat-card-title {
+    line-height: 1.2em;
+    font-size: 40px;
+  }
+
+  .answers-container {
+    justify-content: center;
+    margin-bottom: 10%;
+    font-size: 1.8em;
+    color: #565655;
+    width: 400px;
+    max-width: 100%;
+    margin: 0 25px 25px 0;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+
+section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.block-container {
+  width: 500px;
+  max-width: 100%;
+  margin-left: 50px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.box {
+  flex: 0 1 auto;
+  display: flex;
+  justify-content: center;
+  width: 400px;
+  padding: 1rem;
+  margin: 25px;
+  border-radius: 0.5rem;
+  text-align: left;
+  line-height: 1.5;
+  color: #fff;
+  background-image: linear-gradient(to right, #8e2de2, #4a00e0);
+}
+
+.box-1 {
+  width: auto;
+  max-width: 350px;
+}
+
+.box-1.expanded {
+  min-height: 100px;
+}
+
+.select {
+  border: 3px solid rgb(182, 130, 130);
+}
+/* Style the lines like this */
+draw-lines {
+  stroke: rgb(54, 54, 71);
+  stroke-width: 2px;
+}
+
+pre {
+  background: lightgray;
+  padding: 10px;
+}

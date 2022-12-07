@@ -1,0 +1,41 @@
+<mat-card *ngIf="exercice.name">
+  <div class="question-container">
+    <mat-card-content style="text-align: center">
+      {{ exercice?.name }}
+    </mat-card-content>
+  </div>
+</mat-card>
+
+<mat-card>
+  <div class="question-container">
+    <mat-card-title [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"> Faites correspondre les éléments suivants avec leurs noms: </mat-card-title>
+
+    <mat-card-content [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+      <div cdkDropListGroup class="paragraph-container">
+        <span>
+          <ng-container *ngFor="let block of exercice.blocks; let index = index">
+            <ng-container *ngIf="block.exerciceBlockType === ExerciceBlockTypes.TEXT">
+              {{ block.value }}
+            </ng-container>
+
+            <div
+              *ngIf="block.exerciceBlockType === ExerciceBlockTypes.INPUT_TEXT"
+              cdkDropList
+              cdkDropListOrientation="horizontal"
+              [cdkDropListData]="inputLists[index]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of inputLists[index]" cdkDrag>{{ item }}</div>
+            </div>
+
+            <br *ngIf="block.exerciceBlockType === ExerciceBlockTypes.BREAK" />
+          </ng-container>
+        </span>
+        <br />
+        <div cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="valuesList" class="example-list" (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let item of valuesList" cdkDrag>{{ item }}</div>
+        </div>
+      </div>
+    </mat-card-content>
+  </div>
+</mat-card>

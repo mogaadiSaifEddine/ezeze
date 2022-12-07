@@ -1,0 +1,55 @@
+<div id="tokenDetailsDialog">
+    <h2 mat-dialog-title>Token details</h2>
+
+    <mat-dialog-content class="mat-typography">
+        <table>
+            <tr>
+                <th>Token</th>
+                <td><span id="truncatedToken">{{tokenDetails.value}}</span></td>
+            </tr>
+            <tr>
+                <th>Created At</th>
+                <td>{{tokenDetails.creationDate}}</td>
+            </tr>
+            <tr>
+                <th>Expires on</th>
+                <td>{{tokenDetails.expirationDate}}</td>
+            </tr>
+            <tr>
+                <th>Users capacity</th>
+                <td>{{tokenDetails.numberUsers}}</td>
+            </tr>
+            <tr>
+                <th>Attached to account(s)</th>
+                <td>{{tokenDetails.usedUsersNumber}}</td>
+            </tr>
+        </table>
+        <!-- RESPONSIVE LAYOUT -->
+        <ul>
+            <li>
+                Token
+                <span>{{tokenDetails.value}}</span>
+            </li>
+            <li>
+                Created At
+                <span>{{tokenDetails.creationDate}}</span>
+            </li>
+            <li>
+                Expires on
+                <span>{{tokenDetails.expirationDate}}</span>
+            </li>
+            <li>
+                Users capacity
+                <span>{{tokenDetails.numberUsers}}</span>
+            </li>
+            <li>
+                Attached to account(s)
+                <span>{{tokenDetails.usedUsersNumber}}</span>
+            </li>
+        </ul>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Close</button>
+    </mat-dialog-actions>
+</div>

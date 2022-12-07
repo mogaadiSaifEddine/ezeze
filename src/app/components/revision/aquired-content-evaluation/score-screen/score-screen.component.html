@@ -1,0 +1,18 @@
+<mat-card class="welcome-container">
+  <h1>{{ 'revision.good-job' | translate }}</h1>
+
+  <mat-progress-bar class="progress-bar" color="warn" [value]="score"> </mat-progress-bar>
+  <button *ngIf="!canGoNext" id="start-evaluation-btn" mat-fab matTooltip="Home" color="warn" (click)="goToDashboard()" aria-label="Example icon button with a home icon">
+    <mat-icon>home</mat-icon>
+  </button>
+  <button
+    *ngIf="canGoNext"
+    id="start-evaluation-btn"
+    mat-fab
+    matTooltip="Go to the next level"
+    color="warn"
+    (click)="goNextLevel()"
+    aria-label="Example icon button with a home icon">
+    <mat-icon>navigate_next</mat-icon>
+  </button>
+</mat-card>

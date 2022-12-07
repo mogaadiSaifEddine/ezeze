@@ -1,0 +1,81 @@
+<div id="voucherAndActionDialog">
+    <div id="leftSection">
+        <img src="../../../../../assets/img/undraw_my_password_re_ydq7.svg" alt="">
+    </div>
+    <div id="rightSection">
+        <mat-stepper [linear]="isLinear" #stepper>
+            <mat-step [stepControl]="tokenForm" class="firstStep">
+                <mat-progress-bar mode="indeterminate" *ngIf="tokenIsBeingChecked"></mat-progress-bar>
+                <ng-template matStepLabel>Add a New Vourcher</ng-template>
+                <div class="stepBody">
+                    <form [formGroup]="tokenForm">
+                        <div mat-dialog-content class="mat-typography">
+                            <p>You are about to add a new voucher.</p>
+                            <p>This will allow you to add new students account(s).</p>
+
+                            <mat-form-field appearance="outline">
+                                <mat-label>Token</mat-label>
+                                <input type="text" formControlName='token' matInput placeholder="Ex. 1665003584" [disabled]="tokenIsValid">
+                                <mat-error *ngIf="getTokenInput.hasError('required')">
+                                    Token is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-error *ngIf="showError">
+                                Invalid token!
+                            </mat-error>
+                        </div>
+
+                        <div mat-dialog-actions align="end" class="stepFooter">
+                            <button mat-button (click)="close()">Cancel</button>
+                            <!-- button to trigger check -->
+                            <button mat-flat-button color="primary" (click)="verifyToken()" [disabled]="!tokenForm.valid" *ngIf="!tokenIsBeingChecked && !tokenIsValid || this.tokenForm.invalid">
+                                <mat-icon>check_circle_outline</mat-icon>
+                                Verify
+                            </button>
+                            <!-- check is in progress loader -->
+                            <button mat-flat-button [disabled]="true" *ngIf="tokenIsBeingChecked">
+                                <span>
+                                    Verifying...
+                                </span>
+                            </button>
+                            <!-- check is done, and token is valid -->
+                            <button mat-flat-button color="accent" matStepperNext *ngIf="tokenIsValid">
+                                Next
+                                <mat-icon>arrow_forward</mat-icon>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </mat-step>
+            <!-- AFTER TOKEN HAS BEEN VERIFIED, CHOOSE ACTION TO PROCEED -->
+            <mat-step [stepControl]="">
+                <ng-template matStepLabel>Choose action</ng-template>
+                <div class="stepBody">
+                    <p>How do you wish to proceed ?</p>
+
+                    <div class="buttonGroup">
+                        <div (click)="openAddStudentDialog()" class="triggerCard">
+                            <div class="cardIcon">
+                                <mat-icon>group_add</mat-icon>
+                            </div>
+                            <div class="cardBody">
+                                <h2>Add account</h2>
+                                <p>Add new students using the generated token.</p>
+                            </div>
+                        </div>
+
+                        <div class="triggerCard">
+                            <div class="cardIcon">
+                                <mat-icon>people</mat-icon>
+                            </div>
+                            <div class="cardBody" (click)="showManageStudentAccountGuide()">
+                                <h2>update account</h2>
+                                <p>Update an existing account by replacing an expired token.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-step>
+        </mat-stepper>
+    </div>
+</div>

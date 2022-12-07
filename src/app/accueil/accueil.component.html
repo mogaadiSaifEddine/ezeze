@@ -1,0 +1,292 @@
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top d-flex align-items-center header-transparent p-15">
+  <div class="bg-light hide h-100">
+    <img src="assets/image.png" class="testimonial-imga h-100" alt="{{ 'e-learning-logo-image' | translate }}" />
+  </div>
+  <div class="d-none w-100 d-lg-block p-3">
+    <c-nav class="justify-content-end language-right">
+      <c-nav-item>
+        <a [active]="true" class="nav-text" routerLink="" fragment="hero" cNavLink>
+          {{ 'header.accueil' | translate | titlecase }}
+        </a>
+      </c-nav-item>
+      <c-nav-item>
+        <a routerLink="" fragment="about" class="nav-text" cNavLink>{{ 'header.a-propos' | translate | titlecase }}</a>
+      </c-nav-item>
+      <c-nav-item>
+        <a routerLink="" fragment="contact" class="nav-text" cNavLink>{{ 'header.contact' | translate }}</a>
+      </c-nav-item>
+
+      <c-nav-item>
+        <a routerLink="/login" class="nav-text" [state]="{ isRegisterPageActive: false }" cNavLink>{{ 'common.login' | translate }}</a>
+      </c-nav-item>
+      <c-nav-item>
+        <a routerLink="/signup" class="nav-text" [state]="{ isRegisterPageActive: true }" cNavLink>{{ 'common.sign-up' | translate }}</a>
+      </c-nav-item>
+      <c-nav-item>
+        <c-dropdown variant="nav-item">
+          <a cDropdownToggle href class="nav-text">
+            {{ 'common.language' | translate }}
+          </a>
+          <ul cDropdownMenu>
+            <li>
+              <a cDropdownItem (click)="changeLang('en')">{{ 'langs.en' | translate }}</a>
+            </li>
+            <li>
+              <a cDropdownItem (click)="changeLang('fr')">{{ 'langs.fr' | translate }}</a>
+            </li>
+            <li>
+              <a cDropdownItem (click)="changeLang('ar')">{{ 'langs.ar' | translate }}</a>
+            </li>
+          </ul>
+        </c-dropdown>
+      </c-nav-item>
+    </c-nav>
+  </div>
+  <div class="d-sm-block d-lg-none p-3">
+    <button cButton color="dark" cOffcanvasToggle="OffcanvasStart">
+      <svg cIcon name="cil-hamburger-menu" size="xl"></svg>
+    </button>
+  </div>
+  <!-- navbar -->
+</header>
+<c-offcanvas placement="end" id="OffcanvasStart">
+  <c-offcanvas-header>
+    <h5 cOffcanvasTitle></h5>
+    <button cButtonClose class="text-reset" cOffcanvasToggle="OffcanvasStart"></button>
+  </c-offcanvas-header>
+  <c-offcanvas-body>
+    <c-nav class="flex-column">
+      <c-nav-item>
+        <a [active]="true" class="text-dark" routerLink="" fragment="hero" cNavLink>
+          {{ 'header.accueil' | translate }}
+        </a>
+      </c-nav-item>
+      <c-nav-item>
+        <a class="text-dark" routerLink="" fragment="about" cNavLink>{{ 'header.a-propos' | translate }}</a>
+      </c-nav-item>
+      <c-nav-item>
+        <a class="text-dark" routerLink="" fragment="contact" cNavLink>{{ 'header.contact' | translate }}</a>
+      </c-nav-item>
+
+      <c-nav-item>
+        <a class="text-dark" routerLink="/login" cNavLink>{{ 'common.login' | translate }}</a>
+      </c-nav-item>
+      <c-nav-item>
+        <a class="text-dark" routerLink="/signup" cNavLink>{{ 'common.sign-up' | translate }}</a>
+      </c-nav-item>
+    </c-nav>
+  </c-offcanvas-body>
+</c-offcanvas>
+
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+  <div class="hero-container">
+    <!-- <h1 class="text-center fade show">{{ 'home.slogan' | translate }}</h1>
+    <h2 class="fade show">{{ 'common.site-link' | translate }}</h2> -->
+    <a href="#about" class="btn-scroll scrollto" title="{{ 'common.scroll-down' | translate }}"
+      ><svg cIcon name="cil-chevron-bottom" size="lg"></svg> <i class="bx bx-chevron-down"></i
+    ></a>
+  </div>
+</section>
+<!-- End Hero -->
+
+<main id="main">
+  <!-- ======= About Me Section ======= -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="section-title">
+        <h2>{{ 'common.a-propos' | translate }}</h2>
+      </div>
+      <div class="row">
+        <div class="d-flex flex-column align-items-stretch">
+          <div class="content ps-lg-4 d-flex flex-column justify-content-center">
+            <div class="row">
+              <!-- <strong>
+                <p class="espaceentre">
+                  {{ 'home.historique' | translate }}
+                </p></strong
+              >-->
+              <strong>
+                {{ 'home.desc-societe-1' | translate }}
+              </strong>
+            </div>
+            <!-- <div class="row mt-n4">
+              <div class="col-md-6 mt-5 d-md-flex align-items-md-stretch">
+                <div class="count-box">
+                  <strong></strong>
+                  <p id="Company">
+                    {{ 'home.desc-societe-2' | translate }}
+                  </p>
+                </div>
+              </div> j
+
+              <div class="col-md-6 mt-5 d-md-flex align-items-md-stretch">
+                <div class="count-box">
+                  <strong>{{ 'home.prestation-personnalisee' | translate }}</strong>
+                  <p id="Company">
+                    {{ 'home.desc-societe-3' | translate }}
+                  </p>
+                </div>
+              </div>
+            </div> -->
+          </div>
+          <!-- End .content-->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Contact Me Section ======= -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="section-title">
+        <h2>{{ 'home.nous-contacter' | translate }}</h2>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <input type="text" name="name" class="form-control" id="name" placeholder="{{ 'home.votre-nom' | translate }}" required />
+              </div>
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <input type="email" class="form-control" name="email" id="email" placeholder=" {{ 'common.email' | translate }}" />
+              </div>
+            </div>
+            <div class="form-group mt-3">
+              <input type="text" class="form-control" name="subject" id="subject" placeholder="{{ 'common.sujet' | translate }}" required />
+            </div>
+            <div class="form-group mt-3">
+              <textarea class="form-control" name="message" rows="6" placeholder="{{ 'home.message' | translate }}" required></textarea>
+            </div>
+            <div class="my-3">
+              <div class="loading">{{ 'common.loading' | translate }}</div>
+              <div class="error-message"></div>
+              <div class="sent-message">
+                {{ 'home.message-envoyé' | translate }}
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="submit">
+                {{ 'home.envoyer-le-message' | translate }}
+              </button>
+            </div>
+          </form>
+          <div class="social-links">
+            <a target="_blank" href="https://www.youtube.com/channel/UCavSHrpV2ya6BDaS2K2cNnA" class="youtube">
+              <mat-icon>video_library</mat-icon>
+            </a>
+            <a target="_blank" href="https://www.facebook.com/INESAcademy" class="facebook">
+              <svg cIcon name="cib-facebook" size="lg"></svg>
+              <i class="bi bi-facebook"></i>
+            </a>
+
+            <a target="_blank" href="https://www.facebook.com/groups/inesacademy" class="facebook">
+              <mat-icon>group</mat-icon>
+            </a>
+            <a target="_blank" href="https://www.instagram.com/ines_academy/" class="instagram">
+              <svg cIcon name="cib-instagram" size="lg"></svg>
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a target="_blank" href="https://www.linkedin.com/in/ines-academy/" class="linkedin">
+              <svg cIcon name="cib-linkedin" size="lg"></svg>
+              <i class="bi bi-linkedin"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="row">
+            <div class="col-4">
+              <div class="info-box mt-4">
+                <svg style="color: #333" cIcon name="cil-envelope-letter" size="lg"></svg>
+                <h3>{{ 'common.email' | translate }}</h3>
+
+                <span style="width: 100%">contact@inesacademy.com</span>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="info-box mt-4">
+                <svg style="color: #333" cIcon name="cil-phone" size="lg"></svg>
+                <h3>{{ 'common.phone' | translate }}</h3>
+                (216) 72 522 311
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="info-box mt-4">
+                <svg style="color: #333" cIcon name="cil-fax" size="lg"></svg>
+                <i class="bx bx-world"></i>
+                <h3>{{ 'common.fax' | translate }}</h3>
+                (216) 72 522 311
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-title"></div>
+  <div class="container" style="margin-bottom: 2%">
+    <div class="section-title">
+      <h2>{{ 'home.notre-adresse' | translate }}</h2>
+    </div>
+
+    <div class="row">
+      <app-map></app-map>
+    </div>
+  </div>
+
+  <!-- End About Me Section -->
+</main>
+
+<!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <img src="assets/image.png" class="footer-logo" alt="{{ 'e-learning-logo-image' | translate }}" />
+      </div>
+      <div class="col-md-3">
+        <div class="footer-link mt-45">
+          <h4>Contactez nous</h4>
+          <ul>
+            <li>
+              <a
+                target="_blank"
+                href="https://www.google.com/maps/dir//5Q2W%2B22W+I.N.E.S+Academy,+Avenue+Kheireddine,+Menzel+Bourguiba+7050/@37.1501141,9.5149327,11z/data=!4m17!1m7!3m6!1s0x12e32333b86115f9:0x7784c3eda743d2a6!2sI.N.E.S+Academy!8m2!3d37.1501324!4d9.7950478!15sCi1hdmVudWUga2hlaXJlZGRpbmUsIG1lbnplbCBib3VyZ3VpYmEsIHR1bmlzaWGSAQ1zY2hvb2xfY2VudGVy4AEA!4m8!1m0!1m5!1m1!1s0x12e32333b86115f9:0x7784c3eda743d2a6!2m2!1d9.7950478!2d37.1501324!3e2">
+                Kheireddine, Menzel Bourguiba, Tunisia</a
+              >
+            </li>
+            <li>
+              <a target="_blank" href="mailto:contact@inesacademy.com">contact@inesacademy.com</a>
+            </li>
+            <li>(216) 72 522 311</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <h4>Rejoignez-nous</h4>
+
+        <div class="social-links" style="color: #333">
+          <a target="_blank" href="https://www.facebook.com/INESAcademy" class="facebook"><svg cIcon name="cib-facebook" size="lg"></svg> </a>
+          <a target="_blank" href="https://www.instagram.com/ines_academy" class="instagram"><svg cIcon name="cib-instagram" size="lg"></svg> </a>
+          <a target="_blank" href="https://www.linkedin.com/in/ines-academy" class="linkedin"><svg cIcon name="cib-linkedin" size="lg"></svg> </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center active">
+  <svg cIcon name="cil-chevron-circle-up-alt" size="xl"></svg>
+</a>
+
+<!-- Vendor JS Files -->

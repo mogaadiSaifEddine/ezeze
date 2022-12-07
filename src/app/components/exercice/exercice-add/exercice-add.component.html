@@ -1,0 +1,90 @@
+<!-- <h3>Ajouter exercice</h3>
+
+<div [hidden]="submitted" style="width: 400px;">
+  <form (ngSubmit)="onSubmit()"  >
+    <mat-form-field class="example-full-width" appearance="fill">
+     <mat-label>Niveau</mat-label>
+     <mat-select [(ngModel)]="ex.niveau" [formControl]="niveau">
+      <mat-option *ngFor="let n of niveaux" [value]="n"  >{{n.titre}}</mat-option>
+     </mat-select>
+     <mat-error *ngIf="niveau.invalid">{{getErrorMessage()}}</mat-error>
+
+</mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Trimestre</mat-label>
+      <mat-select [(ngModel)]="ex.trimestre" [formControl]="trimestre">
+        <mat-option *ngFor="let n of trimestres" [value]="n"  >{{n.titre}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="trimestre.invalid">{{getErrorMessage()}}</mat-error>
+
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Section</mat-label>
+      <mat-select [(ngModel)]="champselec"  (selectionChange)="SelectChamp($event)"  [formControl]="champ">
+        <mat-option *ngFor="let n of champs" [value]="n"  >{{n.titre}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="champ.invalid">{{getErrorMessage()}}</mat-error>
+
+    </mat-form-field>
+
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Specialité</mat-label>
+      <mat-select [(ngModel)]="ex.sousChamp" [formControl]="sousChamp" [disabled]="!cacher">
+        <mat-option *ngFor="let t of sousChamps"  [value]="t"  >{{t.titre}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="champ.invalid">{{getErrorMessage()}}</mat-error>
+
+    </mat-form-field>
+
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Chapitre</mat-label>
+      <mat-select [(ngModel)]="ex.chapitre" [formControl]="chapitre">
+        <mat-option *ngFor="let n of chapitres" [value]="n"  >{{n.titre}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="chapitre.invalid">{{getErrorMessage()}}</mat-error>
+
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Difficulté</mat-label>
+      <mat-select [(ngModel)]="ex.difficulte" [formControl]="difficulte">
+        <mat-option *ngFor="let n of difficultes" [value]="n"  >{{n.titre}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="difficulte.invalid">{{getErrorMessage()}}</mat-error>
+
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Numero Exercice</mat-label>
+      <input matInput placeholder="par exemple 4"  type="number" [(ngModel)]="ex.numero" step="1"  [formControl]="numero">
+      <mat-error *ngIf="numero.invalid">{{getErrorMessage()}}</mat-error>
+
+
+    </mat-form-field>
+
+
+
+    <div class="form-group" >
+      <label >Enoncé</label><br/>
+      <input  type="file" class="form-control"  (change)="onFileChange($event)"   [formControl]="fichier" >
+      <mat-error *ngIf="fichier.invalid">{{getErrorMessage()}}</mat-error>
+
+
+    </div>
+
+
+  <br/>
+    <br/>
+    <button type="submit" class="btn btn-success">Ajotuer exercice</button>
+
+
+  </form>
+
+
+
+</div> -->
+
+

@@ -1,0 +1,29 @@
+<mat-card *ngIf="exercice.name">
+  <div class="question-container">
+    <mat-card-content style="text-align: center">
+      {{ exercice?.name }}
+    </mat-card-content>
+  </div>
+</mat-card>
+
+<mat-card>
+  <div class="question-container">
+    <mat-card-title [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+      {{ exercice.question }}
+    </mat-card-title>
+    <mat-card-content [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+      <ng-container *ngFor="let block of exercice.blocks">
+        <mat-radio-group class="answers-container">
+          <h4 *ngIf="block.exerciceBlockType === ExerciceBlockTypes.QUESTION">
+            {{ block.label }}
+          </h4>
+          <mat-radio-button (change)="valueChanged($event)" *ngIf="block.exerciceBlockType === ExerciceBlockTypes.RADIO" [value]="block">{{ block.label }}</mat-radio-button>
+        </mat-radio-group>
+      </ng-container>
+    </mat-card-content>
+  </div>
+  <div class="image-container">
+    <!-- <img *ngIf="!imageBlock" src="assets/images/kids.jpg" alt="" /> -->
+    <!-- <img *ngIf="imageBlock" src="assets/images/{{ imageBlock.value }}" alt="" /> -->
+  </div>
+</mat-card>

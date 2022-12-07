@@ -1,0 +1,16 @@
+<section id="messageContainer" *ngIf="thereIsAnAnswer">
+    <div id="falfoulContainer">
+        <img src="https://i.imgur.com/ZN7i2jg.png" alt="Falfoul Image">
+    </div>
+
+    <div id="falfoulMessage" class="success" *ngIf="answerIsCorrect">
+        <h1>{{congrats}}</h1>
+        <div>
+        </div>
+    </div>
+
+    <div id="falfoulMessage" class="failure" *ngIf="!answerIsCorrect">
+        <h1>{{congrats}}</h1>
+        <h1>{{failureMessage}}</h1>
+    </div>
+</section>

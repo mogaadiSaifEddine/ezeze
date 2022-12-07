@@ -1,0 +1,37 @@
+<mat-card *ngIf="exercice.name">
+  <div class="question-container">
+    <mat-card-content style="text-align: center">
+      {{ exercice?.name }}
+    </mat-card-content>
+  </div>
+</mat-card>
+
+<mat-card>
+  <div>
+    <!-- <img *ngIf="!imageBlock" src="assets/images/photothree.jpg" alt="" /> -->
+    <!-- <img *ngIf="imageBlock" src="assets/images/{{ imageBlock.value }}" alt="" /> -->
+  </div>
+  <div class="question-container">
+    <mat-card-title [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+      {{ exercice.question }}
+    </mat-card-title>
+   
+    <mat-card-content [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }" >
+      <div *ngFor="let question of questions">
+        <div *ngIf="question.exerciceBlockType === ExerciceBlockTypes.INPUT_TEXT" >
+          <div class="label" >
+            {{ question.label }}
+          </div>
+          
+          <mat-form-field  appearance="outline" (change)="valueChanged()">
+            <mat-label>Answer</mat-label>
+            <input matInput [(ngModel)]="question.value" required />
+          </mat-form-field>
+        </div>
+        
+        <br *ngIf="question.exerciceBlockType === ExerciceBlockTypes.BREAK" />
+
+      </div>
+    </mat-card-content>
+  </div>
+</mat-card>

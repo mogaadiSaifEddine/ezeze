@@ -1,0 +1,33 @@
+<mat-card *ngIf="exercice.name && !loading">
+  <div class="question-container">
+    <mat-card-content style="text-align: center">
+      {{ exercice?.name }}
+    </mat-card-content>
+  </div>
+</mat-card>
+
+<mat-card>
+  <div>
+    <!-- <img *ngIf="!imageBlock" src="assets/images/kids.jpg" alt="" /> -->
+    <!-- <img *ngIf="imageBlock" src="assets/images/{{ imageBlock.value }}" alt="" /> -->
+  </div>
+  <div class="question-container">
+    <mat-card-title [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+      {{ exercice.question }}
+    </mat-card-title>
+
+    <mat-card-content [ngClass]="{'rtl':exercice['rtl']===true}" >
+     
+      <div *ngFor="let question of questions">
+        <div class="label" [ngClass]="{'rtl':exercice['rtl']===true}">
+          {{ question.label }}
+        </div>
+        
+        <mat-form-field appearance="outline" (change)="valueChanged()">
+          <mat-label>Answer</mat-label>
+          <input matInput [(ngModel)]="question.value" required />
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+  </div>
+</mat-card>

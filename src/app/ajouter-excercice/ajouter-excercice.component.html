@@ -1,0 +1,265 @@
+<div mat-dialog-content>
+
+  <div class="d-flex justify-content-center" >
+  
+      <div class="mx-5 mt-5" >
+   <form>
+    <h3>Ajouter Serie d'excercice</h3>
+    <form [formGroup]="regiForm"(ngSubmit)="onFormSubmit()" >  
+      <table class="x">  
+        <tr>  
+          <td>    
+            <mat-form-field >  
+            <mat-select  formControlName="chap" placeholder="chapitre">  
+              <div *ngFor="let seri of chap">
+                <mat-option [value]="seri.chapter_id">{{seri.name}}</mat-option> 
+            </div>      
+            </mat-select>  
+            <mat-error>  
+                <span *ngIf="!regiForm.get('name').valid && regiForm.get('name').touched">Please select any item !!!</span>  
+            </mat-error>  
+           </mat-form-field>  
+         </td>
+        </tr> 
+        <tr>         
+          <td>  
+             <mat-form-field class="demo-full-width">  
+                 <input  matInput formControlName="name"  placeholder="name">  
+             </mat-form-field>  
+             <mat-error>  
+                 <span *ngIf="!regiForm.get('name').valid && regiForm.get('name').touched">s'il vous entre le nom du chapitre !!!</span>  
+             </mat-error>  
+         </td>   
+       </tr>
+       <tr>         
+        <td>  
+           <mat-form-field class="demo-full-width">  
+               <input  matInput formControlName="description" placeholder="description">  
+           </mat-form-field>  
+           <mat-error>  
+               <span *ngIf="!regiForm.get('description').valid && regiForm.get('description').touched">s'il vous entre le nom du chapitre !!!</span>  
+           </mat-error>  
+       </td>   
+     </tr>
+     <tr>  
+      <td>    
+        <mat-form-field>  
+        <mat-select formControlName="seriesType" placeholder="seriesType">  
+            <mat-option value="PREREQUISITE">PREREQUISITE</mat-option>  
+            <mat-option value="EXERCICE">EXERCICE</mat-option>   
+            <mat-option value="EVALUATION">EVALUATION</mat-option>  
+        </mat-select>  
+        <mat-error>  
+            <span *ngIf="!regiForm.get('seriesType').valid && regiForm.get('seriesType').touched">Please select any item !!!</span>  
+        </mat-error>  
+       </mat-form-field>  
+     </td>
+    </tr> 
+    <tr>  
+      <td>    
+        <mat-form-field>  
+        <mat-select formControlName="diff" placeholder="difficulty">  
+            <mat-option value="NIVEAU1">NIVEAU1</mat-option>  
+            <mat-option value="NIVEAU2">NIVEAU2</mat-option>  
+        </mat-select>  
+        <mat-error>  
+            <span *ngIf="!regiForm.get('diff').valid && regiForm.get('diff').touched">Please select any item !!!</span>  
+        </mat-error>  
+       </mat-form-field>  
+     </td>
+    </tr>
+    <tr>         
+      <td>  
+         <mat-form-field class="demo-full-width">  
+             <input  matInput formControlName="nameex" placeholder="nameex">  
+         </mat-form-field>  
+         <mat-error>  
+             <span *ngIf="!regiForm.get('nameex').valid && regiForm.get('nameex').touched">s'il vous entre le nom du chapitre !!!</span>  
+         </mat-error>  
+     </td>   
+   </tr>
+   <tr>         
+    <td>  
+       <mat-form-field class="demo-full-width">  
+           <input  matInput formControlName="question" placeholder="question">  
+       </mat-form-field>  
+       <mat-error>  
+           <span *ngIf="!regiForm.get('nameex').valid && regiForm.get('nameex').touched">s'il vous entre le nom du chapitre !!!</span>  
+       </mat-error>  
+   </td>   
+ </tr>
+   <!-- <tr>         
+    <td>  
+       <mat-form-field class="demo-full-width">  
+           <input  matInput placeholder="nameex">  
+       </mat-form-field>  
+       <mat-error>  
+           <span *ngIf="!regiForm.get('nameex').valid && regiForm.get('nameex').touched">s'il vous entre le nom du chapitre !!!</span>  
+       </mat-error>  
+   </td>   
+ </tr> -->
+ <tr>  
+  <td>    
+    <mat-form-field>  
+    <mat-select formControlName="typeEx" placeholder="typeExercice">  
+        <mat-option value="MULTIPLE_CHOICE">MULTIPLE_CHOICE</mat-option>  
+        <mat-option value="MULTIPLE_RESPONSE">MULTIPLE_RESPONSE</mat-option>  
+        <mat-option value="TRUE_FALSE">TRUE_FALSE</mat-option> 
+        <mat-option value="SHORT_RESPONSE">SHORT_RESPONSE</mat-option>  
+        <mat-option value="FILL_EMPTY_FIELDS">FILL_EMPTY_FIELDS</mat-option>  
+        <mat-option value="SEQUENCING">SEQUENCING</mat-option>  
+        <mat-option value="HOTSPOT">HOTSPOT</mat-option>  
+        <mat-option value="DRAG_WORDS">DRAG_DROP</mat-option>  
+        <mat-option value="SELECT_FROM_LIST">SELECT_FROM_LIST</mat-option>  
+        <mat-option value="NUMERIC">NUMERIC</mat-option>  
+        <mat-option value="LIKERT_SCALE">LIKERT_SCALE</mat-option>  
+        <mat-option value="WRITING">WRITING</mat-option>  
+        <mat-option value="WORD_COLORATION">WORD_COLORATION</mat-option>  
+        <mat-option value="DRAG_WORDS">DRAG_WORDS</mat-option>  
+
+      
+        
+
+       
+    </mat-select>  
+    <mat-error>  
+        <span *ngIf="!regiForm.get('typeEx').valid && regiForm.get('typeEx').touched">Please select any item !!!</span>  
+    </mat-error>  
+   </mat-form-field>  
+ </td>
+</tr>
+<tr>         
+  <td>  
+     <mat-form-field class="demo-full-width">  
+         <input  matInput formControlName="label" placeholder="label">  
+     </mat-form-field>  
+     <mat-error>  
+         <span *ngIf="!regiForm.get('label').valid && regiForm.get('label').touched">s'il vous entre le label du exercice !!!</span>  
+     </mat-error>  
+ </td>   
+</tr>
+<tr>         
+  <td>  
+     <mat-form-field class="demo-full-width">  
+         <input  matInput formControlName="placeholder" placeholder="placeholder">  
+     </mat-form-field>  
+     <mat-error>  
+         <span *ngIf="!regiForm.get('placeholder').valid && regiForm.get('placeholder').touched">s'il vous entre le nom du chapitre !!!</span>  
+     </mat-error>  
+ </td>   
+</tr>
+<tr>         
+  <td>  
+     <mat-form-field class="demo-full-width">  
+         <input  matInput formControlName="value"  placeholder="value">  
+     </mat-form-field>  
+     <mat-error>  
+         <span *ngIf="!regiForm.get('value').valid && regiForm.get('value').touched">s'il vous entre le nom du chapitre !!!</span>  
+     </mat-error>  
+ </td>   
+</tr>
+<tr>         
+  <td>  
+     <mat-form-field class="demo-full-width">  
+         <input  matInput formControlName="correctValue" placeholder="correctValue">  
+     </mat-form-field>  
+     <mat-error>  
+         <span *ngIf="!regiForm.get('correctValue').valid && regiForm.get('correctValue').touched">s'il vous entre le nom du chapitre !!!</span>  
+     </mat-error>  
+ </td>   
+</tr>
+
+<tr>  
+  <td>    
+    <mat-form-field>  
+    <mat-select formControlName="exerciceBlockType" placeholder="exerciceBlockType">  
+        <mat-option value="MULTIPLE_CHOICE">MULTIPLE_CHOICE</mat-option>  
+        <mat-option value="CORRESPONDANCE_LEFT">CORRESPONDANCE_LEFT</mat-option>  
+        <mat-option value="CORRESPONDANCE_RIGHT">CORRESPONDANCE_RIGHT</mat-option> 
+        <mat-option value="COLOR">COLOR</mat-option> 
+        <mat-option value="VIDEO">VIDEO</mat-option> 
+        <mat-option value="IMAGE">IMAGE</mat-option> 
+        <mat-option value="INPUT_NUMBER">INPUT_NUMBER</mat-option> 
+        <mat-option value="HIGHLIGHT_TEXT">HIGHLIGHT_TEXT</mat-option> 
+        <mat-option value="INPUT_TEXT">INPUT_TEXT</mat-option> 
+        <mat-option value="RADIO">RADIO</mat-option> 
+        <mat-option value="CHECKBOX">CHECKBOX</mat-option> 
+    </mat-select>  
+    <mat-error>  
+        <span *ngIf="!regiForm.get('exerciceBlockType').valid && regiForm.get('exerciceBlockType').touched">Please select any item !!!</span>  
+    </mat-error>  
+   </mat-form-field>  
+ </td>
+</tr>
+          <tr>  
+              <td colspan="2" class="content-center">  
+                  <button type="submit"   class="btn btn-primary">Ajouter</button>  
+              </td>  
+          </tr>    
+      </table>      
+  </form>
+</form>
+  
+      </div>
+      <div>
+        <h3 style="margin-top: 50px;">List d'Excercice</h3>
+      <div >   
+          <mat-form-field appearance="standard">
+              <mat-label>Filter</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+            </mat-form-field>
+            
+            <div class="mat-elevation-z8">
+                  
+              <table mat-table [dataSource]="dataSource" matSort>
+            
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> ORDER </th>
+                  <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                </ng-container>
+            
+                <!-- Progress Column -->
+                <ng-container matColumnDef="progress">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Exercice </th>
+                  <td mat-cell *matCellDef="let row"> {{row.progress}}% </td>
+                </ng-container>
+            
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                  <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                </ng-container>
+            
+                <!-- Fruit Column -->
+                <ng-container matColumnDef="fruit">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> <button mat-icon-button mat-raised-button  style="color: white;" class="btn default"  >
+                    <span class="material-icons">add</span>
+                    </button></th>
+                  <td mat-cell *matCellDef="let row"  class="d-flex justify-content">
+                    <button mat-icon-button style="color: white;" class="btn default"  >
+                        <span class="material-icons">preview</span>
+                    </button>
+                    <button  mat-icon-button style="color: white;"   class="btn default" >
+                        <mat-icon >edit</mat-icon>  
+                    </button>
+                  </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+              </table>
+              <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+            </div> 
+            <button mat-raised-button style="margin-left:400px" color="primary">Ajouter</button>
+     
+      </div>
+    </div>
+  </div>
+  </div>
+  

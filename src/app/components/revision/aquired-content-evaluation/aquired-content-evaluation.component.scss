@@ -1,0 +1,51 @@
+.container {
+  height: fit-content;
+}
+.stepper {
+  text-align: right;
+  margin-top: 10px;
+}
+video {
+  width: 100%;
+}
+#test-aquisitions-btn {
+  float: right;
+  margin-bottom: 10px;
+}
+.welcome-container {
+  height: calc(100vh - 200px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#start-evaluation-btn {
+  width: fit-content;
+}
+.course-reminder,
+.concept-map {
+  background-color: #fff;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: none;
+  margin-left: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.course-reminder {
+  background: url('/assets/images/course-reminder.png') no-repeat center /cover;
+}
+.concept-map {
+  background: url('/assets/images/carte-concept.png') no-repeat center /cover;
+}
+.tool-buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,100 @@
+.headher-avatar {
+  background-image: url("https://www.theedadvocate.org/wp-content/uploads/2018/01/eye-for-ebony-400376-660x400@2x.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+  padding-top: 10%;
+}
+.post-button {
+  margin-top: 2%;
+  width: 100%;
+  background-color: rgb(81, 54, 178);
+}
+.boder-header-outline {
+  border-bottom: 2px solid #c9c0c0;
+  padding: 3%;
+}
+.display {
+  padding-top: 2;
+}
+
+.h-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.dropzone {
+  height: 130px;
+  text-align: center;
+  border: 1px dashed #979797;
+  position: relative;
+  margin-top: 2%;
+  overflow-y: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  input {
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .mat-icon {
+    transform: scale(2);
+  }
+
+  h3 {
+    color: #38424c;
+    font-size: 20px;
+    font-weight: 600;
+  }
+}
+
+mat-form-field {
+  width: 90%;
+}
+.btn-sec {
+  margin-right: 5rem !important;
+  text-align: right;
+  margin-top: 1.5em;
+}
+.Update-btn {
+  margin: 5px;
+}
+.Discard-btn {
+  margin: 5px;
+}
+.text-inside {
+  position: absolute;
+  left: 5px;
+  width: 100%;
+}
+
+.big-post {
+  margin-top: 3%;
+}
+@media (max-width: 800px) {
+  .btn-sec {
+    margin-right: 1rem !important;
+  }
+}
+@media (max-width: 600px) {
+  .btn-sec {
+    margin-right: 1rem !important;
+  }
+}

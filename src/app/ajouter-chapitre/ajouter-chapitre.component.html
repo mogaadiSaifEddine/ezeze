@@ -1,0 +1,116 @@
+<mat-stepper linear="false" #stepper>
+  <mat-step [stepControl]="regiForm">
+    <form [formGroup]="regiForm">
+      <ng-template matStepLabel>Chapitre</ng-template>
+
+      <div class="container">
+        <mat-form-field formControlName="groupe" appearance="outline">
+          <mat-select placeholder="classe">
+            <mat-option *ngFor="let seri of serieex" [value]="seri.id">{{ seri.name }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="!regiForm.get('groupe').valid && regiForm.get('groupe').touched"> Please select any item !!! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <input formControlName="NomChap" matInput placeholder="Nom Chapitre" />
+        </mat-form-field>
+
+        <!-- <tr>  
+                <td>    
+                  <mat-form-field>  
+                  <mat-select formControlName="Module" placeholder="Pre-Requis">  
+                      <mat-option value="Langue">Langue</mat-option>  
+                      <mat-option value="Arabe">Arabe</mat-option>  
+                      <mat-option value="Science">Science</mat-option>  
+                  </mat-select>  
+                  <mat-error>  
+                      <span *ngIf="!regiForm.get('Module').valid && regiForm.get('Module').touched">Please select any item !!!</span>  
+                  </mat-error>  
+                 </mat-form-field>  
+               </td>
+              </tr>         -->
+        <mat-form-field appearance="outline">
+          <mat-label>Pre-Requis</mat-label>
+          <mat-select formControlName="ChapPrerquis" multiple>
+            <div *ngFor="let prer of Prer">
+              <mat-option [value]="prer.prerequired_id">{{ prer.name }}</mat-option>
+            </div>
+          </mat-select>
+          <mat-error *ngIf="!regiForm.get('ChapPrerquis').valid && regiForm.get('ChapPrerquis').touched"> s'il vous entre le nom du chapitre !!! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <ngx-mat-file-input placeholder="rappel de cours" formControlName=""> </ngx-mat-file-input>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <ngx-mat-file-input placeholder="carte conceptuelle" formControlName=""> </ngx-mat-file-input>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <!-- <h3 style="margin-top: 50px;">Serie d'Excercice</h3> -->
+      </div>
+    </form>
+    <div class="trigger-button">
+      <button mat-button matStepperNext (click)="onFormSubmit()">Done</button>
+      <button mat-button matStepperNext (click)="onFormSubmit()">Ajouter serie</button>
+    </div>
+  </mat-step>
+  <mat-step [stepControl]="" label="Serie">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Self aware panel </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort>
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>ORDER</th>
+              <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="progress">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Exercice</th>
+              <td mat-cell *matCellDef="let row">{{ row.progress }}%</td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+              <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+            </ng-container>
+
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="fruit">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <button mat-icon-button mat-raised-button style="color: white" class="btn default">
+                  <span class="material-icons">add</span>
+                </button>
+              </th>
+              <td mat-cell *matCellDef="let row" class="d-flex justify-content">
+                <button mat-icon-button style="color: white" class="btn default">
+                  <span class="material-icons">preview</span>
+                </button>
+                <button mat-icon-button style="color: white" class="btn default">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">No data matching the filter</td>
+            </tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        </div>
+        <!-- <button mat-raised-button style="margin-left:400px" color="primary">Ajouter</button> -->
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-step>
+</mat-stepper>

@@ -1,0 +1,74 @@
+#col {
+  flex: 1;
+  padding: 1em;
+  border: solid;
+}
+#twitchContent {
+  display: flex;
+}
+#twitchContent2 {
+  display: column;
+}
+mgl-map {
+  height: 100vh;
+  width: 100%;
+}
+
+main {
+  p {
+    font-style: s;
+  }
+  .about {
+    background: url('/assets/images/vectors.png') center;
+    background-size: cover;
+  }
+}
+.p-15 {
+  padding-right: 10%;
+}
+.nav-text {
+  font-size: 01.1rem;
+  font-weight: 500;
+  color: #fff;
+  text-transform: lowercase;
+  &:first-letter {
+    text-transform: uppercase;
+  }
+}
+.nav-text .hide {
+  border-radius: 50%;
+}
+ul {
+  list-style-type: none;
+  margin-left: 0;
+  padding-left: 0;
+  li {
+    padding: 10px;
+    font-weight: 300;
+    font-size: 16px;
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
+li:hover {
+  color: rgb(212, 138, 115);
+}
+h4 {
+  margin-bottom: 10%;
+  font-size: 24px;
+}
+.footer-logo {
+  width: 295px;
+  height: 140px;
+}
+@media screen and (max-width: 768px) {
+  .hide {
+    display: none;
+  }
+  .p-15 {
+    padding-right: 0%;
+    padding-left: 0%;
+  }
+}

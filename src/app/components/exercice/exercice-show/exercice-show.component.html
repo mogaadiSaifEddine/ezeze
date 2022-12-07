@@ -1,0 +1,109 @@
+<!-- <h2 >Afficher exercices</h2>
+
+<mat-form-field appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Insert Keyword" #input>
+</mat-form-field><div class="example-container mat-elevation-z8">
+
+
+
+
+
+  <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"> -->
+
+
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <!-- <ng-container matColumnDef="numero">
+      <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by numero"> No. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.numero}} </mat-cell>
+    </ng-container> -->
+
+    <!-- Name Column -->
+    <!-- <ng-container matColumnDef="niveau">
+      <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by niveau.titre"> Niveau </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.niveau.titre}} </mat-cell>
+    </ng-container> -->
+
+    <!-- Weight Column -->
+    <!-- <ng-container matColumnDef="trimestre">
+      <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by trimestre.titre"> Trimestre </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.trimestre.titre}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="sousChamp">
+      <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by sousChamp.titre"> Specialité </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.sousChamp.titre}} </mat-cell>
+    </ng-container> -->
+
+    <!-- Symbol Column -->
+    <!-- <ng-container matColumnDef="chapitre">
+      <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by chapitre.titre"> Chapitre </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.chapitre.titre}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="difficulte">
+      <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by difficulte.titre"> Difficulté </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.difficulte.titre}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="fichiers">
+      <mat-header-cell *matHeaderCellDef> Fichiers </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+
+        <a [href]="getSanitizedURL(element.fichiers[0].filePath)" download target="_blank" ><mat-icon>cloud_download</mat-icon>
+          {{element.fichiers[0].fileName}}
+        </a>
+
+
+       </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+
+</div> -->
+
+<!-- <ng-container *ngIf="dataSource">
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="data">
+        <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
+        <mat-cell *matCellDef="let a"> {{a.data}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="a11">
+        <mat-header-cell *matHeaderCellDef> A11 </mat-header-cell>
+        <mat-cell *matCellDef="let a"> {{a.A11}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="a12">
+        <mat-header-cell *matHeaderCellDef> A12 </mat-header-cell>
+        <mat-cell *matCellDef="let a"> {{a.A12}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="a13">
+        <mat-header-cell *matHeaderCellDef> A13 </mat-header-cell>
+        <mat-cell *matCellDef="let a"> {{a.A13}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="a14">
+        <mat-header-cell *matHeaderCellDef> A14 </mat-header-cell>
+        <mat-cell *matCellDef="let a"> {{a.A14}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="a15">
+        <mat-header-cell *matHeaderCellDef> A15 </mat-header-cell>
+        <mat-cell *matCellDef="let a"> {{a.A15}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+</ng-container> -->

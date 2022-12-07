@@ -1,0 +1,28 @@
+<mat-card *ngIf="exercice.name">
+  <div class="question-container">
+    <mat-card-content style="text-align: center">
+      {{ exercice?.name }}
+    </mat-card-content>
+  </div>
+</mat-card>
+
+<mat-card>
+  <div>
+    <!-- <img id="mobileImage" *ngIf="!imageBlock" src="assets/images/kids.jpg" alt="" /> -->
+    <!-- <img *ngIf="imageBlock" src="assets/images/{{ imageBlock.value }}" alt="" /> -->
+  </div>
+  <div class="question-container">
+    <mat-card-title [ngStyle]="(exercice['rtl']===true) && {'direction': 'rtl'}">
+      {{ exercice.question }}
+    </mat-card-title>
+
+    <mat-card-content *ngFor="let block of exercice.blocks" [ngStyle]="(exercice['rtl']===true) && {'direction': 'rtl'}">
+      <label style="font-size: 20px ;padding: 10px;" >{{block.label}}</label>
+
+      <mat-form-field appearance="outline" (change)="valueChanged()" class="full-width">
+        <mat-label>{{ block.label }}</mat-label>
+        <textarea rows="5" matInput [(ngModel)]="block.value" required></textarea>
+      </mat-form-field>
+    </mat-card-content>
+  </div>
+</mat-card>

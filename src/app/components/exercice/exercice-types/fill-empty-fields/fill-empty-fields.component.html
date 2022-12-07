@@ -1,0 +1,26 @@
+<mat-card *ngIf="exercice.name">
+  <div class="question-container">
+    <mat-card-content style="text-align: center">
+      {{ exercice?.name }}
+    </mat-card-content>
+  </div>
+</mat-card>
+
+<mat-card>
+  <div class="question-container">
+    <mat-card-title [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"> {{exercice.question}}</mat-card-title>
+
+    <mat-card-content [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+      <ng-container *ngFor="let block of exercice.blocks; let index = index">
+        <span *ngIf="block.exerciceBlockType === ExerciceBlockTypes.TEXT">
+          {{ block.value }}
+        </span>
+        <br *ngIf="block.exerciceBlockType === ExerciceBlockTypes.BREAK" />
+
+        <mat-form-field *ngIf="block.exerciceBlockType === ExerciceBlockTypes.INPUT_TEXT" appearance="outline" class="full-width">
+          <input matInput (change)="valueChanged()" [(ngModel)]="block.value" [name]="'input' + index" required />
+        </mat-form-field>
+      </ng-container>
+    </mat-card-content>
+  </div>
+</mat-card>

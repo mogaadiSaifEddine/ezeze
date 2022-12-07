@@ -1,0 +1,215 @@
+<div @fadeInOut class="d-flex px-3 justify-content-center align-items-center vh-100">
+  <div class="container mat-elevation-z4" id="container" [ngClass]="{ 'right-panel-active': isRegisterPageActive }">
+    <div class="form-container sign-up-container bg-white d-flex flex-column align-items-center pt-3">
+      <h1>{{ 'signup.create-account' | translate }}</h1>
+      <div class="social-container">
+        <a class="social cursor-pointer text-primary">
+          <svg cIcon name="cib-facebook" size="lg"></svg>
+        </a>
+        <a class="social cursor-pointer text-danger">
+          <svg cIcon name="cib-google" size="lg"></svg>
+        </a>
+        <a class="social cursor-pointer text-info">
+          <svg cIcon name="cib-linkedin" size="lg"></svg>
+        </a>
+      </div>
+      <span>{{ 'signup.or-use-your-email-for-registration' | translate }}</span>
+      <div class="h-100 d-flex flex-column justify-content-between">
+        <mat-stepper [linear]="true" #stepper class="h-100">
+          <mat-step [stepControl]="signupStepAccountForm" class="h-100">
+            <div class="d-flex flex-column align-items-center">
+              <form [formGroup]="signupStepAccountForm" style="font-size: 12px">
+                <!-- Email input -->
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>{{ 'common.email' | translate }} </mat-label>
+                  <input type="text" name="email" autocomplete="email" matInput formControlName="email" />
+                  <mat-error *ngIf="signupStepAccountFormControls['email']?.errors?.['required']">{{ 'error.field-required' | translate }} </mat-error>
+                  <mat-error *ngIf="signupStepAccountFormControls['email']?.errors?.['pattern']">{{ 'error.email-pattern' | translate }} </mat-error>
+                </mat-form-field>
+
+                <!--  Username -->
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>{{ 'login.username' | translate }} </mat-label>
+                  <input type="text" name="username" autocomplete="username" matInput formControlName="username" />
+                  <mat-error *ngIf="signupStepAccountFormControls['username']?.errors?.['required']">{{ 'error.field-required' | translate }} </mat-error>
+                  <mat-error *ngIf="signupStepAccountFormControls['username']?.errors?.['minlength']">{{ 'error.min-length' | translate: { count: 5 } }} </mat-error>
+                </mat-form-field>
+
+                <!-- Password et confirmpassword -->
+                <div class="row">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>{{ 'login.mot-de-passe' | translate }} </mat-label>
+                    <input [type]="isSignupPasswordVisible ? 'text' : 'password'" name="username" autocomplete="new-password" matInput formControlName="password" />
+                    <mat-icon matSuffix (click)="isSignupPasswordVisible = !isSignupPasswordVisible">{{ isSignupPasswordVisible ? 'visibility' : 'visibility_off' }} </mat-icon>
+                    <mat-error *ngIf="signupStepAccountFormControls['password']?.errors?.['required']">{{ 'error.field-required' | translate }} </mat-error>
+                    <mat-error *ngIf="signupStepAccountFormControls['password']?.errors?.['minlength']">{{ 'error.min-length' | translate: { count: 5 } }} </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>{{ 'signup.confirm-password' | translate }} </mat-label>
+                    <input [type]="isSignupPasswordConfirmVisible ? 'text' : 'password'" name="confirm-password" autocomplete="none" matInput formControlName="confirmepassword" />
+                    <mat-icon matSuffix (click)="isSignupPasswordConfirmVisible = !isSignupPasswordConfirmVisible"
+                      >{{ isSignupPasswordConfirmVisible ? 'visibility' : 'visibility_off' }}
+                    </mat-icon>
+                    <mat-error *ngIf="signupStepAccountFormControls['confirmepassword']?.errors?.['required']">
+                      {{ 'error.field-required' | translate }}
+                    </mat-error>
+                    <mat-error *ngIf="signupStepAccountFormControls['confirmepassword']?.errors?.['minlength']">
+                      {{ 'error.min-length' | translate: { count: 5 } }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </form>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="signupStepPersonalForm">
+            <form [formGroup]="signupStepPersonalForm" style="font-size: 12px">
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <!-- First Name -->
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>{{ 'signup.first-name' | translate }} </mat-label>
+                    <input type="text" name="first-name" matInput autocomplete="family-name" formControlName="firstname" />
+                    <mat-error *ngIf="signupStepPersonalFormControls['firstname']?.errors?.['required']">
+                      {{ 'error.field-required' | translate }}
+                    </mat-error>
+                    <mat-error *ngIf="signupStepPersonalFormControls['firstname']?.errors?.['minlength']">
+                      {{ 'error.min-length' | translate: { count: 5 } }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <!-- Last Name -->
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>{{ 'signup.last-name' | translate }} </mat-label>
+                    <input type="text" name="username" autocomplete="given-name" matInput formControlName="lastname" />
+                    <mat-error *ngIf="signupStepPersonalFormControls['lastname']?.errors?.['required']">
+                      {{ 'error.field-required' | translate }}
+                    </mat-error>
+                    <mat-error *ngIf="signupStepPersonalFormControls['lastname']?.errors?.['minlength']">
+                      {{ 'error.min-length' | translate: { count: 5 } }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <!-- sexe et datenaissance  -->
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label class="form-label">
+                      {{ 'common.sex' | translate }}
+                    </mat-label>
+                    <mat-select formControlName="sexe">
+                      <mat-option value="homme">{{ 'common.male' | translate }}</mat-option>
+                      <mat-option value="femme">{{ 'common.female' | translate }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="signupStepPersonalFormControls['firstname']?.errors?.['required']">
+                      {{ 'error.field-required' | translate }}
+                    </mat-error>
+                    <mat-error *ngIf="signupStepPersonalFormControls['firstname']?.errors?.['minlength']">
+                      {{ 'error.min-length' | translate: { count: 5 } }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>{{ 'common.birthdate' | translate }}</mat-label>
+                    <input matInput [matDatepicker]="picker" [min]="minDate" formControlName="datenaissance" />
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="signupStepPersonalFormControls['datenaissance']?.errors?.['required']">
+                      {{ 'error.field-required' | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- phone and profession -->
+              <div class="row">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>{{ 'common.phone' | translate }} </mat-label>
+                  <input type="tel" (keypress)="keyPressNumbers('phone', $event)" name="phone" matInput formControlName="phone" />
+                  <mat-error *ngIf="signupStepPersonalFormControls['phone']?.errors?.['required']">
+                    {{ 'error.field-required' | translate }}
+                  </mat-error>
+                  <mat-error *ngIf="signupStepPersonalFormControls['phone']?.errors?.['minlength']">
+                    {{ 'error.min-length' | translate: { count: 8 } }}
+                  </mat-error>
+                </mat-form-field>
+
+              </div>
+
+              <!-- Checkbox -->
+              <div class="form-check d-flex justify-content-center">
+                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
+                <label class="form-check-label" for="form2Example33">
+                  {{ 'signup.abonnez-vous-a-notre-platfrome' | translate }}
+                </label>
+              </div>
+            </form>
+          </mat-step>
+        </mat-stepper>
+        <div class="d-flex justify-content-center gx-1 mb-4">
+          <button *ngIf="stepper.selectedIndex === 0" (click)="stepper.next()">next</button>
+          <button class="mx-1" *ngIf="stepper.selectedIndex === 1" (click)="stepper.previous()">back</button>
+          <button *ngIf="stepper.selectedIndex === 1" [disabled]="this.signupStepAccountForm.invalid || this.signupStepPersonalForm.invalid" (click)="signup()">
+            {{ 'common.sign-up' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="form-container sign-in-container">
+      <form [formGroup]="loginForm" (submit)="login()">
+        <h1>{{ 'common.login' | translate }}</h1>
+        <div class="social-container">
+          <a class="social cursor-pointer text-primary">
+            <svg cIcon name="cib-facebook" size="lg"></svg>
+          </a>
+          <a class="social cursor-pointer text-danger">
+            <svg cIcon name="cib-google" size="lg"></svg>
+          </a>
+          <a class="social cursor-pointer text-info">
+            <svg cIcon name="cib-linkedin" size="lg"></svg>
+          </a>
+        </div>
+        <span>{{ 'signup.or-use-your-account' | translate }}</span>
+        <div style="font-size: 12px">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>{{ 'login.entrer-username' | translate }} </mat-label>
+            <input type="text" name="username" autocomplete="username" matInput formControlName="username" />
+            <mat-icon matSuffix>person</mat-icon>
+          </mat-form-field>
+
+          <!-- Password input -->
+
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>{{ 'login.entrer-mot-de-passe' | translate }} </mat-label>
+            <input [type]="isPasswordVisible ? 'text' : 'password'" autocomplete="current-password" name="password" matInput placeholder="{{ 'login.mot-de-passe' | translate }}" formControlName="password" />
+            <mat-icon matSuffix (click)="isPasswordVisible = !isPasswordVisible">{{ isPasswordVisible ? 'visibility' : 'visibility_off' }} </mat-icon>
+          </mat-form-field>
+        </div>
+
+        <a href="#">{{ 'signup.forgot-your-password' | translate }}</a>
+        <button>{{ 'common.login' | translate }}</button>
+      </form>
+    </div>
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <h1>{{ 'signup.welcome-back' | translate }}</h1>
+          <p>{{ 'signup.to-keep-connected-with-us-please-login-with-your-personal-info' | translate }}</p>
+          <button class="ghost" id="signIn" (click)="isRegisterPageActive = false">
+            {{ 'common.login' | translate }}
+          </button>
+        </div>
+        <div class="overlay-panel overlay-right">
+          <h1>{{ 'signup.hello-friend' | translate }}</h1>
+          <p>{{ 'signup.enter-your-personal-details-and-start-journey-with-us' | translate }}</p>
+          <button class="ghost" id="signUp" (click)="isRegisterPageActive = true">
+            {{ 'common.sign-up' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

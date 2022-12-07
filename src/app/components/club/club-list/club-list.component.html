@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-card-content class="container flex mt-5 justify-content-center align-items-center">
+    <div class="row wrap">
+      <div class="col-md-4 col-sm-12 align-items-around justify-content-center my-2" *ngFor="let club of clubs">
+        <app-club-card [club]="club"> </app-club-card>
+      </div>
+    </div>
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]" (page)="pageEvent = $event" aria-label="Select page"> </mat-paginator>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,34 @@
+<h2 style="color: #3e4665">Espace Enseignant</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Chapitre</th>
+      <th scope="col">Pre-Requis</th>
+      <th scope="col">Serie d'excercice</th>
+      <th scope="col">
+        <button mat-icon-button mat-raised-button (click)="openDialog()" style="color: white" class="btn default">
+          <span class="material-icons">add</span>
+        </button>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cha of chapp">
+      <th scope="row">1</th>
+      <td>{{ cha.name }}</td>
+      <td>chapone</td>
+      <td>2</td>
+      <td class="d-flex justify-content">
+        <button mat-icon-button style="color: white" class="btn default">
+          <!-- <mat-icon >add_comment</mat-icon> -->
+          <span class="material-icons">edit</span>
+        </button>
+        <button mat-icon-button style="color: white" class="btn default">
+          <!-- <mat-icon >add_comment</mat-icon> -->
+          <span class="material-icons">preview</span>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

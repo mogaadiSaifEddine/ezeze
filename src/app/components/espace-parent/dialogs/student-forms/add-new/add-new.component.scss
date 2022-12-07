@@ -1,0 +1,183 @@
+@import '../../../../../../scss/variables';
+
+:host:ng-deep .mat-dialog-container {
+  padding: 0;
+  position: relative;
+  z-index: 10;
+}
+
+#addNewStudentForm {
+  width: $dialog-width;
+  height: $dialog-height;
+  padding: 0;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: row;
+  position: relative;
+
+  #leftSection {
+    width: $dialog-right-section-width;
+    height: 100%;
+    background-color: #f5f6f7;
+    color: #fff;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 200px;
+    }
+
+    .addNewStudentFormGroupButton {
+      margin-bottom: 3rem;
+    }
+  }
+
+  #rightSection {
+    padding: 0 1rem;
+    width: calc(100% - $dialog-right-section-width);
+    position: relative;
+    overflow-y: scroll;
+    position: relative;
+
+    #actionHeader {
+      width: 100%;
+      padding: 0.5rem 0;
+      position: sticky;
+      top: 0;
+      background-color: #fff;
+      border-bottom: 1px solid #f5f6f7;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    form {
+      width: 100%;
+
+      .formSectionHeader {
+        display: block;
+        width: 100%;
+        font-size: 1rem;
+        text-transform: uppercase;
+        padding: 0.2rem 1rem;
+        margin: 1rem 0;
+        text-align: center;
+        border-radius: 0.5rem 0.5rem 0 0;
+
+        color: #1b1e21;
+        background-color: #f5f6f7;
+      }
+
+      .formGroupContainer {
+        position: relative;
+        padding: 0;
+
+        .deleteGroupTrigger {
+          position: relative;
+          top: 18px;
+          left: -5px;
+          z-index: 5;
+
+          &:hover ~ .actualGroup {
+            border-color: #f5c6cb;
+            background-color: #f8d7da;
+            color: #721c24;
+          }
+        }
+      }
+    }
+
+    .actualGroup {
+      border: 1px dashed #3f51b5;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      position: relative;
+
+      .nameGroup,
+      .schoolGroup,
+      .accountGroup {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        font-size: 12px;
+
+        mat-form-field {
+          width: 180px;
+        }
+
+        .schoolInput,
+        .groupInput,
+        .passwordInput,
+        .tokenInput {
+          width: 48%;
+        }
+      }
+    }
+  }
+}
+
+.showInBigScreen {
+  display: block;
+}
+
+.showInSmallScreen {
+  display: none;
+}
+
+@media only screen and (max-width: 767px) {
+  ::ng-deep .mat-dialog-container {
+    width: 600px !important;
+    margin: 0;
+    padding: 1rem;
+  }
+
+  #addNewStudentForm {
+    width: 100% !important;
+    display: block;
+    padding: 0;
+    margin: 0;
+
+    #leftSection {
+      display: none;
+    }
+
+    #rightSection {
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+
+      .showInBigScreen {
+        display: none;
+      }
+
+      .showInSmallScreen {
+        display: block;
+        margin-right: 0.5rem;
+      }
+
+      .nameGroup,
+      .schoolGroup,
+      .accountGroup {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .mat-form-field {
+          width: 100% !important;
+        }
+      }
+    }
+
+    .deleteGroupTrigger {
+      left: 6px !important;
+    }
+  }
+}

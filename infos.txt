@@ -1,0 +1,29 @@
+------------
+Education-FE:
+------------
+public ip: 197.13.31.80
+path: /var/www/html/
+ssh: ssh 13961-1446@gate.p4d.click -p 3022
+ftp:
+login : root
+pass: TOXvvf67164
+------------
+Education-BE:
+------------
+public ip: 197.13.31.221
+ssh: ssh 13960-1446@gate.p4d.click -p 3022
+ftp:
+login : root
+pass: KMGneb31811
+------------
+Education-DB:
+------------
+public ip: 197.13.31.224
+ssh: ssh 13955-1446@gate.p4d.click -p 3022
+ftp:
+login : root
+pass: KMGneb31811
+phpMyAdmin:
+url: http://node13955-education-db.my.p4d.click
+login: root
+password: QZQqgl71065

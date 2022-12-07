@@ -1,0 +1,23 @@
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Feeds">
+    <div
+      class="col-md-4 col-sm-12 align-items-around justify-content-center my-2 container"
+      *ngFor="let feed of clubFeeds"
+    >
+      <app-club-feeds-card [clubFeeds]="feed"> </app-club-feeds-card>
+
+      <button
+        matTooltip="Ajouter un image/video"
+        [matTooltipPosition]="'after'"
+        (click)="openDialog()"
+        class="round-button add-post"
+        color="primary"
+      >
+        <mat-icon>add_circle_outline</mat-icon>
+      </button>
+    </div>
+  </mat-tab>
+  <mat-tab label="Description">
+    <app-club-settings-card></app-club-settings-card>
+  </mat-tab>
+</mat-tab-group>

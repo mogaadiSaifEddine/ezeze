@@ -1,0 +1,54 @@
+:host:ng-deep .mat-dialog-container {
+  padding: 1.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+#deleteConfirmationDialog {
+  padding: 0;
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h2 {
+      font-size: 2rem;
+      text-transform: capitalize;
+      font-weight: 900;
+    }
+  }
+
+  main {
+    width: 100%;
+    margin-top: 1rem;
+
+    .confirmationWarning {
+      width: 100%;
+      padding: 1rem;
+      text-align: left;
+
+      border-left: 10px solid #f5c6cb;
+      color: #721c24;
+      background-color: #f8d7da;
+
+      h4 {
+        display: block;
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  header {
+    width: 100%;
+
+    h2 {
+      font-size: 1.2rem !important;
+    }
+  }
+}

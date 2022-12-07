@@ -1,0 +1,20 @@
+<div class="container" *ngIf="showCoursesList">
+  <!-- <mat-card *ngFor="let course of courses" (click)="openCourse(course)">
+    {{ course }}
+  </mat-card> -->
+
+  <button *ngIf="!show_serie_level_1" (click)="goToExercicesLevel1()" mat-raised-button color="primary">{{ 'revision.test-your-knowledge' | translate }}</button>
+</div>
+
+<div *ngIf="show_serie_level_1">
+  <app-pass-test [evaluationContent]="exercices_level_1" (finalScore)="testFinishedLevel1($event)"></app-pass-test>
+</div>
+<div *ngIf="show_serie_level_2">
+  <app-pass-test [evaluationContent]="exercices_level_2" (finalScore)="testFinishedLevel2($event)"></app-pass-test>
+</div>
+<div *ngIf="show_serie_level_3">
+  <app-pass-test [evaluationContent]="exercices_level_3" (finalScore)="testFinishedLevel3($event)"></app-pass-test>
+</div>
+<app-score-screen [score]="score" [canGoNext]="true" (goNext)="goToNextLevel($event)" *ngIf="showFinalScoreLevel1"> </app-score-screen>
+<app-score-screen [score]="score" [canGoNext]="true" (goNext)="goToNextLevel($event)" *ngIf="showFinalScoreLevel2"> </app-score-screen>
+<app-score-screen [score]="score" [canGoNext]="false" *ngIf="showFinalScoreLevel3"> </app-score-screen>

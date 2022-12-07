@@ -1,0 +1,25 @@
+.example-header-image {
+  background-size: cover;
+  max-width: 40px;
+}
+.comment-card {
+  margin-left: 2%;
+  border-radius: 20px;
+  width: 95%;
+}
+
+span {
+  font-size: 12px;
+  color: #9e9e9e;
+}
+
+.comment-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.action {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

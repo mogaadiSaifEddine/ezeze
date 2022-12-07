@@ -1,0 +1,57 @@
+:host:ng-deep .mat-dialog-container {
+  padding: 1.5rem;
+}
+
+#tokenDetailsDialog {
+  table {
+    width: 400px;
+
+    tr {
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+      th,
+      td {
+        padding: 0.5rem 0;
+      }
+
+      #truncatedToken {
+        display: inline-block;
+        width: 120px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  ul {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  table {
+    display: none;
+  }
+
+  ul {
+    display: block !important;
+    min-width: 250px;
+    margin: 0;
+    padding: 0;
+    padding-left: 1rem;
+
+    li {
+      width: 100%;
+      font-weight: bold;
+
+      span {
+        display: block;
+        margin-left: 1rem;
+        font-size: 0.8rem;
+        font-weight: normal;
+      }
+    }
+  }
+}

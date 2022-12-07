@@ -1,0 +1,35 @@
+<mat-card *ngIf="exercice.name">
+  <div class="question-container">
+    <mat-card-content style="text-align: center">
+      {{ exercice?.name }}
+    </mat-card-content>
+  </div>
+</mat-card>
+
+<mat-card>
+  <div class="question-container">
+    <mat-card-title [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+      {{ exercice.question }}
+    </mat-card-title>
+
+    <mat-card-content [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+      <div class="answers-container">
+        <ng-container *ngFor="let block of exercice.blocks">
+          <h4 *ngIf="block.exerciceBlockType === ExerciceBlockTypes.QUESTION">
+            {{ block.label }}
+          </h4>
+          <mat-checkbox
+            *ngIf="block.exerciceBlockType === ExerciceBlockTypes.INPUT_TEXT"
+            (change)="valueChanged(block)"
+            [(ngModel)]="block.value"
+            [value]="block.value === 'true' ? 'true' : 'false'"
+            >{{ block.label }}</mat-checkbox
+          >
+        </ng-container>
+      </div>
+    </mat-card-content>
+  </div>
+  <div>
+    <!-- <img src="assets/images/kids.jpg" alt="" /> -->
+  </div>
+</mat-card>

@@ -1,0 +1,36 @@
+<mat-card *ngIf="exercice.name">
+  <div class="question-container">
+    <mat-card-content style="text-align: center">
+      {{ exercice?.name }}
+    </mat-card-content>
+  </div>
+</mat-card>
+
+<mat-card>
+  <div class="question-container">
+    <mat-card-title [ngStyle]="(exercice['rtl']===true) && {'direction': 'rtl'}"> Veuillez indiquer votre accord ou désaccord avec les déclarations suivantes: </mat-card-title>
+
+    <mat-card-content [ngStyle]="(exercice['rtl']===true) && {'direction': 'rtl'}">
+      <table>
+        <tr>
+          <td></td>
+          <td>Pas du tout d'accord</td>
+          <td>Pas d'accord</td>
+          <td>Incertain</td>
+          <td>D'accord</td>
+          <td>Totalement d'accord</td>
+        </tr>
+        <ng-container *ngFor="let block of exercice.blocks; let index = index">
+          <tr *ngIf="block.exerciceBlockType === ExerciceBlockTypes.INPUT_TEXT">
+            <td>{{ block.placeholder }}</td>
+            <td><input (change)="valueChanged()" class="form-check-input mt-0" type="radio" [name]="index + ''" value="1" [(ngModel)]="block.value" [checked]="block.value" /></td>
+            <td><input (change)="valueChanged()" class="form-check-input mt-0" type="radio" [name]="index + ''" value="2" [(ngModel)]="block.value" [checked]="block.value" /></td>
+            <td><input (change)="valueChanged()" class="form-check-input mt-0" type="radio" [name]="index + ''" value="3" [(ngModel)]="block.value" [checked]="block.value" /></td>
+            <td><input (change)="valueChanged()" class="form-check-input mt-0" type="radio" [name]="index + ''" value="4" [(ngModel)]="block.value" [checked]="block.value" /></td>
+            <td><input (change)="valueChanged()" class="form-check-input mt-0" type="radio" [name]="index + ''" value="5" [(ngModel)]="block.value" [checked]="block.value" /></td>
+          </tr>
+        </ng-container>
+      </table>
+    </mat-card-content>
+  </div>
+</mat-card>

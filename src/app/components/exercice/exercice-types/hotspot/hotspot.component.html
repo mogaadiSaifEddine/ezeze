@@ -1,0 +1,34 @@
+<mat-card *ngIf="exercice.name">
+  <div class="question-container">
+    <mat-card-content style="text-align: center">
+      {{ exercice?.name }}
+    </mat-card-content>
+  </div>
+</mat-card>
+
+<mat-card>
+  <div class="question-container">
+    <mat-card-title [ngStyle]="(exercice['rtl']===true) && {'direction': 'rtl'}">
+      {{ exercice.question }}
+      <br />
+      Placer un marqueur de hotspot sur la partie appropriée.
+    </mat-card-title>
+  </div>
+  <div  class="image-container">
+    <!-- <img src="assets/images/kids.jpg" alt="" /> -->
+    <img (load)="imageLoaded=true" *ngIf="imageBlock" #hotspotImg src="assets/images/{{imageBlock.value}}" alt="">
+    <ng-container *ngIf="imageLoaded">
+
+      <div (click)="hotspotClicked(hotspot)" class="hotspot" 
+        [ngStyle]="{top: (hotspot.y*hotspotImg?.first?.nativeElement?.offsetHeight)-20 + 'px', left: (hotspot.x *hotspotImg?.first?.nativeElement?.offsetWidth)-10 + 'px' }" 
+        *ngFor="let hotspot of hotspotsList; let index = index">
+        <span *ngIf="!hotspot.value">
+          {{ index + 1 }}
+        </span>
+        <div *ngIf="hotspot.value == 'true'" class="selected-hotspot"></div>
+      </div>
+    </ng-container>
+
+  
+  </div>
+</mat-card>

@@ -1,0 +1,22 @@
+<mat-card *ngIf="exercice.name">
+  <div class="question-container">
+    <mat-card-content style="text-align: center">
+      {{ exercice?.name }}
+    </mat-card-content>
+  </div>
+</mat-card>
+
+<mat-card>
+<div class="question-container">
+  <mat-card-title>{{exercice.question}} </mat-card-title>
+</div>
+<draw-lines [lines]="lines">
+  <div class="block-container">
+    <div *ngFor="let element of arrow_left; let i = index"  class="box" lineAnchor="{{ element.label }}" (click)="listenToClick(element, 'left')">{{element.label}}</div>
+  </div>
+
+  <div class="block-container">
+    <div *ngFor="let element of arrow_right; let i = index" class="box" lineAnchor="{{ element.label }}" (click)="listenToClick(element, 'right')">{{element.label}}</div>
+  </div>
+</draw-lines>
+</mat-card>

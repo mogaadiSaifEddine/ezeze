@@ -1,0 +1,109 @@
+<section id="addNewStudentForm">
+    <section id="leftSection">
+        <button mat-flat-button color="accent" (click)="addNewFormGroup($event)" class="addNewStudentFormGroupButton showInBigScreen" *ngIf="groupsListDoneFetching && schoolsListDoneFetching"
+            [disabled]="disableAddButton">
+            <mat-icon>add</mat-icon>
+            New Student
+        </button>
+        <ng-container *ngIf="!groupsListDoneFetching && !schoolsListDoneFetching">
+            <mat-spinner [diameter]="50" color="accent"></mat-spinner>
+        </ng-container>
+        <img src="../../../../../../assets/img/undraw_add_user_re_5oib.svg">
+    </section>
+
+    <section id="rightSection">
+        <main>
+            <form [formGroup]="studentForm" (ngSubmit)="submitHandler()">
+                <header id="actionHeader">
+                    <button mat-flat-button color="accent" class="addNewStudentFormGroupButton showInSmallScreen" *ngIf="groupsListDoneFetching && schoolsListDoneFetching"
+                        (click)="addNewFormGroup($event)" [disabled]="disableAddButton">
+                        <mat-icon>add</mat-icon>
+                        New
+                    </button>
+
+                    <button type="submit" mat-raised-button color="primary" [disabled]="studentForm.invalid">
+                        <mat-icon>save</mat-icon>
+                        Save
+                    </button>
+
+                    <button id="closeButton" (click)="close()" mat-icon-button color="primary">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </header>
+
+                <div class="formGroupContainer">
+                    <div formArrayName='studentsArray'>
+                        <!-- START OF FORMarray -->
+                        <div *ngFor="let tmpFormGroup of getStudentsFormArray.controls; let i = index" [formGroupName]="i">
+                            <button mat-mini-fab color="accent" class="deleteGroupTrigger" (click)="deleteFormGroup(i)">
+                                <mat-icon>delete_outline</mat-icon>
+                            </button>
+                            <div class="actualGroup">
+                                <span class="formSectionHeader personal">Personal Info</span>
+
+                                <div class="nameGroup">
+                                    <mat-form-field class="nameInput" appearance="outline">
+                                        <mat-label>First name</mat-label>
+                                        <input matInput formControlName="firstname">
+                                    </mat-form-field>
+
+                                    <mat-form-field class="lastNameInput" appearance="outline">
+                                        <mat-label>Last name</mat-label>
+                                        <input matInput formControlName="lastname">
+                                    </mat-form-field>
+
+                                    <!-- DOB -->
+                                    <mat-form-field appearance="outline" class="datePicker">
+                                        <mat-label>Date of birth</mat-label>
+                                        <input matInput [matDatepicker]="picker" formControlName="datenaissance" (ngModelChange)="handleDateChange($event)">
+                                        <mat-hint>MM/DD/YYYY</mat-hint>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+
+                                <!-- ESTABLISHMENT INFO -->
+                                <span class="formSectionHeader school">School Info</span>
+
+                                <div class="schoolGroup">
+                                    <mat-form-field appearance="outline" class="schoolInput">
+                                        <mat-label>School</mat-label>
+                                        <mat-select formControlName="school">
+                                            <mat-option *ngFor="let school of schoolsList" [value]="school.id">{{school.name}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline" class="groupInput">
+                                        <mat-label>Group</mat-label>
+                                        <mat-select formControlName="group">
+                                            <mat-option *ngFor="let group of groupsList" [value]="group">{{group.name}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <!-- ACCOUNT DETAILS -->
+                                <span class="formSectionHeader personal">Account Info</span>
+
+                                <div class="accountGroup">
+                                    <mat-form-field class="schoolInput" appearance="outline">
+                                        <mat-label>Password (auto generated)</mat-label>
+                                        <input matInput formControlName="password" readonly>
+                                        <mat-hint>Password could be changed later</mat-hint>
+                                    </mat-form-field>
+
+                                    <mat-form-field class="tokenInput" appearance="outline">
+                                        <mat-label>Token</mat-label>
+                                        <input matInput formControlName="token" readonly>
+                                        <mat-hint>Token could be changed later</mat-hint>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END OF FORMarray -->
+                    </div>
+                </div>
+                <!-- END OF RIGHT SECTION MAIN -->
+            </form>
+        </main>
+    </section>
+</section>

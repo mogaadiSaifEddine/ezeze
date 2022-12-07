@@ -1,0 +1,47 @@
+<div class="tool-buttons-container mt-2">
+  <button class="course-reminder" matTooltip="Course reminder" (click)="openCourseReminder()"></button>
+  <button class="concept-map" matTooltip="Concept map" (click)="openConceptMap()"></button>
+</div>
+<app-main-screen (startEvaluation)="startEvaluation($event)" *ngIf="showMainScreen"></app-main-screen>
+
+<app-achievement-screen *ngIf="showGoNextStepScreen" (goNextStep)="goNextStep($event)"></app-achievement-screen>
+
+<div class="container" *ngIf="evaluationMode && !!serieExercice">
+  <app-pass-test [evaluationContent]="evaluationContent" (finalScore)="evaluationTestFinished($event)"></app-pass-test>
+</div>
+
+<div class="container" *ngIf="prerequisiteMode && !!serieExercice">
+  <app-pass-test 
+    [evaluationContent]="prerequisiteContent" 
+    (finalScore)="prerequisiteTestFinished($event)"></app-pass-test>
+</div>
+
+<div *ngIf="showExercicesMode">
+  <app-pass-test [evaluationContent]="exerciceContent" (finalScore)="testFinished($event)"></app-pass-test>
+</div>
+<app-score-screen [score]="score" *ngIf="showFinalScore"> </app-score-screen>
+
+<div *ngIf="showCourseReminderMode && !!serieExercice">
+  <button id="test-aquisitions-btn" (click)="goToExercices()" mat-raised-button color="primary">{{ 'revision.test-your-knowledge' | translate }}</button>
+  <br />
+  <video controls>
+    <source src="assets/sample_videos/addition.mp4" type="video/mp4" />
+    <source src="assets/sample_videos/addition.ogg" type="video/ogg" />
+    {{ 'revision.your-browser-does-not-support-html-video' | translate }}
+  </video>
+
+  <div *ngIf="showCourseReminderMode">
+    <button id="test-aquisitions-btn" (click)="goToExercices()" mat-raised-button color="primary">{{ 'revision.test-your-knowledge' | translate }}</button>
+    <br />
+    <video controls>
+      <source src="assets/sample_videos/addition.mp4" type="video/mp4" />
+      <source src="assets/sample_videos/addition.ogg" type="video/ogg" />
+      {{ 'revision.your-browser-does-not-support-html-video' | translate }}
+    </video>
+  </div>
+  <div *ngIf="showExercicesMode">
+    <app-pass-test [evaluationContent]="evaluationContent" (finalScore)="testFinished($event)"></app-pass-test>
+  </div>
+
+  <app-score-screen [score]="score" *ngIf="showFinalScore"> </app-score-screen>
+</div>

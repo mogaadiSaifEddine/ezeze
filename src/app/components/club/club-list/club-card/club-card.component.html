@@ -1,0 +1,15 @@
+<mat-card @fadeSlideInOut class="card selected-card" (click)="goToFeeds()">
+  <div class="ribbon">
+    <span>test</span>
+  </div>
+
+  <mat-card-content
+    class="background-img"
+    [ngStyle]="{ 'background-image': 'url(' + club.logo + ')' }"
+  >
+  </mat-card-content>
+
+  <span class="text-center">
+    {{ club.name }}
+  </span>
+</mat-card>

@@ -1,0 +1,6 @@
+import{Chapter} from './Chapter'
+  export interface Pre_Required_Chapter {
+    prerequired_id:number;
+    name:string;
+    chapitre:Chapter[];
+  }

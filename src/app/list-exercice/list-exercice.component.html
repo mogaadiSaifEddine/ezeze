@@ -1,0 +1,41 @@
+
+  <h2 style="color:#3E4665 ;">Espace Enseignant</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Serie</th>
+        <th scope="col">Nom exercice</th>
+        <th scope="col">exercice</th>
+        <th scope="col"><button mat-icon-button mat-raised-button  style="color: white;" class="btn default"  >
+          <span class="material-icons">add</span>
+          </button></th>
+
+      </tr>
+    </thead>
+    <tbody >
+      <tr *ngFor="let seri of serieEx">
+        <th scope="row">1</th>
+        <td >{{seri.name}}</td>
+        <td >{{seri.description}}</td>
+        <td >{{seri.name}}</td>
+
+        <!-- <div *ngFor="let ser of ex"> -->
+          <!-- <td >{{ser.name}}</td> -->
+        <!-- </div> -->
+        <!-- <div *ngFor="let ser of Exblock"> -->
+          <!-- <td >{{ser.label}}</td> -->
+        <!-- </div> -->
+        <td  class="d-flex justify-content">  
+          <button mat-icon-button style="color: white;"class="btn default"  >
+          <!-- <mat-icon >add_comment</mat-icon> -->
+          <span class="material-icons">edit</span>
+         </button>
+         <button mat-icon-button style="color: white;" class="btn default"  >
+          <!-- <mat-icon >add_comment</mat-icon> -->
+          <span class="material-icons">preview</span>
+      </button>
+    </td>
+      </tr>
+    </tbody>
+  </table>  

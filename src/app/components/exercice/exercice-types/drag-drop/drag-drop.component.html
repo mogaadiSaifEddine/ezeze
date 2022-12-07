@@ -1,0 +1,31 @@
+<mat-card *ngIf="exercice.name">
+  <div class="question-container">
+    <mat-card-content style="text-align: center">
+      {{ exercice?.name }}
+    </mat-card-content>
+  </div>
+</mat-card>
+
+<mat-card class="container" cdkDropListGroup>
+  <div class="container-left">
+    <mat-card class="question-container">
+      <mat-card-title [ngStyle]="(exercice['rtl']===true) && {'direction': 'rtl'}">{{ exercice.question }}</mat-card-title>
+      <mat-card-content class="answers-container" [ngStyle]="(exercice['rtl']===true) && {'direction': 'rtl'}">{{ exercice.name }}</mat-card-content>
+    </mat-card>
+
+    <div cdkDropList [cdkDropListData]="dragDropItem" class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of dragDropItem" cdkDrag>
+        <!-- <img class="imgs" [src]="item.label" /> -->
+      </div>
+    </div>
+  </div>
+  <div class="container-right">
+    <div *ngFor="let item of listBlocks; let i = index">
+      <div cdkDropList [cdkDropListData]="imageList[i]" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" [id]="image.blockId" *ngFor="let image of imageList[i]" [cdkDragDisabled]="image.disabled" cdkDrag>
+          <!-- <img class="imgs" [src]="image.label" /> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-card>
