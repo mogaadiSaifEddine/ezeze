@@ -22,6 +22,9 @@ export class CorrespondenceComponent implements OnInit, OnChanges {
   constructor(private revisionService: RevisionService) {}
 
   ngOnInit(): void {
+    this.exercice.question = this.exercice.question.split('#').join('\n');
+    this.exercice.name = this.exercice.name.split('#').join('\n');
+
     this.revisionService.resetFormSub.subscribe((res) => {
       this.exercice.blocks.forEach((block) => {
         block.value ? (block.value = '') : '';
@@ -33,15 +36,18 @@ export class CorrespondenceComponent implements OnInit, OnChanges {
     this.canGoNext.emit(true);
     this.correspandance_left = [];
     this.correspandance_right = [];
-    this.correspandance_left = [...this.exercice.blocks.filter(b => b.exerciceBlockType === ExerciceBlockTypes.CORRESPONDANCE_LEFT)]
+    this.correspandance_left = [...this.exercice.blocks.filter((b) => b.exerciceBlockType === ExerciceBlockTypes.CORRESPONDANCE_LEFT)];
 
-    this.exercice.blocks.filter(b => b.exerciceBlockType === ExerciceBlockTypes.CORRESPONDANCE_RIGHT).forEach((block) => {
+    this.exercice.blocks
+      .filter((b) => b.exerciceBlockType === ExerciceBlockTypes.CORRESPONDANCE_RIGHT)
+      .forEach((block) => {
         if (this.isCheckMode) {
-          this.correspandance_right[this.correspandance_left.findIndex(b => b.exerciceBlockType === ExerciceBlockTypes.CORRESPONDANCE_LEFT && b.correctValue === block.value)] = block
+          this.correspandance_right[this.correspandance_left.findIndex((b) => b.exerciceBlockType === ExerciceBlockTypes.CORRESPONDANCE_LEFT && b.correctValue === block.value)] =
+            block;
         } else {
           this.correspandance_right.push(block);
         }
-    });
+      });
   }
 
   ngOnChanges(changes: SimpleChanges): void {

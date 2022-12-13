@@ -16,12 +16,15 @@ export class SelectFromListComponent implements OnInit, OnChanges {
   readonly ExerciceBlockTypes = ExerciceBlockTypes;
   imageBlock: ExerciceBlock = null;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.initExercice();
   }
   private initExercice() {
+    this.exercice.question = this.exercice.question.split('#').join('\n');
+    this.exercice.name = this.exercice.name.split('#').join('\n');
+
     this.answerChange.emit(false);
     this.imageBlock = this.exercice.blocks.find((block: ExerciceBlock) => block.exerciceBlockType === ExerciceBlockTypes.IMAGE);
     this.canGoNext.emit(true);
@@ -32,7 +35,7 @@ export class SelectFromListComponent implements OnInit, OnChanges {
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['exercice']) {
-      this.initExercice()
+      this.initExercice();
     }
   }
 

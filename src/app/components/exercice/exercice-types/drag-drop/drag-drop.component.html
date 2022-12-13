@@ -1,16 +1,16 @@
 <mat-card *ngIf="exercice.name">
   <div class="question-container">
-    <mat-card-content style="text-align: center">
-      {{ exercice?.name }}
-    </mat-card-content>
+    <mat-card-content [innerText]="exercice?.name" style="text-align: center"> </mat-card-content>
   </div>
 </mat-card>
 
 <mat-card class="container" cdkDropListGroup>
   <div class="container-left">
     <mat-card class="question-container">
-      <mat-card-title [ngStyle]="(exercice['rtl']===true) && {'direction': 'rtl'}">{{ exercice.question }}</mat-card-title>
-      <mat-card-content class="answers-container" [ngStyle]="(exercice['rtl']===true) && {'direction': 'rtl'}">{{ exercice.name }}</mat-card-content>
+      <mat-card-title [innerText]="exercice.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+        <br />
+      </mat-card-title>
+      <mat-card-content class="answers-container" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">{{ exercice.name }}</mat-card-content>
     </mat-card>
 
     <div cdkDropList [cdkDropListData]="dragDropItem" class="example-list" (cdkDropListDropped)="drop($event)">

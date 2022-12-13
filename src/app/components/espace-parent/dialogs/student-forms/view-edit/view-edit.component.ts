@@ -58,7 +58,7 @@ export class ViewEditComponent implements OnInit {
       dobControl: [momentFucker, Validators.required],
       schoolControl: [null, Validators.required],
       groupControl: [this.student.group.id, Validators.required],
-      passwordControl: [this.student.password, Validators.required],
+      passwordControl: [null, Validators.required],
       tokenControl: [this.student.coupon[0]?.value, Validators.required]
     });
 
@@ -95,7 +95,7 @@ export class ViewEditComponent implements OnInit {
       dob: this.studentForm.get('dobControl').value,
       school: this.studentForm.get('schoolControl').value,
       group: group,
-      // password: '',
+      password: this.studentForm.get('passwordControl').value,
       token: this.studentForm.get('tokenControl').value,
       username: `${this.studentForm.get('nameControl').value.firstname}.${this.studentForm.get('nameControl').value.lastname}`
     };

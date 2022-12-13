@@ -22,16 +22,17 @@ export class WritingComponent implements OnInit, OnChanges {
   constructor(private revisionService: RevisionService) {}
 
   ngOnInit(): void {
+    this.exercice.question = this.exercice.question.split('#').join('\n');
+    this.exercice.name = this.exercice.name.split('#').join('\n');
+
     this.revisionService.resetFormSub.subscribe((res) => {
       this.selectedBlock ? (this.selectedBlock.value = '') : '';
     });
     this.initExercice();
- 
- console.log(this.exercice);
-    
+
+    console.log(this.exercice);
   }
   private initExercice() {
-    
     this.answerChange.emit(false);
     this.imageBlock = this.exercice.blocks.find((block: ExerciceBlock) => block.exerciceBlockType === ExerciceBlockTypes.IMAGE);
     this.selectedBlock = this.exercice.blocks.find((block: ExerciceBlock) => block.exerciceBlockType === ExerciceBlockTypes.INPUT_TEXT);

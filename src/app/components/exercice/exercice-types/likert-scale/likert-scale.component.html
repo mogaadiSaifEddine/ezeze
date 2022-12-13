@@ -1,16 +1,14 @@
 <mat-card *ngIf="exercice.name">
   <div class="question-container">
-    <mat-card-content style="text-align: center">
-      {{ exercice?.name }}
-    </mat-card-content>
+    <mat-card-content [innerText]="exercice?.name" style="text-align: center"> </mat-card-content>
   </div>
 </mat-card>
 
 <mat-card>
   <div class="question-container">
-    <mat-card-title [ngStyle]="(exercice['rtl']===true) && {'direction': 'rtl'}"> Veuillez indiquer votre accord ou désaccord avec les déclarations suivantes: </mat-card-title>
+    <mat-card-title [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"> Veuillez indiquer votre accord ou désaccord avec les déclarations suivantes: </mat-card-title>
 
-    <mat-card-content [ngStyle]="(exercice['rtl']===true) && {'direction': 'rtl'}">
+    <mat-card-content [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
       <table>
         <tr>
           <td></td>

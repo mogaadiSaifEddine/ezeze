@@ -19,8 +19,8 @@ export class CorrespondingArrowComponent implements OnInit {
   arrow_right: ExerciceBlock[] = [];
   left = [1, 2, 3];
   right = [10, 5, 9];
-  rightArrow:any=0
-  leftArrow:any=0
+  rightArrow: any = 0;
+  leftArrow: any = 0;
   lines: Line[] = [];
   selectedBox = 0;
 
@@ -29,7 +29,9 @@ export class CorrespondingArrowComponent implements OnInit {
   expanded = false;
 
   ngOnInit(): void {
-    
+    this.exercice.question = this.exercice.question.split('#').join('\n');
+    this.exercice.name = this.exercice.name.split('#').join('\n');
+
     this.canGoNext.emit(true);
     this.exercice.blocks.forEach((block) => {
       if (block.exerciceBlockType == ExerciceBlockTypes.ARROW_LEFT) {
@@ -39,7 +41,6 @@ export class CorrespondingArrowComponent implements OnInit {
       }
     });
     console.log(this.exercice);
-    
   }
 
   listenToClick(x, direction: string): void {
@@ -51,13 +52,12 @@ export class CorrespondingArrowComponent implements OnInit {
       this.selectedBox = x;
       this.leftArrow = x;
       console.log(this.leftArrow);
-      
     } else if (this.rightArrow == 0 && direction === 'right' && this.leftArrow != 0) {
       this.selectedBox = 0;
       console.log('left', x);
       this.rightArrow = x;
       console.log(this.rightArrow);
-      
+
       this.lines = [
         ...this.lines,
         {
@@ -75,8 +75,7 @@ export class CorrespondingArrowComponent implements OnInit {
       this.leftArrow = x;
     }
     this.answerChange.emit(true);
-    this.checkCorrectValues()
-
+    this.checkCorrectValues();
   }
 
   checkCorrectValues() {
@@ -88,7 +87,6 @@ export class CorrespondingArrowComponent implements OnInit {
     });
 
     this.answerChange.emit(allCorrect);
-
   }
 
   clearLines(): void {

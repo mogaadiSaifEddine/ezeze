@@ -20,8 +20,10 @@ export class MultipleChoiceComponent implements OnInit, OnChanges {
 
   constructor(private revisionService: RevisionService) {}
 
- 
   ngOnInit(): void {
+    this.exercice.question = this.exercice.question.split('#').join('\n');
+    this.exercice.name = this.exercice.name.split('#').join('\n');
+
     this.revisionService.resetFormSub.subscribe((res) => {
       this.exercice.blocks.forEach((block) => {
         block.value ? (block.value = '') : '';

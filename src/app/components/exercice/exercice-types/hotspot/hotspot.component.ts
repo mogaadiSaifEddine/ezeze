@@ -19,28 +19,28 @@ export class HotspotComponent implements OnInit, OnChanges {
   readonly ExerciceBlockTypes = ExerciceBlockTypes;
   imageBlock: ExerciceBlock = null;
   hotspotsList: any[] = [];
-  imageLoaded=false
+  imageLoaded = false;
   constructor() {}
   ngOnInit(): void {
-    console.log("BLOCK",this.exercice.blocks)
+    this.exercice.question = this.exercice.question.split('#').join('\n');
+    this.exercice.name = this.exercice.name.split('#').join('\n');
+
     this.initExercice();
   }
 
   private initExercice() {
     this.answerChange.emit(false);
     this.imageBlock = this.exercice.blocks.find((block: ExerciceBlock) => block.exerciceBlockType === ExerciceBlockTypes.IMAGE);
-    console.log("BLOCKss",this.exercice.blocks)
-    this.hotspotsList=[]
+    console.log('BLOCKss', this.exercice.blocks);
+    this.hotspotsList = [];
     this.exercice.blocks.forEach((block: ExerciceBlock) => {
-      if(block.exerciceBlockType === ExerciceBlockTypes.INPUT_TEXT){
+      if (block.exerciceBlockType === ExerciceBlockTypes.INPUT_TEXT) {
         this.hotspotsList.push({
-          y:parseFloat(block.label),
-          x:parseFloat(block.placeholder),
-          correctValue:block.correctValue
-        })
-
+          y: parseFloat(block.label),
+          x: parseFloat(block.placeholder),
+          correctValue: block.correctValue
+        });
       }
-    
     });
   }
 
@@ -58,14 +58,13 @@ export class HotspotComponent implements OnInit, OnChanges {
   hotspotClicked(hotspot) {
     !hotspot.value ? (hotspot.value = 'true') : (hotspot.value = null);
     let correct = true;
-    console.log(this.hotspotsList)
-    this.hotspotsList.forEach(hot=>{
-
-      if(hot.value == 'true' && hot.correctValue !='true'){
-        correct=false;
+    console.log(this.hotspotsList);
+    this.hotspotsList.forEach((hot) => {
+      if (hot.value == 'true' && hot.correctValue != 'true') {
+        correct = false;
       }
-    })
-    console.log(correct)
+    });
+    console.log(correct);
     this.answerChange.emit(correct);
     this.canGoNext.emit(true);
   }

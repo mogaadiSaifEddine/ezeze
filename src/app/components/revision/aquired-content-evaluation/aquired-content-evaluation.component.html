@@ -16,8 +16,14 @@
     (finalScore)="prerequisiteTestFinished($event)"></app-pass-test>
 </div>
 
-<div *ngIf="showExercicesMode">
-  <app-pass-test [evaluationContent]="exerciceContent" (finalScore)="testFinished($event)"></app-pass-test>
+<div *ngIf="showExercicesMode && selectedExercice==1">
+  <app-pass-test [evaluationContent]="exercice1Content" (finalScore)="testFinished($event)"></app-pass-test>
+</div>
+<div *ngIf="showExercicesMode && selectedExercice==2">
+  <app-pass-test [evaluationContent]="exercice2Content" (finalScore)="testFinished($event)"></app-pass-test>
+</div>
+<div *ngIf="showExercicesMode && selectedExercice==3">
+  <app-pass-test [evaluationContent]="exercice3Content" (finalScore)="testFinished($event)"></app-pass-test>
 </div>
 <app-score-screen [score]="score" *ngIf="showFinalScore"> </app-score-screen>
 

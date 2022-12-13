@@ -20,6 +20,8 @@ export class MultipleAnswersComponent implements OnInit, OnChanges {
   constructor() {}
 
   ngOnInit(): void {
+    this.exercice.question = this.exercice.question.split('#').join('\n');
+    this.exercice.name = this.exercice.name.split('#').join('\n');
     this.initExercice();
   }
   private initExercice() {

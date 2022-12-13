@@ -21,6 +21,8 @@ export class TrueFalseComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     console.log(this.exercice);
+    this.exercice.question = this.exercice.question.split('#').join('\n');
+    this.exercice.name = this.exercice.name.split('#').join('\n');
 
     this.revisionService.resetFormSub.subscribe((res) => {
       this.exercice.blocks.forEach((block) => {

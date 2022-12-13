@@ -22,6 +22,9 @@ export class DragDropComponent implements OnInit, OnChanges {
   dragDropItem: DragDropItem[] = [];
 
   ngOnInit(): void {
+    this.exercice.question = this.exercice.question.split('#').join('\n');
+    this.exercice.name = this.exercice.name.split('#').join('\n');
+
     this.initExercice();
   }
   private initExercice() {

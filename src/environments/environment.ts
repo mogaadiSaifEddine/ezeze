@@ -6,11 +6,23 @@
 export const environment = {
   production: false,
 
-  // Dev server Api
-  // serverApi: 'http://179.61.246.84:8081/',
+  // // Dev server Api
+  serverApi: 'http://179.61.246.84:8081/',
 
   // local server Api
-  serverApi: 'http://localhost:8081/',
+  // serverApi: 'http://localhost:8081/',
+
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+
   /******************** */
   /******************** */
   /******************** */

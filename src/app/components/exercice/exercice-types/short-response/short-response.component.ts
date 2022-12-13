@@ -10,8 +10,7 @@ import { RevisionService } from 'src/app/services/revision.service';
   styleUrls: ['./short-response.component.scss']
 })
 export class ShortResponseComponent implements OnInit, OnChanges {
-  
-  questions
+  questions;
   @Input() exercice: Exercice;
   @Input() answer: boolean;
   @Output() answerChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -22,12 +21,14 @@ export class ShortResponseComponent implements OnInit, OnChanges {
   constructor(private revisionService: RevisionService) {}
 
   ngOnInit(): void {
+    this.exercice.question = this.exercice.question.split('#').join('\n');
+    this.exercice.name = this.exercice.name.split('#').join('\n');
+
     this.revisionService.resetFormSub.subscribe((res) => {
       this.questions ? (this.questions.value = '') : '';
     });
     this.initExercice();
     console.log(this.exercice['rtl']);
-    
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['exercice']) {
@@ -37,15 +38,16 @@ export class ShortResponseComponent implements OnInit, OnChanges {
   private initExercice() {
     this.answerChange.emit(false);
     this.imageBlock = this.exercice.blocks.find((block: ExerciceBlock) => block.exerciceBlockType === ExerciceBlockTypes.IMAGE);
-    this.questions = this.exercice.blocks.filter((block: ExerciceBlock) => block.exerciceBlockType === ExerciceBlockTypes.INPUT_TEXT || block.exerciceBlockType === ExerciceBlockTypes.BREAK);
-   
+    this.questions = this.exercice.blocks.filter(
+      (block: ExerciceBlock) => block.exerciceBlockType === ExerciceBlockTypes.INPUT_TEXT || block.exerciceBlockType === ExerciceBlockTypes.BREAK
+    );
   }
 
   valueChanged() {
-    let correct=true;
-    this.questions.forEach(element => {
-      if(element.value!=element.correctValue){
-        correct=false;
+    let correct = true;
+    this.questions.forEach((element) => {
+      if (element.value != element.correctValue) {
+        correct = false;
       }
     });
     this.answerChange.emit(correct);
