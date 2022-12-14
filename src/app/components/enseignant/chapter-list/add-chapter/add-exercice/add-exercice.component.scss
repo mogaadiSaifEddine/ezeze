@@ -193,7 +193,7 @@ title-holder {
 
 .button-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   text-align: center;
 }
@@ -286,4 +286,9 @@ title-holder {
 .correct-value-point{
   background-color: green;
   color: white;
+}
+
+.preview-container{
+  width: 100%;
+  height: fit-content;
 }

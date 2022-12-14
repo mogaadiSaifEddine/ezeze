@@ -69,9 +69,9 @@ const MaterialModules = [MatCardModule, MatRadioModule, MatCheckboxModule, MatFo
   ],
   providers: [],
   exports: [
-    TrueFalseComponent,
     MultipleChoiceComponent,
     MultipleAnswersComponent,
+    TrueFalseComponent,
     ShortResponseComponent,
     FillEmptyFieldsComponent,
     CorrespondenceComponent,
@@ -80,7 +80,18 @@ const MaterialModules = [MatCardModule, MatRadioModule, MatCheckboxModule, MatFo
     WritingComponent,
     SelectFromListComponent,
     SequencingComponent,
-    PassTestComponent
+    PassTestComponent,
+    ColorTheTextComponent,
+    ColorTheTextElementComponent,
+    ColorPaletteElementComponent,
+    DragDropComponent,
+    DragWordsComponent,
+    HotspotComponent,
+    EspaceProfComponent,
+    CorrespondingArrowComponent,
+    DrawLinesComponent,
+    LineAnchorDirective,
+    FalfoulComponent
   ]
 })
 export class ExerciceModule { }
