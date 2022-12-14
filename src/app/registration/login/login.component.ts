@@ -64,8 +64,8 @@ export class LoginComponent implements OnInit {
       username: []
     });
     this.signupStepPersonalForm = this.fb.group({
-      firstname: ['', [Validators.required, Validators.minLength(5)]],
-      lastname: ['', [Validators.required, Validators.minLength(5)]],
+      firstname: ['', [Validators.required, Validators.minLength(3)]],
+      lastname: ['', [Validators.required, Validators.minLength(3)]],
       datenaissance: ['/6/1985', [Validators.required]],
       phone: ['', [Validators.required, Validators.minLength(8)]],
       sexe: ['', [Validators.required, Validators.minLength(4)]]
