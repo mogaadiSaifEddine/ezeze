@@ -17,11 +17,11 @@ export class SignupComponent implements OnInit {
     this.signup = new FormGroup({
       firstname: new FormControl(this.hero.firstname, [
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(3),
       ]),
       lastname: new FormControl(this.hero.lastname, [
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(3),
       ]),
       username: new FormControl(this.hero.username, [
         Validators.required,

@@ -74,7 +74,7 @@
                       {{ 'error.field-required' | translate }}
                     </mat-error>
                     <mat-error *ngIf="signupStepPersonalFormControls['firstname']?.errors?.['minlength']">
-                      {{ 'error.min-length' | translate: { count: 5 } }}
+                      {{ 'error.min-length' | translate: { count: 3 } }}
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -87,7 +87,7 @@
                       {{ 'error.field-required' | translate }}
                     </mat-error>
                     <mat-error *ngIf="signupStepPersonalFormControls['lastname']?.errors?.['minlength']">
-                      {{ 'error.min-length' | translate: { count: 5 } }}
+                      {{ 'error.min-length' | translate: { count: 3 } }}
                     </mat-error>
                   </mat-form-field>
                 </div>
