@@ -55,8 +55,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.isRegisterPageActive = history.state.isRegisterPageActive;
     this.userservice.getGroups().subscribe((groupList) => {
-
-
       this.groupList = groupList;
     });
     this.loginForm = this.fb.group({
@@ -64,8 +62,8 @@ export class LoginComponent implements OnInit {
       username: []
     });
     this.signupStepPersonalForm = this.fb.group({
-      firstname: ['', [Validators.required, Validators.minLength(5)]],
-      lastname: ['', [Validators.required, Validators.minLength(5)]],
+      firstname: ['', [Validators.required, Validators.minLength(3)]],
+      lastname: ['', [Validators.required, Validators.minLength(3)]],
       datenaissance: ['/6/1985', [Validators.required]],
       phone: ['', [Validators.required, Validators.minLength(8)]],
       sexe: ['', [Validators.required, Validators.minLength(4)]]
@@ -79,8 +77,6 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-
-
     this.tokenservice.login(this.loginForm.value).subscribe({
       next: (data) => {
         let jwtToken = data.headers.get('Authorization')!;
@@ -88,7 +84,6 @@ export class LoginComponent implements OnInit {
         this.tokenservice.saveToken(jwtToken);
         this.tokenservice.saveConnectedUser(userconnected);
         this.userservice.getUser(userconnected).subscribe((res) => {
-
           UserService.currentuser = res;
           localStorage.setItem('user_details', JSON.stringify(res));
           this.revisionSerivce.modulesContent.next(res?.group?.chaptersList);
@@ -102,33 +97,36 @@ export class LoginComponent implements OnInit {
           } else if (res?.profession === 'admin') {
             this.router.navigate(['/dashboard']);
           }
+          this.toastr.success('Welcome Again!', 'Toastr fun!');
         });
       },
       error: (err) => {
-        if (err.status === 0) {
-          this.toastr.error(this.translate.instant('error.check-connection'));
-        }
-        this.toastr.success('Hello world!', 'Toastr fun!');
+        console.log(err);
+
+        this.toastr.error(this.translate.instant('error.check-connection'));
       }
     });
   }
 
   signup() {
+    if (this.signupStepAccountForm.get('confirmepassword').value !== this.signupStepAccountForm.get('password').value) {
+      this.toastr.error('Verif Your passwords ');
+      return;
+    }
     if (this.signupStepPersonalForm.valid && this.signupStepAccountForm.valid)
-
-    this.userservice
-      .signup({
-        ...this.signupStepPersonalForm.value,
-        ...this.signupStepAccountForm.value
-      })
-      .subscribe({
-        next: (res) => {
-          this.isRegisterPageActive = false;
-        },
-        error: (error) => {
-          this.isRegisterPageActive = false;
-        }
-      });
+      this.userservice
+        .signup({
+          ...this.signupStepPersonalForm.value,
+          ...this.signupStepAccountForm.value
+        })
+        .subscribe({
+          next: (res) => {
+            this.isRegisterPageActive = false;
+          },
+          error: (error) => {
+            this.isRegisterPageActive = false;
+          }
+        });
   }
   keyPressNumbers(formControlName: string, event) {
     let charCode = event.which ? event.which : event.keyCode;

@@ -58,7 +58,8 @@ export class TokenserviceService {
   logout(userID?: any) {
     this.router.navigate(['/acceuil']);
 
-
+    window.sessionStorage.clear();
+    localStorage.clear();
     return this.http.post(
       this.serverApi + 'Elearning/user/logout/' + this.userconnected,
       {},
