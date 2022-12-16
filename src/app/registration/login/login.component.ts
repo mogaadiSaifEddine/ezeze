@@ -97,13 +97,13 @@ export class LoginComponent implements OnInit {
           } else if (res?.profession === 'admin') {
             this.router.navigate(['/dashboard']);
           }
+          this.toastr.success('Welcome Again!', 'Toastr fun!');
         });
       },
       error: (err) => {
-        if (err.status === 0) {
-          this.toastr.error(this.translate.instant('error.check-connection'));
-        }
-        this.toastr.success('Hello world!', 'Toastr fun!');
+        console.log(err);
+
+        this.toastr.error(this.translate.instant('error.check-connection'));
       }
     });
   }
