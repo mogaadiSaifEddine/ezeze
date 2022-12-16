@@ -55,8 +55,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.isRegisterPageActive = history.state.isRegisterPageActive;
     this.userservice.getGroups().subscribe((groupList) => {
-
-
       this.groupList = groupList;
     });
     this.loginForm = this.fb.group({
@@ -79,8 +77,6 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-
-
     this.tokenservice.login(this.loginForm.value).subscribe({
       next: (data) => {
         let jwtToken = data.headers.get('Authorization')!;
@@ -88,7 +84,6 @@ export class LoginComponent implements OnInit {
         this.tokenservice.saveToken(jwtToken);
         this.tokenservice.saveConnectedUser(userconnected);
         this.userservice.getUser(userconnected).subscribe((res) => {
-
           UserService.currentuser = res;
           localStorage.setItem('user_details', JSON.stringify(res));
           this.revisionSerivce.modulesContent.next(res?.group?.chaptersList);
@@ -114,21 +109,24 @@ export class LoginComponent implements OnInit {
   }
 
   signup() {
+    if (this.signupStepAccountForm.get('confirmepassword').value !== this.signupStepAccountForm.get('password').value) {
+      this.toastr.error('Verif Your passwords ');
+      return;
+    }
     if (this.signupStepPersonalForm.valid && this.signupStepAccountForm.valid)
-
-    this.userservice
-      .signup({
-        ...this.signupStepPersonalForm.value,
-        ...this.signupStepAccountForm.value
-      })
-      .subscribe({
-        next: (res) => {
-          this.isRegisterPageActive = false;
-        },
-        error: (error) => {
-          this.isRegisterPageActive = false;
-        }
-      });
+      this.userservice
+        .signup({
+          ...this.signupStepPersonalForm.value,
+          ...this.signupStepAccountForm.value
+        })
+        .subscribe({
+          next: (res) => {
+            this.isRegisterPageActive = false;
+          },
+          error: (error) => {
+            this.isRegisterPageActive = false;
+          }
+        });
   }
   keyPressNumbers(formControlName: string, event) {
     let charCode = event.which ? event.which : event.keyCode;
