@@ -1,6 +1,7 @@
 import { trigger, transition, style, animate } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { fromEvent, interval, merge, Observable, skipWhile, Subscription, switchMap, take, tap } from 'rxjs';
 import { Chapter } from 'src/app/model/Chapter';
 import { ChapitreService } from 'src/app/services/chapitre.service';
 
@@ -16,6 +17,7 @@ import { ChapitreService } from 'src/app/services/chapitre.service';
   ]
 })
 export class ModuleCardComponent implements OnInit {
+
   @Input() matiere: Chapter;
   colorPalette = ['FD90D4', '00B997', 'FFEC01', 'FA617D', '01CC01', 'A9013F', '009CA9', 'A9F800', '8B8E95', 'FE1F34', 'F08324'];
 
@@ -24,8 +26,14 @@ export class ModuleCardComponent implements OnInit {
 
   constructor(private router: Router, private chapterService: ChapitreService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+
+  }
+
+
   navigateToRoute() {
+
     this.chapterService.getOneChapter(this.matiere.chapter_id).subscribe((res: Chapter[]) => {
       this.chapterService.chapterList.next(res);
       this.router.navigate(['/revision/chapitres']);

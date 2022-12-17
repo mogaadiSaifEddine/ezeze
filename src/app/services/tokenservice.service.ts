@@ -55,17 +55,10 @@ export class TokenserviceService {
     return !!localStorage.getItem('Authorization');
   }
 
-  logout(userID?: any) {
-    this.router.navigate(['/acceuil']);
+  logout() {
 
     window.sessionStorage.clear();
     localStorage.clear();
-    return this.http.post(
-      this.serverApi + 'Elearning/user/logout/' + this.userconnected,
-      {},
-      {
-        observe: 'response'
-      }
-    );
+
   }
 }
