@@ -23,10 +23,7 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
     this.userconencte();
   }
   logout(): void {
-    this.tokenservice.logout(this.userconnected).subscribe((r) => {
-      window.sessionStorage.clear();
-      localStorage.clear()
-    });
+    this.tokenservice.logout()
     this.router.navigate(['/accueil']);
   }
   userconencte() {
