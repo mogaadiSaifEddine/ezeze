@@ -1,6 +1,7 @@
 <mat-card *ngIf="exercice.name">
   <div class="question-container">
-    <mat-card-content [innerText]="exercice?.name" style="text-align: center"> </mat-card-content>
+    <!-- <mat-card-content [innerText]="exercice?.name" style="text-align: center"> </mat-card-content> -->
+    <div [innerHTML]="exercice?.name"></div>
   </div>
 </mat-card>
 
@@ -14,9 +15,7 @@
     <!-- <img src="assets/images/kids.jpg" alt="" /> -->
     <img (load)="imageLoaded = true" *ngIf="imageBlock" #hotspotImg src="assets/images/{{ imageBlock.value }}" alt="" />
     <ng-container *ngIf="imageLoaded">
-      <div
-        (click)="hotspotClicked(hotspot)"
-        class="hotspot"
+      <div (click)="hotspotClicked(hotspot)" class="hotspot"
         [ngStyle]="{ top: hotspot.y * hotspotImg?.first?.nativeElement?.offsetHeight - 20 + 'px', left: hotspot.x * hotspotImg?.first?.nativeElement?.offsetWidth - 10 + 'px' }"
         *ngFor="let hotspot of hotspotsList; let index = index">
         <span *ngIf="!hotspot.value">

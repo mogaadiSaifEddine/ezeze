@@ -1,15 +1,15 @@
 <section id="showEditStudent">
-  <div id="leftSection">
-    <img src="../../../../../../assets/img/undraw_professional_card_otb4.svg" />
-  </div>
   <div id="rightSection">
     <form [formGroup]="studentForm">
       <header id="dialogStikyHeader">
         <div>
-          <h4>{{ dialogAction }} student</h4>
-          <button mat-flat-button color="primary" type="submit" (click)="updateStudentData()">
+          <button mat-flat-button color="primary" type="submit" (click)="updateStudentData()" *ngIf="viewNotEditMode">
             <mat-icon>update</mat-icon>
             Update
+          </button>
+          <button mat-flat-button color="primary" type="submit" (click)="updateStudentData()" *ngIf="!viewNotEditMode">
+            <mat-icon>save</mat-icon>
+            Save
           </button>
         </div>
         <button mat-icon-button (click)="close()">

@@ -11,13 +11,16 @@ example-form {
 td {
   padding-right: 8px;
 }
+
 .container {
   background-color: white;
 }
+
 title-holder {
   border-bottom: 2px solid #f2f2f2;
   margin-bottom: 10px;
 }
+
 .table-holder {
   background-color: white;
   padding: 15px;
@@ -26,6 +29,7 @@ title-holder {
   margin-left: 45px;
   margin-right: 45px;
 }
+
 .list-title {
   font-size: 20px;
   font-weight: bold;
@@ -33,6 +37,7 @@ title-holder {
   letter-spacing: 0.5px;
   margin: 5px;
 }
+
 /* ---------------------------------------------------------- */
 
 /* Table styles */
@@ -44,6 +49,7 @@ title-holder {
 .float-right {
   float: right;
 }
+
 /* ---------------------------------------------------------- */
 
 /* Header styles */
@@ -65,10 +71,12 @@ title-holder {
   line-height: normal;
   letter-spacing: 0.5px;
 }
+
 /* Round the top table corners */
 .mat-header-cell:first-child {
   border-top-left-radius: 5px;
 }
+
 .mat-header-cell:last-child {
   border-top-right-radius: 5px;
 }
@@ -96,6 +104,7 @@ title-holder {
   display: none !important;
   opacity: 0;
 }
+
 :host ::ng-deep .my-custom-dialog-class {
   width: 700px;
 }
@@ -114,33 +123,39 @@ title-holder {
   padding-top: 0px;
   padding-bottom: 0px;
 }
+
 .name-column {
   width: 30%;
 
   padding-top: 0px;
   padding-bottom: 0px;
 }
+
 .amount-column {
   width: 15%;
 
   padding-top: 0px;
   padding-bottom: 0px;
 }
+
 .status-column {
   width: 15%;
 
   padding-top: 0px;
   padding-bottom: 0px;
 }
+
 .date-column {
   width: 20%;
 
   padding-top: 0px;
   padding-bottom: 0px;
 }
+
 .state-column {
   width: 5%;
 }
+
 /* ---------------------------------------------------------- */
 
 /* Row styles */
@@ -148,6 +163,7 @@ title-holder {
 .mat-row:nth-child(2n) {
   background-color: #f2f2f2;
 }
+
 /* ---------------------------------------------------------- */
 
 /* Cell styles */
@@ -155,6 +171,7 @@ title-holder {
 .state-cell {
   text-align: right;
 }
+
 .mat-cell {
   border: none;
 }
@@ -162,6 +179,7 @@ title-holder {
 .green-svg {
   fill: #6dd400;
 }
+
 .gray-svg {
   fill: #b2b4b6;
 }
@@ -172,6 +190,7 @@ title-holder {
   align-items: center;
   text-align: center;
 }
+
 // th {
 //   text-align: center;
 //   overflow: hidden;
@@ -203,6 +222,7 @@ title-holder {
   justify-content: flex-end;
   margin: 1%;
 }
+
 .icon-button {
   border: none;
   background-color: inherit;
@@ -240,10 +260,12 @@ title-holder {
   justify-content: flex-end;
   margin: 1%;
 }
+
 .icon-button {
   border: none;
   background-color: inherit;
 }
+
 .close-button {
   float: right;
   top: -24px;
@@ -257,7 +279,8 @@ title-holder {
 .close-icon:hover {
   transform: rotate(180deg);
 }
-#hotspot-img{
+
+#hotspot-img {
   width: 100%;
   position: absolute;
   top: 0;
@@ -273,22 +296,32 @@ title-holder {
   font-size: 1.1em;
   font-weight: 500;
 }
+
 .image-container {
   position: relative;
   width: 100%;
   height: fit-content;
-  
+
 }
-#image-name-container{
+
+#image-name-container {
   display: flex;
   align-items: center;
 }
-.correct-value-point{
+
+.correct-value-point {
   background-color: green;
   color: white;
 }
 
-.preview-container{
+.preview-container {
   width: 100%;
   height: fit-content;
+}
+
+#angularEditor {
+  .angular-editor-textarea {
+    resize: none;
+    font-size: 3rem;
+  }
 }

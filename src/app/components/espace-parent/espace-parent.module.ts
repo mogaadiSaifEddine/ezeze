@@ -26,6 +26,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { VouchercheckComponent } from './dialogs/vouchercheck/vouchercheck.component';
 
 
 
@@ -53,7 +54,8 @@ const MATERIAL_MODULES = [
     AddNewComponent,
     ViewEditComponent,
     DeleteConfirmationComponent,
-    TokenDetailsComponent
+    TokenDetailsComponent,
+    VouchercheckComponent
   ],
   imports: [
     CommonModule,

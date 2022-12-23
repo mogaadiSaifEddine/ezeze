@@ -7,7 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SharedService } from 'src/app/services/shared.service';
 import { StudentService } from 'src/app/services/espace-parent/student.service';
 // COMPONNETS
-import { AddVoucherComponent } from '../dialogs/add-voucher/add-voucher.component';
+import { VouchercheckComponent } from '../dialogs/vouchercheck/vouchercheck.component';
 import { ViewEditComponent } from 'src/app/components/espace-parent/dialogs/student-forms/view-edit/view-edit.component';
 import { DeleteConfirmationComponent } from 'src/app/components/espace-parent/dialogs/delete-confirmation/delete-confirmation.component';
 import { TokenDetailsComponent } from 'src/app/components/espace-parent/dialogs/token-details/token-details.component';
@@ -36,7 +36,11 @@ export class EspaceParentViewComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public dialog: MatDialog, private sharedService: SharedService, private studentService: StudentService) {}
+  constructor(
+    public dialog: MatDialog,
+    private sharedService: SharedService,
+    private studentService: StudentService
+  ) { }
 
   ngOnInit(): void {
     this.sharedService.showManageStudentAccountGuide.subscribe({
@@ -52,13 +56,9 @@ export class EspaceParentViewComponent implements OnInit {
     });
   }
 
-  hideGuide() {
-    this.sharedService.showManageStudentAccountGuide.next(false);
-  }
-
   openDialog() {
-    const dialogRef = this.dialog.open(AddVoucherComponent);
-
+    // const dialogRef = this.dialog.open(AddVoucherComponent);
+    const dialogRef = this.dialog.open(VouchercheckComponent);
     dialogRef.afterClosed().subscribe();
   }
 

@@ -1,6 +1,10 @@
 <div class="tool-buttons-container mt-2">
-  <button class="course-reminder" matTooltip="Course reminder" (click)="openCourseReminder()"></button>
-  <button class="concept-map" matTooltip="Concept map" (click)="openConceptMap()"></button>
+  <button mat-fab color="primary" matTooltip="Course reminder" (click)="openCourseReminder()" class="pulse">
+    <mat-icon>assignment</mat-icon>
+  </button>
+  <button mat-fab color="primary" matTooltip="Concept map" (click)="openConceptMap()" class="pulse">
+    <mat-icon>bookmark</mat-icon>
+  </button>
 </div>
 <app-main-screen (startEvaluation)="startEvaluation($event)" *ngIf="showMainScreen"></app-main-screen>
 
@@ -11,9 +15,7 @@
 </div>
 
 <div class="container" *ngIf="prerequisiteMode && !!serieExercice">
-  <app-pass-test 
-    [evaluationContent]="prerequisiteContent" 
-    (finalScore)="prerequisiteTestFinished($event)"></app-pass-test>
+  <app-pass-test [evaluationContent]="prerequisiteContent" (finalScore)="prerequisiteTestFinished($event)"></app-pass-test>
 </div>
 
 <div *ngIf="showExercicesMode && selectedExercice==1">

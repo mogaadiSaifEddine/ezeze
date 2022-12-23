@@ -14,7 +14,7 @@ export class SerieCardComponent implements OnInit {
   @Input() serie_id: number;
 
   displayedColumns: string[] = ['ordre', 'exercice', 'type', 'action'];
-  constructor(public dialog: MatDialog, private serieService: SerieService) {}
+  constructor(public dialog: MatDialog, private serieService: SerieService) { }
   dataSource: any;
 
   ngOnInit(): void {
@@ -27,8 +27,8 @@ export class SerieCardComponent implements OnInit {
 
   openDialog(element?): void {
     const dialogRef = this.dialog.open(AddExerciceComponent, {
-      width: '50%',
-      height: '50%',
+      width: '1200px',
+      height: '80%',
       disableClose: true,
       data: {
         exercice: element,
@@ -42,7 +42,7 @@ export class SerieCardComponent implements OnInit {
       });
     });
 
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe((result) => { });
   }
 
   deleteExercice(element) {

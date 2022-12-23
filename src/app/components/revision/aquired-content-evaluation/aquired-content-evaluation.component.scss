@@ -1,17 +1,21 @@
 .container {
   height: fit-content;
 }
+
 .stepper {
   text-align: right;
   margin-top: 10px;
 }
+
 video {
   width: 100%;
 }
+
 #test-aquisitions-btn {
   float: right;
   margin-bottom: 10px;
 }
+
 .welcome-container {
   height: calc(100vh - 200px);
   width: 100%;
@@ -20,9 +24,11 @@ video {
   justify-content: center;
   align-items: center;
 }
+
 #start-evaluation-btn {
   width: fit-content;
 }
+
 .course-reminder,
 .concept-map {
   background-color: #fff;
@@ -34,18 +40,53 @@ video {
   display: flex;
   justify-content: center;
   align-items: center;
+
   &:hover {
     cursor: pointer;
   }
 }
+
 .course-reminder {
   background: url('/assets/images/course-reminder.png') no-repeat center /cover;
 }
+
 .concept-map {
   background: url('/assets/images/carte-concept.png') no-repeat center /cover;
 }
+
 .tool-buttons-container {
+  width: 100%;
   display: flex;
+  align-items: center;
   justify-content: flex-end;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+
+  button:nth-child(1) {
+    margin-right: 2rem;
+  }
+}
+
+// PULSE
+.pulse {
+  background: #3f51b5;
+  animation: animate-pulse 3s linear infinite;
+}
+
+@keyframes animate-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(63, 81, 181, 0.7), 0 0 0 0 rgb(63, 81, 181, 0.7);
+  }
+
+  40% {
+    box-shadow: 0 0 0 50px rgb(63, 81, 181, 0.0), 0 0 0 0 rgb(63, 81, 181, 0.7);
+  }
+
+  80% {
+    box-shadow: 0 0 0 50px rgb(63, 81, 181, 0.0), 0 0 0 30px rgb(63, 81, 181, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgb(63, 81, 181, 0.0), 0 0 0 30px rgb(63, 81, 181, 0);
+  }
+
 }

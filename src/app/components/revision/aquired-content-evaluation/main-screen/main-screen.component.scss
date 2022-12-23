@@ -4,25 +4,18 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-image: url(https://img.freepik.com/premium-vector/teacher-with-kids-school_97632-628.jpg?w=2000);
-  background-size: cover;
   align-items: center;
-  border-radius: 2%;
+  border-radius: .5rem;
 }
+
 h1 {
-  font-size: 3em;
-  color: rgb(249, 97, 97);
+  font-size: 2em;
+  color: #7E57C2;
   font-weight: bold;
 }
 
 #start-evaluation-btn {
-  position: absolute;
-  bottom: 8%;
-}
-
-@media screen and (max-width: 767px) {
-  .welcome-container {
-    background-position: top;
-    background-size: auto;
-  }
+  margin-top: 1rem;
+  background-color: #7E57C2;
+  color: #fff;
 }

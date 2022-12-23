@@ -1,24 +1,12 @@
 <section id="ParentSection">
   <header>
-    <button mat-flat-button color="primary" (click)="openDialog()">
+    <button mat-flat-button color="primary" (click)="openDialog()" id="addVoucherButton">
       <mat-icon>add</mat-icon>
-      Add Voucher
+      Add Token
     </button>
   </header>
 
   <main>
-    <!-- EDIT STUDENT ACCOUNT GUIDE -->
-    <div id="editStudentAccountGuide" *ngIf="showGuide">
-      <button mat-mini-fab (click)="hideGuide()">
-        <mat-icon>close</mat-icon>
-      </button>
-      <p>
-        Please use the given controls <mat-icon>open_in_new</mat-icon>, <mat-icon>drive_file_rename_outline</mat-icon>, <mat-icon>delete_outline</mat-icon> to manage an existing
-        student account.
-      </p>
-      <img src="../../../../assets/img/help-arrows.png" alt="help-arrow" />
-    </div>
-
     <mat-form-field appearance="standard">
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input />

@@ -1,0 +1,20 @@
+.mainContainer {
+    // width: 500px;
+    height: auto;
+
+    form {
+        margin-top: 1rem;
+    }
+
+    .inputContainer {
+        width: 100%;
+    }
+
+    .errorLabel {
+        margin-top: 1rem;
+        padding: 1rem;
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+    }
+}

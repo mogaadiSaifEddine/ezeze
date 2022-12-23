@@ -1,6 +1,7 @@
 <mat-card *ngIf="exercice.name">
   <div class="question-container">
-    <mat-card-content [innerText]="exercice?.name" style="text-align: center"> </mat-card-content>
+    <!-- <mat-card-content [innerText]="exercice?.name" style="text-align: center"> </mat-card-content> -->
+    <div [innerHTML]="exercice?.name"></div>
   </div>
 </mat-card>
 
@@ -14,13 +15,8 @@
           <h4 *ngIf="block.exerciceBlockType === ExerciceBlockTypes.QUESTION">
             {{ block.label }}
           </h4>
-          <mat-checkbox
-            *ngIf="block.exerciceBlockType === ExerciceBlockTypes.INPUT_TEXT"
-            (change)="valueChanged(block)"
-            [(ngModel)]="block.value"
-            [value]="block.value === 'true' ? 'true' : 'false'"
-            >{{ block.label }}</mat-checkbox
-          >
+          <mat-checkbox *ngIf="block.exerciceBlockType === ExerciceBlockTypes.INPUT_TEXT" (change)="valueChanged(block)" [(ngModel)]="block.value"
+            [value]="block.value === 'true' ? 'true' : 'false'">{{ block.label }}</mat-checkbox>
         </ng-container>
       </div>
     </mat-card-content>

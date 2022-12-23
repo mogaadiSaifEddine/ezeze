@@ -1,0 +1,35 @@
+<div class="mainContainer">
+    <mat-progress-bar mode="indeterminate" *ngIf="tokenIsBeingChecked"></mat-progress-bar>
+    <form [formGroup]="tokenForm">
+        <div mat-dialog-content class="mat-typography">
+            <p>You are about to add a new token.</p>
+            <p>This will allow you to add new students account(s).</p>
+
+            <mat-form-field appearance="outline" class="inputContainer">
+                <mat-label>Token</mat-label>
+                <input type="text" formControlName='token' matInput placeholder="Ex. 1665003584" [disabled]="tokenIsValid">
+                <mat-error *ngIf="getTokenInput.hasError('required')">
+                    Token is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-error *ngIf="showError" class="errorLabel">
+                ⚠️ Invalid token!
+            </mat-error>
+        </div>
+
+        <div mat-dialog-actions align="end" class="stepFooter" *ngIf="!tokenIsValid">
+            <button mat-button (click)="close()">Cancel</button>
+            <!-- button to trigger check -->
+            <button mat-flat-button color="primary" (click)="verifyToken()" [disabled]="!tokenForm.valid" *ngIf="!tokenIsBeingChecked && !tokenIsValid || this.tokenForm.invalid">
+                <mat-icon>check_circle_outline</mat-icon>
+                Verify
+            </button>
+            <!-- check is in progress loader -->
+            <button mat-flat-button [disabled]="true" *ngIf="tokenIsBeingChecked">
+                <span>
+                    Verifying...
+                </span>
+            </button>
+        </div>
+    </form>
+</div>

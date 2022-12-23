@@ -3,6 +3,7 @@ import { Exercice } from 'src/app/model/Exercice';
 import { ExerciceBlock } from 'src/app/model/ExerciceBlock';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
 import { RevisionService } from 'src/app/services/revision.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-short-response',
@@ -17,8 +18,53 @@ export class ShortResponseComponent implements OnInit, OnChanges {
   @Output() canGoNext: EventEmitter<boolean> = new EventEmitter<boolean>();
   readonly ExerciceBlockTypes = ExerciceBlockTypes;
   imageBlock: ExerciceBlock = null;
+  // EDITOR CONFIGURATION
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '200px',
+    minHeight: '3rem',
+    maxHeight: '15rem',
+    width: 'auto',
+    minWidth: '0',
+    translate: 'yes',
+    enableToolbar: true,
+    showToolbar: true,
+    defaultParagraphSeparator: '',
+    defaultFontName: 'arial',
+    defaultFontSize: 'auto',
+    uploadWithCredentials: false,
+    sanitize: true,
+    toolbarPosition: 'top',
+    toolbarHiddenButtons: [
+      [
+        'subscript',
+        'superscript',
+        'justifyLeft',
+        'justifyCenter',
+        'justifyRight',
+        'justifyFull',
+        'indent',
+        'outdent',
+        'insertUnorderedList',
+        'insertOrderedList',
+        'heading',
+        'fontName',
+        'fontSize',
+        'backgroundColor',
+        'customClasses',
+        'link',
+        'unlink',
+        'insertImage',
+        'insertVideo',
+        'insertHorizontalRule',
+        'removeFormat',
+        'toggleEditorMode'
+      ]
+    ]
+  }
 
-  constructor(private revisionService: RevisionService) {}
+  constructor(private revisionService: RevisionService) { }
 
   ngOnInit(): void {
     this.exercice.question = this.exercice.question.split('#').join('\n');

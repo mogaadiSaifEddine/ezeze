@@ -1,4 +1,8 @@
-<mat-card @fadeSlideInOut [ngStyle]="{ 'background-color': randomColor }" class="card selected-card" (click)="navigateToRoute()">
-  <mat-card-content> </mat-card-content>
-  <span class="text-center"> {{ matiere.name }}</span>
-</mat-card>
+<div class="feature" (click)="navigateToRoute()" [ngStyle]="{ 'border-color': randomColor }">
+  <h2 class="feature__title">{{ matiere.name }}</h2>
+  <p class="feature__desc" *ngIf="matiere.children.length>0">
+    <span *ngIf="matiere.children.length === 1">{{matiere.children.length}} محور</span>
+    <span *ngIf="matiere.children.length>1">{{matiere.children.length}} محاور</span>
+  </p>
+  <img class="feature__img" src={{iconToDislay}} alt="">
+</div>

@@ -1,4 +1,4 @@
-<mat-card @fadeSlideInOut [ngStyle]="{ 'background-color': randomColor }" class="card selected-card" (click)="navigateToRoute()">
-  <mat-card-content> </mat-card-content>
-  <span class="text-center"> {{ chapter.name }}</span>
-</mat-card>
+<div class="feature" (click)="navigateToRoute()" [ngStyle]="{ 'border-color': randomColor }">
+  <h2 class="feature__title">{{ chapter.name }}</h2>
+  <img class="feature__img" src="https://img.icons8.com/bubbles/512/box-important.png" alt="">
+</div>

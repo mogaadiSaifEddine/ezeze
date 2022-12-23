@@ -20,17 +20,27 @@ export class ModuleCardComponent implements OnInit {
 
   @Input() matiere: Chapter;
   colorPalette = ['FD90D4', '00B997', 'FFEC01', 'FA617D', '01CC01', 'A9013F', '009CA9', 'A9F800', '8B8E95', 'FE1F34', 'F08324'];
-
-  // randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
   randomColor = '#' + this.colorPalette[Math.floor(Math.random() * this.colorPalette.length)];
+  cardIcons = [
+    { name: 'إنتاج كتابي', url: 'https://img.icons8.com/color/512/left-handed.png' },
+    { name: 'حساب', url: 'https://img.icons8.com/office/512/abacus.png' },
+    { name: 'ايقاظ علمي', url: 'https://img.icons8.com/color/512/microscope.png' },
+    { name: 'رسم واملاء', url: 'https://img.icons8.com/color/512/pencil-tip.png' },
+    { name: 'قواعد لغة', url: 'https://img.icons8.com/color/512/pencil-tip.png' },
+    { name: 'قراءة', url: 'https://img.icons8.com/fluency/512/reading.png' },
+    { name: 'انجليزية', url: 'https://img.icons8.com/color-glass/512/requires-interpreter.png' },
+    { name: 'فرنسية', url: 'https://img.icons8.com/color-glass/512/requires-interpreter.png' },
+  ];
+  iconToDislay = '';
 
-  constructor(private router: Router, private chapterService: ChapitreService) {}
+  constructor(
+    private router: Router,
+    private chapterService: ChapitreService
+  ) { }
 
   ngOnInit(): void {
-
-
+    this.iconToDislay = this.cardIcons.filter(ci => ci.name === this.matiere.name.trim())[0].url;
   }
-
 
   navigateToRoute() {
 

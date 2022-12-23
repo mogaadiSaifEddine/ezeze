@@ -27,11 +27,12 @@ export class ChapterListComponent implements OnInit {
   resumer_cour: any;
   catre_conceptuelle: any;
   dataSource: ChapterChildren[];
+  matTableSources = Array(6).fill(null);
   chapitre: Chapter[];
   // dataSource = new MatTableDataSource<Chapter>(this.chapp);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(private chapterService: ChapitreService, private serieService: SerieService, public dialog: MatDialog) {}
+  constructor(private chapterService: ChapitreService, private serieService: SerieService, public dialog: MatDialog) { }
   displayedColumns: string[] = ['Classe', 'Trimestre', 'Matiere', 'Chapitre', 'Action'];
 
   ngOnInit(): void {
@@ -41,6 +42,7 @@ export class ChapterListComponent implements OnInit {
   getallchapters() {
     this.chapterService.getchapitre().subscribe((chapt) => {
       this.dataSource = chapt.filter((chap) => chap.chapterType !== 'MATIERE');
+      this.handleSourceSeparationBasedOnGroupName(this.dataSource);
     });
   }
 
@@ -54,7 +56,7 @@ export class ChapterListComponent implements OnInit {
     this.serieService.getSerieByChapter(element.chapter_id).subscribe((res) => {
       const serie = res;
       const dialogRef = this.dialog.open(AddSerieComponent, {
-        width: '50%',
+        width: '1200px',
         height: 'fit-content',
         disableClose: true,
         data: {
@@ -87,6 +89,21 @@ export class ChapterListComponent implements OnInit {
       // }
       // this.dataSource.push(result);
       this.getallchapters();
+    });
+  }
+
+  // Separating the rows based on groups (1, 2, 3, 4, 5, 6)
+  handleSourceSeparationBasedOnGroupName(dataSource: any) {
+    const classes = [
+      'السنة الأولى',
+      'السنة الثانية',
+      'السنة الثالثة',
+      'السنة الرابعة',
+      'السنة الخامسة',
+      'السنة السادسة'
+    ];
+    classes.map((cName, index) => {
+      this.matTableSources[index] = dataSource.filter(ds => ds['group'].name.trim() === cName);
     });
   }
 }

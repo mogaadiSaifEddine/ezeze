@@ -11,29 +11,9 @@
   height: $dialog-height;
   padding: 0;
 
-  display: flex;
-  flex-direction: row;
-  position: relative;
-
-  #leftSection {
-    width: $dialog-right-section-width;
-    height: 100%;
-    background-color: #f5f6f7;
-    color: #fff;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    img {
-      width: 200px;
-    }
-  }
-
   #rightSection {
     padding: 0 1rem;
-    width: calc(100% - $dialog-right-section-width);
+    width: 100%;
     position: relative;
 
     #dialogStikyHeader {

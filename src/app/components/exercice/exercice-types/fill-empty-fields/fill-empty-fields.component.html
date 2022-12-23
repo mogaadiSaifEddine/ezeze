@@ -1,14 +1,16 @@
 <mat-card *ngIf="exercice.name">
   <div class="question-container">
-    <mat-card-content [innerText]="exercice?.name" style="text-align: center"> </mat-card-content>
+    <!-- <mat-card-content [innerText]="exercice?.name" style="text-align: center"> </mat-card-content> -->
+    <div [innerHTML]="exercice?.name"></div>
   </div>
 </mat-card>
 
 <mat-card>
   <div class="question-container">
-    <mat-card-title [innerText]="exercice.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+    <!-- <mat-card-title [innerText]="exercice.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
       <br />
-    </mat-card-title>
+    </mat-card-title> -->
+    <div [innerHTML]="exercice?.question"></div><br>
     <mat-card-content [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
       <ng-container *ngFor="let block of exercice.blocks; let index = index">
         <span *ngIf="block.exerciceBlockType === ExerciceBlockTypes.TEXT">

@@ -1,6 +1,7 @@
 <mat-card *ngIf="exercice.name">
   <div class="question-container">
-    <mat-card-content [innerText]="exercice?.name" style="text-align: center"> </mat-card-content>
+    <!-- <mat-card-content [innerText]="exercice?.name" style="text-align: center"> </mat-card-content> -->
+    <div [innerHTML]="exercice?.name"></div>
   </div>
 </mat-card>
 
@@ -10,17 +11,18 @@
     <!-- <img *ngIf="imageBlock" src="assets/images/{{ imageBlock.value }}" alt="" /> -->
   </div>
   <div class="question-container">
-    <mat-card-title [innerText]="exercice.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+    <!-- <mat-card-title [innerText]="exercice.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
       <br />
-    </mat-card-title>
+    </mat-card-title> -->
+    <div [innerHTML]="exercice?.question"></div><br>
 
     <mat-card-content *ngFor="let block of exercice.blocks" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
       <label style="font-size: 20px; padding: 10px">{{ block.label }}</label>
-
-      <mat-form-field appearance="outline" (change)="valueChanged()" class="full-width">
+      <!-- <mat-form-field appearance="outline" (change)="valueChanged()" class="full-width">
         <mat-label>{{ block.label }}</mat-label>
         <textarea rows="5" matInput [(ngModel)]="block.value" required></textarea>
-      </mat-form-field>
+      </mat-form-field> -->
+      <angular-editor [(ngModel)]="block.value" [config]="editorConfig" (change)="valueChanged()" id="angular-editor"></angular-editor>
     </mat-card-content>
   </div>
 </mat-card>
