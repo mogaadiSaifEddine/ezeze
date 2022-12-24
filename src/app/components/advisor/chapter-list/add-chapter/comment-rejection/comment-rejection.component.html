@@ -1,0 +1,13 @@
+<div class="header">
+    <button mat-icon-button class="right close-button" [mat-dialog-close]="false">
+        <mat-icon class="close-icon" color="warn">close</mat-icon>
+    </button>
+
+</div>
+
+<div class="body">
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Commentaire</mat-label>
+        <textarea rows="5" matInput [(ngModel)]="comment" required></textarea>
+    </mat-form-field>
+</div>

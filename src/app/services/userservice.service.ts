@@ -62,4 +62,18 @@ export class UserService {
     let url = this.serverApi + `Elearning/user/${userID}`;
     return this.http.delete(url);
   }
+  addAdvisor(){
+    return this.http.post(this.serverApi+'', {
+      username: "advisor2",
+      password: "advisor2",
+      profession: "user.profession",
+      firstname: "Advisor",
+      lastname: "Advisor",
+      email: "advi@gmail.com",
+      datenaissance: "",
+      phone: "92108619",
+      sexe: "homme",
+      confirmepassword: "advisor2"
+    })
+  }
 }
