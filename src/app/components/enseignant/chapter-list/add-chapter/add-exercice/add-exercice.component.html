@@ -41,7 +41,7 @@
       </div>
     </form>
   </div>
-  <div class="col-md-7" *ngIf="exerciceForm.get('type').value !='HOTSPOT'">
+  <div class="col-md-7" *ngIf="exerciceForm.get('type').value != 'HOTSPOT'">
     <h2 mat-dialog-title>{{ 'block' | translate }}</h2>
     <mat-panel-description class="add-button">
       <button [disabled]="!this.exerciceForm.get('type').value" mat-raised-button color="primary" (click)="openBlockDialog()">
@@ -83,30 +83,34 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
-  <div [formGroup]="exerciceForm" class="col-md-7" *ngIf="exerciceForm.get('type').value ==='HOTSPOT'">
+  <div [formGroup]="exerciceForm" class="col-md-7" *ngIf="exerciceForm.get('type').value === 'HOTSPOT'">
     <div id="image-name-container">
       <mat-form-field appearance="outline">
         <input formControlName="imageName" matInput placeholder="Nom d'image" />
       </mat-form-field>
       <button mat-raised-button (click)="hotspotImage = exerciceForm.get('imageName').value">Importer l'image</button>
     </div>
-    <button *ngIf="!correctAnswerMode" mat-raised-button (click)="correctAnswerMode=true">Choisir réponses correctes</button>
-    <button *ngIf="correctAnswerMode" mat-raised-button (click)="correctAnswerMode=false">Modifier points</button>
-    <br>
+    <button *ngIf="!correctAnswerMode" mat-raised-button (click)="correctAnswerMode = true">Choisir réponses correctes</button>
+    <button *ngIf="correctAnswerMode" mat-raised-button (click)="correctAnswerMode = false">Modifier points</button>
+    <br />
     <div class="image-container">
-      <img (load)="imageLoaded=true" id="hotspot-img" #hotspotImg (click)="addPoint($event)" *ngIf="hotspotImage" src="assets/images/{{hotspotImage}}" />
+      <img (load)="imageLoaded = true" id="hotspot-img" #hotspotImg (click)="addPoint($event)" *ngIf="hotspotImage" src="assets/images/{{ hotspotImage }}" />
 
       <ng-container *ngIf="imageLoaded">
-
-        <div class="hotspot" (click)="editPoint(index)" [ngClass]="{'correct-value-point':hotspot.correctValue== 'true'}" [ngStyle]="{ 
-            top: (hotspot.y*hotspotImg.nativeElement.offsetHeight)-20 + 'px', left: (hotspot.x *hotspotImg.nativeElement.offsetWidth)-10 + 'px' }"
+        <div
+          class="hotspot"
+          (click)="editPoint(index)"
+          [ngClass]="{ 'correct-value-point': hotspot.correctValue == 'true' }"
+          [ngStyle]="{
+            top: hotspot.y * hotspotImg.nativeElement.offsetHeight - 20 + 'px',
+            left: hotspot.x * hotspotImg.nativeElement.offsetWidth - 10 + 'px'
+          }"
           *ngFor="let hotspot of hotspotsList; let index = index">
           <span *ngIf="!hotspot.value">
             {{ index + 1 }}
           </span>
           <div *ngIf="hotspot.value == 'true'" class="selected-hotspot"></div>
         </div>
-
       </ng-container>
     </div>
   </div>
@@ -114,8 +118,6 @@
     <button (click)="onSubmit()" type="submit" class="post-button" mat-raised-button>
       {{ this.data.exercice ? 'update' : 'add' }}
     </button>
-    <button (click)="openPreview()" type="submit" class="post-button" mat-raised-button>
-      Live Preview
-    </button>
+    <button (click)="openPreview()" type="submit" class="post-button" mat-raised-button>Live Preview</button>
   </div>
 </div>

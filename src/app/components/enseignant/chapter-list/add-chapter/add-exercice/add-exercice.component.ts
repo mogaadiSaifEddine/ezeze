@@ -19,18 +19,18 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 export class AddExerciceComponent implements OnInit {
   @Output() chapterId: EventEmitter<number> = new EventEmitter<number>();
   @ViewChild('hotspotImg') hotspotImg;
-  currentExercice: Exercice
+  currentExercice: Exercice;
   constructor(
     private serieService: SerieService,
     private fb: FormBuilder,
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<AddExerciceComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { exercice: Exercice; serieId: number; chapterId: number }
-  ) { }
-  hotspotsList = []
+  ) {}
+  hotspotsList = [];
   correctAnswerMode = false;
   displayedColumns: string[] = ['ordre', 'type', 'label', 'action'];
-  hotspotImage = null
+  hotspotImage = null;
   TYPES = Types;
   BLOCKS: any[];
   dataSource: any[] = [];
@@ -87,7 +87,7 @@ export class AddExerciceComponent implements OnInit {
         'toggleEditorMode'
       ]
     ]
-  }
+  };
 
   ngOnInit(): void {
     this.initForm();
@@ -99,10 +99,8 @@ export class AddExerciceComponent implements OnInit {
             y: parseFloat(block.label),
             x: parseFloat(block.placeholder),
             correctValue: block.correctValue
-          })
-
+          });
         }
-
       });
     }
   }
@@ -112,7 +110,7 @@ export class AddExerciceComponent implements OnInit {
     }
   }
   initForm() {
-    this.hotspotImage = this.data.exercice?.blocks.find(block => block.exerciceBlockType == "IMAGE")?.value;
+    this.hotspotImage = this.data.exercice?.blocks.find((block) => block.exerciceBlockType == 'IMAGE')?.value;
     this.exerciceForm = this.fb.group({
       type: [this.data.exercice?.type, [Validators.required]],
       name: [this.data.exercice?.name],
@@ -149,19 +147,22 @@ export class AddExerciceComponent implements OnInit {
   }
 
   onSubmit() {
-    let exercice
+    console.log(this.dataSource);
+
+    let exercice;
     if (this.exerciceForm.get('type').value == 'HOTSPOT') {
       this.dataSource = [];
       this.dataSource.push({
         blockOrder: 0,
-        correctValue: "",
+        correctValue: '',
         exerciceBlockType: ExerciceBlockTypes.IMAGE,
         exercice_Block_Id: null,
         isAdmissable: null,
-        label: "",
-        placeholder: "",
+        label: '',
+        placeholder: '',
+        blockParams: "{'ee':'55'}",
         value: this.hotspotImage
-      })
+      });
 
       this.hotspotsList.forEach((hotspot, index) => {
         this.dataSource.push({
@@ -172,31 +173,45 @@ export class AddExerciceComponent implements OnInit {
           isAdmissable: null,
           label: hotspot.y,
           placeholder: hotspot.x,
-          value: ""
-        })
-      })
+          value: ''
+        });
+      });
       exercice = {
         ...this.exerciceForm.value,
         blocks: this.dataSource
       };
     } else {
-
       exercice = {
         ...this.exerciceForm.value,
         blocks: this.dataSource
       };
     }
+    console.log(exercice);
+
+    console.log(this.exerciceForm.value);
+
     if (this.exerciceForm.valid && this.checkBlocks()) {
       if (this.data.exercice) {
         this.serieService.updateExercice(exercice, this.data.exercice.ex_id).subscribe(async (res: Exercice) => {
-          if (this.exerciceForm.get('file').value !== null) (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => { });
+          if (this.exerciceForm.get('file').value !== null) (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => {});
           this.dialogRef.close(true);
           this.dialogRef.close();
         });
       } else {
         this.serieService.addExercice(exercice, this.data.serieId).subscribe(async (res: Exercice) => {
+          console.log(res);
 
-          if (this.exerciceForm.get('file').value !== null) (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => { });
+          let files = [];
+          exercice.blocks.forEach((element, index) => {
+            if (element.imageFile) {
+              files.push(element.imageFile);
+            }
+            if (element.audioFile) {
+              files.push(element.audioFile);
+            }
+            if (files.length) this.serieService.addExerciceBlockFile(files, Number(res.blocks[index].exercice_Block_Id)).subscribe((resFileBlock) => console.log(resFileBlock));
+          });
+          if (this.exerciceForm.get('file').value !== null) (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => {});
           this.dialogRef.close(true);
         });
       }
@@ -220,30 +235,30 @@ export class AddExerciceComponent implements OnInit {
   addPoint(event) {
     this.hotspotsList.push({
       x: event.offsetX / this.hotspotImg.nativeElement.offsetWidth,
-      y: event.offsetY / this.hotspotImg.nativeElement.offsetHeight,
-    })
+      y: event.offsetY / this.hotspotImg.nativeElement.offsetHeight
+    });
   }
   editPoint(index) {
     if (this.correctAnswerMode) {
-      this.hotspotsList[index].correctValue == 'true' ? this.hotspotsList[index].correctValue = null : this.hotspotsList[index].correctValue = 'true';
+      this.hotspotsList[index].correctValue == 'true' ? (this.hotspotsList[index].correctValue = null) : (this.hotspotsList[index].correctValue = 'true');
     } else {
-      this.hotspotsList.splice(index, 1)
+      this.hotspotsList.splice(index, 1);
     }
   }
   openPreview() {
-    let exercice
+    let exercice;
     if (this.exerciceForm.get('type').value == 'HOTSPOT') {
       this.dataSource = [];
       this.dataSource.push({
         blockOrder: 0,
-        correctValue: "",
+        correctValue: '',
         exerciceBlockType: ExerciceBlockTypes.IMAGE,
         exercice_Block_Id: null,
         isAdmissable: null,
-        label: "",
-        placeholder: "",
+        label: '',
+        placeholder: '',
         value: this.hotspotImage
-      })
+      });
 
       this.hotspotsList.forEach((hotspot, index) => {
         this.dataSource.push({
@@ -254,23 +269,21 @@ export class AddExerciceComponent implements OnInit {
           isAdmissable: null,
           label: hotspot.y,
           placeholder: hotspot.x,
-          value: ""
-        })
-      })
+          value: ''
+        });
+      });
       exercice = {
         ...this.exerciceForm.value,
         blocks: this.dataSource
       };
     } else {
-
       exercice = {
         ...this.exerciceForm.value,
         blocks: this.dataSource
       };
     }
     if (this.exerciceForm.valid && this.checkBlocks()) {
-
-      const dialog = this.selectedExercice = exercice
+      const dialog = (this.selectedExercice = exercice);
       this.dialog.open(ExercicePreviewComponent, {
         width: '70%',
         maxWidth: '70%',

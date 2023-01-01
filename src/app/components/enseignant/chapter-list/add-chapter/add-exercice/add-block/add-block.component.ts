@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ExerciceBlock } from 'src/app/model/ExerciceBlock';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
@@ -66,7 +66,7 @@ export class AddBlockComponent implements OnInit {
         this.showCorrectValue = true;
         this.showPlaceholder = false;
         this.showValue = false;
-        this.labelHolder = 'Veuiller saisir la question'
+        this.labelHolder = 'Veuiller saisir la question';
         this.correctValueHolder = 'Veuiller saisir la valeur correcte';
         this.blockForm.get('correctValue').addValidators([Validators.required]);
         this.blockForm.get('label').clearValidators();
@@ -204,7 +204,7 @@ export class AddBlockComponent implements OnInit {
         this.showPlaceholder = false;
         this.showValue = false;
         this.labelHolder = 'Veuiller saisir la question';
-        
+
         this.blockForm.get('label').clearValidators();
         this.blockForm.get('value').clearValidators();
         this.correctValueHolder = "veiller saisir la valuer correcte de l'essai";
@@ -265,7 +265,7 @@ export class AddBlockComponent implements OnInit {
         this.showCorrectValue = true;
         this.showPlaceholder = false;
         this.showValue = false;
-        this.labelHolder= 'Veuiller saisir la question'
+        this.labelHolder = 'Veuiller saisir la question';
         this.correctValueHolder = 'Veuiller saisir la valeur correcte';
         this.blockForm.get('correctValue').addValidators([Validators.required]);
         this.blockForm.get('label').clearValidators();
@@ -336,6 +336,29 @@ export class AddBlockComponent implements OnInit {
         this.showCorrectValue = false;
         this.blockForm.get('correctValue').clearValidators();
       }
+    } else if (this.data.exercice_type === 'LISTEN') {
+      this.showLabel = true;
+      this.showValue = true;
+      this.showPlaceholder = false;
+
+      this.valueHolder = 'Veuiller saisir la valeur';
+      this.labelHolder = 'Veuiller saisir le label';
+
+      this.blockForm.get('label').addValidators([Validators.required]);
+      this.blockForm.get('value').addValidators([Validators.required]);
+      // this.blockForm.addControl('imageFile', new FormControl('', Validators.required));
+      // this.blockForm.addControl('audioFile', new FormControl('', Validators.required));
+      this.blockForm.get('placeholder').clearValidators();
+      console.log(this.blockForm.value);
+
+      if (this.blockForm.get('exerciceBlockType').value === 12) {
+        this.showCorrectValue = true;
+        this.blockForm.get('correctValue').addValidators([Validators.required]);
+        this.correctValueHolder = 'Veuiller saisir la valeur correcte separer avec un /';
+      } else {
+        this.showCorrectValue = false;
+        this.blockForm.get('correctValue').clearValidators();
+      }
     }
   }
 
@@ -348,7 +371,10 @@ export class AddBlockComponent implements OnInit {
       value: [this.data.block?.value],
       blockOrder: [this.data.block?.blockOrder],
       isAdmissable: [this.data.block?.isAdmissable],
-      exercice_Block_Id: [this.data.block?.exerciceBlockId]
+      exercice_Block_Id: [this.data.block?.exerciceBlockId],
+      imageFile: [''],
+      audioFile: [''],
+      workstationUuid: this.fb.group({})
     });
   }
 
@@ -379,13 +405,17 @@ export class AddBlockComponent implements OnInit {
       this.TYPES_KEYS_MAP = this.TYPES_KEYS_MAP.filter((x) => x.value === 'DRAG_DROP_IMAGE_LIST');
     } else if (this.data.exercice_type === 'DRAG_WORDS') {
       this.TYPES_KEYS_MAP = this.TYPES_KEYS_MAP.filter((x) => x.value === 'HIGHLIGHT_TEXT' || x.value === 'TEXT' || x.value === 'INPUT_TEXT' || x.value === 'BREAK');
+    } else if (this.data.exercice_type === 'LISTEN') {
+      this.TYPES_KEYS_MAP = this.TYPES_KEYS_MAP.filter((x) => x.value === 'AUDIO_IMAGE');
     }
   }
   saveBlok() {
     let c = {};
     c[this.blockForm.value.label] = this.blockForm.value.correctValue;
-
+    console.log(this.blockForm.get('audioFile').value);
+    // let correctValue = { ...this.blockForm.value, workstationUuid: "{'a' : 'rr'}" };
     const correctValue = this.blockForm.value.exerciceBlockType === 16 ? { ...this.blockForm.value, correctValue: JSON.stringify(c) } : this.blockForm.value;
+    console.log(correctValue);
 
     this.dialogRef.close(correctValue);
   }

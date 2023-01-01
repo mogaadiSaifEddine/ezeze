@@ -14,6 +14,15 @@ export class SerieService {
   addExercice(exercice, serieId: number) {
     return this.http.post(environment.serverApi + 'Elearning/' + 'exercice/' + serieId, exercice);
   }
+  addExerciceBlockFile(files: any[], blockId: number) {
+    console.log(files);
+
+    const formData = new FormData();
+    files.forEach((file, index) => {
+      formData.append('file', file, file.name + index);
+    });
+    return this.http.post(environment.serverApi + 'Elearning/' + 'block_exercice/file/' + blockId, formData);
+  }
   updateExercice(exercice, id: number) {
     return this.http.put(environment.serverApi + 'Elearning/' + 'exercice/' + id, exercice);
   }
