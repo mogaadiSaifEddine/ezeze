@@ -126,21 +126,24 @@ export class AddExerciceComponent implements OnInit {
   }
 
   openBlockDialog(element?: ExerciceBlock) {
-    this.dialog.open(AddBlockComponent, {
-      width: '700px',
-      maxWidth: '700px',
-      maxHeight: '100vh',
-      panelClass: 'my-custom-dialog-class',
-      data: {
-        block: element,
-        exercice_type: this.exerciceForm.get('type').value
-      }
-    }).afterClosed().subscribe((result) => {
-      if (result) {
-        result.blockOrder = this.order++;
-        this.dataSource = [...this.dataSource, result];
-      }
-    });
+    this.dialog
+      .open(AddBlockComponent, {
+        width: '700px',
+        maxWidth: '700px',
+        maxHeight: '100vh',
+        panelClass: 'my-custom-dialog-class',
+        data: {
+          block: element,
+          exercice_type: this.exerciceForm.get('type').value
+        }
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          result.blockOrder = this.order++;
+          this.dataSource = [...this.dataSource, result];
+        }
+      });
   }
 
   onSubmit() {
@@ -154,6 +157,7 @@ export class AddExerciceComponent implements OnInit {
         isAdmissable: null,
         label: '',
         placeholder: '',
+        blockParams: "{'ee':'55'}",
         value: this.hotspotImage
       });
 
@@ -183,6 +187,21 @@ export class AddExerciceComponent implements OnInit {
         });
       } else {
         this.serieService.addExercice(exercice, this.data.serieId).subscribe(async (res: Exercice) => {
+          console.log(res);
+
+          let files = [];
+          exercice.blocks.forEach((element, index) => {
+            if (element.imageFile) {
+              files.push(element.imageFile);
+            }
+            if (element.audioFile) {
+              files.push(element.audioFile);
+            }
+            if (files.length)
+              this.serieService
+                .addExerciceBlockFile(files, Number(res.blocks[index].exercice_Block_Id))
+                .subscribe((resFileBlock) => console.log(resFileBlock));
+          });
           if (this.exerciceForm.get('file').value !== null)
             (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => {});
           this.dialogRef.close(true);
@@ -213,7 +232,9 @@ export class AddExerciceComponent implements OnInit {
   }
   editPoint(index) {
     if (this.correctAnswerMode) {
-      this.hotspotsList[index].correctValue == 'true' ? (this.hotspotsList[index].correctValue = null) : (this.hotspotsList[index].correctValue = 'true');
+      this.hotspotsList[index].correctValue == 'true'
+        ? (this.hotspotsList[index].correctValue = null)
+        : (this.hotspotsList[index].correctValue = 'true');
     } else {
       this.hotspotsList.splice(index, 1);
     }

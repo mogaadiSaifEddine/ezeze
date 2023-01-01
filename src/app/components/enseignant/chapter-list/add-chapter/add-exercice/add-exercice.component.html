@@ -18,7 +18,9 @@
           <mat-select formControlName="difficulty" placeholder="difficulty">
             <mat-option *ngFor="let diff of difficultys | keyvalue" [value]="diff.key">{{ diff.value }}</mat-option>
           </mat-select>
-          <mat-error *ngIf="!formControls.difficulty.valid && formControls.difficulty.touched"> {{ 'please-select-any-item' | translate }} </mat-error>
+          <mat-error *ngIf="!formControls.difficulty.valid && formControls.difficulty.touched">
+            {{ 'please-select-any-item' | translate }}
+          </mat-error>
         </mat-form-field>
 
         <angular-editor formControlName="name" [config]="editorConfig" id="angularEditor"></angular-editor>
@@ -27,7 +29,11 @@
           <ngx-mat-file-input placeholder="Image question generale" formControlName="file"> </ngx-mat-file-input>
         </mat-form-field>
 
-        <angular-editor formControlName="question" [config]="editorConfig" id="angularEditor" placeholder="{{ 'question-de-lexercice' | translate }}"></angular-editor>
+        <angular-editor
+          formControlName="question"
+          [config]="editorConfig"
+          id="angularEditor"
+          placeholder="{{ 'question-de-lexercice' | translate }}"></angular-editor>
 
         <mat-slide-toggle formControlName="rtl" class="example-margin">{{ !!formControls.rtl.value ? 'RTL' : 'LTR' }} </mat-slide-toggle>
       </div>
@@ -41,7 +47,6 @@
       </button>
     </mat-panel-description>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
       <ng-container matColumnDef="ordre">
         <th mat-header-cell *matHeaderCellDef>{{ 'ordre' | translate }}</th>
 
@@ -78,10 +83,18 @@
       </mat-form-field>
       <button mat-raised-button (click)="hotspotImage = formControls.imageName.value">Importer l'image</button>
     </div>
-    <button mat-raised-button (click)="correctAnswerMode = !correctAnswerMode">{{ correctAnswerMode ? 'Modifier points' : 'Choisir réponses correctes'}}</button>
+    <button mat-raised-button (click)="correctAnswerMode = !correctAnswerMode">
+      {{ correctAnswerMode ? 'Modifier points' : 'Choisir réponses correctes' }}
+    </button>
     <br />
     <div class="image-container">
-      <img (load)="imageLoaded = true" id="hotspot-img" #hotspotImg (click)="addPoint($event)" *ngIf="hotspotImage" src="assets/images/{{ hotspotImage }}" />
+      <img
+        (load)="imageLoaded = true"
+        id="hotspot-img"
+        #hotspotImg
+        (click)="addPoint($event)"
+        *ngIf="hotspotImage"
+        src="assets/images/{{ hotspotImage }}" />
 
       <ng-container *ngIf="imageLoaded">
         <div
@@ -108,4 +121,3 @@
     <button (click)="openPreview()" type="submit" class="post-button" mat-raised-button>Live Preview</button>
   </div>
 </div>
-

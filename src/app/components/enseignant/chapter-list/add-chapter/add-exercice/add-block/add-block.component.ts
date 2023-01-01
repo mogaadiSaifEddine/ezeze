@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ExerciceBlock } from 'src/app/model/ExerciceBlock';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
@@ -18,7 +18,7 @@ export class AddBlockComponent implements OnInit {
   TYPES = ExerciceBlockTypes;
   TYPES_KEYS_MAP = Object.values(this.TYPES).map((el, ind) => ({ key: ind, value: el }));
 
-  fieldData = new FieldData()
+  fieldData = new FieldData();
 
   readonly exerciceTypeToTypesKeysMap: Record<Exercise_Types, ExerciceBlockTypes[]> = {
     CORRESPONDANCE: [ExerciceBlockTypes.CORRESPONDANCE_LEFT, ExerciceBlockTypes.CORRESPONDANCE_RIGHT],
@@ -42,7 +42,14 @@ export class AddBlockComponent implements OnInit {
     DRAG_DROP: [ExerciceBlockTypes.DRAG_DROP_IMAGE_LIST],
     DRAG_WORDS: [ExerciceBlockTypes.HIGHLIGHT_TEXT, ExerciceBlockTypes.TEXT, ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.BREAK],
     FILL_LETTERS: [ExerciceBlockTypes.TEXT],
-    HOTSPOT: []
+    HOTSPOT: [],
+    [Exercise_Types.DRAG_SYLLABLES]: [],
+    [Exercise_Types.PUT_IN_FRAME]: [],
+    [Exercise_Types.OUTSIDER_ELEMENT]: [],
+    [Exercise_Types.LISTEN]: [ExerciceBlockTypes.AUDIO_IMAGE],
+    [Exercise_Types.ARITHMETIC_TREE]: [],
+    [Exercise_Types.FILL_BLANKS_IMG]: [],
+    [Exercise_Types.COLOR_SHAPE]: []
   };
   readonly showFieldsFor: Record<Exercise_Types, () => void> = {
     LIKERT_SCALE: () => this.showFieldsForLikertScale(),
@@ -61,7 +68,26 @@ export class AddBlockComponent implements OnInit {
     DRAG_WORDS: (): void => {},
     SELECT_FROM_LIST: (): void => {},
     WRITING: (): void => {},
-    LINK_ARROW: (): void => {}
+    LINK_ARROW: (): void => {},
+    [Exercise_Types.DRAG_SYLLABLES]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.PUT_IN_FRAME]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.OUTSIDER_ELEMENT]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.LISTEN]: (): void => this.showFieldsForListening(),
+    [Exercise_Types.ARITHMETIC_TREE]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.FILL_BLANKS_IMG]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.COLOR_SHAPE]: function (): void {
+      throw new Error('Function not implemented.');
+    }
   };
 
   constructor(
@@ -93,6 +119,31 @@ export class AddBlockComponent implements OnInit {
       if (showFieldsForExerciceType) {
         showFieldsForExerciceType();
       }
+    }
+  }
+
+  private showFieldsForListening() {
+    this.fieldData.showLabel = true;
+    this.fieldData.showValue = true;
+    this.fieldData.showPlaceholder = false;
+
+    this.fieldData.valueHolder = 'Veuiller saisir la valeur';
+    this.fieldData.labelHolder = 'Veuiller saisir le label';
+
+    this.blockForm.get('label').addValidators([Validators.required]);
+    this.blockForm.get('value').addValidators([Validators.required]);
+    // this.blockForm.addControl('imageFile', new FormControl('', Validators.required));
+    // this.blockForm.addControl('audioFile', new FormControl('', Validators.required));
+    this.blockForm.get('placeholder').clearValidators();
+    console.log(this.blockForm.value);
+
+    if (this.blockForm.get('exerciceBlockType').value === 12) {
+      this.fieldData.showCorrectValue = true;
+      this.blockForm.get('correctValue').addValidators([Validators.required]);
+      this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correcte separer avec un /';
+    } else {
+      this.fieldData.showCorrectValue = false;
+      this.blockForm.get('correctValue').clearValidators();
     }
   }
 
@@ -179,7 +230,10 @@ export class AddBlockComponent implements OnInit {
       value: [this.data.block?.value],
       blockOrder: [this.data.block?.blockOrder],
       isAdmissable: [this.data.block?.isAdmissable],
-      exercice_Block_Id: [this.data.block?.exerciceBlockId]
+      exercice_Block_Id: [this.data.block?.exerciceBlockId],
+      imageFile: [''],
+      audioFile: [''],
+      workstationUuid: this.fb.group({})
     });
   }
 
