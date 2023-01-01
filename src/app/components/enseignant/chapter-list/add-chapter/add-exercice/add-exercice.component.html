@@ -21,20 +21,12 @@
           <mat-error *ngIf="!formControls.difficulty.valid && formControls.difficulty.touched"> {{ 'please-select-any-item' | translate }} </mat-error>
         </mat-form-field>
 
-        <!-- LEGACY
-          <mat-form-field appearance="outline">
-            <input formControlName="name" matInput placeholder="Question generale" />
-          </mat-form-field>
-        -->
         <angular-editor formControlName="name" [config]="editorConfig" id="angularEditor"></angular-editor>
 
         <mat-form-field appearance="outline">
           <ngx-mat-file-input placeholder="Image question generale" formControlName="file"> </ngx-mat-file-input>
         </mat-form-field>
 
-        <!-- <mat-form-field appearance="outline">
-          <textarea placeholder="{{ 'question-de-lexercice' | translate }}" matInput cdkTextareaAutosize formControlName="question" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5"></textarea>
-        </mat-form-field> -->
         <angular-editor formControlName="question" [config]="editorConfig" id="angularEditor" placeholder="{{ 'question-de-lexercice' | translate }}"></angular-editor>
 
         <mat-slide-toggle formControlName="rtl" class="example-margin">{{ !!formControls.rtl.value ? 'RTL' : 'LTR' }} </mat-slide-toggle>
@@ -49,10 +41,7 @@
       </button>
     </mat-panel-description>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <!--- Note that these columns can be defined in any order.
-                The actual rendered columns are set as a property on the row definition" -->
 
-      <!-- Position Column -->
       <ng-container matColumnDef="ordre">
         <th mat-header-cell *matHeaderCellDef>{{ 'ordre' | translate }}</th>
 
@@ -62,7 +51,6 @@
         <th mat-header-cell *matHeaderCellDef>{{ 'type' | translate }}</th>
         <td mat-cell *matCellDef="let element">{{ element.exerciceBlockType }}</td>
       </ng-container>
-      <!-- Name Column -->
       <ng-container matColumnDef="label">
         <th mat-header-cell *matHeaderCellDef>{{ 'label' | translate }}</th>
         <td mat-cell *matCellDef="let element">{{ element.label }}</td>
@@ -90,8 +78,7 @@
       </mat-form-field>
       <button mat-raised-button (click)="hotspotImage = formControls.imageName.value">Importer l'image</button>
     </div>
-    <button *ngIf="!correctAnswerMode" mat-raised-button (click)="correctAnswerMode = true">Choisir réponses correctes</button>
-    <button *ngIf="correctAnswerMode" mat-raised-button (click)="correctAnswerMode = false">Modifier points</button>
+    <button mat-raised-button (click)="correctAnswerMode = !correctAnswerMode">{{ correctAnswerMode ? 'Modifier points' : 'Choisir réponses correctes'}}</button>
     <br />
     <div class="image-container">
       <img (load)="imageLoaded = true" id="hotspot-img" #hotspotImg (click)="addPoint($event)" *ngIf="hotspotImage" src="assets/images/{{ hotspotImage }}" />

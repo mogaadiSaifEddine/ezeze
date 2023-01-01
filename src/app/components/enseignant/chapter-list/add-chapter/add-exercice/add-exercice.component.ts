@@ -126,22 +126,16 @@ export class AddExerciceComponent implements OnInit {
   }
 
   openBlockDialog(element?: ExerciceBlock) {
-    const dialog = this.dialog.open(AddBlockComponent, {
+    this.dialog.open(AddBlockComponent, {
       width: '700px',
       maxWidth: '700px',
       maxHeight: '100vh',
-      // position: {
-      //   top: '5%',
-      //   left: '10%'
-      // },
       panelClass: 'my-custom-dialog-class',
-
       data: {
         block: element,
         exercice_type: this.exerciceForm.get('type').value
       }
-    });
-    dialog.afterClosed().subscribe((result) => {
+    }).afterClosed().subscribe((result) => {
       if (result) {
         result.blockOrder = this.order++;
         this.dataSource = [...this.dataSource, result];
