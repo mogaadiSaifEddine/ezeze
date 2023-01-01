@@ -34,7 +34,7 @@ export class SequencingComponent implements OnInit, OnChanges {
   private initExercice() {
     this.refreshAnswerValue();
     this.canGoNext.emit(true);
-    let index = this.exercice.blocks.findIndex((block: ExerciceBlock) => block.exerciceBlockType === ExerciceBlockTypes.IMAGE);
+    const index = this.exercice.blocks.findIndex((block: ExerciceBlock) => block.exerciceBlockType === ExerciceBlockTypes.IMAGE);
     this.imageBlock = this.exercice.blocks[index];
 
     this.exercice.blocks.splice(index, 0);
@@ -57,7 +57,7 @@ export class SequencingComponent implements OnInit, OnChanges {
     this.refreshAnswerValue();
   }
   move(pos1: number, pos2: number): void {
-    let element = this.exercice.blocks[pos1];
+    const element = this.exercice.blocks[pos1];
 
     this.exercice.blocks.splice(pos1, 1);
     this.exercice.blocks.splice(pos2, 0, element);

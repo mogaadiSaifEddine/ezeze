@@ -59,9 +59,9 @@ export class DragDropComponent implements OnInit, OnChanges {
 
     // this.listBlock.value = this.listBlock.value + event.container.data[event.currentIndex].value + ',';
 
-    let exId = event.container.id.replace(/[^0-9]/g, '');
+    const exId = event.container.id.replace(/[^0-9]/g, '');
 
-    let currentExerciceblock = this.imageList[parseInt(exId) - 1]?.find((item) => item.disabled === true);
+    const currentExerciceblock = this.imageList[parseInt(exId) - 1]?.find((item) => item.disabled === true);
 
     event.container.data.forEach((item) => {
       //   if (item.value !== '') {

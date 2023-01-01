@@ -10,7 +10,7 @@ describe('ShowCourseComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ShowCourseComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ShowCourseComponent);
     component = fixture.componentInstance;

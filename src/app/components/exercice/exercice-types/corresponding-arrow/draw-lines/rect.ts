@@ -41,14 +41,14 @@ export class Rect {
         horizontal === 'left'
           ? this.left
           : horizontal === 'right'
-          ? this.right
-          : this.centerX,
+            ? this.right
+            : this.centerX,
       y:
         vertical === 'top'
           ? this.top
           : vertical === 'bottom'
-          ? this.bottom
-          : this.centerY,
+            ? this.bottom
+            : this.centerY,
     };
   }
 

@@ -36,9 +36,11 @@ export class ViewEditComponent implements OnInit {
     this.getDBData();
     this.dialogAction = this.data.at;
 
-    if (this.dialogAction === 'update') this.viewNotEditMode = false;
+    if (this.dialogAction === 'update') 
+      this.viewNotEditMode = false;
 
-    if (this.dialogAction === 'view') this.viewNotEditMode = true;
+    if (this.dialogAction === 'view') 
+      this.viewNotEditMode = true;
 
     this.initForm();
   }

@@ -1,11 +1,4 @@
-import {
-  AfterContentInit,
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Input
-} from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 
 import packageJson from '../../../package.json';
 
@@ -16,10 +9,7 @@ import packageJson from '../../../package.json';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DocsExampleComponent implements AfterContentInit, AfterViewInit {
-
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef
-  ) {}
+  constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
   @Input() fragment?: string;
 

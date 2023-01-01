@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CourseSeries } from 'src/app/model/CourseSeries';
 import { AnswerFeedback, Exercice } from 'src/app/model/Exercice';
-import { Types } from 'src/app/model/Exercice_type';
+import { Exercise_Types } from 'src/app/model/Exercice_type';
 import { RevisionService } from 'src/app/services/revision.service';
 import { UserService } from 'src/app/services/userservice.service';
 import { SharedService } from 'src/app/services/shared.service';
@@ -21,7 +21,7 @@ export class PassTestComponent implements OnInit {
   answerFeedback!: AnswerFeedback;
 
   score = 0;
-  readonly TYPES = Types;
+  readonly TYPES = Exercise_Types;
   answer: boolean = null;
   UserId;
 
@@ -34,7 +34,7 @@ export class PassTestComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log("evaluationContent",this.evaluationContent)
+
     const userconnected = JSON.parse(localStorage.getItem('user_details'));
     this.UserId = userconnected.user_id;
 
@@ -45,7 +45,7 @@ export class PassTestComponent implements OnInit {
       this.currentExercise =this.evaluationContent.exercices[0];
       this.loading = false;
     });
-    console.log('current ',this.currentExercise)
+
   }
 
   nextQuestion() {
@@ -66,12 +66,13 @@ export class PassTestComponent implements OnInit {
     const userAnswer = {
       id: this.currentExercise.ex_id,
       score: this.score,
-      scoreToSend: !!this.answer ? 1 : 0,
+      scoreToSend: this.answer ? 1 : 0,
       serie: this.evaluationContent.seriesType,
 
       user: this.UserId
     };
-    if (userAnswer.id !== null) this.revisionService.addUserAnswer({ ...userAnswer, score: userAnswer.scoreToSend }).subscribe((res) => { });
+    if (userAnswer.id !== null) 
+      this.revisionService.addUserAnswer({ ...userAnswer, score: userAnswer.scoreToSend }).subscribe((res) => { });
     if (this.answer) {
       this.score = this.score + 100 / this.evaluationContent.exercices.length;
     }
@@ -81,7 +82,7 @@ export class PassTestComponent implements OnInit {
     this.canGoNextQuestion = event;
   }
   checkAnswer() {
-    console.log("CHECKING THE ANSWER");
+
 
     if (this.answer !== null) {
       this.sendUserAnswerToTheServer();
@@ -93,7 +94,7 @@ export class PassTestComponent implements OnInit {
         this.ss.showFalfoul.next(true);
         this.ss.answerIsCorrect.next(false);
       }
-      this.currentExercise = { ...this.currentExercise, blocks: this.currentExercise.blocks.map(b => ({ ...b, value: b.correctValue ? b.correctValue : b.value })) }
+      this.currentExercise = { ...this.currentExercise, blocks: this.currentExercise.blocks.map(b => ({ ...b, value: b.correctValue ? b.correctValue : b.value })) };
     }
   }
 }

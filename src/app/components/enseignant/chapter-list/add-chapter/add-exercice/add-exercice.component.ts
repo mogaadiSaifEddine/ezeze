@@ -1,15 +1,15 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { Difficulty } from 'src/app/model/Difficulty';
 import { Exercice } from 'src/app/model/Exercice';
 import { ExerciceBlock } from 'src/app/model/ExerciceBlock';
-import { Types } from 'src/app/model/Exercice_type';
-import { AddBlockComponent } from './add-block/add-block.component';
-import { SerieService } from 'src/app/services/serie.service';
-import { Difficulty } from 'src/app/model/Difficulty';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
+import { Exercise_Types } from 'src/app/model/Exercice_type';
+import { SerieService } from 'src/app/services/serie.service';
+import { AddBlockComponent } from './add-block/add-block.component';
 import { ExercicePreviewComponent } from './exercice-preview/exercice-preview.component';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-add-exercice',
@@ -31,7 +31,7 @@ export class AddExerciceComponent implements OnInit {
   correctAnswerMode = false;
   displayedColumns: string[] = ['ordre', 'type', 'label', 'action'];
   hotspotImage = null;
-  TYPES = Types;
+  TYPES = Exercise_Types;
   BLOCKS: any[];
   dataSource: any[] = [];
   exerciceForm: any;
@@ -88,6 +88,9 @@ export class AddExerciceComponent implements OnInit {
       ]
     ]
   };
+  get formControls() {
+    return this.exerciceForm?.controls;
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -123,33 +126,27 @@ export class AddExerciceComponent implements OnInit {
   }
 
   openBlockDialog(element?: ExerciceBlock) {
-    const dialog = this.dialog.open(AddBlockComponent, {
-      width: '700px',
-      maxWidth: '700px',
-      maxHeight: '100vh',
-      // position: {
-      //   top: '5%',
-      //   left: '10%'
-      // },
-      panelClass: 'my-custom-dialog-class',
-
-      data: {
-        block: element,
-        exercice_type: this.exerciceForm.get('type').value
-      }
-    });
-    dialog.afterClosed().subscribe((result) => {
-      if (result) {
-        result.blockOrder = this.order++;
-        this.dataSource = [...this.dataSource, result];
-      }
-    });
+    this.dialog
+      .open(AddBlockComponent, {
+        width: '700px',
+        maxWidth: '700px',
+        maxHeight: '100vh',
+        panelClass: 'my-custom-dialog-class',
+        data: {
+          block: element,
+          exercice_type: this.exerciceForm.get('type').value
+        }
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          result.blockOrder = this.order++;
+          this.dataSource = [...this.dataSource, result];
+        }
+      });
   }
 
   onSubmit() {
-    console.log(this.dataSource);
-
-    let exercice;
     if (this.exerciceForm.get('type').value == 'HOTSPOT') {
       this.dataSource = [];
       this.dataSource.push({
@@ -176,26 +173,17 @@ export class AddExerciceComponent implements OnInit {
           value: ''
         });
       });
-      exercice = {
-        ...this.exerciceForm.value,
-        blocks: this.dataSource
-      };
-    } else {
-      exercice = {
-        ...this.exerciceForm.value,
-        blocks: this.dataSource
-      };
     }
-    console.log(exercice);
-
-    console.log(this.exerciceForm.value);
-
+    const exercice = {
+      ...this.exerciceForm.value,
+      blocks: this.dataSource
+    };
     if (this.exerciceForm.valid && this.checkBlocks()) {
       if (this.data.exercice) {
         this.serieService.updateExercice(exercice, this.data.exercice.ex_id).subscribe(async (res: Exercice) => {
-          if (this.exerciceForm.get('file').value !== null) (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => {});
+          if (this.exerciceForm.get('file').value !== null)
+            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => {});
           this.dialogRef.close(true);
-          this.dialogRef.close();
         });
       } else {
         this.serieService.addExercice(exercice, this.data.serieId).subscribe(async (res: Exercice) => {
@@ -209,9 +197,13 @@ export class AddExerciceComponent implements OnInit {
             if (element.audioFile) {
               files.push(element.audioFile);
             }
-            if (files.length) this.serieService.addExerciceBlockFile(files, Number(res.blocks[index].exercice_Block_Id)).subscribe((resFileBlock) => console.log(resFileBlock));
+            if (files.length)
+              this.serieService
+                .addExerciceBlockFile(files, Number(res.blocks[index].exercice_Block_Id))
+                .subscribe((resFileBlock) => console.log(resFileBlock));
           });
-          if (this.exerciceForm.get('file').value !== null) (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => {});
+          if (this.exerciceForm.get('file').value !== null)
+            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => {});
           this.dialogRef.close(true);
         });
       }
@@ -225,7 +217,7 @@ export class AddExerciceComponent implements OnInit {
       return false;
     }
   }
-  resetBlock(event) {
+  resetBlocks() {
     this.dataSource = [];
   }
   deleteBlock(element) {
@@ -240,13 +232,14 @@ export class AddExerciceComponent implements OnInit {
   }
   editPoint(index) {
     if (this.correctAnswerMode) {
-      this.hotspotsList[index].correctValue == 'true' ? (this.hotspotsList[index].correctValue = null) : (this.hotspotsList[index].correctValue = 'true');
+      this.hotspotsList[index].correctValue == 'true'
+        ? (this.hotspotsList[index].correctValue = null)
+        : (this.hotspotsList[index].correctValue = 'true');
     } else {
       this.hotspotsList.splice(index, 1);
     }
   }
   openPreview() {
-    let exercice;
     if (this.exerciceForm.get('type').value == 'HOTSPOT') {
       this.dataSource = [];
       this.dataSource.push({
@@ -272,18 +265,13 @@ export class AddExerciceComponent implements OnInit {
           value: ''
         });
       });
-      exercice = {
-        ...this.exerciceForm.value,
-        blocks: this.dataSource
-      };
-    } else {
-      exercice = {
-        ...this.exerciceForm.value,
-        blocks: this.dataSource
-      };
     }
+    const exercice = {
+      ...this.exerciceForm.value,
+      blocks: this.dataSource
+    };
     if (this.exerciceForm.valid && this.checkBlocks()) {
-      const dialog = (this.selectedExercice = exercice);
+      this.selectedExercice = exercice;
       this.dialog.open(ExercicePreviewComponent, {
         width: '70%',
         maxWidth: '70%',

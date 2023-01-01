@@ -10,7 +10,7 @@ describe('AddChapterComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ AddChapterComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AddChapterComponent);
     component = fixture.componentInstance;

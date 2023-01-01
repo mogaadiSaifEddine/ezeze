@@ -13,8 +13,8 @@ export class User {
   profession: string;
   password: string;
   confirmepassword: string;
-  isblocked: Boolean;
-  enabled: Boolean;
+  isblocked: boolean;
+  enabled: boolean;
   group: Group;
 }
 export interface Group {

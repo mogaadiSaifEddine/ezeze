@@ -10,7 +10,7 @@ describe('HotspotComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ HotspotComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(HotspotComponent);
     component = fixture.componentInstance;

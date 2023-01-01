@@ -10,7 +10,7 @@ describe('ShortResponseComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ShortResponseComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ShortResponseComponent);
     component = fixture.componentInstance;

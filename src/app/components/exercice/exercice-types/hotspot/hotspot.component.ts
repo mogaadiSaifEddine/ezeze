@@ -31,7 +31,7 @@ export class HotspotComponent implements OnInit, OnChanges {
   private initExercice() {
     this.answerChange.emit(false);
     this.imageBlock = this.exercice.blocks.find((block: ExerciceBlock) => block.exerciceBlockType === ExerciceBlockTypes.IMAGE);
-    console.log('BLOCKss', this.exercice.blocks);
+
     this.hotspotsList = [];
     this.exercice.blocks.forEach((block: ExerciceBlock) => {
       if (block.exerciceBlockType === ExerciceBlockTypes.INPUT_TEXT) {
@@ -58,13 +58,13 @@ export class HotspotComponent implements OnInit, OnChanges {
   hotspotClicked(hotspot) {
     !hotspot.value ? (hotspot.value = 'true') : (hotspot.value = null);
     let correct = true;
-    console.log(this.hotspotsList);
+
     this.hotspotsList.forEach((hot) => {
       if (hot.value == 'true' && hot.correctValue != 'true') {
         correct = false;
       }
     });
-    console.log(correct);
+
     this.answerChange.emit(correct);
     this.canGoNext.emit(true);
   }

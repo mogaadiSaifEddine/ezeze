@@ -10,7 +10,7 @@ describe('RevisionComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ RevisionComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(RevisionComponent);
     component = fixture.componentInstance;

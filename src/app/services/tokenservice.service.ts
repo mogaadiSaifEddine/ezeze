@@ -38,7 +38,7 @@ export class TokenserviceService {
   }
 
   getToken(): any {
-    let _token = this.token.split('.')[1];
+    const _token = this.token.split('.')[1];
     this.tokenresp = JSON.parse(atob(_token));
 
     return this.tokenresp;

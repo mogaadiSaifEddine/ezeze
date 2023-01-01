@@ -27,16 +27,16 @@
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="Action">
-      <mat-header-cell *matHeaderCellDef> {{ 'action' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let element; let i = index">
-        <button class="icon-button" matTooltip="Add Serie" (click)="openSerieDialog(element)" matTooltipPosition="left">
-          <span class="material-icons"> assignment </span>
+      <mat-header-cell *matHeaderCellDef> {{ 'actions' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button class="icon-button" (click)="openSerieDialog(element)">
+          <span class="material-icons" matTooltipPosition="above" matTooltip="Manage Series"> assignment </span>
         </button>
-        <button class="icon-button" matTooltip="Edit" (click)="openDialog(element, i)" matTooltipPosition="left">
-          <span class="material-icons"> edit </span>
+        <button class="icon-button" (click)="openDialog(element)">
+          <span class="material-icons" matTooltipPosition="above" matTooltip="Edit Chapter"> edit </span>
         </button>
-        <button class="icon-button" matTooltip="Delete" (click)="deleteChapter(element.chapter_id)" matTooltipPosition="left">
-          <span class="material-icons"> delete </span>
+        <button class="icon-button" (click)="deleteChapter(element.chapter_id)">
+          <span class="material-icons" matTooltipPosition="above" matTooltip="Delete Chapter"> delete </span>
         </button>
       </mat-cell>
     </ng-container>

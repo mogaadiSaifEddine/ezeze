@@ -118,10 +118,10 @@ export class WidgetsEComponent implements AfterContentInit {
   }
 
   getDataset({
-               backgroundColor = 'transparent',
-               borderColor = 'transparent',
-               borderWidth = 1
-             }) {
+    backgroundColor = 'transparent',
+    borderColor = 'transparent',
+    borderWidth = 1
+  }) {
     const dataset = this.baseDatasets;
     dataset[0].backgroundColor =
       backgroundColor !== 'transparent'

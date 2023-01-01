@@ -7,23 +7,23 @@
       <mat-error *ngIf="!blockForm.get('exerciceBlockType').valid && blockForm.get('exerciceBlockType').touched"> {{ 'please-select-any-item' | translate }} </mat-error>
     </mat-form-field>
 
-    <mat-form-field *ngIf="showLabel" appearance="outline">
-      <input formControlName="label" matInput [placeholder]="labelHolder" />
+    <mat-form-field *ngIf="fieldData.showLabel" appearance="outline">
+      <input formControlName="label" matInput [placeholder]="fieldData.labelHolder" />
     </mat-form-field>
 
-    <mat-form-field *ngIf="showPlaceholder" appearance="outline">
-      <input formControlName="placeholder" matInput [placeholder]="placeHolder" />
+    <mat-form-field *ngIf="fieldData.showPlaceholder" appearance="outline">
+      <input formControlName="placeholder" matInput [placeholder]="fieldData.placeHolder" />
     </mat-form-field>
 
-    <mat-form-field *ngIf="showCorrectValue" appearance="outline">
-      <input formControlName="correctValue" matInput [placeholder]="correctValueHolder" />
+    <mat-form-field *ngIf="fieldData.showCorrectValue" appearance="outline">
+      <input formControlName="correctValue" matInput [placeholder]="fieldData.correctValueHolder" />
     </mat-form-field>
 
-    <mat-form-field *ngIf="showValue" appearance="outline">
-      <input formControlName="value" matInput [placeholder]="valueHolder" />
+    <mat-form-field *ngIf="fieldData.showValue" appearance="outline">
+      <input formControlName="value" matInput [placeholder]="fieldData.valueHolder" />
     </mat-form-field>
 
-    <mat-form-field *ngIf="showOrder" appearance="outline">
+    <mat-form-field *ngIf="fieldData.showOrder" appearance="outline">
       <input formControlName="blockOrder" matInput placeholder="{{ 'order' | translate }}" />
     </mat-form-field>
     <mat-form-field appearance="outline">
@@ -33,7 +33,7 @@
       <ngx-mat-file-input placeholder="Image question generale" formControlName="audioFile"> </ngx-mat-file-input>
     </mat-form-field>
     <div class="add-button">
-      <button type="submit" class="post-button" (click)="saveBlok()" mat-raised-button>
+      <button type="submit" class="post-button" (click)="saveBlock()" mat-raised-button>
         {{ 'ajouter-block' | translate }}
       </button>
     </div>

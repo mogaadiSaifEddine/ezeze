@@ -5,8 +5,8 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { EspaceParentRoutingModule } from './espace-parent.routing.module';
 import { EspaceParentViewComponent } from './espace-parent-view/espace-parent-view.component';
-import { AddVoucherComponent } from './dialogs/add-voucher/add-voucher.component'
-import { AddNewComponent } from './dialogs/student-forms/add-new/add-new.component'
+import { AddVoucherComponent } from './dialogs/add-voucher/add-voucher.component';
+import { AddNewComponent } from './dialogs/student-forms/add-new/add-new.component';
 import { ViewEditComponent } from './dialogs/student-forms/view-edit/view-edit.component';
 import { DeleteConfirmationComponent } from 'src/app/components/espace-parent/dialogs/delete-confirmation/delete-confirmation.component';
 import { TokenDetailsComponent } from 'src/app/components/espace-parent/dialogs/token-details/token-details.component';

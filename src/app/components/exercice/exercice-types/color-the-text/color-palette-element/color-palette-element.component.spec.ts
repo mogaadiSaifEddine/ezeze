@@ -10,7 +10,7 @@ describe('ColorPaletteElementComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ColorPaletteElementComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ColorPaletteElementComponent);
     component = fixture.componentInstance;

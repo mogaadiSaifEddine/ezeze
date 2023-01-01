@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CourseSeries } from 'src/app/model/CourseSeries';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
-import { Types } from 'src/app/model/Exercice_type';
+import { Exercise_Types } from 'src/app/model/Exercice_type';
 import { SeriesType } from 'src/app/model/SeriesTypes';
 import { RevisionService } from 'src/app/services/revision.service';
 import { ShowCourseComponent } from './show-course/show-course.component';
@@ -18,7 +18,7 @@ export class CourseReminderComponent implements OnInit {
   show_serie_level_2: boolean;
   show_serie_level_3: boolean;
 
-  score: number = 85;
+  score = 85;
   courses = ['Chapitre A', 'Chapitre B', 'Chapitre C', 'Chapitre D'];
   showCoursesList = true;
   showFinalScoreLevel1 = false;
@@ -37,10 +37,10 @@ export class CourseReminderComponent implements OnInit {
       this.exercices_level_2 = serie.find((el) => el.seriesType === 'EXERCICE_2');
       this.exercices_level_3 = serie.find((el) => el.seriesType === 'EXERCICE_3');
 
-      console.log(this.exercices_level_1)
-      console.log(this.exercices_level_2)
-      console.log(this.exercices_level_3)
-      
+
+
+
+
     });
   }
 
@@ -98,7 +98,7 @@ export class CourseReminderComponent implements OnInit {
 
   goToNextLevel(event) {
     if (this.showFinalScoreLevel1) {
-      
+
       this.showFinalScoreLevel1 = false;
 
       this.show_serie_level_2 = true;

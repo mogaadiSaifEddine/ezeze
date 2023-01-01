@@ -62,7 +62,7 @@ export class ShortResponseComponent implements OnInit, OnChanges {
         'toggleEditorMode'
       ]
     ]
-  }
+  };
 
   constructor(private revisionService: RevisionService) { }
 
@@ -74,7 +74,7 @@ export class ShortResponseComponent implements OnInit, OnChanges {
       this.questions ? (this.questions.value = '') : '';
     });
     this.initExercice();
-    console.log(this.exercice['rtl']);
+
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['exercice']) {

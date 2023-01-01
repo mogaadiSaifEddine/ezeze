@@ -28,7 +28,7 @@ export class DragWordsComponent implements OnInit, OnChanges {
   }
 
   private initExercice() {
-    let block = this.exercice.blocks.find((block) => {
+    const block = this.exercice.blocks.find((block) => {
       return block.exerciceBlockType === ExerciceBlockTypes.HIGHLIGHT_TEXT;
     });
     if (this.isCheckMode) {
@@ -48,7 +48,7 @@ export class DragWordsComponent implements OnInit, OnChanges {
         }
       });
     }
-    console.debug(this.exercice, this.inputLists, this.valuesList)
+    console.debug(this.exercice, this.inputLists, this.valuesList);
 
   }
   ngOnChanges(changes: SimpleChanges): void {

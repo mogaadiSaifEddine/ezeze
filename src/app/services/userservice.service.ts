@@ -44,11 +44,11 @@ export class UserService {
     return this.http.post(`${this.baseUrl}` + `/create`, { email, newpass, cofirm });
   }
   Activecompte(username: string) {
-    let url = this.serverApi + `Elearning/activecompte/${username}`;
+    const url = this.serverApi + `Elearning/activecompte/${username}`;
     return this.http.put<User>(url, username);
   }
   getUser(username: string) {
-    let url = this.serverApi + `Elearning/user/username/${username}`;
+    const url = this.serverApi + `Elearning/user/username/${username}`;
     return this.http.get<User>(url);
   }
   getGroups() {
@@ -59,7 +59,7 @@ export class UserService {
     return this.http.get<Group[]>(this.serverApi + 'Elearning/group/');
   }
   deleteUser(userID) {
-    let url = this.serverApi + `Elearning/user/${userID}`;
+    const url = this.serverApi + `Elearning/user/${userID}`;
     return this.http.delete(url);
   }
 }

@@ -10,7 +10,7 @@ describe('TokenDetailsComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ TokenDetailsComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(TokenDetailsComponent);
     component = fixture.componentInstance;

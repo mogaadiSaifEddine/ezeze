@@ -56,7 +56,7 @@ export class WritingComponent implements OnInit, OnChanges {
         'toggleEditorMode'
       ]
     ]
-  }
+  };
 
   @Input() exercice: Exercice;
   @Input() answer: boolean;
@@ -76,7 +76,7 @@ export class WritingComponent implements OnInit, OnChanges {
     });
     this.initExercice();
 
-    console.log(this.exercice);
+
   }
   private initExercice() {
     this.answerChange.emit(false);
@@ -90,7 +90,7 @@ export class WritingComponent implements OnInit, OnChanges {
   }
 
   valueChanged() {
-    console.log('change motherfucker');
+
 
     this.answerChange.emit(this.selectedBlock.value === this.selectedBlock.correctValue);
     this.canGoNext.emit(this.selectedBlock.value.length > 0);

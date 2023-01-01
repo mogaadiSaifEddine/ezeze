@@ -40,23 +40,23 @@ export class CorrespondingArrowComponent implements OnInit {
         this.arrow_right.push(block);
       }
     });
-    console.log(this.exercice);
+
   }
 
   listenToClick(x, direction: string): void {
-    console.log('click');
-    console.log(x);
+
+
 
     if (direction === 'left' && this.leftArrow == 0) {
-      console.log('right', x);
+
       this.selectedBox = x;
       this.leftArrow = x;
-      console.log(this.leftArrow);
+
     } else if (this.rightArrow == 0 && direction === 'right' && this.leftArrow != 0) {
       this.selectedBox = 0;
-      console.log('left', x);
+
       this.rightArrow = x;
-      console.log(this.rightArrow);
+
 
       this.lines = [
         ...this.lines,

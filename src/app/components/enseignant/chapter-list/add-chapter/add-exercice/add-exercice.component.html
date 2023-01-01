@@ -1,58 +1,52 @@
 <button mat-icon-button class="right close-button" [mat-dialog-close]="true">
   <mat-icon class="close-icon" color="warn">close</mat-icon>
 </button>
-<div class="row">
+<div class="row h-100">
   <div class="col-md-5">
     <h2 mat-dialog-title>{{ 'exercice' | translate }}</h2>
 
     <form [formGroup]="exerciceForm">
       <div class="container row">
         <mat-form-field appearance="outline">
-          <mat-select (valueChange)="resetBlock($event)" formControlName="type" placeholder="{{ 'type' | translate }}">
+          <mat-select (valueChange)="resetBlocks()" formControlName="type" placeholder="{{ 'type' | translate }}">
             <mat-option *ngFor="let type of TYPES | keyvalue" [value]="type.key">{{ type.value }}</mat-option>
           </mat-select>
-          <mat-error *ngIf="!exerciceForm.get('type').valid && exerciceForm.get('type').touched"> {{ 'please-select-any-item' | translate }} </mat-error>
+          <mat-error *ngIf="!formControls.type.valid && formControls.type.touched"> {{ 'please-select-any-item' | translate }} </mat-error>
         </mat-form-field>
 
         <mat-form-field *ngIf="showdifficulty" appearance="outline">
           <mat-select formControlName="difficulty" placeholder="difficulty">
             <mat-option *ngFor="let diff of difficultys | keyvalue" [value]="diff.key">{{ diff.value }}</mat-option>
           </mat-select>
-          <mat-error *ngIf="!exerciceForm.get('difficulty').valid && exerciceForm.get('difficulty').touched"> {{ 'please-select-any-item' | translate }} </mat-error>
+          <mat-error *ngIf="!formControls.difficulty.valid && formControls.difficulty.touched">
+            {{ 'please-select-any-item' | translate }}
+          </mat-error>
         </mat-form-field>
 
-        <!-- LEGACY
-          <mat-form-field appearance="outline">
-            <input formControlName="name" matInput placeholder="Question generale" />
-          </mat-form-field>
-        -->
         <angular-editor formControlName="name" [config]="editorConfig" id="angularEditor"></angular-editor>
 
         <mat-form-field appearance="outline">
           <ngx-mat-file-input placeholder="Image question generale" formControlName="file"> </ngx-mat-file-input>
         </mat-form-field>
 
-        <!-- <mat-form-field appearance="outline">
-          <textarea placeholder="{{ 'question-de-lexercice' | translate }}" matInput cdkTextareaAutosize formControlName="question" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5"></textarea>
-        </mat-form-field> -->
-        <angular-editor formControlName="question" [config]="editorConfig" id="angularEditor" placeholder="{{ 'question-de-lexercice' | translate }}"></angular-editor>
+        <angular-editor
+          formControlName="question"
+          [config]="editorConfig"
+          id="angularEditor"
+          placeholder="{{ 'question-de-lexercice' | translate }}"></angular-editor>
 
-        <mat-slide-toggle formControlName="rtl" class="example-margin">{{ !!exerciceForm.get('rtl').value ? 'RTL' : 'LTR' }} </mat-slide-toggle>
+        <mat-slide-toggle formControlName="rtl" class="example-margin">{{ !!formControls.rtl.value ? 'RTL' : 'LTR' }} </mat-slide-toggle>
       </div>
     </form>
   </div>
-  <div class="col-md-7" *ngIf="exerciceForm.get('type').value != 'HOTSPOT'">
+  <div class="col-md-7" *ngIf="formControls.type.value != 'HOTSPOT'">
     <h2 mat-dialog-title>{{ 'block' | translate }}</h2>
     <mat-panel-description class="add-button">
-      <button [disabled]="!this.exerciceForm.get('type').value" mat-raised-button color="primary" (click)="openBlockDialog()">
+      <button [disabled]="!this.formControls.type.value" mat-raised-button color="primary" (click)="openBlockDialog()">
         <span class="material-icons">add</span>
       </button>
     </mat-panel-description>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <!--- Note that these columns can be defined in any order.
-                The actual rendered columns are set as a property on the row definition" -->
-
-      <!-- Position Column -->
       <ng-container matColumnDef="ordre">
         <th mat-header-cell *matHeaderCellDef>{{ 'ordre' | translate }}</th>
 
@@ -62,7 +56,6 @@
         <th mat-header-cell *matHeaderCellDef>{{ 'type' | translate }}</th>
         <td mat-cell *matCellDef="let element">{{ element.exerciceBlockType }}</td>
       </ng-container>
-      <!-- Name Column -->
       <ng-container matColumnDef="label">
         <th mat-header-cell *matHeaderCellDef>{{ 'label' | translate }}</th>
         <td mat-cell *matCellDef="let element">{{ element.label }}</td>
@@ -83,18 +76,25 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
-  <div [formGroup]="exerciceForm" class="col-md-7" *ngIf="exerciceForm.get('type').value === 'HOTSPOT'">
+  <div [formGroup]="exerciceForm" class="col-md-7" *ngIf="formControls.type.value === 'HOTSPOT'">
     <div id="image-name-container">
       <mat-form-field appearance="outline">
         <input formControlName="imageName" matInput placeholder="Nom d'image" />
       </mat-form-field>
-      <button mat-raised-button (click)="hotspotImage = exerciceForm.get('imageName').value">Importer l'image</button>
+      <button mat-raised-button (click)="hotspotImage = formControls.imageName.value">Importer l'image</button>
     </div>
-    <button *ngIf="!correctAnswerMode" mat-raised-button (click)="correctAnswerMode = true">Choisir réponses correctes</button>
-    <button *ngIf="correctAnswerMode" mat-raised-button (click)="correctAnswerMode = false">Modifier points</button>
+    <button mat-raised-button (click)="correctAnswerMode = !correctAnswerMode">
+      {{ correctAnswerMode ? 'Modifier points' : 'Choisir réponses correctes' }}
+    </button>
     <br />
     <div class="image-container">
-      <img (load)="imageLoaded = true" id="hotspot-img" #hotspotImg (click)="addPoint($event)" *ngIf="hotspotImage" src="assets/images/{{ hotspotImage }}" />
+      <img
+        (load)="imageLoaded = true"
+        id="hotspot-img"
+        #hotspotImg
+        (click)="addPoint($event)"
+        *ngIf="hotspotImage"
+        src="assets/images/{{ hotspotImage }}" />
 
       <ng-container *ngIf="imageLoaded">
         <div
@@ -114,7 +114,7 @@
       </ng-container>
     </div>
   </div>
-  <div class="button-container">
+  <div class="button-container mt-auto">
     <button (click)="onSubmit()" type="submit" class="post-button" mat-raised-button>
       {{ this.data.exercice ? 'update' : 'add' }}
     </button>

@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ExerciceBlock } from 'src/app/model/ExerciceBlock';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
+import { Exercise_Types } from 'src/app/model/Exercice_type';
+import { FieldData } from 'src/app/helpers/block';
 
 @Component({
   selector: 'app-add-block',
@@ -15,351 +17,208 @@ export class AddBlockComponent implements OnInit {
   blockForm: FormGroup;
   TYPES = ExerciceBlockTypes;
   TYPES_KEYS_MAP = Object.values(this.TYPES).map((el, ind) => ({ key: ind, value: el }));
-  showLabel = false;
-  showCorrectValue = false;
-  showPlaceholder = false;
-  showValue = false;
-  showOrder = false;
-  placeHolder = 'placeholder';
-  valueHolder = 'value';
-  labelHolder = 'label';
-  correctValueHolder = 'correct value';
 
-  constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: { block: ExerciceBlock; exercice_type: string }, private dialogRef: MatDialogRef<AddBlockComponent>) {}
+  fieldData = new FieldData();
+
+  readonly exerciceTypeToTypesKeysMap: Record<Exercise_Types, ExerciceBlockTypes[]> = {
+    CORRESPONDANCE: [ExerciceBlockTypes.CORRESPONDANCE_LEFT, ExerciceBlockTypes.CORRESPONDANCE_RIGHT],
+    LINK_ARROW: [ExerciceBlockTypes.ARROW_LEFT, ExerciceBlockTypes.ARROW_RIGHT],
+    MULTIPLE_CHOICE: [ExerciceBlockTypes.RADIO, ExerciceBlockTypes.IMAGE, ExerciceBlockTypes.QUESTION],
+    TRUE_FALSE: [ExerciceBlockTypes.RADIO, ExerciceBlockTypes.IMAGE, ExerciceBlockTypes.QUESTION],
+    SHORT_RESPONSE: [ExerciceBlockTypes.INPUT_TEXT],
+    SEQUENCING: [ExerciceBlockTypes.INPUT_TEXT],
+    WRITING: [ExerciceBlockTypes.INPUT_TEXT],
+    LIKERT_SCALE: [ExerciceBlockTypes.INPUT_TEXT],
+    MULTIPLE_RESPONSE: [ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.QUESTION],
+    NUMERIC: [ExerciceBlockTypes.INPUT_NUMBER],
+    WORD_COLORATION: [
+      ExerciceBlockTypes.COLOR,
+      ExerciceBlockTypes.HIGHLIGHT_TEXT,
+      ExerciceBlockTypes.COLORATE_TEXT,
+      ExerciceBlockTypes.BREAK
+    ],
+    SELECT_FROM_LIST: [ExerciceBlockTypes.TEXT, ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.BREAK],
+    FILL_EMPTY_FIELDS: [ExerciceBlockTypes.TEXT, ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.BREAK],
+    DRAG_DROP: [ExerciceBlockTypes.DRAG_DROP_IMAGE_LIST],
+    DRAG_WORDS: [ExerciceBlockTypes.HIGHLIGHT_TEXT, ExerciceBlockTypes.TEXT, ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.BREAK],
+    FILL_LETTERS: [ExerciceBlockTypes.TEXT],
+    HOTSPOT: [],
+    [Exercise_Types.DRAG_SYLLABLES]: [],
+    [Exercise_Types.PUT_IN_FRAME]: [],
+    [Exercise_Types.OUTSIDER_ELEMENT]: [],
+    [Exercise_Types.LISTEN]: [ExerciceBlockTypes.AUDIO_IMAGE],
+    [Exercise_Types.ARITHMETIC_TREE]: [],
+    [Exercise_Types.FILL_BLANKS_IMG]: [],
+    [Exercise_Types.COLOR_SHAPE]: []
+  };
+  readonly showFieldsFor: Record<Exercise_Types, () => void> = {
+    LIKERT_SCALE: () => this.showFieldsForLikertScale(),
+    NUMERIC: () => this.showFieldsForNumeric(),
+    CORRESPONDANCE: () => this.showFieldsForCorrespondance(),
+    WORD_COLORATION: () => this.showFieldsForWordColoration(),
+    FILL_LETTERS: (): void => this.showFieldsForFillLetters(),
+    MULTIPLE_CHOICE: (): void => {},
+    MULTIPLE_RESPONSE: (): void => {},
+    TRUE_FALSE: (): void => {},
+    SHORT_RESPONSE: (): void => {},
+    FILL_EMPTY_FIELDS: (): void => {},
+    SEQUENCING: (): void => {},
+    HOTSPOT: (): void => {},
+    DRAG_DROP: (): void => {},
+    DRAG_WORDS: (): void => {},
+    SELECT_FROM_LIST: (): void => {},
+    WRITING: (): void => {},
+    LINK_ARROW: (): void => {},
+    [Exercise_Types.DRAG_SYLLABLES]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.PUT_IN_FRAME]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.OUTSIDER_ELEMENT]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.LISTEN]: (): void => this.showFieldsForListening(),
+    [Exercise_Types.ARITHMETIC_TREE]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.FILL_BLANKS_IMG]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.COLOR_SHAPE]: function (): void {
+      throw new Error('Function not implemented.');
+    }
+  };
+
+  constructor(
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: { block: ExerciceBlock; exercice_type: string },
+    private dialogRef: MatDialogRef<AddBlockComponent>
+  ) {}
 
   ngOnInit(): void {
     this.filterTypes();
     this.initForm();
   }
   // this code is bullshit but we dont have time
+  // (＃￣ω￣) * ... and appnester took exception to that *
+
   checkFieldsToShow() {
-    console.log(this.blockForm.get('exerciceBlockType').value);
-
+    this.fieldData.resetFieldData();
+    this.clearValidators();
     if (this.blockForm.get('exerciceBlockType').value === 6) {
-      this.showLabel = false;
-      this.showCorrectValue = false;
-      this.showPlaceholder = false;
-      this.showValue = true;
-      this.valueHolder = "Selectioner l'url de l'image";
-      this.blockForm.get('value').addValidators([Validators.required]);
-      this.blockForm.get('label').clearValidators();
+      this.fieldData.showLabel = false;
+      this.fieldData.showCorrectValue = false;
+      this.fieldData.showPlaceholder = false;
+      this.fieldData.showValue = true;
+      this.fieldData.valueHolder = "Selectioner l'url de l'image";
+
+      this.addValueValidator();
+    } else {
+      const showFieldsForExerciceType = this.showFieldsFor[this.data.exercice_type];
+      if (showFieldsForExerciceType) {
+        showFieldsForExerciceType();
+      }
+    }
+  }
+
+  private showFieldsForListening() {
+    this.fieldData.showLabel = true;
+    this.fieldData.showValue = true;
+    this.fieldData.showPlaceholder = false;
+
+    this.fieldData.valueHolder = 'Veuiller saisir la valeur';
+    this.fieldData.labelHolder = 'Veuiller saisir le label';
+
+    this.blockForm.get('label').addValidators([Validators.required]);
+    this.blockForm.get('value').addValidators([Validators.required]);
+    // this.blockForm.addControl('imageFile', new FormControl('', Validators.required));
+    // this.blockForm.addControl('audioFile', new FormControl('', Validators.required));
+    this.blockForm.get('placeholder').clearValidators();
+    console.log(this.blockForm.value);
+
+    if (this.blockForm.get('exerciceBlockType').value === 12) {
+      this.fieldData.showCorrectValue = true;
+      this.blockForm.get('correctValue').addValidators([Validators.required]);
+      this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correcte separer avec un /';
+    } else {
+      this.fieldData.showCorrectValue = false;
       this.blockForm.get('correctValue').clearValidators();
-      this.blockForm.get('placeholder').clearValidators();
     }
-    if (this.data.exercice_type === 'LIKERT_SCALE') {
-      if (this.blockForm.get('exerciceBlockType').value === 2) {
-        this.showLabel = false;
-        this.showCorrectValue = true;
-        this.showPlaceholder = true;
-        this.showValue = false;
-        this.placeHolder = 'Veuiller saisir le champ a voter';
-        this.correctValueHolder = 'Veuiller saisir la valeur correcte de 1-5';
+  }
 
-        this.blockForm.get('label').clearValidators();
-        this.blockForm.get('value').clearValidators();
-        this.blockForm.get('correctValue').addValidators([Validators.required]);
-        this.blockForm.get('placeholder').addValidators([Validators.required]);
-      }
-    } else if (this.data.exercice_type === 'NUMERIC') {
-      if (this.blockForm.get('exerciceBlockType').value === 3) {
-        this.showLabel = true;
-        this.showCorrectValue = true;
-        this.showPlaceholder = false;
-        this.showValue = false;
-        this.labelHolder = 'Veuiller saisir la question';
-        this.correctValueHolder = 'Veuiller saisir la valeur correcte';
-        this.blockForm.get('correctValue').addValidators([Validators.required]);
-        this.blockForm.get('label').clearValidators();
-        this.blockForm.get('value').clearValidators();
-        this.blockForm.get('placeholder').clearValidators();
-      }
-    } else if (this.data.exercice_type === 'CORRESPONDANCE') {
-      this.showLabel = true;
-      this.showValue = true;
-      this.showPlaceholder = true;
+  showFieldsForLikertScale() {
+    if (this.blockForm.get('exerciceBlockType').value === 2) {
+      this.fieldData.showLabel = false;
+      this.fieldData.showCorrectValue = true;
+      this.fieldData.showPlaceholder = true;
+      this.fieldData.showValue = false;
+      this.fieldData.placeHolder = 'Veuiller saisir le champ a voter';
+      this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correcte de 1-5';
 
-      this.placeHolder = "Veuiller saisir le nom de l'image";
-      this.valueHolder = 'Veuiller saisir la valeur';
-      this.labelHolder = 'Veuiller saisir le label';
-
-      this.blockForm.get('label').addValidators([Validators.required]);
-      this.blockForm.get('value').addValidators([Validators.required]);
-      this.blockForm.get('placeholder').addValidators([Validators.required]);
-      if (this.blockForm.get('exerciceBlockType').value === 10) {
-        this.showCorrectValue = true;
-        this.blockForm.get('correctValue').addValidators([Validators.required]);
-        this.correctValueHolder = 'Veuiller saisir la valeur correcte';
-      } else {
-        this.showCorrectValue = false;
-        this.blockForm.get('correctValue').clearValidators();
-      }
-    } else if (this.data.exercice_type === 'WORD_COLORATION') {
-      if (this.blockForm.get('exerciceBlockType').value === 4 || this.blockForm.get('exerciceBlockType').value === 16) {
-        this.showLabel = true;
-        this.showPlaceholder = false;
-        this.showValue = false;
-        this.showCorrectValue = true;
-
-        this.labelHolder = 'Veuiller saisir la mot a colorer';
-
-        this.correctValueHolder = 'Veuiller saisir la couleur correcte si aucune valeur correcte laisser vide';
-        this.blockForm.get('correctValue').clearValidators();
-        this.blockForm.get('label').addValidators([Validators.required]);
-        this.blockForm.get('value').clearValidators();
-        this.blockForm.get('placeholder').clearValidators();
-      } else {
-        this.showLabel = true;
-        this.showCorrectValue = false;
-        this.showPlaceholder = false;
-        this.showValue = false;
-        this.labelHolder = "Veuiller saisir le couleur de l'image";
-        this.blockForm.get('label').addValidators([Validators.required]);
-        this.blockForm.get('value').clearValidators();
-        this.blockForm.get('correctValue').clearValidators();
-        this.blockForm.get('placeholder').clearValidators();
-      }
-    } else if (this.data.exercice_type === 'FILL_EMPTY_FIELDS') {
-      if (this.blockForm.get('exerciceBlockType').value === 5) {
-        this.showLabel = false;
-        this.showCorrectValue = false;
-        this.showPlaceholder = false;
-        this.showValue = true;
-        this.valueHolder = 'Veuiller saisir le texte';
-        this.blockForm.get('value').addValidators([Validators.required]);
-        this.blockForm.get('label').clearValidators();
-        this.blockForm.get('correctValue').clearValidators();
-        this.blockForm.get('placeholder').clearValidators();
-      } else if (this.blockForm.get('exerciceBlockType').value === 2) {
-        this.showLabel = false;
-        this.showPlaceholder = false;
-        this.showValue = true;
-        this.showCorrectValue = true;
-        this.labelHolder = 'Veuiller saisir le texte';
-        this.blockForm.get('label').clearValidators();
-        this.blockForm.get('value').clearValidators();
-        this.valueHolder = 'Veuilller saisir la valeur initiale du champ vide (optionel)';
-        this.blockForm.get('correctValue').addValidators([Validators.required]);
-        this.correctValueHolder = 'Veuiller saisir la valeur correcte du champ';
-        this.blockForm.get('placeholder').clearValidators();
-      }
-      // this.showLabel = true;
-      // this.showCorrectValue = true;
-      // this.showPlaceholder = true;
-      // this.showValue = true;
-      // this.blockForm.get('label').addValidators([Validators.required]);
-      // this.blockForm.get('value').addValidators([Validators.required]);
-      // this.blockForm.get('placeholder').addValidators([Validators.required]);
-    } else if (this.data.exercice_type === 'MULTIPLE_RESPONSE') {
-      if (this.blockForm.get('exerciceBlockType').value === 2) {
-        this.showLabel = true;
-        this.showCorrectValue = true;
-        this.showPlaceholder = false;
-        this.showValue = true;
-        this.labelHolder = 'Veuiller saisir le text du champ';
-        this.blockForm.get('label').addValidators([Validators.required]);
-        this.blockForm.get('value').clearValidators();
-        this.valueHolder = 'Veullier saisir true si vous vouler que le champ soit coché initialement (optionel)';
-        this.correctValueHolder = 'Veuiller saisir true si ce champ est la bonne reponse';
-        this.blockForm.get('correctValue').addValidators([Validators.required]);
-        this.blockForm.get('placeholder').clearValidators();
-      } else if (this.blockForm.get('exerciceBlockType').value === 15) {
-        this.showLabel = true;
-        this.showCorrectValue = false;
-        this.showPlaceholder = false;
-        this.showValue = false;
-        this.labelHolder = 'Veuiller saisir la question';
-        this.blockForm.get('value').clearValidators();
-        this.blockForm.get('label').addValidators([Validators.required]);
-        this.blockForm.get('correctValue').clearValidators();
-        this.blockForm.get('placeholder').clearValidators();
-      }
-    } else if (this.data.exercice_type === 'SELECT_FROM_LIST') {
-      if (this.blockForm.get('exerciceBlockType').value === 5) {
-        this.showLabel = false;
-        this.showCorrectValue = false;
-        this.showPlaceholder = false;
-        this.showValue = true;
-        this.labelHolder = 'Veuiller saisir le texte';
-        this.blockForm.get('value').addValidators([Validators.required]);
-        this.blockForm.get('label').clearValidators();
-        this.blockForm.get('correctValue').clearValidators();
-        this.blockForm.get('placeholder').clearValidators();
-      } else if (this.blockForm.get('exerciceBlockType').value === 2) {
-        this.showLabel = false;
-        this.showPlaceholder = true;
-        this.showValue = false;
-        this.showCorrectValue = true;
-        this.labelHolder = 'Veuiller saisir le texte';
-        this.blockForm.get('label').clearValidators();
-        this.blockForm.get('value').clearValidators();
-        this.placeHolder = 'Veuilller saisir les champ de selection séparé avec /';
-        this.blockForm.get('placeholder').addValidators([Validators.required]);
-        this.blockForm.get('correctValue').addValidators([Validators.required]);
-        this.correctValueHolder = 'Veuiller saisir la valeur correcte de la selection';
-      }
-    } else if (this.data.exercice_type === 'WRITING') {
-      if (this.blockForm.get('exerciceBlockType').value === 2) {
-        this.showLabel = true;
-        this.showCorrectValue = true;
-        this.showPlaceholder = false;
-        this.showValue = false;
-        this.labelHolder = 'Veuiller saisir la question';
-
-        this.blockForm.get('label').clearValidators();
-        this.blockForm.get('value').clearValidators();
-        this.correctValueHolder = "veiller saisir la valuer correcte de l'essai";
-        this.blockForm.get('correctValue').addValidators([Validators.required]);
-        this.blockForm.get('label').addValidators([Validators.required]);
-
-        this.blockForm.get('placeholder').clearValidators();
-      }
-    } else if (this.data.exercice_type === 'TRUE_FALSE') {
-      if (this.blockForm.get('exerciceBlockType').value === 1) {
-        this.showLabel = true;
-        this.showCorrectValue = true;
-        this.showPlaceholder = false;
-        this.showValue = false;
-        this.labelHolder = 'Veuiller saisir true or false';
-        this.correctValueHolder = 'Veuiller saisir true pour la valeur correcte';
-        this.blockForm.get('value').addValidators([Validators.required]);
-        this.blockForm.get('label').clearValidators();
-        this.blockForm.get('correctValue').clearValidators();
-        this.blockForm.get('placeholder').clearValidators();
-      } else if (this.blockForm.get('exerciceBlockType').value === 15) {
-        this.showLabel = true;
-        this.showCorrectValue = false;
-        this.showPlaceholder = false;
-        this.showValue = false;
-        this.labelHolder = 'Veuiller saisir la question';
-        this.blockForm.get('value').clearValidators();
-        this.blockForm.get('label').addValidators([Validators.required]);
-        this.blockForm.get('correctValue').clearValidators();
-        this.blockForm.get('placeholder').clearValidators();
-      }
-    } else if (this.data.exercice_type === 'MULTIPLE_CHOICE') {
-      if (this.blockForm.get('exerciceBlockType').value === 1) {
-        this.showLabel = true;
-        this.showCorrectValue = true;
-        this.showPlaceholder = false;
-        this.showValue = false;
-        this.labelHolder = 'Veuiller la valeur du champ';
-        this.correctValueHolder = 'Veuiller saisir true si cette valuer est correcte';
-        this.blockForm.get('value').addValidators([Validators.required]);
-        this.blockForm.get('label').clearValidators();
-        this.blockForm.get('correctValue').clearValidators();
-        this.blockForm.get('placeholder').clearValidators();
-      } else if (this.blockForm.get('exerciceBlockType').value === 15) {
-        this.showLabel = true;
-        this.showCorrectValue = false;
-        this.showPlaceholder = false;
-        this.showValue = false;
-        this.labelHolder = 'Veuiller saisir la question';
-        this.blockForm.get('value').clearValidators();
-        this.blockForm.get('label').addValidators([Validators.required]);
-        this.blockForm.get('correctValue').clearValidators();
-        this.blockForm.get('placeholder').clearValidators();
-      }
-    } else if (this.data.exercice_type === 'SHORT_RESPONSE') {
-      if (this.blockForm.get('exerciceBlockType').value === 2) {
-        this.showLabel = true;
-        this.showCorrectValue = true;
-        this.showPlaceholder = false;
-        this.showValue = false;
-        this.labelHolder = 'Veuiller saisir la question';
-        this.correctValueHolder = 'Veuiller saisir la valeur correcte';
-        this.blockForm.get('correctValue').addValidators([Validators.required]);
-        this.blockForm.get('label').clearValidators();
-        this.blockForm.get('value').clearValidators();
-        this.blockForm.get('placeholder').clearValidators();
-      }
-    } else if (this.data.exercice_type === 'DRAG_WORDS') {
-      if (this.blockForm.get('exerciceBlockType').value === 2) {
-        this.showLabel = false;
-        this.showCorrectValue = true;
-        this.showPlaceholder = false;
-        this.showValue = false;
-        this.correctValueHolder = 'Veuiller saisir la valeur correcte';
-        this.blockForm.get('correctValue').addValidators([Validators.required]);
-        this.blockForm.get('label').clearValidators();
-        this.blockForm.get('value').clearValidators();
-        this.blockForm.get('placeholder').clearValidators();
-      } else if (this.blockForm.get('exerciceBlockType').value === 5) {
-        this.showLabel = false;
-        this.showCorrectValue = false;
-        this.showPlaceholder = false;
-        this.showValue = true;
-        this.valueHolder = 'Veuiller saisir le texte';
-        this.blockForm.get('correctValue').clearValidators();
-        this.blockForm.get('label').clearValidators();
-        this.blockForm.get('value').addValidators([Validators.required]);
-        this.blockForm.get('placeholder').clearValidators();
-      } else if (this.blockForm.get('exerciceBlockType').value === 4) {
-        this.showLabel = false;
-        this.showCorrectValue = false;
-        this.showPlaceholder = false;
-        this.showValue = true;
-        this.valueHolder = 'Veuiller saisir les mots separer avec un /';
-        this.blockForm.get('correctValue').clearValidators();
-        this.blockForm.get('label').clearValidators();
-        this.blockForm.get('value').addValidators([Validators.required]);
-        this.blockForm.get('placeholder').clearValidators();
-      }
-    } else if (this.data.exercice_type === 'SEQUENCING') {
-      if (this.blockForm.get('exerciceBlockType').value === 2) {
-        this.showLabel = false;
-        this.showCorrectValue = true;
-        this.showPlaceholder = true;
-        this.showValue = false;
-        this.placeHolder = 'veuiller saisir le texte';
-        this.correctValueHolder = 'Veuiller saisir la valeur par ordre en nombre ex 1';
-        this.blockForm.get('correctValue').addValidators([Validators.required]);
-        this.blockForm.get('label').clearValidators();
-        this.blockForm.get('value').clearValidators();
-        this.blockForm.get('placeholder').addValidators([Validators.required]);
-      }
-    } else if (this.data.exercice_type === 'LINK_ARROW') {
-      this.showLabel = true;
-      this.showValue = true;
-      this.showPlaceholder = false;
-
-      this.valueHolder = 'Veuiller saisir la valeur';
-      this.labelHolder = 'Veuiller saisir le label';
-
-      this.blockForm.get('label').addValidators([Validators.required]);
-      this.blockForm.get('value').addValidators([Validators.required]);
-      this.blockForm.get('placeholder').clearValidators();
-      if (this.blockForm.get('exerciceBlockType').value === 12) {
-        this.showCorrectValue = true;
-        this.blockForm.get('correctValue').addValidators([Validators.required]);
-        this.correctValueHolder = 'Veuiller saisir la valeur correcte separer avec un /';
-      } else {
-        this.showCorrectValue = false;
-        this.blockForm.get('correctValue').clearValidators();
-      }
-    } else if (this.data.exercice_type === 'LISTEN') {
-      this.showLabel = true;
-      this.showValue = true;
-      this.showPlaceholder = false;
-
-      this.valueHolder = 'Veuiller saisir la valeur';
-      this.labelHolder = 'Veuiller saisir le label';
-
-      this.blockForm.get('label').addValidators([Validators.required]);
-      this.blockForm.get('value').addValidators([Validators.required]);
-      // this.blockForm.addControl('imageFile', new FormControl('', Validators.required));
-      // this.blockForm.addControl('audioFile', new FormControl('', Validators.required));
-      this.blockForm.get('placeholder').clearValidators();
-      console.log(this.blockForm.value);
-
-      if (this.blockForm.get('exerciceBlockType').value === 12) {
-        this.showCorrectValue = true;
-        this.blockForm.get('correctValue').addValidators([Validators.required]);
-        this.correctValueHolder = 'Veuiller saisir la valeur correcte separer avec un /';
-      } else {
-        this.showCorrectValue = false;
-        this.blockForm.get('correctValue').clearValidators();
-      }
+      this.addCorrectValueValidator();
+      this.addPlaceholderValidator();
     }
+  }
+
+  showFieldsForNumeric() {
+    if (this.blockForm.get('exerciceBlockType').value === 3) {
+      this.fieldData.showLabel = true;
+      this.fieldData.showCorrectValue = true;
+      this.fieldData.showPlaceholder = false;
+      this.fieldData.showValue = false;
+      this.fieldData.labelHolder = 'Veuiller saisir la question';
+      this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correcte';
+      this.addCorrectValueValidator();
+      this.addLabelValidator();
+    }
+  }
+
+  showFieldsForCorrespondance() {
+    this.fieldData.showLabel = true;
+    this.fieldData.showValue = true;
+    this.fieldData.showPlaceholder = true;
+
+    this.fieldData.placeHolder = "Veuiller saisir le nom de l'image";
+    this.fieldData.valueHolder = 'Veuiller saisir la valeur';
+    this.fieldData.labelHolder = 'Veuiller saisir le label';
+
+    this.addLabelValidator();
+    this.addValueValidator();
+    this.addPlaceholderValidator();
+
+    if (this.blockForm.get('exerciceBlockType').value === 10) {
+      this.fieldData.showCorrectValue = true;
+      this.addCorrectValueValidator();
+      this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correcte';
+    } else {
+      this.fieldData.showCorrectValue = false;
+    }
+  }
+  showFieldsForWordColoration() {
+    if (this.blockForm.get('exerciceBlockType').value === 4 || this.blockForm.get('exerciceBlockType').value === 16) {
+      this.fieldData.showLabel = true;
+      this.fieldData.showPlaceholder = false;
+      this.fieldData.showValue = false;
+      this.fieldData.showCorrectValue = true;
+
+      this.fieldData.labelHolder = 'Veuiller saisir la mot a colorer';
+
+      this.fieldData.correctValueHolder = 'Veuiller saisir la couleur correcte si aucune valeur correcte laisser vide';
+
+      this.addCorrectValueValidator();
+      this.addLabelValidator();
+    }
+  }
+  showFieldsForFillLetters() {
+    this.fieldData.showValue = true;
+    this.fieldData.showCorrectValue = true;
+
+    this.fieldData.valueHolder = 'Veuillez saisir la réponse avec les séparateurs (exp: Ines<A>cademy)';
+    this.fieldData.correctValueHolder = 'Veuiller saisir la réponse correcte à vérifier (exp: InesAcademy)';
+
+    this.addCorrectValueValidator();
+    this.addValueValidator();
   }
 
   initForm() {
@@ -379,44 +238,37 @@ export class AddBlockComponent implements OnInit {
   }
 
   filterTypes() {
-    if (this.data.exercice_type === 'CORRESPONDANCE') {
-      this.TYPES_KEYS_MAP = this.TYPES_KEYS_MAP.filter((x) => x.value === 'CORRESPONDANCE_LEFT' || x.value === 'CORRESPONDANCE_RIGHT');
-    } else if (this.data.exercice_type === 'LINK_ARROW') {
-      this.TYPES_KEYS_MAP = this.TYPES_KEYS_MAP.filter((x) => x.value === 'ARROW_LEFT' || x.value === 'ARROW_RIGHT');
-    } else if (this.data.exercice_type === 'MULTIPLE_CHOICE' || this.data.exercice_type === 'TRUE_FALSE') {
-      this.TYPES_KEYS_MAP = this.TYPES_KEYS_MAP.filter((x) => x.value === 'RADIO' || x.value === 'IMAGE' || x.value === 'QUESTION');
-    } else if (
-      this.data.exercice_type === 'SHORT_RESPONSE' ||
-      this.data.exercice_type === 'SEQUENCING' ||
-      // this.data.exercice_type === 'HOTSPOT' ||
-      this.data.exercice_type === 'WRITING' ||
-      this.data.exercice_type === 'LIKERT_SCALE'
-    ) {
-      this.TYPES_KEYS_MAP = this.TYPES_KEYS_MAP.filter((x) => x.value === 'INPUT_TEXT');
-    } else if (this.data.exercice_type === 'MULTIPLE_RESPONSE') {
-      this.TYPES_KEYS_MAP = this.TYPES_KEYS_MAP.filter((x) => x.value === 'INPUT_TEXT' || x.value === 'QUESTION');
-    } else if (this.data.exercice_type === 'NUMERIC') {
-      this.TYPES_KEYS_MAP = this.TYPES_KEYS_MAP.filter((x) => x.value === 'INPUT_NUMBER');
-    } else if (this.data.exercice_type === 'WORD_COLORATION') {
-      this.TYPES_KEYS_MAP = this.TYPES_KEYS_MAP.filter((x) => x.value === 'COLOR' || x.value === 'HIGHLIGHT_TEXT' || x.value === 'COLORATE_TEXT' || x.value === 'BREAK');
-    } else if (this.data.exercice_type === 'SELECT_FROM_LIST' || this.data.exercice_type === 'FILL_EMPTY_FIELDS') {
-      this.TYPES_KEYS_MAP = this.TYPES_KEYS_MAP.filter((x) => x.value === 'TEXT' || x.value === 'INPUT_TEXT' || x.value === 'BREAK');
-    } else if (this.data.exercice_type === 'DRAG_DROP') {
-      this.TYPES_KEYS_MAP = this.TYPES_KEYS_MAP.filter((x) => x.value === 'DRAG_DROP_IMAGE_LIST');
-    } else if (this.data.exercice_type === 'DRAG_WORDS') {
-      this.TYPES_KEYS_MAP = this.TYPES_KEYS_MAP.filter((x) => x.value === 'HIGHLIGHT_TEXT' || x.value === 'TEXT' || x.value === 'INPUT_TEXT' || x.value === 'BREAK');
-    } else if (this.data.exercice_type === 'LISTEN') {
-      this.TYPES_KEYS_MAP = this.TYPES_KEYS_MAP.filter((x) => x.value === 'AUDIO_IMAGE');
-    }
+    this.TYPES_KEYS_MAP = this.TYPES_KEYS_MAP.filter((x) => this.exerciceTypeToTypesKeysMap[this.data.exercice_type].includes(x.value));
   }
-  saveBlok() {
-    let c = {};
+  saveBlock() {
+    const c = {};
     c[this.blockForm.value.label] = this.blockForm.value.correctValue;
-    console.log(this.blockForm.get('audioFile').value);
-    // let correctValue = { ...this.blockForm.value, workstationUuid: "{'a' : 'rr'}" };
-    const correctValue = this.blockForm.value.exerciceBlockType === 16 ? { ...this.blockForm.value, correctValue: JSON.stringify(c) } : this.blockForm.value;
-    console.log(correctValue);
 
-    this.dialogRef.close(correctValue);
+    const block =
+      this.blockForm.value.exerciceBlockType === 16 ? { ...this.blockForm.value, correctValue: JSON.stringify(c) } : this.blockForm.value;
+
+    this.dialogRef.close(block);
+  }
+  private clearValidators() {
+    this.blockForm.get('label').clearValidators();
+    this.blockForm.get('value').clearValidators();
+    this.blockForm.get('placeholder').clearValidators();
+    this.blockForm.get('correctValue').clearValidators();
+  }
+
+  private addLabelValidator() {
+    this.blockForm.get('label').addValidators([Validators.required]);
+  }
+
+  private addValueValidator() {
+    this.blockForm.get('value').addValidators([Validators.required]);
+  }
+
+  private addPlaceholderValidator() {
+    this.blockForm.get('placeholder').addValidators([Validators.required]);
+  }
+
+  private addCorrectValueValidator() {
+    this.blockForm.get('correctValue').addValidators([Validators.required]);
   }
 }

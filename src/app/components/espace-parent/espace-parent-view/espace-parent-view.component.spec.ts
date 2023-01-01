@@ -10,7 +10,7 @@ describe('EspaceParentViewComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ EspaceParentViewComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(EspaceParentViewComponent);
     component = fixture.componentInstance;

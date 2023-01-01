@@ -10,7 +10,7 @@ describe('SelectFromListComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ SelectFromListComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SelectFromListComponent);
     component = fixture.componentInstance;
