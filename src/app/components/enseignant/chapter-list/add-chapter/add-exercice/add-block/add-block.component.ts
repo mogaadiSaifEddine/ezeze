@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ExerciceBlock } from 'src/app/model/ExerciceBlock';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
 import { Exercise_Types } from 'src/app/model/Exercice_type';
-import { FieldData } from 'src/app/types/block';
+import { FieldData } from 'src/app/helpers/block';
 
 @Component({
   selector: 'app-add-block',
@@ -18,17 +18,7 @@ export class AddBlockComponent implements OnInit {
   TYPES = ExerciceBlockTypes;
   TYPES_KEYS_MAP = Object.values(this.TYPES).map((el, ind) => ({ key: ind, value: el }));
 
-  fieldData: FieldData = {
-    showLabel: false,
-    showCorrectValue: false,
-    showPlaceholder: false,
-    showValue: false,
-    showOrder: false,
-    placeHolder: 'placeholder',
-    valueHolder: 'value',
-    labelHolder: 'label',
-    correctValueHolder: 'correct value'
-  };
+  fieldData = new FieldData()
 
   readonly exerciceTypeToTypesKeysMap: Record<Exercise_Types, ExerciceBlockTypes[]> = {
     CORRESPONDANCE: [ExerciceBlockTypes.CORRESPONDANCE_LEFT, ExerciceBlockTypes.CORRESPONDANCE_RIGHT],
@@ -41,7 +31,12 @@ export class AddBlockComponent implements OnInit {
     LIKERT_SCALE: [ExerciceBlockTypes.INPUT_TEXT],
     MULTIPLE_RESPONSE: [ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.QUESTION],
     NUMERIC: [ExerciceBlockTypes.INPUT_NUMBER],
-    WORD_COLORATION: [ExerciceBlockTypes.COLOR, ExerciceBlockTypes.HIGHLIGHT_TEXT, ExerciceBlockTypes.COLORATE_TEXT, ExerciceBlockTypes.BREAK],
+    WORD_COLORATION: [
+      ExerciceBlockTypes.COLOR,
+      ExerciceBlockTypes.HIGHLIGHT_TEXT,
+      ExerciceBlockTypes.COLORATE_TEXT,
+      ExerciceBlockTypes.BREAK
+    ],
     SELECT_FROM_LIST: [ExerciceBlockTypes.TEXT, ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.BREAK],
     FILL_EMPTY_FIELDS: [ExerciceBlockTypes.TEXT, ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.BREAK],
     DRAG_DROP: [ExerciceBlockTypes.DRAG_DROP_IMAGE_LIST],
@@ -49,54 +44,50 @@ export class AddBlockComponent implements OnInit {
     FILL_LETTERS: [ExerciceBlockTypes.TEXT],
     HOTSPOT: []
   };
-  readonly showFieldsFor: Record<string, () => void> = {
+  readonly showFieldsFor: Record<Exercise_Types, () => void> = {
     LIKERT_SCALE: () => this.showFieldsForLikertScale(),
     NUMERIC: () => this.showFieldsForNumeric(),
     CORRESPONDANCE: () => this.showFieldsForCorrespondance(),
-    WORD_COLORATION: () => this.showFieldsForWordColoration()
+    WORD_COLORATION: () => this.showFieldsForWordColoration(),
+    FILL_LETTERS: (): void => this.showFieldsForFillLetters(),
+    MULTIPLE_CHOICE: (): void => {},
+    MULTIPLE_RESPONSE: (): void => {},
+    TRUE_FALSE: (): void => {},
+    SHORT_RESPONSE: (): void => {},
+    FILL_EMPTY_FIELDS: (): void => {},
+    SEQUENCING: (): void => {},
+    HOTSPOT: (): void => {},
+    DRAG_DROP: (): void => {},
+    DRAG_WORDS: (): void => {},
+    SELECT_FROM_LIST: (): void => {},
+    WRITING: (): void => {},
+    LINK_ARROW: (): void => {}
   };
 
-  constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: { block: ExerciceBlock; exercice_type: string }, private dialogRef: MatDialogRef<AddBlockComponent>) {}
+  constructor(
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: { block: ExerciceBlock; exercice_type: string },
+    private dialogRef: MatDialogRef<AddBlockComponent>
+  ) {}
 
   ngOnInit(): void {
     this.filterTypes();
     this.initForm();
   }
-  clearValidators() {
-    this.blockForm.get('label').clearValidators();
-    this.blockForm.get('value').clearValidators();
-    this.blockForm.get('placeholder').clearValidators();
-    this.blockForm.get('correctValue').clearValidators();
-  }
-
-  addLabelValidator() {
-    this.blockForm.get('label').addValidators([Validators.required]);
-  }
-
-  addValueValidator() {
-    this.blockForm.get('value').addValidators([Validators.required]);
-  }
-
-  addPlaceholderValidator() {
-    this.blockForm.get('placeholder').addValidators([Validators.required]);
-  }
-
-  addCorrectValueValidator() {
-    this.blockForm.get('correctValue').addValidators([Validators.required]);
-  }
-  // this code is bullshit but we dont have time // .. or do we?
+  // this code is bullshit but we dont have time
+  // (＃￣ω￣) * ... and appnester took exception to that *
 
   checkFieldsToShow() {
+    this.fieldData.resetFieldData();
+    this.clearValidators();
     if (this.blockForm.get('exerciceBlockType').value === 6) {
       this.fieldData.showLabel = false;
       this.fieldData.showCorrectValue = false;
       this.fieldData.showPlaceholder = false;
       this.fieldData.showValue = true;
       this.fieldData.valueHolder = "Selectioner l'url de l'image";
-      this.blockForm.get('value').addValidators([Validators.required]);
-      this.blockForm.get('label').clearValidators();
-      this.blockForm.get('correctValue').clearValidators();
-      this.blockForm.get('placeholder').clearValidators();
+
+      this.addValueValidator();
     } else {
       const showFieldsForExerciceType = this.showFieldsFor[this.data.exercice_type];
       if (showFieldsForExerciceType) {
@@ -104,9 +95,9 @@ export class AddBlockComponent implements OnInit {
       }
     }
   }
+
   showFieldsForLikertScale() {
     if (this.blockForm.get('exerciceBlockType').value === 2) {
-      this.clearValidators();
       this.fieldData.showLabel = false;
       this.fieldData.showCorrectValue = true;
       this.fieldData.showPlaceholder = true;
@@ -121,7 +112,6 @@ export class AddBlockComponent implements OnInit {
 
   showFieldsForNumeric() {
     if (this.blockForm.get('exerciceBlockType').value === 3) {
-      this.clearValidators();
       this.fieldData.showLabel = true;
       this.fieldData.showCorrectValue = true;
       this.fieldData.showPlaceholder = false;
@@ -134,7 +124,6 @@ export class AddBlockComponent implements OnInit {
   }
 
   showFieldsForCorrespondance() {
-    this.clearValidators();
     this.fieldData.showLabel = true;
     this.fieldData.showValue = true;
     this.fieldData.showPlaceholder = true;
@@ -146,6 +135,7 @@ export class AddBlockComponent implements OnInit {
     this.addLabelValidator();
     this.addValueValidator();
     this.addPlaceholderValidator();
+
     if (this.blockForm.get('exerciceBlockType').value === 10) {
       this.fieldData.showCorrectValue = true;
       this.addCorrectValueValidator();
@@ -156,7 +146,6 @@ export class AddBlockComponent implements OnInit {
   }
   showFieldsForWordColoration() {
     if (this.blockForm.get('exerciceBlockType').value === 4 || this.blockForm.get('exerciceBlockType').value === 16) {
-      this.clearValidators();
       this.fieldData.showLabel = true;
       this.fieldData.showPlaceholder = false;
       this.fieldData.showValue = false;
@@ -169,6 +158,16 @@ export class AddBlockComponent implements OnInit {
       this.addCorrectValueValidator();
       this.addLabelValidator();
     }
+  }
+  showFieldsForFillLetters() {
+    this.fieldData.showValue = true;
+    this.fieldData.showCorrectValue = true;
+
+    this.fieldData.valueHolder = 'Veuillez saisir la réponse avec les séparateurs (exp: Ines<A>cademy)';
+    this.fieldData.correctValueHolder = 'Veuiller saisir la réponse correcte à vérifier (exp: InesAcademy)';
+
+    this.addCorrectValueValidator();
+    this.addValueValidator();
   }
 
   initForm() {
@@ -191,8 +190,31 @@ export class AddBlockComponent implements OnInit {
     const c = {};
     c[this.blockForm.value.label] = this.blockForm.value.correctValue;
 
-    const correctValue = this.blockForm.value.exerciceBlockType === 16 ? { ...this.blockForm.value, correctValue: JSON.stringify(c) } : this.blockForm.value;
+    const block =
+      this.blockForm.value.exerciceBlockType === 16 ? { ...this.blockForm.value, correctValue: JSON.stringify(c) } : this.blockForm.value;
 
-    this.dialogRef.close(correctValue);
+    this.dialogRef.close(block);
+  }
+  private clearValidators() {
+    this.blockForm.get('label').clearValidators();
+    this.blockForm.get('value').clearValidators();
+    this.blockForm.get('placeholder').clearValidators();
+    this.blockForm.get('correctValue').clearValidators();
+  }
+
+  private addLabelValidator() {
+    this.blockForm.get('label').addValidators([Validators.required]);
+  }
+
+  private addValueValidator() {
+    this.blockForm.get('value').addValidators([Validators.required]);
+  }
+
+  private addPlaceholderValidator() {
+    this.blockForm.get('placeholder').addValidators([Validators.required]);
+  }
+
+  private addCorrectValueValidator() {
+    this.blockForm.get('correctValue').addValidators([Validators.required]);
   }
 }

@@ -1,7 +1,7 @@
 <button mat-icon-button class="right close-button" [mat-dialog-close]="true">
   <mat-icon class="close-icon" color="warn">close</mat-icon>
 </button>
-<div class="row">
+<div class="row h-100">
   <div class="col-md-5">
     <h2 mat-dialog-title>{{ 'exercice' | translate }}</h2>
 
@@ -101,10 +101,11 @@
       </ng-container>
     </div>
   </div>
+  <div class="button-container mt-auto">
+    <button (click)="onSubmit()" type="submit" class="post-button" mat-raised-button>
+      {{ this.data.exercice ? 'update' : 'add' }}
+    </button>
+    <button (click)="openPreview()" type="submit" class="post-button" mat-raised-button>Live Preview</button>
+  </div>
 </div>
-<div class="button-container mt-auto">
-  <button (click)="onSubmit()" type="submit" class="post-button" mat-raised-button>
-    {{ this.data.exercice ? 'update' : 'add' }}
-  </button>
-  <button (click)="openPreview()" type="submit" class="post-button" mat-raised-button>Live Preview</button>
-</div>
+

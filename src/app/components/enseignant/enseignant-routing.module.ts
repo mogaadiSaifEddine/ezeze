@@ -6,7 +6,8 @@ const routes: Routes = [
   {
     path: 'chapter-list',
     component: ChapterListComponent
-  }
+  },
+  { path: '**', redirectTo: 'chapter-list' }
 ];
 
 @NgModule({

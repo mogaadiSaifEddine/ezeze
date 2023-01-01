@@ -32,7 +32,7 @@ export class ChapterListComponent implements OnInit {
   // dataSource = new MatTableDataSource<Chapter>(this.chapp);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(private chapterService: ChapitreService, private serieService: SerieService, public dialog: MatDialog) { }
+  constructor(private chapterService: ChapitreService, private serieService: SerieService, public dialog: MatDialog) {}
   displayedColumns: string[] = ['Classe', 'Trimestre', 'Matiere', 'Chapitre', 'Action'];
 
   ngOnInit(): void {
@@ -65,46 +65,29 @@ export class ChapterListComponent implements OnInit {
         }
       });
       dialogRef.afterClosed().subscribe((result) => {
-        if (result) 
-          this.getallchapters();
+        if (result) this.getallchapters();
       });
     });
   }
 
-  openDialog(element?, i?: number): void {
-    const dialogRef = this.dialog.open(AddChapterComponent, {
-      width: '50%',
-      height: '70vh',
-      disableClose: true,
-      data: element
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      // if (element) {
-      //   let y = this.dataSource;
-      //   y[i] = result;
-      //
-
-      //   this.dataSource = y;
-      //   return;
-      // }
-      // this.dataSource.push(result);
-      this.getallchapters();
-    });
+  openDialog(element?): void {
+    const dialogRef = this.dialog
+      .open(AddChapterComponent, {
+        width: '50%',
+        height: '70vh',
+        disableClose: true,
+        data: element
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        this.getallchapters();
+      });
   }
 
-  // Separating the rows based on groups (1, 2, 3, 4, 5, 6)
   handleSourceSeparationBasedOnGroupName(dataSource: any) {
-    const classes = [
-      'السنة الأولى',
-      'السنة الثانية',
-      'السنة الثالثة',
-      'السنة الرابعة',
-      'السنة الخامسة',
-      'السنة السادسة'
-    ];
+    const classes = ['السنة الأولى', 'السنة الثانية', 'السنة الثالثة', 'السنة الرابعة', 'السنة الخامسة', 'السنة السادسة'];
     classes.map((cName, index) => {
-      this.matTableSources[index] = dataSource.filter(ds => ds['group'].name.trim() === cName);
+      this.matTableSources[index] = dataSource.filter((ds) => ds['group'].name.trim() === cName);
     });
   }
 }

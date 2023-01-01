@@ -30,6 +30,7 @@ export class SerieCardComponent implements OnInit {
       width: '1200px',
       height: '80%',
       disableClose: true,
+      panelClass: 'p-1',
       data: {
         exercice: element,
         serieId: this.serie_id,
