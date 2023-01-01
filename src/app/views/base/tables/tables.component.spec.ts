@@ -18,7 +18,7 @@ describe('TablesComponent', () => {
       imports: [GridModule, CardModule, TableModule, GridModule, UtilitiesModule, DocsComponentsModule, RouterTestingModule],
       providers: [IconSetService]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -10,7 +10,7 @@ describe('LikertScaleComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ LikertScaleComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(LikertScaleComponent);
     component = fixture.componentInstance;

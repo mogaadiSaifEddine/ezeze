@@ -17,10 +17,9 @@
   "plugins": ["@typescript-eslint"],
   "rules": {
     "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "nonblock-statement-body-position": ["error", "below"],
-    "no-empty-function": "warn",
+    "no-empty-function": "off",
     "@typescript-eslint/no-empty-function": "warn",
     "indent": [2, 2]
   }

@@ -9,7 +9,7 @@ import { UserService } from '../services/userservice.service';
   styleUrls: ['./accueil.component.scss']
 })
 export class AccueilComponent implements OnInit {
-  emailConfirmed: boolean = false;
+  emailConfirmed = false;
   urlParams: any = {};
 
   constructor(private readonly translate: TranslateService) {}
@@ -25,7 +25,7 @@ export class AccueilComponent implements OnInit {
     // this.activecompte();
   }
   changeLang(lang: string) {
-    localStorage.setItem('lang', lang)
+    localStorage.setItem('lang', lang);
     this.translate.use(lang);
   }
   /* activecompte():void{

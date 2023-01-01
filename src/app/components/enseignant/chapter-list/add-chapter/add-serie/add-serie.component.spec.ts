@@ -10,7 +10,7 @@ describe('AddSerieComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ AddSerieComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AddSerieComponent);
     component = fixture.componentInstance;

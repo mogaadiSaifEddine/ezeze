@@ -10,7 +10,7 @@ describe('DragDropComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ DragDropComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(DragDropComponent);
     component = fixture.componentInstance;

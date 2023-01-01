@@ -12,7 +12,7 @@ describe('DocsCalloutComponent', () => {
       declarations: [ DocsCalloutComponent ],
       imports: [CalloutModule]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

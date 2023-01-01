@@ -17,7 +17,7 @@ describe('WidgetsEComponent', () => {
       imports: [WidgetModule, GridModule, ChartjsModule],
       providers: [IconSetService]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

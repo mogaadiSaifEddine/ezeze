@@ -10,7 +10,7 @@ describe('ShowConceptMapComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ShowConceptMapComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ShowConceptMapComponent);
     component = fixture.componentInstance;

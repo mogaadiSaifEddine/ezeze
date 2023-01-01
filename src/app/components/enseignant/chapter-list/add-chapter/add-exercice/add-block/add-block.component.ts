@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ExerciceBlock } from 'src/app/model/ExerciceBlock';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
+import { Exercise_Types } from 'src/app/model/Exercice_type';
 
 @Component({
   selector: 'app-add-block',
@@ -24,6 +25,25 @@ export class AddBlockComponent implements OnInit {
   valueHolder = 'value';
   labelHolder = 'label';
   correctValueHolder = 'correct value';
+  exerciceTypeToTypesKeysMap: Record<Exercise_Types, ExerciceBlockTypes[]> = {
+    CORRESPONDANCE: [ExerciceBlockTypes.CORRESPONDANCE_LEFT, ExerciceBlockTypes.CORRESPONDANCE_RIGHT],
+    LINK_ARROW: [ExerciceBlockTypes.ARROW_LEFT, ExerciceBlockTypes.ARROW_RIGHT],
+    MULTIPLE_CHOICE: [ExerciceBlockTypes.RADIO, ExerciceBlockTypes.IMAGE, ExerciceBlockTypes.QUESTION],
+    TRUE_FALSE: [ExerciceBlockTypes.RADIO, ExerciceBlockTypes.IMAGE, ExerciceBlockTypes.QUESTION],
+    SHORT_RESPONSE: [ExerciceBlockTypes.INPUT_TEXT],
+    SEQUENCING: [ExerciceBlockTypes.INPUT_TEXT],
+    WRITING: [ExerciceBlockTypes.INPUT_TEXT],
+    LIKERT_SCALE: [ExerciceBlockTypes.INPUT_TEXT],
+    MULTIPLE_RESPONSE: [ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.QUESTION],
+    NUMERIC: [ExerciceBlockTypes.INPUT_NUMBER],
+    WORD_COLORATION: [ExerciceBlockTypes.COLOR, ExerciceBlockTypes.HIGHLIGHT_TEXT, ExerciceBlockTypes.COLORATE_TEXT, ExerciceBlockTypes.BREAK],
+    SELECT_FROM_LIST: [ExerciceBlockTypes.TEXT, ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.BREAK],
+    FILL_EMPTY_FIELDS: [ExerciceBlockTypes.TEXT, ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.BREAK],
+    DRAG_DROP: [ExerciceBlockTypes.DRAG_DROP_IMAGE_LIST],
+    DRAG_WORDS: [ExerciceBlockTypes.HIGHLIGHT_TEXT, ExerciceBlockTypes.TEXT, ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.BREAK],
+    FILL_LETTERS: [],
+    HOTSPOT: []
+  };
 
   constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: { block: ExerciceBlock; exercice_type: string }, private dialogRef: MatDialogRef<AddBlockComponent>) {}
 
@@ -33,8 +53,6 @@ export class AddBlockComponent implements OnInit {
   }
   // this code is bullshit but we dont have time
   checkFieldsToShow() {
-    console.log(this.blockForm.get('exerciceBlockType').value);
-
     if (this.blockForm.get('exerciceBlockType').value === 6) {
       this.showLabel = false;
       this.showCorrectValue = false;
@@ -66,7 +84,7 @@ export class AddBlockComponent implements OnInit {
         this.showCorrectValue = true;
         this.showPlaceholder = false;
         this.showValue = false;
-        this.labelHolder = 'Veuiller saisir la question'
+        this.labelHolder = 'Veuiller saisir la question';
         this.correctValueHolder = 'Veuiller saisir la valeur correcte';
         this.blockForm.get('correctValue').addValidators([Validators.required]);
         this.blockForm.get('label').clearValidators();
@@ -204,7 +222,7 @@ export class AddBlockComponent implements OnInit {
         this.showPlaceholder = false;
         this.showValue = false;
         this.labelHolder = 'Veuiller saisir la question';
-        
+
         this.blockForm.get('label').clearValidators();
         this.blockForm.get('value').clearValidators();
         this.correctValueHolder = "veiller saisir la valuer correcte de l'essai";
@@ -265,7 +283,7 @@ export class AddBlockComponent implements OnInit {
         this.showCorrectValue = true;
         this.showPlaceholder = false;
         this.showValue = false;
-        this.labelHolder= 'Veuiller saisir la question'
+        this.labelHolder = 'Veuiller saisir la question';
         this.correctValueHolder = 'Veuiller saisir la valeur correcte';
         this.blockForm.get('correctValue').addValidators([Validators.required]);
         this.blockForm.get('label').clearValidators();
@@ -382,7 +400,7 @@ export class AddBlockComponent implements OnInit {
     }
   }
   saveBlok() {
-    let c = {};
+    const c = {};
     c[this.blockForm.value.label] = this.blockForm.value.correctValue;
 
     const correctValue = this.blockForm.value.exerciceBlockType === 16 ? { ...this.blockForm.value, correctValue: JSON.stringify(c) } : this.blockForm.value;

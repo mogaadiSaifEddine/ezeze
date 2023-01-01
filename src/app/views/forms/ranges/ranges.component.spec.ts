@@ -18,7 +18,7 @@ describe('RangesComponent', () => {
       imports: [CardModule, GridModule, FormModule, DocsComponentsModule, RouterTestingModule],
       providers: [IconSetService]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

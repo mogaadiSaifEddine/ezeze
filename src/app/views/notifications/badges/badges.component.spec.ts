@@ -18,7 +18,7 @@ describe('BadgesComponent', () => {
       imports: [BadgeModule, CardModule, GridModule, UtilitiesModule, ButtonModule, DocsComponentsModule, RouterTestingModule],
       providers: [IconSetService]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -10,7 +10,6 @@ import { TokenserviceService } from '../../../services/tokenservice.service';
   templateUrl: './default-header.component.html'
 })
 export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
-
   public newMessages = new Array(4);
   public newTasks = new Array(5);
   public newNotifications = new Array(5);
@@ -23,7 +22,7 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
     this.userconencte();
   }
   logout(): void {
-    this.tokenservice.logout()
+    this.tokenservice.logout();
     this.router.navigate(['/accueil']);
   }
   userconencte() {

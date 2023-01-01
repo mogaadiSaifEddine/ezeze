@@ -10,7 +10,7 @@ describe('MainScreenComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ MainScreenComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(MainScreenComponent);
     component = fixture.componentInstance;

@@ -10,7 +10,7 @@ describe('AquiredContentEvaluationComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ AquiredContentEvaluationComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AquiredContentEvaluationComponent);
     component = fixture.componentInstance;

@@ -10,7 +10,7 @@ export class ShowConceptMapComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<ShowConceptMapComponent>, @Inject(MAT_DIALOG_DATA) public data: { imgSrc; imageType: string }) {}
 
   ngOnInit(): void {
-    console.log(this.data);
+
   }
 
   close() {

@@ -12,10 +12,10 @@ export class CanLoginGuard implements CanActivate {
   constructor(private tokenservice:TokenserviceService,private router:Router){}
   canActivate():boolean{
     if(this.tokenservice.loggedIn()){
-      return true
+      return true;
     }else{
-      this.router.navigate(['/accueil'])
-      return false
+      this.router.navigate(['/accueil']);
+      return false;
     }
 
   }

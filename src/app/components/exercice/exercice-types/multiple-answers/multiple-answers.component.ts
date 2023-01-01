@@ -43,7 +43,7 @@ export class MultipleAnswersComponent implements OnInit, OnChanges {
   }
 
   checkCanGoNext() {
-    let trueBlock = this.exercice.blocks.find((block) => block.value === true);
+    const trueBlock = this.exercice.blocks.find((block) => block.value === true);
 
     trueBlock ? this.canGoNext.emit(true) : this.canGoNext.emit(false);
   }

@@ -47,7 +47,7 @@ export class CouponsListComponent implements OnInit {
     const fileNameToDownload = 'image_qrcode';
     const base64Img = document.getElementById(id).children[0].children[0] as HTMLCanvasElement;
 
-    var link = document.createElement('a');
+    const link = document.createElement('a');
     link.href = base64Img.toDataURL('image/png');
     link.download = `qrcode/${id}.png`;
     link.click();

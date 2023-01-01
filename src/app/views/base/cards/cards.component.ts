@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Chapter } from 'src/app/model/Chapter';
 import { Module } from 'src/app/model/Module';
-import { ChapitreServiceService } from '../../../service/chapitre-service.service'
+import { ChapitreServiceService } from '../../../service/chapitre-service.service';
 @Component({
   selector: 'app-cards',
   templateUrl: './cards.component.html',
@@ -26,7 +26,7 @@ export class CardsComponent {
   ];
   regiForm: FormGroup;
 
-  IsAccepted: number = 0;
+  IsAccepted = 0;
   chapitre: Chapter;
 
   imgContext = { $implicit: 'top', bottom: 'bottom' };

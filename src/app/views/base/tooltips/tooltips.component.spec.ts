@@ -18,7 +18,7 @@ describe('TooltipsComponent', () => {
       imports: [CardModule, GridModule, TooltipModule, ButtonModule, DocsComponentsModule, RouterTestingModule],
       providers: [IconSetService]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -10,7 +10,7 @@ describe('ColorTheTextElementComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ColorTheTextElementComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ColorTheTextElementComponent);
     component = fixture.componentInstance;

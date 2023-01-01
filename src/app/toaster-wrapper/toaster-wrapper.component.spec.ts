@@ -10,7 +10,7 @@ describe('ToasterWrapperComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ToasterWrapperComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ToasterWrapperComponent);
     component = fixture.componentInstance;

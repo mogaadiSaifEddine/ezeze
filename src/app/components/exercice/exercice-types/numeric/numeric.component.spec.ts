@@ -10,7 +10,7 @@ describe('NumericComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ NumericComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(NumericComponent);
     component = fixture.componentInstance;

@@ -10,7 +10,7 @@ describe('VouchercheckComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ VouchercheckComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(VouchercheckComponent);
     component = fixture.componentInstance;

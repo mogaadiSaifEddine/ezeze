@@ -50,10 +50,13 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
       return this.navItems.filter((nav) => {
         return nav?.url?.includes('parent');
       });
-    if (userType === 'student') return this.navItems.filter((nav) => ['modules', 'revision', 'clubs', 'chat'].some((el) => nav.id.includes(el)));
-    if (userType === 'teacher') return this.navItems.filter((nav) => ['modules', 'chapter', 'Clubs', 'chat'].some((el) => nav.id.includes(el)));
+    if (userType === 'student') 
+      return this.navItems.filter((nav) => ['modules', 'revision', 'clubs', 'chat'].some((el) => nav.id.includes(el)));
+    if (userType === 'teacher') 
+      return this.navItems.filter((nav) => ['modules', 'chapter', 'Clubs', 'chat'].some((el) => nav.id.includes(el)));
     // if (userType === 'student') return this.navItems.filter((nav) => ['Modules', 'Révision', 'Clubs', 'Messagerie'].some((el) => nav.id.includes(el)));
-    if (userType === 'admin') return this.navItems;
+    if (userType === 'admin') 
+      return this.navItems;
     return [];
   }
   translate(item): void {

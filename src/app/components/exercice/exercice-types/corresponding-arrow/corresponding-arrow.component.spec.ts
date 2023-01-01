@@ -10,7 +10,7 @@ describe('CorrespondingArrowComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ CorrespondingArrowComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(CorrespondingArrowComponent);
     component = fixture.componentInstance;

@@ -105,7 +105,7 @@ import { ADDchapitreComponent } from './addchapitre/addchapitre.component';
     MatRadioModule,
     MatCardModule,
     MatNativeDateModule,
-      MatCheckboxModule,
+    MatCheckboxModule,
     MatTooltipModule,
     FormsModule
     

@@ -12,7 +12,7 @@ import { fadeInOut } from 'src/app/fe-animations';
 import { fromEvent, interval, merge, Observable, skipWhile, Subscription, switchMap, take, tap } from 'rxjs';
 import { SharedService } from 'src/app/services/shared.service';
 
-schemas: [CUSTOM_ELEMENTS_SCHEMA];
+[CUSTOM_ELEMENTS_SCHEMA];
 
 @Component({
   selector: 'app-login',
@@ -24,15 +24,15 @@ export class LoginComponent implements OnInit {
   @ViewChild('stepper') stepper: MatStepper;
   // timer stopper
   public inactivityTimerEvent: Array<any>[] = [[document, 'click'], [document, 'wheel'], [document, 'scroll'], [document, 'mousemove'], [document, 'keyup'], [window, 'resize'], [window, 'scroll'], [window, 'mousemove']];
-  inactivityTime: number = 1200;
+  inactivityTime = 1200;
 
-  timeLapsedSinceInactivity: number = 0;
+  timeLapsedSinceInactivity = 0;
   // minute: number = this.padZero(0);
   // seconds: number = this.padZero(0);
   subscription: Subscription;
   observeable$: Observable<any>;
   mergedObservable$: Observable<any>;
-  status = 'actif'
+  status = 'actif';
 
 
   isPasswordVisible = false;
@@ -71,10 +71,10 @@ export class LoginComponent implements OnInit {
     private ss : SharedService
   ) {}
   ngOnInit(): void {
-    let observableArray$: Observable<any>[] = [];
+    const observableArray$: Observable<any>[] = [];
     this.inactivityTimerEvent.forEach(x => {
-      observableArray$.push(fromEvent(x[0], x[1]))
-    })
+      observableArray$.push(fromEvent(x[0], x[1]));
+    });
     this.mergedObservable$ = merge(...observableArray$);
     this.isRegisterPageActive = history.state.isRegisterPageActive;
     this.userservice.getGroups().subscribe((groupList) => {
@@ -105,29 +105,29 @@ export class LoginComponent implements OnInit {
 
   createObserable(): void {
     this._ngZone.runOutsideAngular(() => {
-      console.log('test');
+
 
 
       this.observeable$ = this.mergedObservable$
-      .pipe(
-        switchMap(ev => interval(1000).pipe(take      (this.inactivityTime))),
+        .pipe(
+          switchMap(ev => interval(1000).pipe(take      (this.inactivityTime))),
 
-        tap(value => this.isItTimeToShowPopUp(value)),
+          tap(value => this.isItTimeToShowPopUp(value)),
 
-        skipWhile((x) => {
-          this.timeLapsedSinceInactivity = x;
-          return x != this.inactivityTime - 1
-        })
-      );
+          skipWhile((x) => {
+            this.timeLapsedSinceInactivity = x;
+            return x != this.inactivityTime - 1;
+          })
+        );
 
       this.subscribeObservable();
-    })
+    });
 
   }
 
 
   isItTimeToShowPopUp(val: number) {
-    let timeLeftForInactive = this.inactivityTime - val;
+    const timeLeftForInactive = this.inactivityTime - val;
     if (timeLeftForInactive <= 1200) {
 
       this.timeLapsedSinceInactivity = timeLeftForInactive;
@@ -137,38 +137,38 @@ export class LoginComponent implements OnInit {
 
       this._cd.detectChanges();
       if (timeLeftForInactive === 600) {
-        this.ss.studentStatus.next('inactif')
-        console.log(this.ss.studentStatus.value);
+        this.ss.studentStatus.next('inactif');
+
 
 
       }
-      console.log(timeLeftForInactive);
+
 
     }
   }
 
   subscribeObservable() {
     this.subscription = this.observeable$.subscribe((x) => {
-      console.log(`subscribed for ${x + 1} sec`);
-      this.unsubscribeObservable()
 
-    })
+      this.unsubscribeObservable();
+
+    });
   }
 
   unsubscribeObservable() {
-    this.ss.studentStatus.next('disconected')
+    this.ss.studentStatus.next('disconected');
     this._ngZone.run(() => {
-      this.tokenservice.logout()
-    this.router.navigate(['/accueil'])
-    })
+      this.tokenservice.logout();
+      this.router.navigate(['/accueil']);
+    });
 
-    console.log('  unsubscriebd')
+
     this.subscription.unsubscribe();
   }
 
   startTimer() {
     this.createObserable();
-    console.log('subscription started');
+
   }
   // stopTimer(event) {
   //   if (this.subscription && !this.subscription.closed) {
@@ -180,17 +180,17 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.tokenservice.login(this.loginForm.value).subscribe({
       next: (data) => {
-        let jwtToken = data.headers.get('Authorization')!;
-        let userconnected = data.headers.get('userconnected')!;
+        const jwtToken = data.headers.get('Authorization')!;
+        const userconnected = data.headers.get('userconnected')!;
         this.tokenservice.saveToken(jwtToken);
         this.tokenservice.saveConnectedUser(userconnected);
         this.userservice.getUser(userconnected).subscribe((res) => {
           UserService.currentuser = res;
           localStorage.setItem('user_details', JSON.stringify(res));
           this.revisionSerivce.modulesContent.next(res?.group?.chaptersList);
-          console.log(res);
+
           if (res?.profession === 'student') {
-            this.startTimer()
+            this.startTimer();
             this.router.navigate(['/revision/matieres']);
           } else if (res?.profession === 'teacher') {
             this.router.navigate(['/enseignant/chapter-list']);
@@ -203,7 +203,7 @@ export class LoginComponent implements OnInit {
         });
       },
       error: (err) => {
-        console.log(err);
+
 
         this.toastr.error(this.translate.instant('error.check-connection'));
       }
@@ -233,8 +233,8 @@ export class LoginComponent implements OnInit {
         });
   }
   keyPressNumbers(formControlName: string, event) {
-    let charCode = event.which ? event.which : event.keyCode;
-    let formControlValue = this.signupStepPersonalFormControls[formControlName].value;
+    const charCode = event.which ? event.which : event.keyCode;
+    const formControlValue = this.signupStepPersonalFormControls[formControlName].value;
     // Only Numbers 0-9 and +
     if (formControlValue.length > 15 || ((charCode !== 43 || (charCode === 43 && formControlValue[0] === '+')) && charCode < 48) || charCode > 57) {
       event.preventDefault();

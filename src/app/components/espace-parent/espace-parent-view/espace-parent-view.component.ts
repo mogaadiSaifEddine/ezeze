@@ -51,7 +51,8 @@ export class EspaceParentViewComponent implements OnInit {
     this.fetchStudentsData();
     this.sharedService.reloadStudentsList.subscribe({
       next: (value) => {
-        if (value === true) this.fetchStudentsData();
+        if (value === true) 
+          this.fetchStudentsData();
       }
     });
   }

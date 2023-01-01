@@ -9,8 +9,8 @@ import { ClubFeeds } from 'src/app/model/Club_Feeds';
 export class ClubFeedsCardComponent implements OnInit {
   @Input() clubFeeds: ClubFeeds;
 
-  start: number = 0;
-  end: number = 3;
+  start = 0;
+  end = 3;
 
   loadComments() {
     this.end += 3;

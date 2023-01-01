@@ -12,7 +12,7 @@ export class SharedService {
   reloadStudentsList = new BehaviorSubject(false);
   showFalfoul = new BehaviorSubject(false);
   answerIsCorrect = new BehaviorSubject(false);
-  studentStatus = new BehaviorSubject('actif')
+  studentStatus = new BehaviorSubject('actif');
   currentCount = 0;
   currentToken = null;
   currentTokenData = null;

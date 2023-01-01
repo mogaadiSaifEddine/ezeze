@@ -34,7 +34,7 @@ export class DrawLinesComponent {
   @ViewChild('svg') svg: ElementRef;
 
   @ContentChildren(LineAnchorDirective, { descendants: true })
-  anchors: QueryList<LineAnchorDirective>;
+    anchors: QueryList<LineAnchorDirective>;
 
   svgLines: SvgLine[] = [];
 
@@ -57,7 +57,7 @@ export class DrawLinesComponent {
   }
 
   lineToSvgLine(line: Line): SvgLine {
-    console.log(this.anchors);
+
     const getAnchor = (name) => this.anchors.find((dir) => dir.name === name);
     const container = Rect.fromElement(this.svg);
 

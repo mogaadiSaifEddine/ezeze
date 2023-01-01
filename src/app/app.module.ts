@@ -94,7 +94,7 @@ import { MapComponent } from './accueil/map/map.component';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
-schemas: [CUSTOM_ELEMENTS_SCHEMA];
+[CUSTOM_ELEMENTS_SCHEMA];
 const APP_CONTAINERS = [DefaultFooterComponent, DefaultHeaderComponent, DefaultLayoutComponent];
 
 // AoT requires an exported function for factories

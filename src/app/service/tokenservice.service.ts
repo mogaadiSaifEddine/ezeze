@@ -31,7 +31,7 @@ export class TokenserviceService {
    
   }
   loadToken(){
-  localStorage.getItem('Authorization');
+    localStorage.getItem('Authorization');
   }
   
   getToken():string{
@@ -51,7 +51,7 @@ export class TokenserviceService {
     return !!localStorage.getItem('Authorization');
   }
   
-   logout() {
+  logout() {
     window.sessionStorage.clear();
     localStorage.removeItem('Authorization');
     localStorage.removeItem('userconnected');

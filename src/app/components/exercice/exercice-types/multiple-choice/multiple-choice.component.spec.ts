@@ -10,7 +10,7 @@ describe('MultipleChoiceComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ MultipleChoiceComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(MultipleChoiceComponent);
     component = fixture.componentInstance;

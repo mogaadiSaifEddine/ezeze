@@ -10,7 +10,7 @@ describe('ViewEditComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ViewEditComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ViewEditComponent);
     component = fixture.componentInstance;

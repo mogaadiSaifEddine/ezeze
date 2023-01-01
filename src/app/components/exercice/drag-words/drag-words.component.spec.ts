@@ -10,7 +10,7 @@ describe('DragWordsComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ DragWordsComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(DragWordsComponent);
     component = fixture.componentInstance;

@@ -1,6 +1,6 @@
 import { ExerciceBlock } from './ExerciceBlock';
 import { Difficulty } from './Difficulty';
-import { Types } from './Exercice_type';
+import { Exercise_Types } from './Exercice_type';
 export interface Exercice {
   ex_id?: number;
   exercice_id: string;
@@ -8,7 +8,7 @@ export interface Exercice {
   name: string;
   difficulty: Difficulty;
   order: string;
-  type: Types;
+  type: Exercise_Types;
   question: string;
   exerciceorder: string;
   blocks: ExerciceBlock[];

@@ -65,7 +65,8 @@ export class ChapterListComponent implements OnInit {
         }
       });
       dialogRef.afterClosed().subscribe((result) => {
-        if (result) this.getallchapters();
+        if (result) 
+          this.getallchapters();
       });
     });
   }
@@ -77,12 +78,12 @@ export class ChapterListComponent implements OnInit {
       disableClose: true,
       data: element
     });
-    console.log(element);
+
     dialogRef.afterClosed().subscribe((result) => {
       // if (element) {
       //   let y = this.dataSource;
       //   y[i] = result;
-      //   console.log(y);
+      //
 
       //   this.dataSource = y;
       //   return;

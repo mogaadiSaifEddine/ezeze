@@ -10,7 +10,7 @@ describe('ResetpasswordComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ResetpasswordComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ResetpasswordComponent);
     component = fixture.componentInstance;

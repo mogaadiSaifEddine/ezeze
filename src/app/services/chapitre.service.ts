@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Chapter, ChapterChildren, ChapterType } from '../model/Chapter';
 
@@ -39,24 +39,19 @@ export class ChapitreService {
   async uploadFile(file: File, chapter_id: number) {
     const formData = new FormData();
     formData.set('file', file);
-    console.log(file);
+
 
     return this.http.post(this.serverApi + 'Elearning/' + 'chapter/cart/' + chapter_id, formData);
   }
   async uploadVideo(file: File, chapter_id: number) {
     const formData = new FormData();
     formData.set('file', file);
-    console.log(file);
+
 
     return this.http.post(this.serverApi + 'Elearning/' + 'chapter/course/' + chapter_id, formData);
   }
 
   getFile(file_id: number) {
-    console.log(
-      this.http.get(this.serverApi + 'Elearning/' + 'chapter/cart/' + file_id, {
-        responseType: 'blob'
-      })
-    );
 
     return this.http.get(this.serverApi + 'Elearning/' + 'chapter/cart/' + file_id, {
       responseType: 'blob'

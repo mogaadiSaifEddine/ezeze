@@ -10,7 +10,7 @@ describe('CourseReminderComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ CourseReminderComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(CourseReminderComponent);
     component = fixture.componentInstance;

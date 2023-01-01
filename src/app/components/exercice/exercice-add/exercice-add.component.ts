@@ -33,7 +33,7 @@ export class ExerciceAddComponent implements OnInit {
   ngSelect = 1;
   champs: Champ[] = [];
   sousChamps: SousChamp[] = [];
-  cacher: boolean = false;
+  cacher = false;
   chapitres: Chapter[] = [];
   difficultes: Difficulte[] = [];
   uploadForm: FormGroup;
@@ -127,6 +127,7 @@ export class ExerciceAddComponent implements OnInit {
     }
     if (this.uploadForm.get('fichier').hasError('fichier')) {
       return 'Ajouter fichier svp';
-    } else return null;
+    } else 
+      return null;
   }
 }
