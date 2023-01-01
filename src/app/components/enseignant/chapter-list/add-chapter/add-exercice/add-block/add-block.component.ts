@@ -42,14 +42,14 @@ export class AddBlockComponent implements OnInit {
     DRAG_DROP: [ExerciceBlockTypes.DRAG_DROP_IMAGE_LIST],
     DRAG_WORDS: [ExerciceBlockTypes.HIGHLIGHT_TEXT, ExerciceBlockTypes.TEXT, ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.BREAK],
     FILL_LETTERS: [ExerciceBlockTypes.TEXT],
+    LISTEN: [ExerciceBlockTypes.AUDIO_IMAGE],
     HOTSPOT: [],
-    [Exercise_Types.DRAG_SYLLABLES]: [],
-    [Exercise_Types.PUT_IN_FRAME]: [],
-    [Exercise_Types.OUTSIDER_ELEMENT]: [],
-    [Exercise_Types.LISTEN]: [ExerciceBlockTypes.AUDIO_IMAGE],
-    [Exercise_Types.ARITHMETIC_TREE]: [],
-    [Exercise_Types.FILL_BLANKS_IMG]: [],
-    [Exercise_Types.COLOR_SHAPE]: []
+    DRAG_SYLLABLES: [],
+    PUT_IN_FRAME: [],
+    OUTSIDER_ELEMENT: [],
+    ARITHMETIC_TREE: [],
+    FILL_BLANKS_IMG: [],
+    COLOR_SHAPE: []
   };
   readonly showFieldsFor: Record<Exercise_Types, () => void> = {
     LIKERT_SCALE: () => this.showFieldsForLikertScale(),
@@ -57,6 +57,7 @@ export class AddBlockComponent implements OnInit {
     CORRESPONDANCE: () => this.showFieldsForCorrespondance(),
     WORD_COLORATION: () => this.showFieldsForWordColoration(),
     FILL_LETTERS: (): void => this.showFieldsForFillLetters(),
+    LISTEN: (): void => this.showFieldsForListening(),
     MULTIPLE_CHOICE: (): void => {},
     MULTIPLE_RESPONSE: (): void => {},
     TRUE_FALSE: (): void => {},
@@ -69,25 +70,12 @@ export class AddBlockComponent implements OnInit {
     SELECT_FROM_LIST: (): void => {},
     WRITING: (): void => {},
     LINK_ARROW: (): void => {},
-    [Exercise_Types.DRAG_SYLLABLES]: function (): void {
-      throw new Error('Function not implemented.');
-    },
-    [Exercise_Types.PUT_IN_FRAME]: function (): void {
-      throw new Error('Function not implemented.');
-    },
-    [Exercise_Types.OUTSIDER_ELEMENT]: function (): void {
-      throw new Error('Function not implemented.');
-    },
-    [Exercise_Types.LISTEN]: (): void => this.showFieldsForListening(),
-    [Exercise_Types.ARITHMETIC_TREE]: function (): void {
-      throw new Error('Function not implemented.');
-    },
-    [Exercise_Types.FILL_BLANKS_IMG]: function (): void {
-      throw new Error('Function not implemented.');
-    },
-    [Exercise_Types.COLOR_SHAPE]: function (): void {
-      throw new Error('Function not implemented.');
-    }
+    DRAG_SYLLABLES: (): void => {},
+    PUT_IN_FRAME: (): void => {},
+    OUTSIDER_ELEMENT: (): void => {},
+    ARITHMETIC_TREE: (): void => {},
+    FILL_BLANKS_IMG: (): void => {},
+    COLOR_SHAPE: (): void => {}
   };
 
   constructor(
@@ -132,7 +120,6 @@ export class AddBlockComponent implements OnInit {
 
     this.blockForm.get('label').addValidators([Validators.required]);
     this.blockForm.get('value').addValidators([Validators.required]);
-    // this.blockForm.addControl('imageFile', new FormControl('', Validators.required));
     // this.blockForm.addControl('audioFile', new FormControl('', Validators.required));
     this.blockForm.get('placeholder').clearValidators();
     console.log(this.blockForm.value);
