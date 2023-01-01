@@ -10,7 +10,7 @@ describe('FillEmptyFieldsComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ FillEmptyFieldsComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(FillEmptyFieldsComponent);
     component = fixture.componentInstance;

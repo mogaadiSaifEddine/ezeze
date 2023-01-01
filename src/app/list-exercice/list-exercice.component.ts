@@ -25,15 +25,15 @@ export class ListExerciceComponent implements OnInit {
 
       this.serieEx = chapt;
 
-      });
-    }
-    openDialog(): void {
-      const dialogRef = this.dialog.open(AjouterExcerciceComponent, {
-        width: '900px',
-        data: {}
-      });
-      dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AjouterExcerciceComponent, {
+      width: '900px',
+      data: {}
+    });
+    dialogRef.afterClosed().subscribe(result => {
 
-      });
-    }
+    });
+  }
 }

@@ -18,7 +18,7 @@ describe('WidgetsDropdownComponent', () => {
       imports: [WidgetModule, DropdownModule, IconModule, ButtonModule, ChartjsModule, GridModule],
       providers: [IconSetService]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

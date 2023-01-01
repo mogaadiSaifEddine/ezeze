@@ -1,15 +1,10 @@
 {
-
   "env": {
     "browser": true,
     "commonjs": true,
     "es2021": true
   },
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
-  ],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 12
@@ -17,12 +12,28 @@
   "plugins": ["@typescript-eslint"],
   "rules": {
     "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "nonblock-statement-body-position": ["error", "below"],
-    "no-empty-function": "warn",
+    "no-empty-function": "off",
     "@typescript-eslint/no-empty-function": "warn",
-    "indent": [2, 2]
+    "indent": [2, 2],
+    "max-len": [
+      "error",
+      {
+        "code": 80,
+        "template": 80,
+        "tabWidth": 2,
+        "comments": 80,
+        "ignorePattern": "",
+        "ignoreComments": false,
+        "ignoreTrailingComments": false,
+        "ignoreUrls": false,
+        "ignoreStrings": false,
+        "ignoreTemplateLiterals": false,
+        "ignoreRegExpLiterals": false,
+        "ignoreHTMLAttributeValues": false,
+        "ignoreHTMLTextContents": false
+      }
+    ]
   }
-
 }

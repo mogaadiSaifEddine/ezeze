@@ -56,8 +56,8 @@ export class SignupComponent implements OnInit {
         Validators.required,
         Validators.minLength(4),
       ]),
-  })
-}
+    });
+  }
 
   get firstname() { return this.signup.get('firstname')!; }
   get lastname() { return this.signup.get('lastname')!; }
@@ -77,10 +77,10 @@ export class SignupComponent implements OnInit {
     this.userservice.signup(this.signup.value).subscribe(res => {
       this.data=res;
     }
-    )
+    );
     this.router.navigate(['/accueil']);
 
-  alert("Bienvenu chez Education ! Vous êtes inscrit avec succès ")
+    alert("Bienvenu chez Education ! Vous êtes inscrit avec succès ");
 
   }
 }

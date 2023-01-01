@@ -92,7 +92,7 @@ export class WidgetsBrandComponent implements AfterContentInit {
   ];
 
   capStyle(value: string) {
-    return !!value ? { '--cui-card-cap-bg': value } : {};
+    return value ? { '--cui-card-cap-bg': value } : {};
   }
 
   ngAfterContentInit(): void {

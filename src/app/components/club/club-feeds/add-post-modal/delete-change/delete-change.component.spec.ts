@@ -10,7 +10,7 @@ describe('DeleteChangeComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ DeleteChangeComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(DeleteChangeComponent);
     component = fixture.componentInstance;

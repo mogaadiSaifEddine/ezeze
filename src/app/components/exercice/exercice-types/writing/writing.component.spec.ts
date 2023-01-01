@@ -10,7 +10,7 @@ describe('WritingComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ WritingComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(WritingComponent);
     component = fixture.componentInstance;

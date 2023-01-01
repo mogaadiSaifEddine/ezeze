@@ -10,7 +10,7 @@ describe('AchievementScreenComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ AchievementScreenComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AchievementScreenComponent);
     component = fixture.componentInstance;

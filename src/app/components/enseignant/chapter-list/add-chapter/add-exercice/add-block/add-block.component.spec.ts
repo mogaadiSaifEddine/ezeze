@@ -10,7 +10,7 @@ describe('AddBlockComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ AddBlockComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AddBlockComponent);
     component = fixture.componentInstance;

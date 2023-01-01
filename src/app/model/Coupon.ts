@@ -1,6 +1,6 @@
 export interface Coupon {
   type: CouponType;
-  value: String;
+  value: string;
   expirationDate: Date;
   numberOfRows?: number;
 }

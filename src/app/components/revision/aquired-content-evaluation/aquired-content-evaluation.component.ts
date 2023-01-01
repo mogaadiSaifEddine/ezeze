@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Types } from 'src/app/model/Exercice_type';
+import { Exercise_Types } from 'src/app/model/Exercice_type';
 import { CourseSeries } from 'src/app/model/CourseSeries';
 import { RevisionService } from 'src/app/services/revision.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -24,7 +24,7 @@ export class AquiredContentEvaluationComponent implements OnInit {
   exercice3Content: CourseSeries;
   selectedExercice: number;
   prerequisiteContent: CourseSeries;
-  readonly TYPES = Types;
+  readonly TYPES = Exercise_Types;
   score = 0;
 
   serieExercice: any[];
@@ -61,8 +61,8 @@ export class AquiredContentEvaluationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log("hleloooo")
-    
+
+
     this.loadSerie();
     this.loadFile();
   }
@@ -72,34 +72,37 @@ export class AquiredContentEvaluationComponent implements OnInit {
         this.chapterService.getFileCart(chapter.catre_conceptuelle.carte_id).subscribe((res) => {
           this.fileTypeCart = chapter.catre_conceptuelle.name.includes('mp4') ? 'video' : chapter.catre_conceptuelle.name.includes('pdf') ? 'pdf' : 'image';
           if (this.fileTypeCart !== 'pdf') {
-            let objectURL = URL.createObjectURL(res);
+            const objectURL = URL.createObjectURL(res);
             this.fileCard = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-          } else this.fileCard = res;
+          } else 
+            this.fileCard = res;
         });
       if (chapter.course)
         this.chapterService.getFileCourse(chapter.course.carte_id).subscribe((res) => {
           this.fileTypeCourse = chapter.course.name.includes('mp4') ? 'video' : chapter.course.name.includes('pdf') ? 'pdf' : 'image';
           if (this.fileTypeCourse !== 'pdf') {
-            let objectURL = URL.createObjectURL(res);
+            const objectURL = URL.createObjectURL(res);
             this.fileCourse = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-          } else this.fileCourse = res;
+          } else 
+            this.fileCourse = res;
           //
         });
     });
   }
   loadSerie() {
-    console.log("Load serie")
+
     this.revisionService.exerciceSerie.subscribe((serie: any[]) => {
-      if (!serie) return;
+      if (!serie) 
+        return;
       this.serieExercice = serie;
-      console.log(serie)
+
       this.exercice1Content = serie.find((el) => el.seriesType === 'EXERCICE_1');
       this.exercice2Content = serie.find((el) => el.seriesType === 'EXERCICE_2');
       this.exercice3Content = serie.find((el) => el.seriesType === 'EXERCICE_3');
       this.evaluationContent = serie.find((el) => el.seriesType === 'EVALUATION');
       this.prerequisiteContent = serie.find((el) => el.seriesType === 'PREREQUISITE');
 
-      this.getUserData()
+      this.getUserData();
     });
   }
   getUserData(){
@@ -107,62 +110,62 @@ export class AquiredContentEvaluationComponent implements OnInit {
     const userconnected = localStorage.getItem('userconnected');
     this.userService.getUser(userconnected).subscribe((res) => {
       this.UserId = res.user_id;
-      console.log("uSER connected",userconnected)
-      console.log(this.UserId)
+
+
       this.revisionService.getLastExerciceId(this.UserId).subscribe((el) => {
-        console.log("LASTTTTTTTTTTTt",el)
+
         this.loading = false;
         // this.serieType = el.serie;
-        this.serieType = "EVALUATION"
+        this.serieType = "EVALUATION";
         if(this.serieType=="EVALUATION" && this.evaluationContent.exercices.length==0){
-          this.serieType="PREREQUISITE"
+          this.serieType="PREREQUISITE";
         }
         if(this.serieType=="PREREQUISITE" && this.prerequisiteContent.exercices.length==0){
-          this.serieType="EXERCICE_1"
-          this.selectedExercice=1
+          this.serieType="EXERCICE_1";
+          this.selectedExercice=1;
         }
         if(this.serieType=="EXERCICE_1" && this.exercice1Content.exercices.length==0){
-          this.serieType="EXERCICE_2"
-          this.selectedExercice=2
+          this.serieType="EXERCICE_2";
+          this.selectedExercice=2;
         }
         if(this.serieType=="EXERCICE_2" && this.exercice2Content.exercices.length==0){
-          this.serieType="EXERCICE_3"
-          this.selectedExercice=3
+          this.serieType="EXERCICE_3";
+          this.selectedExercice=3;
         }
-        console.log("TYPE",this.serieType)
+
         if(this.exercice1Content.exercices.length==0
-          && this.exercice2Content.exercices.length==0 
-          && this.exercice3Content.exercices.length==0 
-          && this.prerequisiteContent.exercices.length==0 
+          && this.exercice2Content.exercices.length==0
+          && this.exercice3Content.exercices.length==0
+          && this.prerequisiteContent.exercices.length==0
           && this.evaluationContent.exercices.length==0){
-          this.router.navigate(['revision/chapitres'])
+          this.router.navigate(['revision/chapitres']);
         }
       },(err)=>{
         this.loading = false;
         // this.serieType = el.serie;
-        this.serieType = "EVALUATION"
+        this.serieType = "EVALUATION";
         if(this.serieType=="EVALUATION" && this.evaluationContent.exercices.length==0){
-          this.serieType="PREREQUISITE"
+          this.serieType="PREREQUISITE";
         }
         if(this.serieType=="PREREQUISITE" && this.prerequisiteContent.exercices.length==0){
-          this.serieType="EXERCICE_1"
-          this.selectedExercice=1
+          this.serieType="EXERCICE_1";
+          this.selectedExercice=1;
         }
         if(this.serieType=="EXERCICE_1" && this.exercice1Content.exercices.length==0){
-          this.serieType="EXERCICE_2"
-          this.selectedExercice=2
+          this.serieType="EXERCICE_2";
+          this.selectedExercice=2;
         }
         if(this.serieType=="EXERCICE_2" && this.exercice2Content.exercices.length==0){
-          this.serieType="EXERCICE_3"
-          this.selectedExercice=3
+          this.serieType="EXERCICE_3";
+          this.selectedExercice=3;
         }
-        console.log("TYPE",this.serieType)
+
         if(this.exercice1Content.exercices.length==0
-          && this.exercice2Content.exercices.length==0 
-          && this.exercice3Content.exercices.length==0  
-          && this.prerequisiteContent.exercices.length==0 
+          && this.exercice2Content.exercices.length==0
+          && this.exercice3Content.exercices.length==0
+          && this.prerequisiteContent.exercices.length==0
           && this.evaluationContent.exercices.length==0){
-          this.router.navigate(['revision/chapitres'])
+          this.router.navigate(['revision/chapitres']);
         }
       });
     });
@@ -170,11 +173,11 @@ export class AquiredContentEvaluationComponent implements OnInit {
   goNextStep(event) {
     this.showGoNextStepScreen = false;
     if(
-      (this.exercice1Content.exercices.length>0 
-        || this.exercice2Content.exercices.length>0 
-        || this.exercice3Content.exercices.length>0 ) 
+      (this.exercice1Content.exercices.length>0
+        || this.exercice2Content.exercices.length>0
+        || this.exercice3Content.exercices.length>0 )
         && this.prerequisiteContent.exercices.length>0 ){
-      console.log("hello5")
+
       if (this.score < 30) {
         this.prerequisiteMode = true;
       } else if (this.score < 50) {
@@ -183,25 +186,25 @@ export class AquiredContentEvaluationComponent implements OnInit {
         this.showExercicesMode = true;
       }
     }else {
-      console.log("hello2")
+
       if (this.score < 30 && this.prerequisiteContent.exercices.length>0) {
         this.prerequisiteMode = true;
       } else if (
-        (this.score < 50 && this.prerequisiteContent.exercices.length>0) 
+        (this.score < 50 && this.prerequisiteContent.exercices.length>0)
         || (this.prerequisiteContent.exercices.length==0)
-        ) {
-          console.log("hello4")
+      ) {
+
         this.showCourseReminderMode = true;
       } else if (
-        this.exercice1Content.exercices.length>0 
-        || this.exercice2Content.exercices.length>0 
+        this.exercice1Content.exercices.length>0
+        || this.exercice2Content.exercices.length>0
         || this.exercice3Content.exercices.length>0
-        ){
-          console.log("hello3")
-          this.showExercicesMode = true;
+      ){
+
+        this.showExercicesMode = true;
       }else{
-        console.log("hello1")
-        this.showFinalScore=true
+
+        this.showFinalScore=true;
       }
     }
   }
@@ -212,7 +215,7 @@ export class AquiredContentEvaluationComponent implements OnInit {
       score: score,
       user: this.UserId
     };
-    console.log("SCORE",score)
+
     // this.revisionService.addUserAnswer(userAnswer).subscribe((res) => {});
     this.score = score;
     this.evaluationMode = false;
@@ -241,11 +244,11 @@ export class AquiredContentEvaluationComponent implements OnInit {
   goToExercices() {
     this.showCourseReminderMode = false;
     if (this.exercice1Content.exercices.length>0){
-        console.log("hello3")
-        this.showExercicesMode = true;
+
+      this.showExercicesMode = true;
     }else{
-      console.log("hello1")
-      this.showFinalScore=true
+
+      this.showFinalScore=true;
     }
   }
 
@@ -254,20 +257,20 @@ export class AquiredContentEvaluationComponent implements OnInit {
 
     this.showExercicesMode = false;
     switch(this.selectedExercice){
-      case (1):
-        id=this.exercice1Content.id
-        this.selectedExercice=2
-        this.showExercicesMode = true;
-        break;
-      case (2):
-        id=this.exercice2Content.id
-        this.selectedExercice=3
-        this.showExercicesMode = true;
-        break;
-      case (3):
-        id=this.exercice3Content.id
-        this.showFinalScore = true;
-        break;
+    case (1):
+      id=this.exercice1Content.id;
+      this.selectedExercice=2;
+      this.showExercicesMode = true;
+      break;
+    case (2):
+      id=this.exercice2Content.id;
+      this.selectedExercice=3;
+      this.showExercicesMode = true;
+      break;
+    case (3):
+      id=this.exercice3Content.id;
+      this.showFinalScore = true;
+      break;
     }
     const userAnswer = {
       id: id,
@@ -283,16 +286,21 @@ export class AquiredContentEvaluationComponent implements OnInit {
   }
 
   startEvaluation(event) {
-    console.log("satrt",this.serieType)
-    console.log("content",this.evaluationContent  )
+
+
     this.showMainScreen = event;
 
-    if (this.serieType === 'EVALUATION') this.evaluationMode = true;
-    if (this.serieType === 'PREREQUISITE') this.prerequisiteMode = true;
-    if (this.serieType === 'EXERCICE_1') this.showExercicesMode = true;
-    if (this.serieType === 'EXERCICE_2') this.showExercicesMode = true;
-    if (this.serieType === 'EXERCICE_3') this.showExercicesMode = true;
-   
+    if (this.serieType === 'EVALUATION') 
+      this.evaluationMode = true;
+    if (this.serieType === 'PREREQUISITE') 
+      this.prerequisiteMode = true;
+    if (this.serieType === 'EXERCICE_1') 
+      this.showExercicesMode = true;
+    if (this.serieType === 'EXERCICE_2') 
+      this.showExercicesMode = true;
+    if (this.serieType === 'EXERCICE_3') 
+      this.showExercicesMode = true;
+
 
     //  if( this.evaluationMode ===true)
   }
@@ -316,9 +324,9 @@ export class AquiredContentEvaluationComponent implements OnInit {
       return;
     }
     if (this.fileTypeCourse === 'pdf') {
-      var blob = new Blob([this.fileCourse], { type: 'application/pdf' });
-      var blobURL = URL.createObjectURL(blob);
-      console.log(blobURL);
+      const blob = new Blob([this.fileCourse], { type: 'application/pdf' });
+      const blobURL = URL.createObjectURL(blob);
+
 
       window.open(blobURL);
       return;
@@ -342,16 +350,16 @@ export class AquiredContentEvaluationComponent implements OnInit {
   //   this.chapterService.getFileCart(cha);
   // }
   openConceptMap() {
-    console.log(this.fileTypeCart);
+
 
     if (!this.fileCard) {
       this.toastr.error('There is no course Reminder to show ');
       return;
     }
     if (this.fileTypeCart === 'pdf') {
-      var blob = new Blob([this.fileCard], { type: 'application/pdf' });
-      var blobURL = URL.createObjectURL(blob);
-      console.log(blobURL);
+      const blob = new Blob([this.fileCard], { type: 'application/pdf' });
+      const blobURL = URL.createObjectURL(blob);
+
 
       window.open(blobURL);
       return;

@@ -18,7 +18,7 @@ describe('WidgetsBrandComponent', () => {
       imports: [WidgetModule, GridModule, ChartjsModule, IconModule],
       providers: [IconSetService]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

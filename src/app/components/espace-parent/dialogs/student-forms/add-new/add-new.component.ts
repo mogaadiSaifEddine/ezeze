@@ -51,7 +51,7 @@ export class AddNewComponent implements OnInit {
         this.groupsList = groupsList;
         this.groupsListDoneFetching = true;
       }
-    })
+    });
   }
   fetchSchools() {
     this.userService.getSchoolsList().subscribe({
@@ -59,7 +59,7 @@ export class AddNewComponent implements OnInit {
         this.schoolsList = schoolList;
         this.schoolsListDoneFetching = true;
       }
-    })
+    });
   }
 
   handleDateChange(event) {
@@ -71,7 +71,7 @@ export class AddNewComponent implements OnInit {
   initForm() {
     this.studentForm = this.fb.group({
       studentsArray: this.fb.array([])
-    })
+    });
   }
   public get getStudentsFormArray(): FormArray {
     return this.studentForm.get('studentsArray') as FormArray;
@@ -88,7 +88,7 @@ export class AddNewComponent implements OnInit {
       group: [null, Validators.required],
       token: [this.sharedService.currentToken],
       password: [Date.now().toString(), readonly]
-    })
+    });
     // updating the internal count
     this.countTracker += 1;
     this.getStudentsFormArray.push(tmpStudentFormGroup);
@@ -130,8 +130,8 @@ export class AddNewComponent implements OnInit {
           this.close();
           this.sharedService.reloadStudentsList.next(true);
         }
-      })
-    })
+      });
+    });
   }
 
   // DIALOG ACTIONS

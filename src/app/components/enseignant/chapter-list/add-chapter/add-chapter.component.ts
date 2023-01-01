@@ -83,7 +83,7 @@ export class AddChapterComponent implements OnInit {
 
   onFormSubmit(): void {
     if (this.regiForm.valid) {
-      if (!!this.data) {
+      if (this.data) {
         this.chapterservice.updateChapter(this.regiForm.value, this.data.chapter_id, this.regiForm.get('groupe').value).subscribe(async (res: Chapter) => {
           if (this.filesForm.get('resumer_cour').value !== null)
             (await this.chapterservice.uploadVideo(this.filesForm.get('resumer_cour').value, res.chapter_id)).subscribe((res) => {});

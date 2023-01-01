@@ -36,7 +36,7 @@ export class NumericComponent implements OnInit, OnChanges {
       this.questions ? (this.questions.value = '') : '';
     });
     this.initExercice();
-    console.log(this.exercice);
+
   }
   private initExercice() {
     this.answerChange.emit(false);
@@ -53,7 +53,7 @@ export class NumericComponent implements OnInit, OnChanges {
   getImageFile() {
     if (this.exercice?.exerciceFile) {
       this.serieService.getFile(this.exercice?.exerciceFile?.carte_id).subscribe((res) => {
-        let objectURL = URL.createObjectURL(res);
+        const objectURL = URL.createObjectURL(res);
         this.imgUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
         this.loading = false;
       });

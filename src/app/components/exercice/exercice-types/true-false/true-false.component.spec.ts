@@ -10,7 +10,7 @@ describe('TrueFalseComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ TrueFalseComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(TrueFalseComponent);
     component = fixture.componentInstance;

@@ -138,33 +138,33 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
     for (let idx = 0; idx < 4; idx++) {
       const options = JSON.parse(JSON.stringify(this.optionsDefault));
       switch (idx) {
-        case 0: {
-          this.options.push(options);
-          break;
-        }
-        case 1: {
-          options.scales.y.min = -9;
-          options.scales.y.max = 39;
-          this.options.push(options);
-          break;
-        }
-        case 2: {
-          options.scales.x = { display: false };
-          options.scales.y = { display: false };
-          options.elements.line.borderWidth = 2;
-          options.elements.point.radius = 0;
-          this.options.push(options);
-          break;
-        }
-        case 3: {
-          options.scales.x.grid = { display: false, drawTicks: false };
-          options.scales.x.grid = { display: false, drawTicks: false, drawBorder: false };
-          options.scales.y.min = undefined;
-          options.scales.y.max = undefined;
-          options.elements = {};
-          this.options.push(options);
-          break;
-        }
+      case 0: {
+        this.options.push(options);
+        break;
+      }
+      case 1: {
+        options.scales.y.min = -9;
+        options.scales.y.max = 39;
+        this.options.push(options);
+        break;
+      }
+      case 2: {
+        options.scales.x = { display: false };
+        options.scales.y = { display: false };
+        options.elements.line.borderWidth = 2;
+        options.elements.point.radius = 0;
+        this.options.push(options);
+        break;
+      }
+      case 3: {
+        options.scales.x.grid = { display: false, drawTicks: false };
+        options.scales.x.grid = { display: false, drawTicks: false, drawBorder: false };
+        options.scales.y.min = undefined;
+        options.scales.y.max = undefined;
+        options.elements = {};
+        this.options.push(options);
+        break;
+      }
       }
     }
   }
@@ -227,7 +227,7 @@ export class ChartSample implements AfterViewInit {
       };
       const newLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May'];
       const newData = [42, 88, 42, 66, 77];
-      let { datasets, labels } = { ...this.data };
+      const { datasets, labels } = { ...this.data };
       // @ts-ignore
       const before = this.chartComponent?.chart?.data.datasets.length;
 

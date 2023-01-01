@@ -10,7 +10,7 @@ describe('AddPostModalComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ AddPostModalComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AddPostModalComponent);
     component = fixture.componentInstance;

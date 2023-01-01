@@ -12,7 +12,7 @@ export class ColorTheTextElementComponent implements OnInit {
   @Input() correctColored: any[];
   @Output() colorChange: EventEmitter<object> = new EventEmitter<object>();
   @ViewChild('word')
-  wordElement: ElementRef<HTMLSpanElement>;
+    wordElement: ElementRef<HTMLSpanElement>;
 
   constructor() {}
 
@@ -20,12 +20,14 @@ export class ColorTheTextElementComponent implements OnInit {
 
   //change color
   changeElementColor(color: string) {
-    console.log(this.wordElement.nativeElement.innerText);
+
     // this.element.value = color;
 
-    let obj = {};
-    if (this.wordElement.nativeElement.style.color === this.color) this.wordElement.nativeElement.style.color = 'black';
-    else this.wordElement.nativeElement.style.color = this.color;
+    const obj = {};
+    if (this.wordElement.nativeElement.style.color === this.color) 
+      this.wordElement.nativeElement.style.color = 'black';
+    else 
+      this.wordElement.nativeElement.style.color = this.color;
 
     if (this.wordElement.nativeElement.style.color !== '' && this.wordElement.nativeElement.style.color !== 'black')
       obj[this.wordElement.nativeElement.innerText.trim()] = this.wordElement.nativeElement.style.color;

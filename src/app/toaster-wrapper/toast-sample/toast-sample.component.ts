@@ -19,6 +19,6 @@ export class ToastSampleComponent extends ToastComponent {
     public override changeDetectorRef: ChangeDetectorRef
   ) {
     super(hostElement, renderer, toasterService, changeDetectorRef);
-    console.debug(this.color)
+    console.debug(this.color);
   }
 }

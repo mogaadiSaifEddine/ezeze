@@ -10,7 +10,7 @@ describe('ChapterListComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ChapterListComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ChapterListComponent);
     component = fixture.componentInstance;

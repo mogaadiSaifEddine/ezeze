@@ -10,7 +10,7 @@ describe('CouponsListComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ CouponsListComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(CouponsListComponent);
     component = fixture.componentInstance;

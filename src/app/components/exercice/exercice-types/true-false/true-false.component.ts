@@ -20,7 +20,7 @@ export class TrueFalseComponent implements OnInit, OnChanges {
   constructor(private revisionService: RevisionService) {}
 
   ngOnInit(): void {
-    console.log(this.exercice);
+
     this.exercice.question = this.exercice.question.split('#').join('\n');
     this.exercice.name = this.exercice.name.split('#').join('\n');
 

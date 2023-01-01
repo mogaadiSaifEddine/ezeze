@@ -9,11 +9,11 @@ import { DeleteChangeComponent } from './delete-change/delete-change.component';
   styleUrls: ['./add-post-modal.component.scss']
 })
 export class AddPostModalComponent implements OnInit {
-  userName: string = 'Jilani Ourari';
+  userName = 'Jilani Ourari';
   public breakpoint: number; // Breakpoint observer code
   public addCusForm: FormGroup;
   wasFormChanged = false;
-  selected: string = 'Text';
+  selected = 'Text';
   constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
   ngOnInit(): void {

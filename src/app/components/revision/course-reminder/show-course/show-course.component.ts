@@ -2,7 +2,7 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CourseSeries } from 'src/app/model/CourseSeries';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
-import { Types } from 'src/app/model/Exercice_type';
+import { Exercise_Types } from 'src/app/model/Exercice_type';
 import { SeriesType } from 'src/app/model/SeriesTypes';
 
 @Component({
@@ -21,7 +21,7 @@ export class ShowCourseComponent implements OnInit {
   ];
   exerciceIndex = 0;
   score = 0;
-  readonly TYPES = Types;
+  readonly TYPES = Exercise_Types;
 
   constructor(public dialogRef: MatDialogRef<ShowCourseComponent>, @Inject(MAT_DIALOG_DATA) public data: { imgSrc; imageType: string }) {}
 

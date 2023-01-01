@@ -10,7 +10,7 @@ describe('FalfoulComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ FalfoulComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(FalfoulComponent);
     component = fixture.componentInstance;

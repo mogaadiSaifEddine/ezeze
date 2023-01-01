@@ -10,7 +10,7 @@ describe('ToastSampleComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ToastSampleComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ToastSampleComponent);
     component = fixture.componentInstance;

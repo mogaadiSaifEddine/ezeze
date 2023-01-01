@@ -10,7 +10,7 @@ describe('PassTestComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ PassTestComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(PassTestComponent);
     component = fixture.componentInstance;
