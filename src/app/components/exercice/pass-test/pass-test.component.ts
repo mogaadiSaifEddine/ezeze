@@ -37,12 +37,12 @@ export class PassTestComponent implements OnInit {
 
     const userconnected = JSON.parse(localStorage.getItem('user_details'));
     this.UserId = userconnected.user_id;
-
     this.revisionService.getLastExerciceId(this.UserId).subscribe((res) => {
       this.currentExercise = this.evaluationContent.exercices.find((ex) => ex.ex_id === res.id) || this.evaluationContent.exercices[0];
       this.loading = false;
-    },(error)=>{
-      this.currentExercise =this.evaluationContent.exercices[0];
+      console.log("PASS-TEST.COMPONENT.TS :: CURRENT EXERCICE BEING RETURNED ::: ", this.currentExercise);
+    }, (error) => {
+      this.currentExercise = this.evaluationContent.exercices[0];
       this.loading = false;
     });
 
@@ -71,7 +71,7 @@ export class PassTestComponent implements OnInit {
 
       user: this.UserId
     };
-    if (userAnswer.id !== null) 
+    if (userAnswer.id !== null)
       this.revisionService.addUserAnswer({ ...userAnswer, score: userAnswer.scoreToSend }).subscribe((res) => { });
     if (this.answer) {
       this.score = this.score + 100 / this.evaluationContent.exercices.length;

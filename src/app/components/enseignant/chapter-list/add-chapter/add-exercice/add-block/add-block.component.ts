@@ -49,7 +49,8 @@ export class AddBlockComponent implements OnInit {
     [Exercise_Types.LISTEN]: [ExerciceBlockTypes.AUDIO_IMAGE],
     [Exercise_Types.ARITHMETIC_TREE]: [],
     [Exercise_Types.FILL_BLANKS_IMG]: [],
-    [Exercise_Types.COLOR_SHAPE]: []
+    [Exercise_Types.COLOR_SHAPE]: [],
+    TEXT_UNDER_IMAGE: [ExerciceBlockTypes.IMAGE_WITH_TEXT]
   };
   readonly showFieldsFor: Record<Exercise_Types, () => void> = {
     LIKERT_SCALE: () => this.showFieldsForLikertScale(),
@@ -57,18 +58,19 @@ export class AddBlockComponent implements OnInit {
     CORRESPONDANCE: () => this.showFieldsForCorrespondance(),
     WORD_COLORATION: () => this.showFieldsForWordColoration(),
     FILL_LETTERS: (): void => this.showFieldsForFillLetters(),
-    MULTIPLE_CHOICE: (): void => {},
-    MULTIPLE_RESPONSE: (): void => {},
-    TRUE_FALSE: (): void => {},
-    SHORT_RESPONSE: (): void => {},
-    FILL_EMPTY_FIELDS: (): void => {},
-    SEQUENCING: (): void => {},
-    HOTSPOT: (): void => {},
-    DRAG_DROP: (): void => {},
-    DRAG_WORDS: (): void => {},
-    SELECT_FROM_LIST: (): void => {},
-    WRITING: (): void => {},
-    LINK_ARROW: (): void => {},
+    MULTIPLE_CHOICE: (): void => { },
+    MULTIPLE_RESPONSE: (): void => { },
+    TRUE_FALSE: (): void => { },
+    SHORT_RESPONSE: (): void => { },
+    FILL_EMPTY_FIELDS: (): void => { },
+    SEQUENCING: (): void => { },
+    HOTSPOT: (): void => { },
+    DRAG_DROP: (): void => { },
+    DRAG_WORDS: (): void => { },
+    SELECT_FROM_LIST: (): void => { },
+    WRITING: (): void => { },
+    TEXT_UNDER_IMAGE: () => this.showFieldsForTextUnderImage(),
+    LINK_ARROW: (): void => { },
     [Exercise_Types.DRAG_SYLLABLES]: function (): void {
       throw new Error('Function not implemented.');
     },
@@ -94,7 +96,7 @@ export class AddBlockComponent implements OnInit {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: { block: ExerciceBlock; exercice_type: string },
     private dialogRef: MatDialogRef<AddBlockComponent>
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.filterTypes();
@@ -171,6 +173,19 @@ export class AddBlockComponent implements OnInit {
       this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correcte';
       this.addCorrectValueValidator();
       this.addLabelValidator();
+    }
+  }
+
+  showFieldsForTextUnderImage() {
+    if (this.blockForm.get('exerciceBlockType').value === 20) {
+      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
+      this.fieldData.showCorrectValue = true; // show to teacher and test to get the score
+      this.fieldData.showPlaceholder = false;
+      this.fieldData.showValue = true;
+      this.fieldData
+      this.fieldData.labelHolder = 'Veuiller saisir la question';
+      this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correct';
+      this.addCorrectValueValidator();
     }
   }
 
