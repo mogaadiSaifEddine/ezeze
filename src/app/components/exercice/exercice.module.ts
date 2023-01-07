@@ -8,6 +8,7 @@ import { TrueFalseComponent } from './exercice-types/true-false/true-false.compo
 import { ShortResponseComponent } from './exercice-types/short-response/short-response.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { FillEmptyFieldsComponent } from './exercice-types/fill-empty-fields/fill-empty-fields.component';
 import { CorrespondenceComponent } from './exercice-types/correspondence/correspondence.component';
@@ -21,6 +22,8 @@ import { SequencingComponent } from './exercice-types/sequencing/sequencing.comp
 import { PassTestComponent } from './pass-test/pass-test.component';
 import { ColorTheTextComponent } from './exercice-types/color-the-text/color-the-text.component';
 import { ColorTheTextElementComponent } from './exercice-types/color-the-text/color-the-text-element/color-the-text-element.component';
+import { MatIconModule } from '@angular/material/icon';
+
 
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -40,11 +43,22 @@ import { FalfoulComponent } from './falfoul/falfoul.component';
 import { TextUnderImageComponent } from './exercice-types/text-under-image/text-under-image.component';
 // EDIROE
 import { AngularEditorModule } from '@kolkov/angular-editor';
-const MaterialModules = [MatCardModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, DragDropModule, MatSelectModule, MatButtonModule, MatTooltipModule];
+import { InitEquationFormComponent } from './exercice-types/tables/vertical-equations/init-equation-form/init-equation-form.component';
+import { EquationLayoutBuilderComponent } from './exercice-types/tables/vertical-equations/equation-layout-builder/equation-layout-builder.component';
+const MaterialModules = [MatIconModule, MatCardModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, DragDropModule, MatSelectModule, MatButtonModule, MatTooltipModule,
+];
 
 
 @NgModule({
-  imports: [MaterialModules, TranslateModule, FormsModule, MatInputModule, CommonModule, AngularEditorModule],
+  imports: [
+    MaterialModules,
+    TranslateModule,
+    FormsModule,
+    MatInputModule,
+    CommonModule,
+    AngularEditorModule,
+    ReactiveFormsModule
+  ],
   declarations: [
     MultipleChoiceComponent,
     MultipleAnswersComponent,
@@ -69,7 +83,9 @@ const MaterialModules = [MatCardModule, MatRadioModule, MatCheckboxModule, MatFo
     DrawLinesComponent,
     LineAnchorDirective,
     FalfoulComponent,
-    TextUnderImageComponent
+    TextUnderImageComponent,
+    InitEquationFormComponent,
+    EquationLayoutBuilderComponent
   ],
   providers: [],
   exports: [
@@ -96,7 +112,8 @@ const MaterialModules = [MatCardModule, MatRadioModule, MatCheckboxModule, MatFo
     DrawLinesComponent,
     LineAnchorDirective,
     FalfoulComponent,
-    TextUnderImageComponent
+    TextUnderImageComponent,
+    InitEquationFormComponent
   ]
 })
 export class ExerciceModule { }

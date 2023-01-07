@@ -29,17 +29,14 @@
           <ngx-mat-file-input placeholder="Image question generale" formControlName="file"> </ngx-mat-file-input>
         </mat-form-field>
 
-        <angular-editor
-          formControlName="question"
-          [config]="editorConfig"
-          id="angularEditor"
-          placeholder="{{ 'question-de-lexercice' | translate }}"></angular-editor>
+        <angular-editor formControlName="question" [config]="editorConfig" id="angularEditor" placeholder="{{ 'question-de-lexercice' | translate }}"></angular-editor>
 
         <mat-slide-toggle formControlName="rtl" class="example-margin">{{ !!formControls.rtl.value ? 'RTL' : 'LTR' }} </mat-slide-toggle>
       </div>
     </form>
   </div>
-  <div class="col-md-7" *ngIf="formControls.type.value != 'HOTSPOT'">
+
+  <div class="col-md-7" *ngIf="!['HOTSPOT', 'VERTICAL_EQUATION'].includes(formControls.type.value)">
     <h2 mat-dialog-title>{{ 'block' | translate }}</h2>
     <mat-panel-description class="add-button">
       <button [disabled]="!this.formControls.type.value" mat-raised-button color="primary" (click)="openBlockDialog()">
@@ -76,6 +73,8 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
+  <!-- :: CUSTOM BLOCK HANDLERS :: -->
+  <!-- HOTSPOT (OUSSAMA) -->
   <div [formGroup]="exerciceForm" class="col-md-7" *ngIf="formControls.type.value === 'HOTSPOT'">
     <div id="image-name-container">
       <mat-form-field appearance="outline">
@@ -88,24 +87,13 @@
     </button>
     <br />
     <div class="image-container">
-      <img
-        (load)="imageLoaded = true"
-        id="hotspot-img"
-        #hotspotImg
-        (click)="addPoint($event)"
-        *ngIf="hotspotImage"
-        src="assets/images/{{ hotspotImage }}" />
+      <img (load)="imageLoaded = true" id="hotspot-img" #hotspotImg (click)="addPoint($event)" *ngIf="hotspotImage" src="assets/images/{{ hotspotImage }}" />
 
       <ng-container *ngIf="imageLoaded">
-        <div
-          class="hotspot"
-          (click)="editPoint(index)"
-          [ngClass]="{ 'correct-value-point': hotspot.correctValue == 'true' }"
-          [ngStyle]="{
+        <div class="hotspot" (click)="editPoint(index)" [ngClass]="{ 'correct-value-point': hotspot.correctValue == 'true' }" [ngStyle]="{
             top: hotspot.y * hotspotImg.nativeElement.offsetHeight - 20 + 'px',
             left: hotspot.x * hotspotImg.nativeElement.offsetWidth - 10 + 'px'
-          }"
-          *ngFor="let hotspot of hotspotsList; let index = index">
+          }" *ngFor="let hotspot of hotspotsList; let index = index">
           <span *ngIf="!hotspot.value">
             {{ index + 1 }}
           </span>
@@ -114,6 +102,9 @@
       </ng-container>
     </div>
   </div>
+  <!-- VERTICAL EQUATIONS (AYMEN) -->
+  <ines-init-equation-form class="col-md-7" *ngIf="formControls.type.value === 'VERTICAL_EQUATION'"></ines-init-equation-form>
+
   <div class="button-container mt-auto">
     <button (click)="onSubmit()" type="submit" class="post-button" mat-raised-button>
       {{ this.data.exercice ? 'update' : 'add' }}

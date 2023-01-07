@@ -1,0 +1,50 @@
+<section id="euationInitializer">
+    <header>
+        <h1>Equation Details</h1>
+        <a href="https://i.imgur.com/SW4E9DE.png" target="_blank" mat-mini-fab color="primary"><mat-icon>help</mat-icon></a>
+    </header>
+
+    <form [formGroup]="equationForm" (ngSubmit)="buildEquation()">
+        <!-- ROWS -->
+        <div class="row">
+            <mat-form-field class="example-full-width" appearance='outline'>
+                <mat-label>Number of rows ⬅️➡️</mat-label>
+                <input type="number" matInput formControlName="numRows" placeholder="Ex. 2">
+                <mat-hint>Type in the number of rows for this equation</mat-hint>
+                <mat-error *ngIf="equationForm.get('numRows').hasError('required')">Number of rows is <strong>required</strong></mat-error>
+            </mat-form-field>
+        </div>
+
+        <!-- COLUMNS -->
+        <div class="row">
+            <mat-form-field class="example-full-width" appearance='outline'>
+                <mat-label>Number of columns ⬇️⬆️</mat-label>
+                <input type="number" matInput formControlName="numColumns" placeholder="Ex. 2">
+                <mat-hint>Type in the number of columns for this equation</mat-hint>
+                <mat-error *ngIf="equationForm.get('numColumns').hasError('required')">Number of columns is <strong>required</strong></mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="equationConfiguratoinRow">
+            <!-- OPERATION -->
+            <mat-form-field appearance="outline">
+                <mat-label>Operation Type</mat-label>
+                <mat-select formControlName="operator">
+                    <mat-option [value]="'+'">Addition (+)</mat-option>
+                    <mat-option [value]="'-'">Substraction (-)</mat-option>
+                    <mat-option [value]="'*'">Multiplication (*)</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Type -->
+            <div class="div">
+                <mat-checkbox formControlName='isEmpty' value="isEmpty">Equation is empty</mat-checkbox>
+            </div>
+        </div>
+
+        <div class="col mt-1">
+            <button mat-flat-button color="primary" type="submit">Build Equation</button>
+        </div>
+
+    </form>
+</section>
