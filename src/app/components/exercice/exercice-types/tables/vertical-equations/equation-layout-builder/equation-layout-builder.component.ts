@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'ines-equation-layout-builder',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EquationLayoutBuilderComponent implements OnInit {
 
-  constructor() { }
+  MATRIX: any[][];
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
+    this.drawEquationMatrix();
+  }
+
+  drawEquationMatrix() {
+    console.log(this.data);
+    this.MATRIX = Array.from(Array(this.data.numRows), () => new Array(this.data.numColumns));
+    console.log(this.MATRIX);
   }
 
 }

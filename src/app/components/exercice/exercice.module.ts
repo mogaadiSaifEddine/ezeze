@@ -24,6 +24,7 @@ import { ColorTheTextComponent } from './exercice-types/color-the-text/color-the
 import { ColorTheTextElementComponent } from './exercice-types/color-the-text/color-the-text-element/color-the-text-element.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatStepperModule } from '@angular/material/stepper';
 
 
 import { CommonModule } from '@angular/common';
@@ -46,7 +47,7 @@ import { TextUnderImageComponent } from './exercice-types/text-under-image/text-
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { InitEquationFormComponent } from './exercice-types/tables/vertical-equations/init-equation-form/init-equation-form.component';
 import { EquationLayoutBuilderComponent } from './exercice-types/tables/vertical-equations/equation-layout-builder/equation-layout-builder.component';
-const MaterialModules = [MatDialogModule, MatIconModule, MatCardModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, DragDropModule, MatSelectModule, MatButtonModule, MatTooltipModule,
+const MaterialModules = [MatStepperModule, MatDialogModule, MatIconModule, MatCardModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, DragDropModule, MatSelectModule, MatButtonModule, MatTooltipModule,
 ];
 
 

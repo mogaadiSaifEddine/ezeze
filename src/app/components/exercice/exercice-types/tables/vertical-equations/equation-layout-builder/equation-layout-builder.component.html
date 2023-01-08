@@ -1,7 +1,30 @@
 <mat-dialog-content class="mat-typography">
-    <h3>Develop across all platforms</h3>
+
+    <p>This view will allow you to include the correct values as well as type in the equation.</p>
+
+    <mat-stepper #stepper>
+
+        <mat-step>
+            <ng-template matStepLabel>Teacher's view</ng-template>
+            <main>
+                <table>
+                    <tr *ngFor="let row of MATRIX; let even = even; let odd = odd" [ngClass]="{ odd: odd, even: even }">
+                        <td class="field" *ngFor="let field of row">
+                            <input type="number" min="0" class="numberInput">
+                        </td>
+                    </tr>
+                </table>
+            </main>
+        </mat-step>
+
+        <mat-step>
+            <ng-template matStepLabel>Student's view</ng-template>
+        </mat-step>
+
+    </mat-stepper>
+
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+    <button mat-button cdkFocusInitial>Save Equation</button>
 </mat-dialog-actions>
