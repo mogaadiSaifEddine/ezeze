@@ -117,7 +117,7 @@ export class AddExerciceComponent implements OnInit {
     this.exerciceForm = this.fb.group({
       type: [this.data.exercice?.type, [Validators.required]],
       name: [this.data.exercice?.name],
-      file: [''],
+      file: [null],
       question: [this.data.exercice?.question, [Validators.required]],
       difficulty: ['NIVEAU1', [Validators.required]],
       imageName: [this.hotspotImage],
@@ -187,21 +187,6 @@ export class AddExerciceComponent implements OnInit {
         });
       } else {
         this.serieService.addExercice(exercice, this.data.serieId).subscribe(async (res: Exercice) => {
-          console.log(res);
-
-          let files = [];
-          exercice.blocks.forEach((element, index) => {
-            if (element.imageFile) {
-              files.push(element.imageFile);
-            }
-            if (element.audioFile) {
-              files.push(element.audioFile);
-            }
-            if (files.length)
-              this.serieService
-                .addExerciceBlockFile(files, Number(res.blocks[index].exercice_Block_Id))
-                .subscribe((resFileBlock) => console.log(resFileBlock));
-          });
           if (this.exerciceForm.get('file').value !== null)
             (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => {});
           this.dialogRef.close(true);
@@ -211,14 +196,15 @@ export class AddExerciceComponent implements OnInit {
   }
 
   checkBlocks() {
-    if (this.dataSource.length > 0) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.dataSource.length > 0;
   }
-  resetBlocks() {
+  resetBlocks(type: any) {
     this.dataSource = [];
+    if (type === Exercise_Types.FILL_LETTERS) {
+      this.displayedColumns = ['ordre', 'value', 'correctValue', 'action']
+    } else {
+      this.displayedColumns = ['ordre', 'type', 'label', 'action'];
+    }
   }
   deleteBlock(element) {
     this.dataSource = this.dataSource.filter((item) => item !== element);
@@ -232,15 +218,14 @@ export class AddExerciceComponent implements OnInit {
   }
   editPoint(index) {
     if (this.correctAnswerMode) {
-      this.hotspotsList[index].correctValue == 'true'
-        ? (this.hotspotsList[index].correctValue = null)
-        : (this.hotspotsList[index].correctValue = 'true');
+      this.hotspotsList[index].correctValue == 'true' ? null : 'true';
     } else {
       this.hotspotsList.splice(index, 1);
     }
   }
   openPreview() {
-    if (this.exerciceForm.get('type').value == 'HOTSPOT') {
+    console.debug(this.formControls.valid);
+    if (this.exerciceForm.get('type').value == Exercise_Types.HOTSPOT) {
       this.dataSource = [];
       this.dataSource.push({
         blockOrder: 0,

@@ -39,6 +39,7 @@ import { LineAnchorDirective } from './exercice-types/corresponding-arrow/draw-l
 import { FalfoulComponent } from './falfoul/falfoul.component';
 // EDIROE
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters.component';
 const MaterialModules = [MatCardModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, DragDropModule, MatSelectModule, MatButtonModule, MatTooltipModule];
 
 
@@ -67,7 +68,8 @@ const MaterialModules = [MatCardModule, MatRadioModule, MatCheckboxModule, MatFo
     CorrespondingArrowComponent,
     DrawLinesComponent,
     LineAnchorDirective,
-    FalfoulComponent
+    FalfoulComponent,
+    FillLettersComponent
   ],
   providers: [],
   exports: [
@@ -93,7 +95,8 @@ const MaterialModules = [MatCardModule, MatRadioModule, MatCheckboxModule, MatFo
     CorrespondingArrowComponent,
     DrawLinesComponent,
     LineAnchorDirective,
-    FalfoulComponent
+    FalfoulComponent,
+    FillLettersComponent
   ]
 })
 export class ExerciceModule { }

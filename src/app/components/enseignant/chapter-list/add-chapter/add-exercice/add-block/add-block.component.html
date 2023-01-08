@@ -1,10 +1,15 @@
 <div class="container row">
   <form [formGroup]="blockForm">
     <mat-form-field appearance="outline">
-      <mat-select (selectionChange)="checkFieldsToShow()" formControlName="exerciceBlockType" placeholder="{{ 'choose-block-type' | translate }}">
-        <mat-option *ngFor="let type of TYPES_KEYS_MAP" [value]="type.key">{{ type.value }}</mat-option>
+      <mat-select
+        (selectionChange)="checkFieldsToShow()"
+        formControlName="exerciceBlockType"
+        placeholder="{{ 'choose-block-type' | translate }}">
+        <mat-option *ngFor="let type of blockTypes" [value]="type">{{ type }}</mat-option>
       </mat-select>
-      <mat-error *ngIf="!blockForm.get('exerciceBlockType').valid && blockForm.get('exerciceBlockType').touched"> {{ 'please-select-any-item' | translate }} </mat-error>
+      <mat-error *ngIf="!blockForm.get('exerciceBlockType').valid && blockForm.get('exerciceBlockType').touched">
+        {{ 'please-select-any-item' | translate }}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field *ngIf="fieldData.showLabel" appearance="outline">
@@ -18,19 +23,12 @@
     <mat-form-field *ngIf="fieldData.showCorrectValue" appearance="outline">
       <input formControlName="correctValue" matInput [placeholder]="fieldData.correctValueHolder" />
     </mat-form-field>
-
     <mat-form-field *ngIf="fieldData.showValue" appearance="outline">
       <input formControlName="value" matInput [placeholder]="fieldData.valueHolder" />
     </mat-form-field>
 
     <mat-form-field *ngIf="fieldData.showOrder" appearance="outline">
       <input formControlName="blockOrder" matInput placeholder="{{ 'order' | translate }}" />
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <ngx-mat-file-input placeholder="Image question generale" formControlName="imageFile"> </ngx-mat-file-input>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <ngx-mat-file-input placeholder="Image question generale" formControlName="audioFile"> </ngx-mat-file-input>
     </mat-form-field>
     <div class="add-button">
       <button type="submit" class="post-button" (click)="saveBlock()" mat-raised-button>
