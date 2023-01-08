@@ -35,3 +35,5 @@
 <app-hotspot *ngIf="data.currentExercise.type === TYPES.HOTSPOT" [exercice]="data.currentExercise"></app-hotspot>
 
 <app-drag-words *ngIf="data.currentExercise.type === TYPES.DRAG_WORDS"  [exercice]="data.currentExercise"></app-drag-words>
+
+<ines-fill-letters *ngIf="data.currentExercise.type === TYPES.FILL_LETTERS"  [exercice]="data.currentExercise"></ines-fill-letters>

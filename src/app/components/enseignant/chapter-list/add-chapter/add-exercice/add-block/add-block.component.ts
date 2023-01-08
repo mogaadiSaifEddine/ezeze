@@ -15,8 +15,8 @@ export class AddBlockComponent implements OnInit {
   @Input() block: ExerciceBlock;
   @Output() blockElement: EventEmitter<ExerciceBlock> = new EventEmitter<ExerciceBlock>();
   blockForm: FormGroup;
-  TYPES = ExerciceBlockTypes;
-  TYPES_KEYS_MAP = Object.values(this.TYPES).map((el, ind) => ({ key: ind, value: el }));
+  readonly EXERCICE_BLOCK_TYPES = ExerciceBlockTypes;
+  blockTypes: ExerciceBlockTypes[];
 
   fieldData = new FieldData();
 
@@ -85,22 +85,15 @@ export class AddBlockComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.filterTypes();
     this.initForm();
+    this.filterTypes();
   }
-  // this code is bullshit but we dont have time
-  // (＃￣ω￣) * ... and appnester took exception to that *
-
   checkFieldsToShow() {
     this.fieldData.resetFieldData();
     this.clearValidators();
-    if (this.blockForm.get('exerciceBlockType').value === 6) {
-      this.fieldData.showLabel = false;
-      this.fieldData.showCorrectValue = false;
-      this.fieldData.showPlaceholder = false;
-      this.fieldData.showValue = true;
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.IMAGE) {
+      this.fieldData.showOnly(['showValue']);
       this.fieldData.valueHolder = "Selectioner l'url de l'image";
-
       this.addValueValidator();
     } else {
       const showFieldsForExerciceType = this.showFieldsFor[this.data.exercice_type];
@@ -111,23 +104,19 @@ export class AddBlockComponent implements OnInit {
   }
 
   private showFieldsForListening() {
-    this.fieldData.showLabel = true;
-    this.fieldData.showValue = true;
-    this.fieldData.showPlaceholder = false;
+    this.fieldData.showOnly(['showLabel', 'showValue']);
 
     this.fieldData.valueHolder = 'Veuiller saisir la valeur';
     this.fieldData.labelHolder = 'Veuiller saisir le label';
 
     this.blockForm.get('label').addValidators([Validators.required]);
     this.blockForm.get('value').addValidators([Validators.required]);
-    // this.blockForm.addControl('audioFile', new FormControl('', Validators.required));
     this.blockForm.get('placeholder').clearValidators();
-    console.log(this.blockForm.value);
 
-    if (this.blockForm.get('exerciceBlockType').value === 12) {
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.BREAK) {
       this.fieldData.showCorrectValue = true;
       this.blockForm.get('correctValue').addValidators([Validators.required]);
-      this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correcte separer avec un /';
+      this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correcte separée avec un /';
     } else {
       this.fieldData.showCorrectValue = false;
       this.blockForm.get('correctValue').clearValidators();
@@ -135,11 +124,8 @@ export class AddBlockComponent implements OnInit {
   }
 
   showFieldsForLikertScale() {
-    if (this.blockForm.get('exerciceBlockType').value === 2) {
-      this.fieldData.showLabel = false;
-      this.fieldData.showCorrectValue = true;
-      this.fieldData.showPlaceholder = true;
-      this.fieldData.showValue = false;
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.INPUT_TEXT) {
+      this.fieldData.showOnly(['showPlaceholder', 'showCorrectValue']);
       this.fieldData.placeHolder = 'Veuiller saisir le champ a voter';
       this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correcte de 1-5';
 
@@ -149,11 +135,8 @@ export class AddBlockComponent implements OnInit {
   }
 
   showFieldsForNumeric() {
-    if (this.blockForm.get('exerciceBlockType').value === 3) {
-      this.fieldData.showLabel = true;
-      this.fieldData.showCorrectValue = true;
-      this.fieldData.showPlaceholder = false;
-      this.fieldData.showValue = false;
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.INPUT_NUMBER) {
+      this.fieldData.showOnly(['showLabel', 'showCorrectValue']);
       this.fieldData.labelHolder = 'Veuiller saisir la question';
       this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correcte';
       this.addCorrectValueValidator();
@@ -162,9 +145,7 @@ export class AddBlockComponent implements OnInit {
   }
 
   showFieldsForCorrespondance() {
-    this.fieldData.showLabel = true;
-    this.fieldData.showValue = true;
-    this.fieldData.showPlaceholder = true;
+    this.fieldData.showOnly(['showLabel', 'showValue', 'showPlaceholder']);
 
     this.fieldData.placeHolder = "Veuiller saisir le nom de l'image";
     this.fieldData.valueHolder = 'Veuiller saisir la valeur';
@@ -174,7 +155,7 @@ export class AddBlockComponent implements OnInit {
     this.addValueValidator();
     this.addPlaceholderValidator();
 
-    if (this.blockForm.get('exerciceBlockType').value === 10) {
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.CORRESPONDANCE_LEFT) {
       this.fieldData.showCorrectValue = true;
       this.addCorrectValueValidator();
       this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correcte';
@@ -183,14 +164,10 @@ export class AddBlockComponent implements OnInit {
     }
   }
   showFieldsForWordColoration() {
-    if (this.blockForm.get('exerciceBlockType').value === 4 || this.blockForm.get('exerciceBlockType').value === 16) {
-      this.fieldData.showLabel = true;
-      this.fieldData.showPlaceholder = false;
-      this.fieldData.showValue = false;
-      this.fieldData.showCorrectValue = true;
+    if ([ExerciceBlockTypes.COLORATE_TEXT, ExerciceBlockTypes.HIGHLIGHT_TEXT].includes(this.blockForm.get('exerciceBlockType').value)) {
+      this.fieldData.showOnly(['showLabel', 'showCorrectValue']);
 
       this.fieldData.labelHolder = 'Veuiller saisir la mot a colorer';
-
       this.fieldData.correctValueHolder = 'Veuiller saisir la couleur correcte si aucune valeur correcte laisser vide';
 
       this.addCorrectValueValidator();
@@ -198,14 +175,13 @@ export class AddBlockComponent implements OnInit {
     }
   }
   showFieldsForFillLetters() {
-    this.fieldData.showValue = true;
-    this.fieldData.showCorrectValue = true;
+    this.fieldData.showOnly(['showValue', 'showCorrectValue']);
 
     this.fieldData.valueHolder = 'Veuillez saisir la réponse avec les séparateurs (exp: Ines<A>cademy)';
     this.fieldData.correctValueHolder = 'Veuiller saisir la réponse correcte à vérifier (exp: InesAcademy)';
 
-    this.addCorrectValueValidator();
     this.addValueValidator();
+    this.addCorrectValueValidator();
   }
 
   initForm() {
@@ -218,21 +194,25 @@ export class AddBlockComponent implements OnInit {
       blockOrder: [this.data.block?.blockOrder],
       isAdmissable: [this.data.block?.isAdmissable],
       exercice_Block_Id: [this.data.block?.exerciceBlockId],
-      imageFile: [''],
-      audioFile: [''],
-      workstationUuid: this.fb.group({})
+      blockParams: [this.data.block?.blockParams]
     });
   }
 
   filterTypes() {
-    this.TYPES_KEYS_MAP = this.TYPES_KEYS_MAP.filter((x) => this.exerciceTypeToTypesKeysMap[this.data.exercice_type].includes(x.value));
+    this.blockTypes = Object.values(this.EXERCICE_BLOCK_TYPES).filter((x) =>
+      this.exerciceTypeToTypesKeysMap[this.data.exercice_type].includes(x)
+    );
+    if (this.blockTypes.length === 1) {
+      this.blockForm.get('exerciceBlockType').patchValue(this.blockTypes[0])
+      this.checkFieldsToShow()
+    };
   }
   saveBlock() {
     const c = {};
     c[this.blockForm.value.label] = this.blockForm.value.correctValue;
 
     const block =
-      this.blockForm.value.exerciceBlockType === 16 ? { ...this.blockForm.value, correctValue: JSON.stringify(c) } : this.blockForm.value;
+      this.blockForm.value.exerciceBlockType === ExerciceBlockTypes.COLORATE_TEXT ? { ...this.blockForm.value, correctValue: JSON.stringify(c) } : this.blockForm.value;
 
     this.dialogRef.close(block);
   }
