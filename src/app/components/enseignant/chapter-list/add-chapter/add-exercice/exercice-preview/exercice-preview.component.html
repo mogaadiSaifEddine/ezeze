@@ -10,6 +10,8 @@
 
 <ines-text-under-image *ngIf="data.currentExercise.type === TYPES.TEXT_UNDER_IMAGE" [exercice]="data.currentExercise"></ines-text-under-image>
 
+<ines-equation-display *ngIf="data.currentExercise.type === TYPES.VERTICAL_EQUATION" [exercice]="data.currentExercise"></ines-equation-display>
+
 <app-multiple-answers *ngIf="data.currentExercise.type === TYPES.MULTIPLE_RESPONSE" [exercice]="data.currentExercise"></app-multiple-answers>
 
 <app-color-the-text *ngIf="data.currentExercise.type === TYPES.WORD_COLORATION" [exercice]="data.currentExercise"></app-color-the-text>

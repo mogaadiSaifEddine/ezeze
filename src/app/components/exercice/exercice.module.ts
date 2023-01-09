@@ -42,12 +42,12 @@ import { CorrespondingArrowComponent } from './exercice-types/corresponding-arro
 import { DrawLinesComponent } from './exercice-types/corresponding-arrow/draw-lines/draw-lines.component';
 import { LineAnchorDirective } from './exercice-types/corresponding-arrow/draw-lines/line-anchor.directive';
 import { FalfoulComponent } from './falfoul/falfoul.component';
-import { TextUnderImageComponent } from './exercice-types/text-under-image/text-under-image.component';
-// EDIROE
-import { AngularEditorModule } from '@kolkov/angular-editor';
+import { TextUnderImageComponent } from './exercice-types/tables/text-under-image/text-under-image.component';
 import { InitEquationFormComponent } from './exercice-types/tables/vertical-equations/init-equation-form/init-equation-form.component';
 import { EquationLayoutBuilderComponent } from './exercice-types/tables/vertical-equations/equation-layout-builder/equation-layout-builder.component';
 import { EquationDisplayComponent } from './exercice-types/tables/vertical-equations/equation-display/equation-display.component';
+// EDIROE
+import { AngularEditorModule } from '@kolkov/angular-editor';
 const MaterialModules = [MatStepperModule, MatDialogModule, MatIconModule, MatCardModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, DragDropModule, MatSelectModule, MatButtonModule, MatTooltipModule,
 ];
 
@@ -117,7 +117,8 @@ const MaterialModules = [MatStepperModule, MatDialogModule, MatIconModule, MatCa
     LineAnchorDirective,
     FalfoulComponent,
     TextUnderImageComponent,
-    InitEquationFormComponent
+    InitEquationFormComponent,
+    EquationDisplayComponent
   ]
 })
 export class ExerciceModule { }

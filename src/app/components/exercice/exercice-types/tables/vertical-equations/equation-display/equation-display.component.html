@@ -1,1 +1,26 @@
-<p>equation-display works!</p>
+<mat-card *ngIf="exercice.name">
+    <div class="question-container">
+        <mat-card-title [innerHTML]="exercice?.name" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></mat-card-title>
+    </div>
+</mat-card>
+
+<mat-card>
+    <div class="question-container">
+        <div [innerHTML]="exercice?.question"></div><br>
+    </div>
+    <mat-card-content class="equationGrid" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+        <!-- TABLE === 1 EUATION -->
+        <table class="equationCard" *ngFor="let block of exercice?.blocks; let index;">
+            <tr *ngFor="let row of MATRIX let even = even; let odd = odd; let indexRow = index" [ngClass]="{ odd: odd, even: even }">
+                <span class="signs" *ngIf="indexRow === row.length-1" class="displaySignsHere">
+                    <h4 class="operator">X</h4>
+                    <h4 class="equalSign">=</h4>
+                </span>
+                <td *ngFor="let field of row; let indexColumn= index" [ngClass]="indexRow === row.length && 'equationSignsSeparator'">
+                    <input type="number" min="0" class="numberInput" [readonly]="MATRIX[indexRow][indexColumn]?.length>0" [ngClass]="MATRIX[indexRow][indexColumn]?.length>0 && 'hardCodedValues'"
+                        [value]="MATRIX[indexRow][indexColumn]">
+                </td>
+            </tr>
+        </table>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,59 @@
+.equationGrid {
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-gap: 1rem;
+    overflow-y: scroll;
+
+    .equationCard {
+        table {
+            border-collapse: collapse;
+            width: 120px;
+
+            tr {
+                position: relative;
+            }
+
+            td {
+                border: none;
+                border-bottom: 1px solid #605975;
+                width: 100%;
+
+                input {
+                    border: none;
+                    text-align: center;
+                }
+            }
+        }
+
+        .hardCodedValues {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            color: #605975;
+            border: none;
+        }
+
+        .equationSignsSeparator {
+            padding: .5rem 0;
+            border-top: 2px solid #000;
+        }
+
+        .displaySignsHere {
+            width: 50px;
+            height: 100px;
+            display: block;
+            background-color: red;
+
+            position: absolute;
+            bottom: 0;
+            left: -50px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+    }
+}
