@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ExerciceBlock } from 'src/app/model/ExerciceBlock';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
 import { ExcerciceserviceService } from 'src/app/service/excerciceservice.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'ines-equation-layout-builder',
@@ -22,7 +23,10 @@ export class EquationLayoutBuilderComponent implements OnInit {
   MATRIX_STUDENT: any[][];
   equationBlock: ExerciceBlock;
 
-  constructor(private exerciseService: ExcerciceserviceService) { }
+  constructor(
+    private exerciseService: ExcerciceserviceService,
+    private dialogRef: MatDialogRef<EquationLayoutBuilderComponent>
+  ) { }
 
   ngOnInit(): void {
     this.drawEquationMatrix();
@@ -69,5 +73,7 @@ export class EquationLayoutBuilderComponent implements OnInit {
       exerciceBlockType: ExerciceBlockTypes.EQUATION,
       blockParams: PARAMS
     }
+
+    this.dialogRef.close(this.equationBlock);
   }
 }

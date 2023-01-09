@@ -47,6 +47,7 @@ import { TextUnderImageComponent } from './exercice-types/text-under-image/text-
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { InitEquationFormComponent } from './exercice-types/tables/vertical-equations/init-equation-form/init-equation-form.component';
 import { EquationLayoutBuilderComponent } from './exercice-types/tables/vertical-equations/equation-layout-builder/equation-layout-builder.component';
+import { EquationDisplayComponent } from './exercice-types/tables/vertical-equations/equation-display/equation-display.component';
 const MaterialModules = [MatStepperModule, MatDialogModule, MatIconModule, MatCardModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, DragDropModule, MatSelectModule, MatButtonModule, MatTooltipModule,
 ];
 
@@ -87,7 +88,8 @@ const MaterialModules = [MatStepperModule, MatDialogModule, MatIconModule, MatCa
     FalfoulComponent,
     TextUnderImageComponent,
     InitEquationFormComponent,
-    EquationLayoutBuilderComponent
+    EquationLayoutBuilderComponent,
+    EquationDisplayComponent
   ],
   providers: [],
   exports: [

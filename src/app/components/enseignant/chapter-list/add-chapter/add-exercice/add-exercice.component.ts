@@ -143,8 +143,7 @@ export class AddExerciceComponent implements OnInit {
           exercice_type: this.exerciceForm.get('type').value
         }
       })
-      .afterClosed()
-      .subscribe((result) => {
+      .afterClosed().subscribe((result) => {
         if (result) {
           result.blockOrder = this.order++;
           this.dataSource = [...this.dataSource, result];
