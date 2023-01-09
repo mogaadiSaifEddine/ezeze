@@ -1,0 +1,32 @@
+.word-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.word{
+    min-width: 100px;
+    width: 100px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    input{
+        width: 70px;
+    }
+    button{
+        width: 30px;
+        border-radius: 0;
+    }
+
+    .word-container{
+        display: flex;
+    }
+}
+.word-title-container{
+    display: flex;
+    margin-bottom: 10px;   
+    align-items: center;
+    
+    .add-btn{
+        margin-left: 10px;
+    }
+}

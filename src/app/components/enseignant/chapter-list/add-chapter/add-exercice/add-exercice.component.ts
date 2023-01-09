@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Exercice } from 'src/app/model/Exercice';
 import { ExerciceBlock } from 'src/app/model/ExerciceBlock';
@@ -40,6 +40,8 @@ export class AddExerciceComponent implements OnInit {
   imageLoaded=false;
   showPreview=false;
   selectedExercice:Exercice;
+  wordsSyllablesForm:FormGroup
+
   ngOnInit(): void {
     this.initForm();
     this.loadTable();
@@ -51,7 +53,7 @@ export class AddExerciceComponent implements OnInit {
             x:parseFloat(block.placeholder),
             correctValue:block.correctValue
           })
-  
+          
         }
       
       });
@@ -102,30 +104,15 @@ export class AddExerciceComponent implements OnInit {
   onSubmit() {
     let exercice
     if(this.exerciceForm.get('type').value=='HOTSPOT'){
-      this.dataSource = [];
-      this.dataSource.push({
-        blockOrder:0,
-        correctValue:"",
-        exerciceBlockType:ExerciceBlockTypes.IMAGE,
-        exercice_Block_Id:null,
-        isAdmissable: null,
-        label : "",
-        placeholder:"",
-        value:this.hotspotImage
-      })
+      this.setHotspotExercice();
+      
+      exercice = {
+        ...this.exerciceForm.value,
+        blocks: this.dataSource
+      };
+    }else if(this.exerciceForm.get('type').value=='DRAG_SYLLABLES'){
+      this.setSyllablesExercice();
 
-      this.hotspotsList.forEach((hotspot,index)=>{
-        this.dataSource.push({
-          blockOrder:index+1,
-          correctValue:hotspot.correctValue,
-          exerciceBlockType:ExerciceBlockTypes.INPUT_TEXT,
-          exercice_Block_Id:null,
-          isAdmissable: null,
-          label : hotspot.y,
-          placeholder:hotspot.x,
-          value:""
-        })
-      })
       exercice = {
         ...this.exerciceForm.value,
         blocks: this.dataSource
@@ -153,7 +140,54 @@ export class AddExerciceComponent implements OnInit {
       }
     }
   }
+  setHotspotExercice(){
+    this.dataSource = [];
+    this.dataSource.push({
+      blockOrder:0,
+      correctValue:"",
+      exerciceBlockType:ExerciceBlockTypes.IMAGE,
+      exercice_Block_Id:null,
+      isAdmissable: null,
+      label : "",
+      placeholder:"",
+      value:this.hotspotImage
+    })
 
+    this.hotspotsList.forEach((hotspot,index)=>{
+      this.dataSource.push({
+        blockOrder:index+1,
+        correctValue:hotspot.correctValue,
+        exerciceBlockType:ExerciceBlockTypes.INPUT_TEXT,
+        exercice_Block_Id:null,
+        isAdmissable: null,
+        label : hotspot.y,
+        placeholder:hotspot.x,
+        value:""
+      })
+    })
+  }
+  setSyllablesExercice(){
+    this.dataSource = [];
+    let i=0
+    this.wordsSyllablesForm.value.words.forEach((word,index) => {
+      let localWord = ""
+      console.log("WORD",word.word)
+      word.word.forEach(syllable => {
+        localWord+=syllable.syllable+'/'
+      });
+      this.dataSource.push({
+        blockOrder:index,
+        correctValue:localWord,
+        exerciceBlockType:ExerciceBlockTypes.INPUT_TEXT,
+        exercice_Block_Id:null,
+        isAdmissable: null,
+        label : "",
+        placeholder:"",
+        value:""
+      })
+    });
+      
+  }
   checkBlocks() {
     if (this.dataSource.length > 0) {
       return true;
@@ -237,5 +271,9 @@ export class AddExerciceComponent implements OnInit {
         }
       });
     }
+  }
+
+  test(){
+    console.log(this.wordsSyllablesForm.value)
   }
 }

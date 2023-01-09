@@ -31,6 +31,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ExercicePreviewComponent } from './chapter-list/add-chapter/add-exercice/exercice-preview/exercice-preview.component';
 import { ExerciceModule } from '../exercice/exercice.module';
+import { WordsSyllablesExerciceInputComponent } from './chapter-list/add-chapter/add-exercice/words-syllables-exercice/words-syllables-exercice.component';
 
 const MATERIAL_MODULES = [
   MatGridListModule,
@@ -53,7 +54,7 @@ const MATERIAL_MODULES = [
   MatSlideToggleModule
 ];
 @NgModule({
-  declarations: [ExercicePreviewComponent,ChapterListComponent, AddChapterComponent, SerieCardComponent, AddExerciceComponent, AddBlockComponent, AddSerieComponent],
+  declarations: [WordsSyllablesExerciceInputComponent,ExercicePreviewComponent,ChapterListComponent, AddChapterComponent, SerieCardComponent, AddExerciceComponent, AddBlockComponent, AddSerieComponent],
   imports: [ExerciceModule,CommonModule, EnseignantRoutingModule, MATERIAL_MODULES, ReactiveFormsModule, NgxMatFileInputModule, TranslateModule.forChild({})]
 })
 export class EnseignantModule {}

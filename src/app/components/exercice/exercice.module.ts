@@ -21,6 +21,7 @@ import { SequencingComponent } from './exercice-types/sequencing/sequencing.comp
 import { PassTestComponent } from './pass-test/pass-test.component';
 import { ColorTheTextComponent } from './exercice-types/color-the-text/color-the-text.component';
 import { ColorTheTextElementComponent } from './exercice-types/color-the-text/color-the-text-element/color-the-text-element.component';
+import { DragSyllablesComponent } from './exercice-types/drag-syllables/drag-syllables.component';
 
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -43,6 +44,7 @@ const MaterialModules = [MatCardModule, MatRadioModule, MatCheckboxModule, MatFo
 @NgModule({
   imports: [MaterialModules, TranslateModule, FormsModule, MatInputModule, CommonModule],
   declarations: [
+    DragSyllablesComponent,
     MultipleChoiceComponent,
     MultipleAnswersComponent,
     TrueFalseComponent,
@@ -69,6 +71,7 @@ const MaterialModules = [MatCardModule, MatRadioModule, MatCheckboxModule, MatFo
   ],
   providers: [],
   exports: [
+    DragSyllablesComponent,
     MultipleChoiceComponent,
     MultipleAnswersComponent,
     TrueFalseComponent,

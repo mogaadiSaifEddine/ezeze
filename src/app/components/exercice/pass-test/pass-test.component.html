@@ -38,6 +38,8 @@
 
 <app-drag-words *ngIf="!loading && currentExercise.type === TYPES.DRAG_WORDS" [isCheckMode]="isAnswerChecked" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-drag-words>
 
+<app-drag-syllables *ngIf="!loading && currentExercise.type === TYPES.DRAG_WORDS" [isCheckMode]="isAnswerChecked" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-drag-syllables>
+
 <div class="stepper">
   <button *ngIf="!isAnswerChecked" [disabled]="!canGoNextQuestion" mat-raised-button color="primary" (click)="checkAnswer()">
     {{ 'revision.check-answer' | translate }}
