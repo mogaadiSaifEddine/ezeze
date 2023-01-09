@@ -36,10 +36,10 @@
     </form>
   </div>
 
-  <div class="col-md-7" *ngIf="!['HOTSPOT', 'VERTICAL_EQUATION'].includes(formControls.type.value)">
+  <div class="col-md-7" *ngIf="!['HOTSPOT'].includes(formControls.type.value)">
     <h2 mat-dialog-title>{{ 'block' | translate }}</h2>
     <mat-panel-description class="add-button">
-      <button [disabled]="!this.formControls.type.value" mat-raised-button color="primary" (click)="openBlockDialog()">
+      <button [disabled]="!this.formControls.type.value" mat-raised-button color="primary" (click)="openBlockDialog(formControls.type.value)">
         <span class="material-icons">add</span>
       </button>
     </mat-panel-description>
@@ -103,7 +103,7 @@
     </div>
   </div>
   <!-- VERTICAL EQUATIONS (AYMEN) -->
-  <ines-init-equation-form class="col-md-7" *ngIf="formControls.type.value === 'VERTICAL_EQUATION'"></ines-init-equation-form>
+  <!-- <ines-init-equation-form class="col-md-7" *ngIf="formControls.type.value === 'VERTICAL_EQUATION'"></ines-init-equation-form> -->
 
   <div class="button-container mt-auto">
     <button (click)="onSubmit()" type="submit" class="post-button" mat-raised-button>

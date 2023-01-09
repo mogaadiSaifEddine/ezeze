@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { EquationLayoutBuilderComponent } from '../equation-layout-builder/equation-layout-builder.component';
+import { ExcerciceserviceService } from 'src/app/service/excerciceservice.service';
 
 @Component({
   selector: 'ines-init-equation-form',
@@ -15,7 +14,7 @@ export class InitEquationFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private dialog: MatDialog,
+    private exerciseService: ExcerciceserviceService
   ) { }
 
   ngOnInit() {
@@ -34,10 +33,7 @@ export class InitEquationFormComponent implements OnInit {
   buildEquation() {
     this.equationInformation = this.equationForm.value;
     if (this.equationForm.valid) {
-      this.dialog
-        .open(EquationLayoutBuilderComponent, {
-          data: this.equationInformation
-        })
+      this.exerciseService.equationInfo.next(this.equationInformation);
     }
   }
 

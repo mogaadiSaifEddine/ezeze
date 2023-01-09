@@ -10,7 +10,7 @@ import { Exercise_Types } from 'src/app/model/Exercice_type';
 import { SerieService } from 'src/app/services/serie.service';
 import { AddBlockComponent } from './add-block/add-block.component';
 import { ExercicePreviewComponent } from './exercice-preview/exercice-preview.component';
-
+import { InitEquationFormComponent } from 'src/app/components/exercice/exercice-types/tables/vertical-equations/init-equation-form/init-equation-form.component';
 @Component({
   selector: 'app-add-exercice',
   templateUrl: './add-exercice.component.html',
@@ -26,7 +26,7 @@ export class AddExerciceComponent implements OnInit {
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<AddExerciceComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { exercice: Exercice; serieId: number; chapterId: number }
-  ) {}
+  ) { }
   hotspotsList = [];
   correctAnswerMode = false;
   displayedColumns: string[] = ['ordre', 'type', 'label', 'action'];
@@ -126,10 +126,16 @@ export class AddExerciceComponent implements OnInit {
   }
 
   openBlockDialog(element?: ExerciceBlock) {
+    let BLOCK_FORM_ACCORDING_TO_TYPE: any;
+    if (['VERTICAL_EQUATION'].includes(element.toString()))
+      BLOCK_FORM_ACCORDING_TO_TYPE = InitEquationFormComponent;
+    else
+      BLOCK_FORM_ACCORDING_TO_TYPE = AddBlockComponent;
+
     this.dialog
-      .open(AddBlockComponent, {
-        width: '700px',
-        maxWidth: '700px',
+      .open(BLOCK_FORM_ACCORDING_TO_TYPE, {
+        width: '70%',
+        maxWidth: '70%',
         maxHeight: '100vh',
         panelClass: 'my-custom-dialog-class',
         data: {
@@ -182,7 +188,7 @@ export class AddExerciceComponent implements OnInit {
       if (this.data.exercice) {
         this.serieService.updateExercice(exercice, this.data.exercice.ex_id).subscribe(async (res: Exercice) => {
           if (this.exerciceForm.get('file').value !== null)
-            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => {});
+            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => { });
           this.dialogRef.close(true);
         });
       } else {
@@ -203,7 +209,7 @@ export class AddExerciceComponent implements OnInit {
                 .subscribe((resFileBlock) => console.log(resFileBlock));
           });
           if (this.exerciceForm.get('file').value !== null)
-            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => {});
+            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => { });
           this.dialogRef.close(true);
         });
       }

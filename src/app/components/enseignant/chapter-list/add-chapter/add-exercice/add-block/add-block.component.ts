@@ -196,7 +196,7 @@ export class AddBlockComponent implements OnInit {
       this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
       this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
       this.fieldData.showPlaceholder = false;
-      this.fieldData.showValue = false;
+      this.fieldData.showValue = true;
       this.fieldData
     }
   }
