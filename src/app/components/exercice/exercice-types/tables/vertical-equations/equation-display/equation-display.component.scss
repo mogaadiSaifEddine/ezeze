@@ -2,58 +2,63 @@
     width: 100%;
     height: auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-gap: 1rem;
     overflow-y: scroll;
 
     .equationCard {
+
         table {
             border-collapse: collapse;
-            width: 120px;
+            width: auto;
+
+            td {
+                border: none;
+                width: 50px;
+            }
 
             tr {
                 position: relative;
             }
+        }
 
-            td {
-                border: none;
-                border-bottom: 1px solid #605975;
-                width: 100%;
+        .numberInput {
+            border: none;
+            text-align: right;
+            width: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            outline: none;
+        }
 
-                input {
-                    border: none;
-                    text-align: center;
-                }
+        // DYNAMIC CLASSES
+        .equationEndLine {
+            border-top: 2px solid #000;
+            padding: .5rem 0;
+        }
+
+        .signsHolder {
+            position: relative;
+            width: 60px;
+
+            .equalSign
+            .operator{
+                position: absolute;
+                left: 0;
+                top: 0;
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+
+            .operator{
+                top: -50px;
             }
         }
 
-        .hardCodedValues {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-align: center;
-            color: #605975;
-            border: none;
-        }
-
-        .equationSignsSeparator {
-            padding: .5rem 0;
-            border-top: 2px solid #000;
-        }
-
-        .displaySignsHere {
-            width: 50px;
-            height: 100px;
-            display: block;
-            background-color: red;
-
-            position: absolute;
-            bottom: 0;
-            left: -50px;
-
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: space-between;
+        .studentCanWriteHere{
+            border-bottom: 1px solid #605975;
+            font-weight: normal;
+            outline: none;
         }
     }
 }

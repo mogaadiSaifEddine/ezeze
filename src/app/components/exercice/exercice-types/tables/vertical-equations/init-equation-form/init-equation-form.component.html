@@ -10,24 +10,25 @@
             <ng-template matStepLabel>Equation Parameters</ng-template>
             <main>
                 <form [formGroup]="equationForm" (ngSubmit)="buildEquation()">
-                    <!-- ROWS -->
+                    <!-- ROWS & COLUMNS -->
                     <div class="row">
-                        <mat-form-field class="example-full-width" appearance='outline'>
-                            <mat-label>Number of rows ⬅️➡️</mat-label>
-                            <input type="number" matInput formControlName="numRows" placeholder="Ex. 2" min="1">
-                            <mat-hint>Type in the number of rows for this equation</mat-hint>
-                            <mat-error *ngIf="equationForm.get('numRows').hasError('required')">Number of rows is <strong>required</strong></mat-error>
-                        </mat-form-field>
-                    </div>
+                        <div class="col">
+                            <mat-form-field class="example-full-width" appearance='outline'>
+                                <mat-label>Number of rows ⬅️➡️</mat-label>
+                                <input type="number" matInput formControlName="numRows" placeholder="Ex. 2" min="1">
+                                <mat-hint>Type in the number of rows for this equation</mat-hint>
+                                <mat-error *ngIf="equationForm.get('numRows').hasError('required')">Number of rows is <strong>required</strong></mat-error>
+                            </mat-form-field>
+                        </div>
 
-                    <!-- COLUMNS -->
-                    <div class="row">
-                        <mat-form-field class="example-full-width" appearance='outline'>
-                            <mat-label>Number of columns ⬇️⬆️</mat-label>
-                            <input type="number" matInput formControlName="numColumns" placeholder="Ex. 2" min="1">
-                            <mat-hint>Type in the number of columns for this equation</mat-hint>
-                            <mat-error *ngIf="equationForm.get('numColumns').hasError('required')">Number of columns is <strong>required</strong></mat-error>
-                        </mat-form-field>
+                        <div class="col">
+                            <mat-form-field class="example-full-width" appearance='outline'>
+                                <mat-label>Number of columns ⬇️⬆️</mat-label>
+                                <input type="number" matInput formControlName="numColumns" placeholder="Ex. 2" min="1">
+                                <mat-hint>Type in the number of columns for this equation</mat-hint>
+                                <mat-error *ngIf="equationForm.get('numColumns').hasError('required')">Number of columns is <strong>required</strong></mat-error>
+                            </mat-form-field>
+                        </div>
                     </div>
 
                     <div class="equationConfiguratoinRow">

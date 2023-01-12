@@ -11,14 +11,33 @@
     <mat-card-content class="equationGrid" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
         <!-- TABLE === 1 EUATION -->
         <table class="equationCard" *ngFor="let block of exercice?.blocks; let index;">
-            <tr *ngFor="let row of MATRIX let even = even; let odd = odd; let indexRow = index" [ngClass]="{ odd: odd, even: even }">
-                <span class="signs" *ngIf="indexRow === row.length-1" class="displaySignsHere">
-                    <h4 class="operator">X</h4>
-                    <h4 class="equalSign">=</h4>
-                </span>
-                <td *ngFor="let field of row; let indexColumn= index" [ngClass]="indexRow === row.length && 'equationSignsSeparator'">
-                    <input type="number" min="0" class="numberInput" [readonly]="MATRIX[indexRow][indexColumn]?.length>0" [ngClass]="MATRIX[indexRow][indexColumn]?.length>0 && 'hardCodedValues'"
-                        [value]="MATRIX[indexRow][indexColumn]">
+            <tr *ngFor="let row of MATRIX let indexRow = index">
+                <td *ngFor="let field of row; let indexColumn= index" [ngClass]="indexRow === row.length && 'equationEndLine'">
+                    <input 
+                        type="number" 
+                        min="0" 
+                        class="numberInput" 
+                        [ngClass]="(MIRROR_MATRIX_STUDENT[indexRow][indexColumn]?.length>0) && 'studentCanWriteHere'"
+                        [readonly]="MATRIX[indexRow][indexColumn]?.length>0" 
+                        [value]="MATRIX[indexRow][indexColumn]"
+                        *ngIf="!((indexRow === (row.length)) && (indexColumn === 0))"
+                    >
+
+                    <label
+                        class="signsHolder"
+                        *ngIf="(indexRow===(row.length)) && (indexColumn === 0)"
+                    >
+                        <span class="operator">{{CURRENT_OPERATOR}}</span>
+                        <span class="equalSign">=</span>
+                        <input 
+                            type="number" 
+                            min="0" 
+                            class="numberInput" 
+                            [ngClass]="(MIRROR_MATRIX_STUDENT[indexRow][indexColumn]?.length>0) && 'studentCanWriteHere'"
+                            [readonly]="MATRIX[indexRow][indexColumn]?.length>0" 
+                            [value]="MATRIX[indexRow][indexColumn]"
+                        >
+                    </label>
                 </td>
             </tr>
         </table>

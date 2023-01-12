@@ -16,7 +16,9 @@ export class EquationDisplayComponent implements OnInit {
   @Input() answer: boolean;
   @Output() answerChange = new EventEmitter<boolean>();
   @Output() canGoNext = new EventEmitter<boolean>();
-  MATRIX: any[][];
+  MATRIX: any[][]; // the one to display
+  MIRROR_MATRIX_STUDENT: any[][]; // the one to allow edits on
+  CURRENT_OPERATOR: any;
 
   constructor(
     private exerciseService: ExcerciceserviceService
@@ -30,6 +32,7 @@ export class EquationDisplayComponent implements OnInit {
     this.exerciseService.equationInfo.subscribe({
       next: (val: any) => {
         this.MATRIX = Array.from(Array(val?.numRows), () => new Array(val?.numColumns));
+        this.MIRROR_MATRIX_STUDENT = Array.from(Array(val?.numRows), () => new Array(val?.numColumns));
       }
     });
   }
@@ -38,13 +41,13 @@ export class EquationDisplayComponent implements OnInit {
     this.exercice.blocks.forEach((block: any) => {
       if (block.exerciceBlockType === ExerciceBlockTypes.EQUATION) {
         const EQUATION_BLOCK = block?.blockParams;
+        this.CURRENT_OPERATOR = EQUATION_BLOCK.matrixLayout.operator;
         this.drawEquationMatrix();
         for (let indexRow = 0; indexRow < EQUATION_BLOCK.matrixLayout.numRows; indexRow++) {
           for (let indexColumn = 0; indexColumn < EQUATION_BLOCK.matrixLayout.numColumns; indexColumn++) {
-            console.log(`ARRAY [${indexRow}][${indexColumn}]`,);
             this.MATRIX[indexRow][indexColumn] = EQUATION_BLOCK.teacher_matrix[indexRow][indexColumn];
+            this.MIRROR_MATRIX_STUDENT[indexRow][indexColumn] = EQUATION_BLOCK.student_matrix[indexRow][indexColumn];
           }
-
         }
       }
     });
