@@ -52,6 +52,7 @@ import { GeneralTablesBuilderComponent } from './exercice-types/tables/general-p
 import { GeneralTablesTeacherStudentComponent } from './exercice-types/tables/general-purpose-tables/general-tables-teacher-student/general-tables-teacher-student.component';
 import { GeneralTablesStudentDisplayComponent } from './exercice-types/tables/general-purpose-tables/general-tables-student-display/general-tables-student-display.component';
 import { SentenceBuilderComponent } from './exercice-types/stroke-wrong-answer/stroke-sentence/sentence-builder/sentence-builder.component';
+import { VersionSelectorComponent } from './exercice-types/stroke-wrong-answer/version-selector/version-selector.component';
 const MaterialModules = [MatStepperModule, MatDialogModule, MatIconModule, MatCardModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, DragDropModule, MatSelectModule, MatButtonModule, MatTooltipModule,
 ];
 
@@ -97,7 +98,8 @@ const MaterialModules = [MatStepperModule, MatDialogModule, MatIconModule, MatCa
     GeneralTablesBuilderComponent,
     GeneralTablesTeacherStudentComponent,
     GeneralTablesStudentDisplayComponent,
-    SentenceBuilderComponent
+    SentenceBuilderComponent,
+    VersionSelectorComponent
   ],
   providers: [],
   exports: [
