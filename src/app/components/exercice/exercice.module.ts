@@ -41,6 +41,8 @@ import { FalfoulComponent } from './falfoul/falfoul.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ListeningComponent } from './exercice-types/listening/listening.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+
+import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters.component';
 const MaterialModules = [
   MatCardModule,
   MatRadioModule,
@@ -78,7 +80,8 @@ const MaterialModules = [
     DrawLinesComponent,
     LineAnchorDirective,
     FalfoulComponent,
-    ListeningComponent
+    ListeningComponent,
+    FillLettersComponent
   ],
   providers: [],
   exports: [
@@ -104,7 +107,8 @@ const MaterialModules = [
     CorrespondingArrowComponent,
     DrawLinesComponent,
     LineAnchorDirective,
-    FalfoulComponent
+    FalfoulComponent,
+    FillLettersComponent
   ]
 })
 export class ExerciceModule {}

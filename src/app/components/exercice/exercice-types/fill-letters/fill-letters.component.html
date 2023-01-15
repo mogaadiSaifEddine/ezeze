@@ -1,0 +1,30 @@
+<mat-card *ngIf="exercice.name">
+  <div class="question-container">
+    <div [innerHTML]="exercice?.name"></div>
+  </div>
+</mat-card>
+
+<mat-card>
+  <div class="question-container">
+    <div [innerHTML]="exercice?.question"></div>
+    <br />
+    <mat-card-content [ngStyle]="{ direction: exercice['rtl'] ? 'rtl' : '' }">
+      <ng-container *ngFor="let sectionArray of sectionsMatrix; let i = index">
+        <ng-container *ngFor="let section of sectionArray; let j = index">
+          <span *ngIf="section.type === 'text'">{{ section.value }}</span>
+          <input
+            class="fillable-input"
+            *ngIf="section.type === 'input'"
+            placeholder="..."
+            [maxlength]="section.maxLength"
+            (change)="valueChanged()"
+            [(ngModel)]="section.value"
+            [name]="'input' + j + i"
+            [size]="section.maxLength > 1 ? section.maxLength - 1 : 1"
+            required />
+        </ng-container>
+        <span *ngIf="i !== sectionsMatrix.length - 1"> - </span>
+      </ng-container>
+    </mat-card-content>
+  </div>
+</mat-card>

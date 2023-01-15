@@ -5,7 +5,7 @@
         (selectionChange)="checkFieldsToShow()"
         formControlName="exerciceBlockType"
         placeholder="{{ 'choose-block-type' | translate }}">
-        <mat-option *ngFor="let type of TYPES_KEYS_MAP" [value]="type.key">{{ type.value }}</mat-option>
+        <mat-option *ngFor="let type of blockTypes" [value]="type">{{ type }}</mat-option>
       </mat-select>
       <mat-error *ngIf="!blockForm.get('exerciceBlockType').valid && blockForm.get('exerciceBlockType').touched">
         {{ 'please-select-any-item' | translate }}
@@ -23,7 +23,6 @@
     <mat-form-field *ngIf="fieldData.showCorrectValue" appearance="outline">
       <input formControlName="correctValue" matInput [placeholder]="fieldData.correctValueHolder" />
     </mat-form-field>
-
     <mat-form-field *ngIf="fieldData.showValue" appearance="outline">
       <input formControlName="value" matInput [placeholder]="fieldData.valueHolder" />
     </mat-form-field>

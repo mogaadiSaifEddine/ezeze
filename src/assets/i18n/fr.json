@@ -158,7 +158,7 @@
   "actions": "Actions",
   "block": "Block",
   "exercice": "Exercice",
-  "label": "Étiquette",
+  "label": "Labelle",
   "nom-de-lexercice": "Nom de l'exercice",
   "ordre": "Ordre",
   "question-de-lexercice": "Question de l'exercice",
@@ -172,5 +172,13 @@
   "EVALUATION": "Serie d'evaluation 3",
   "PREREQUISITE": "Serie des prerequis 3",
   "go-to-dashboard-1": "Aller au tableau de bord",
-  "good-job-1": "Bon travail!"
+  "good-job-1": "Bon travail!",
+  "exercise": {
+    "add": {
+      "table-columns": {
+        "correctValue": "Valeur correcte",
+        "value": "Valeur"
+      }
+    }
+  }
 }
