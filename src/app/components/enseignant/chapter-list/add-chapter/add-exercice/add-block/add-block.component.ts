@@ -51,7 +51,8 @@ export class AddBlockComponent implements OnInit {
     [Exercise_Types.FILL_BLANKS_IMG]: [],
     [Exercise_Types.COLOR_SHAPE]: [],
     TEXT_UNDER_IMAGE: [ExerciceBlockTypes.IMAGE_WITH_TEXT],
-    VERTICAL_EQUATION: [ExerciceBlockTypes.EQUATION]
+    VERTICAL_EQUATION: [ExerciceBlockTypes.EQUATION],
+    GENERAL_TABLES: [ExerciceBlockTypes.TABLE]
   };
   readonly showFieldsFor: Record<Exercise_Types, () => void> = {
     LIKERT_SCALE: () => this.showFieldsForLikertScale(),
@@ -72,6 +73,7 @@ export class AddBlockComponent implements OnInit {
     WRITING: (): void => { },
     TEXT_UNDER_IMAGE: () => this.showFieldsForTextUnderImage(),
     VERTICAL_EQUATION: () => this.showFieldsForVerticalEquation(),
+    GENERAL_TABLES: () => this.showFieldsForGeneralTable(),
     LINK_ARROW: (): void => { },
     [Exercise_Types.DRAG_SYLLABLES]: function (): void {
       throw new Error('Function not implemented.');
@@ -193,6 +195,15 @@ export class AddBlockComponent implements OnInit {
 
   showFieldsForVerticalEquation() {
     if (this.blockForm.get('exerciceBlockType').value === 21) {
+      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
+      this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
+      this.fieldData.showPlaceholder = false;
+      this.fieldData.showValue = true;
+      this.fieldData
+    }
+  }
+  showFieldsForGeneralTable() {
+    if (this.blockForm.get('exerciceBlockType').value === 22) {
       this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
       this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
       this.fieldData.showPlaceholder = false;

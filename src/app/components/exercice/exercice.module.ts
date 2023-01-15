@@ -48,6 +48,7 @@ import { EquationLayoutBuilderComponent } from './exercice-types/tables/vertical
 import { EquationDisplayComponent } from './exercice-types/tables/vertical-equations/equation-display/equation-display.component';
 // EDIROE
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { GeneralTablesBuilderComponent } from './exercice-types/tables/general-purpose-tables/general-tables-builder/general-tables-builder.component';
 const MaterialModules = [MatStepperModule, MatDialogModule, MatIconModule, MatCardModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, DragDropModule, MatSelectModule, MatButtonModule, MatTooltipModule,
 ];
 
@@ -89,7 +90,8 @@ const MaterialModules = [MatStepperModule, MatDialogModule, MatIconModule, MatCa
     TextUnderImageComponent,
     InitEquationFormComponent,
     EquationLayoutBuilderComponent,
-    EquationDisplayComponent
+    EquationDisplayComponent,
+    GeneralTablesBuilderComponent
   ],
   providers: [],
   exports: [

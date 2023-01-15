@@ -20,5 +20,6 @@ export enum ExerciceBlockTypes {
   AUDIO = 'AUDIO',
   AUDIO_IMAGE = 'AUDIO_IMAGE',
   IMAGE_WITH_TEXT = 'IMAGE_WITH_TEXT',
-  EQUATION = 'EQUATION'
+  EQUATION = 'EQUATION',
+  TABLE = "TABLE"
 }
