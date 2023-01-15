@@ -51,6 +51,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { GeneralTablesBuilderComponent } from './exercice-types/tables/general-purpose-tables/general-tables-builder/general-tables-builder.component';
 import { GeneralTablesTeacherStudentComponent } from './exercice-types/tables/general-purpose-tables/general-tables-teacher-student/general-tables-teacher-student.component';
 import { GeneralTablesStudentDisplayComponent } from './exercice-types/tables/general-purpose-tables/general-tables-student-display/general-tables-student-display.component';
+import { SentenceBuilderComponent } from './exercice-types/stroke-wrong-answer/stroke-sentence/sentence-builder/sentence-builder.component';
 const MaterialModules = [MatStepperModule, MatDialogModule, MatIconModule, MatCardModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, DragDropModule, MatSelectModule, MatButtonModule, MatTooltipModule,
 ];
 
@@ -95,7 +96,8 @@ const MaterialModules = [MatStepperModule, MatDialogModule, MatIconModule, MatCa
     EquationDisplayComponent,
     GeneralTablesBuilderComponent,
     GeneralTablesTeacherStudentComponent,
-    GeneralTablesStudentDisplayComponent
+    GeneralTablesStudentDisplayComponent,
+    SentenceBuilderComponent
   ],
   providers: [],
   exports: [
