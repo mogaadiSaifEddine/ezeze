@@ -14,6 +14,7 @@ export class EquationDisplayComponent implements OnInit {
   @Input() answer: boolean;
   @Output() answerChange = new EventEmitter<boolean>();
   @Output() canGoNext = new EventEmitter<boolean>();
+  IS_CORRECT_COMBINATION = false;
 
   constructor() { }
 
@@ -29,20 +30,13 @@ export class EquationDisplayComponent implements OnInit {
     });
   }
 
-  valueChanged(e: any, index: any) {
-    const USER_ANSWER = e.target;
-    const ANSWER_INDEX = index.blockOrder;
+  valueChanged(e: any, index: any, correctValue: any) {
+    const USER_ANSWER = e.target.value;
+    const ANSWER_INDEX = index;
+    this.IS_CORRECT_COMBINATION = (USER_ANSWER === correctValue);
 
-    console.log('VALUE HAS BEEN CHANGED ::: ', USER_ANSWER, ANSWER_INDEX);
-
-
-    // if (this.CORRECT_NAMES_ARRAY[ANSWER_INDEX] === USER_ANSWER)
-    //   this.correct = true
-    // else
-    //   this.correct = false;
-
-    // this.answerChange.emit(this.correct);
-    // this.canGoNext.emit(true);
+    this.answerChange.emit(this.IS_CORRECT_COMBINATION);
+    this.canGoNext.emit(true);
   }
 
   ngOnDestroy() {
