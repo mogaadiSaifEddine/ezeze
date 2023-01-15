@@ -11,9 +11,6 @@
     <mat-card-content class="equationGrid" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
         <!-- TABLE === 1 EUATION -->
         <table class="equationCard" *ngFor="let block of exercice?.blocks; let index = index;">
-            <div>
-                <h1>{{index}}</h1>
-            </div>
             <tr *ngFor="let row of block.blockParams['teacher_matrix'] let indexRow = index">
                 <td *ngFor="let field of row; let indexColumn= index" [ngClass]="(indexRow === block.blockParams['matrixLayout'].numRows-1) && 'equationEndLine'">
                     <input type="number" min="0" class="numberInput" [ngClass]="(block.blockParams['student_matrix'][indexRow][indexColumn]?.length>0) && 'studentCanWriteHere'"

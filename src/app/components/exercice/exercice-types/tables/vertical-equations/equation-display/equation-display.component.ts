@@ -32,7 +32,6 @@ export class EquationDisplayComponent implements OnInit {
 
   valueChanged(e: any, index: any, correctValue: any) {
     const USER_ANSWER = e.target.value;
-    const ANSWER_INDEX = index;
     this.IS_CORRECT_COMBINATION = (USER_ANSWER === correctValue);
 
     this.answerChange.emit(this.IS_CORRECT_COMBINATION);
