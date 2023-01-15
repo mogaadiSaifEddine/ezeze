@@ -57,9 +57,6 @@ export class EquationLayoutBuilderComponent implements OnInit {
       student_matrix: this.MATRIX_STUDENT
     }
 
-    console.log("=============================");
-    console.log(PARAMS);
-
     this.equationBlock = {
       exerciceBlockId: null,
       exerciceId: null,
@@ -71,7 +68,7 @@ export class EquationLayoutBuilderComponent implements OnInit {
       blockOrder: null,
       files: null,
       exerciceBlockType: ExerciceBlockTypes.EQUATION,
-      blockParams: PARAMS
+      blockParams: JSON.stringify(PARAMS)
     }
 
     this.dialogRef.close(this.equationBlock);

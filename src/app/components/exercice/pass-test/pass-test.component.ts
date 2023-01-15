@@ -40,7 +40,6 @@ export class PassTestComponent implements OnInit {
     this.revisionService.getLastExerciceId(this.UserId).subscribe((res) => {
       this.currentExercise = this.evaluationContent.exercices.find((ex) => ex.ex_id === res.id) || this.evaluationContent.exercices[0];
       this.loading = false;
-      console.log("PASS-TEST.COMPONENT.TS :: CURRENT EXERCICE BEING RETURNED ::: ", this.currentExercise);
     }, (error) => {
       this.currentExercise = this.evaluationContent.exercices[0];
       this.loading = false;

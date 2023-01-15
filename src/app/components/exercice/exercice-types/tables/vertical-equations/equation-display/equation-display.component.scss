@@ -34,15 +34,15 @@
         // DYNAMIC CLASSES
         .equationEndLine {
             border-top: 2px solid #000;
-            padding: .5rem 0;
+            padding: 1rem 0;
         }
 
         .signsHolder {
             position: relative;
             width: 60px;
 
-            .equalSign
-            .operator{
+            .equalSign,
+            .operator {
                 position: absolute;
                 left: 0;
                 top: 0;
@@ -50,12 +50,12 @@
                 font-weight: bold;
             }
 
-            .operator{
+            .operator {
                 top: -50px;
             }
         }
 
-        .studentCanWriteHere{
+        .studentCanWriteHere {
             border-bottom: 1px solid #605975;
             font-weight: normal;
             outline: none;

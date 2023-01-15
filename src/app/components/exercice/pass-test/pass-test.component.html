@@ -7,7 +7,7 @@
 
 <ines-text-under-image *ngIf="!loading && currentExercise.type === TYPES.TEXT_UNDER_IMAGE" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></ines-text-under-image>
 
-<ines-equation-display *ngIf="!loading && currentExercise.type === TYPES.TEXT_UNDER_IMAGE" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></ines-equation-display>
+<ines-equation-display *ngIf="!loading && currentExercise.type === TYPES.VERTICAL_EQUATION" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></ines-equation-display>
 
 <app-multiple-choice *ngIf="!loading && currentExercise.type === TYPES.MULTIPLE_CHOICE" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-multiple-choice>
 
