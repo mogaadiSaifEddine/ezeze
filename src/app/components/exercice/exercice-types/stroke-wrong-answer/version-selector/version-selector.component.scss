@@ -1,0 +1,43 @@
+.radioOptins {
+    box-sizing: border-box;
+    margin-top: 1rem;
+    width: 100%;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+
+    input[type="radio"] {
+        display: none;
+
+        &:checked~.contentContainer {
+            border: 2px solid #605975;
+        }
+    }
+
+    .contentContainer {
+        width: 100%;
+        padding: 1.4rem;
+        border: 1px solid var(--gray3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        img {
+            width: 100%;
+        }
+
+        &:hover {
+            border: 2px solid #605975;
+
+            .icon {
+                color: #605975;
+            }
+
+            span {
+                color: #605975;
+            }
+        }
+    }
+}

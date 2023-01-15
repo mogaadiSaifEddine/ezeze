@@ -12,6 +12,8 @@ import { AddBlockComponent } from './add-block/add-block.component';
 import { ExercicePreviewComponent } from './exercice-preview/exercice-preview.component';
 import { InitEquationFormComponent } from 'src/app/components/exercice/exercice-types/tables/vertical-equations/init-equation-form/init-equation-form.component';
 import { GeneralTablesBuilderComponent } from 'src/app/components/exercice/exercice-types/tables/general-purpose-tables/general-tables-builder/general-tables-builder.component';
+import { VersionSelectorComponent } from 'src/app/components/exercice/exercice-types/stroke-wrong-answer/version-selector/version-selector.component';
+
 @Component({
   selector: 'app-add-exercice',
   templateUrl: './add-exercice.component.html',
@@ -132,6 +134,8 @@ export class AddExerciceComponent implements OnInit {
       BLOCK_FORM_ACCORDING_TO_TYPE = InitEquationFormComponent;
     else if (element.toString() === "GENERAL_TABLES")
       BLOCK_FORM_ACCORDING_TO_TYPE = GeneralTablesBuilderComponent;
+    else if (element.toString() === "STROKE_WRONG_ANSWER")
+      BLOCK_FORM_ACCORDING_TO_TYPE = VersionSelectorComponent;
     else
       BLOCK_FORM_ACCORDING_TO_TYPE = AddBlockComponent;
 

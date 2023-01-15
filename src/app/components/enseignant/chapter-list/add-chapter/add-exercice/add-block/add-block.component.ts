@@ -215,7 +215,7 @@ export class AddBlockComponent implements OnInit {
   }
 
   showFieldsForStrokeTheWrongAnswer() {
-    if (this.blockForm.get('exerciceBlockType').value === 22) {
+    if (this.blockForm.get('exerciceBlockType').value === 23) {
       this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
       this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
       this.fieldData.showPlaceholder = false;
