@@ -39,11 +39,21 @@ import { LineAnchorDirective } from './exercice-types/corresponding-arrow/draw-l
 import { FalfoulComponent } from './falfoul/falfoul.component';
 // EDIROE
 import { AngularEditorModule } from '@kolkov/angular-editor';
-const MaterialModules = [MatCardModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, DragDropModule, MatSelectModule, MatButtonModule, MatTooltipModule];
-
+import { ListeningComponent } from './exercice-types/listening/listening.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+const MaterialModules = [
+  MatCardModule,
+  MatRadioModule,
+  MatCheckboxModule,
+  MatFormFieldModule,
+  DragDropModule,
+  MatSelectModule,
+  MatButtonModule,
+  MatTooltipModule
+];
 
 @NgModule({
-  imports: [MaterialModules, TranslateModule, FormsModule, MatInputModule, CommonModule, AngularEditorModule],
+  imports: [MaterialModules, TranslateModule, FormsModule, MatInputModule, CommonModule, AngularEditorModule, SharedModule],
   declarations: [
     MultipleChoiceComponent,
     MultipleAnswersComponent,
@@ -67,7 +77,8 @@ const MaterialModules = [MatCardModule, MatRadioModule, MatCheckboxModule, MatFo
     CorrespondingArrowComponent,
     DrawLinesComponent,
     LineAnchorDirective,
-    FalfoulComponent
+    FalfoulComponent,
+    ListeningComponent
   ],
   providers: [],
   exports: [
@@ -96,4 +107,4 @@ const MaterialModules = [MatCardModule, MatRadioModule, MatCheckboxModule, MatFo
     FalfoulComponent
   ]
 })
-export class ExerciceModule { }
+export class ExerciceModule {}

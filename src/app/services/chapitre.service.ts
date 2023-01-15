@@ -12,7 +12,7 @@ export class ChapitreService {
   constructor(private http: HttpClient) {}
   user_id = JSON.parse(localStorage.getItem('user_details')).user_id;
   chapterList = new BehaviorSubject<ChapterChildren[]>(null);
-
+  isMenuOpened = new BehaviorSubject<boolean>(false);
   getchapitre() {
     return this.http.get<Chapter[]>(this.serverApi + 'Elearning/' + 'Chapter/teacher/' + this.user_id);
   }
@@ -33,13 +33,15 @@ export class ChapitreService {
     },
     group_id: number
   ) {
-    return this.http.post(this.serverApi + 'Elearning/' + 'Chapter/' + group_id + '/' + this.user_id + '/' + (chapter.matiere || 0), chapter);
+    return this.http.post(
+      this.serverApi + 'Elearning/' + 'Chapter/' + group_id + '/' + this.user_id + '/' + (chapter.matiere || 0),
+      chapter
+    );
   }
 
   async uploadFile(file: File, chapter_id: number) {
     const formData = new FormData();
     formData.set('file', file);
-
 
     return this.http.post(this.serverApi + 'Elearning/' + 'chapter/cart/' + chapter_id, formData);
   }
@@ -47,12 +49,10 @@ export class ChapitreService {
     const formData = new FormData();
     formData.set('file', file);
 
-
     return this.http.post(this.serverApi + 'Elearning/' + 'chapter/course/' + chapter_id, formData);
   }
 
   getFile(file_id: number) {
-
     return this.http.get(this.serverApi + 'Elearning/' + 'chapter/cart/' + file_id, {
       responseType: 'blob'
     });

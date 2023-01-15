@@ -232,8 +232,8 @@ export class AddBlockComponent implements OnInit {
       isAdmissable: [this.data.block?.isAdmissable],
       exercice_Block_Id: [this.data.block?.exerciceBlockId],
       imageFile: [''],
-      audioFile: [''],
-      workstationUuid: this.fb.group({})
+      audioFile: ['']
+      // workstationUuid: this.fb.group({})
     });
   }
 

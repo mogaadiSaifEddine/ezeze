@@ -73,6 +73,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "proxy.conf.json",
+                  "with": "proxy.conf.test.json"
                 }
               ],
               "outputHashing": "all"
@@ -94,6 +98,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.test.ts"
+                },
+                {
+                  "replace": "proxy.conf.json",
+                  "with": "proxy.conf.test.json"
                 }
               ],
               "outputHashing": "all"
@@ -116,7 +124,8 @@
               "browserTarget": "ines-academy-frontend:build:production"
             },
             "development": {
-              "browserTarget": "ines-academy-frontend:build:development"
+              "browserTarget": "ines-academy-frontend:build:development",
+              "proxyConfig": "proxy.conf.test.json"
             }
           },
           "defaultConfiguration": "development"

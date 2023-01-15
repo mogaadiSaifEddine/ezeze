@@ -7,10 +7,10 @@ export const environment = {
   production: false,
 
   // // Dev server Api
-  serverApi: 'http://179.61.246.84:8081/',
+  // serverApi: 'http://179.61.246.84:8081/',
 
   // local server Api
-  // serverApi: 'http://localhost:8081/',
+  serverApi: 'http://localhost:8081/',
 
   //
   //
@@ -59,7 +59,9 @@ export const environment = {
   exerciceBlock: 'exerciceBlock/',
   serieExercice: 'serie_exercice/',
   userAnswer: 'UserAnswer/',
-  getScoreSerie: 'UserAnswer/score/{userId}/{serie_exercice_id}'
+  getScoreSerie: 'UserAnswer/score/{userId}/{serie_exercice_id}',
+
+  filesSrc: 'filegetter/{{fileurl}}'
 };
 
 /*

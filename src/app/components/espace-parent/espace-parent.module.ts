@@ -27,8 +27,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { VouchercheckComponent } from './dialogs/vouchercheck/vouchercheck.component';
-
-
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const MATERIAL_MODULES = [
   MatIconModule,
@@ -57,14 +56,7 @@ const MATERIAL_MODULES = [
     TokenDetailsComponent,
     VouchercheckComponent
   ],
-  imports: [
-    CommonModule,
-    EspaceParentRoutingModule,
-    MATERIAL_MODULES,
-    ReactiveFormsModule,
-    TranslateModule.forChild({})
-  ],
+  imports: [CommonModule, EspaceParentRoutingModule, MATERIAL_MODULES, ReactiveFormsModule, SharedModule, TranslateModule.forChild({})],
   providers: [DatePipe]
 })
-
-export class EspaceParentModule { }
+export class EspaceParentModule {}

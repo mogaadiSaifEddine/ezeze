@@ -13,4 +13,5 @@ export interface ExerciceBlock {
   blockOrder: number;
   files: any[];
   blockParams?: Object | string | null | undefined;
+  blockFileList: any[];
 }
