@@ -12,6 +12,7 @@ export class ExcerciceserviceService {
   // VERTICAL EQUATIONS LOGIC
   equationInfo = new BehaviorSubject(null);
   // ========
+  tableInfo = new BehaviorSubject(null);
 
   constructor(private _http: HttpClient) { }
   ajouterserieexetblock(exercice, id: number): Observable<any> {

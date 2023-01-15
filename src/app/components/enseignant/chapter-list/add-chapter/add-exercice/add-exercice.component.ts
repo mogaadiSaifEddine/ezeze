@@ -11,6 +11,7 @@ import { SerieService } from 'src/app/services/serie.service';
 import { AddBlockComponent } from './add-block/add-block.component';
 import { ExercicePreviewComponent } from './exercice-preview/exercice-preview.component';
 import { InitEquationFormComponent } from 'src/app/components/exercice/exercice-types/tables/vertical-equations/init-equation-form/init-equation-form.component';
+import { GeneralTablesBuilderComponent } from 'src/app/components/exercice/exercice-types/tables/general-purpose-tables/general-tables-builder/general-tables-builder.component';
 @Component({
   selector: 'app-add-exercice',
   templateUrl: './add-exercice.component.html',
@@ -129,6 +130,8 @@ export class AddExerciceComponent implements OnInit {
     let BLOCK_FORM_ACCORDING_TO_TYPE: any;
     if (['VERTICAL_EQUATION'].includes(element.toString()))
       BLOCK_FORM_ACCORDING_TO_TYPE = InitEquationFormComponent;
+    else if (element.toString() === "GENERAL_TABLES")
+      BLOCK_FORM_ACCORDING_TO_TYPE = GeneralTablesBuilderComponent;
     else
       BLOCK_FORM_ACCORDING_TO_TYPE = AddBlockComponent;
 
