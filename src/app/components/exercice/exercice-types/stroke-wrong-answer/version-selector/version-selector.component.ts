@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+// DIALOGS
+import { SentenceBuilderComponent } from '../stroke-sentence/sentence-builder/sentence-builder.component';
 
 @Component({
   selector: 'ines-version-selector',
@@ -24,7 +27,9 @@ export class VersionSelectorComponent implements OnInit {
 
   CHOSEN_VARATION: any;
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog,
+  ) { }
 
   ngOnInit(): void {
   }
@@ -36,21 +41,16 @@ export class VersionSelectorComponent implements OnInit {
   DisplayBlockCreator() {
     // don't forget to close this one
 
+    let BLOCK_CREATOR_ACORDING_TO_TYPE: any;
+    if (this.CHOSEN_VARATION === "sentence")
+      BLOCK_CREATOR_ACORDING_TO_TYPE = SentenceBuilderComponent;
 
-    switch (this.CHOSEN_VARATION) {
-
-      case 'sentence':
-        console.log("OPENING THIS FUCKER");
-        break;
-
-      case 'sentence':
-        console.log("OPENING THIS FUCKER");
-        break;
-
-      case 'sentence':
-        console.log("OPENING THIS FUCKER");
-        break;
-    }
+    this.dialog
+      .open(BLOCK_CREATOR_ACORDING_TO_TYPE, {
+        width: '70%',
+        maxWidth: '800px',
+        maxHeight: '80vh',
+      });
   }
 
 }
