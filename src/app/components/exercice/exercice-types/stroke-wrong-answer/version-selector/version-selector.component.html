@@ -9,7 +9,7 @@
             <label *ngFor="let varation of exerciseVarations;" for={{varation.type}}>
                 <input type="radio" name='exerciseVaration' value={{varation.type}} id={{varation.type}} />
                 <div class="contentContainer">
-                    <img src={{varation.thumbnail}} alt="thumbnail">
+                    <img src={{varation.thumbnail}} (load)="'....'" alt="thumbnail">
                 </div>
             </label>
         </div>

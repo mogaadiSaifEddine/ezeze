@@ -29,6 +29,7 @@ export class VersionSelectorComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
+    private dialogRef: MatDialogRef<VersionSelectorComponent>
   ) { }
 
   ngOnInit(): void {
@@ -50,6 +51,10 @@ export class VersionSelectorComponent implements OnInit {
         width: '70%',
         maxWidth: '800px',
         maxHeight: '80vh',
+      }).afterClosed().subscribe((result) => {
+        if (result) {
+          this.dialogRef.close(result);
+        }
       });
   }
 
