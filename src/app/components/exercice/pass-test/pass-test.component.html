@@ -12,6 +12,9 @@
 <ines-general-tables-student-display *ngIf="!loading && currentExercise.type === TYPES.GENERAL_TABLES" [exercice]="currentExercise" (canGoNext)="canGoNext($event)"
   [(answer)]="answer"></ines-general-tables-student-display>
 
+<ines-stroke-answer-display *ngIf="!loading && currentExercise.type === TYPES.STROKE_WRONG_ANSWER" [exercice]="currentExercise" (canGoNext)="canGoNext($event)"
+  [(answer)]="answer"></ines-stroke-answer-display>
+
 <app-multiple-choice *ngIf="!loading && currentExercise.type === TYPES.MULTIPLE_CHOICE" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-multiple-choice>
 
 <app-true-false *ngIf="!loading && currentExercise.type === TYPES.TRUE_FALSE" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-true-false>

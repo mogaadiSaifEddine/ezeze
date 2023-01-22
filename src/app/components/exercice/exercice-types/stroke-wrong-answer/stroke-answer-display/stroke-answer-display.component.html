@@ -1,0 +1,28 @@
+<mat-card *ngIf="exercice.name">
+    <div class="question-container">
+        <mat-card-title [innerHTML]="exercice?.name" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></mat-card-title>
+    </div>
+</mat-card>
+
+<mat-card>
+    <div class="question-container">
+        <div [innerHTML]="exercice?.question"></div><br>
+    </div>
+    <mat-card-content class="equationGrid" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+        <section *ngFor="let block of exercice.blocks">
+
+            <!-- sentences -->
+            <div class="SENTENCES" *ngIf="block.blockParams['sentences'].sentencesArray.length>0">
+                <input type="text" *ngFor="let SENTENCE of block.blockParams['sentences'].sentencesArray; let index=index" (click)="toggleStroke($event, index)" readonly
+                    [value]="SENTENCE.sentenceBody" class="stroked" />
+            </div>
+
+
+
+
+
+
+
+        </section>
+    </mat-card-content>
+</mat-card>
