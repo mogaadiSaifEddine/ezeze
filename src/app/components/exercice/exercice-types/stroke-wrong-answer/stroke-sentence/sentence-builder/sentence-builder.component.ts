@@ -12,7 +12,7 @@ import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
 export class SentenceBuilderComponent implements OnInit {
 
   sentencesFormGroup: FormGroup;
-  equationBlock: ExerciceBlock;
+  sentenceBlock: ExerciceBlock;
 
   constructor(
     private fb: FormBuilder,
@@ -52,7 +52,7 @@ export class SentenceBuilderComponent implements OnInit {
         sentences: this.sentencesFormGroup.value
       }
 
-      this.equationBlock = {
+      this.sentenceBlock = {
         exerciceBlockId: null,
         exerciceId: null,
         label: null,
@@ -66,7 +66,7 @@ export class SentenceBuilderComponent implements OnInit {
         blockParams: JSON.stringify(PARAMS)
       }
 
-      this.dialogRef.close(this.equationBlock);
+      this.dialogRef.close(this.sentenceBlock);
     }
   }
 
