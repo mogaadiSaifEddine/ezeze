@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ExerciceBlock } from 'src/app/model/ExerciceBlock';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
@@ -36,7 +36,7 @@ export class SentenceBuilderComponent implements OnInit {
   addNewGroupToSentencesArray(event: any) {
     event.preventDefault();
     const newSentenceFormGroup = this.fb.group({
-      sentenceBody: [null],
+      sentenceBody: [null, Validators.required],
       isWrong: [false]
     })
     this.getSentencesFormArray.push(newSentenceFormGroup);
