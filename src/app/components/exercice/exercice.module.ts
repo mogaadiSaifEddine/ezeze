@@ -25,6 +25,8 @@ import { ColorTheTextElementComponent } from './exercice-types/color-the-text/co
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+
 
 
 import { CommonModule } from '@angular/common';
@@ -54,7 +56,8 @@ import { GeneralTablesStudentDisplayComponent } from './exercice-types/tables/ge
 import { SentenceBuilderComponent } from './exercice-types/stroke-wrong-answer/stroke-sentence/sentence-builder/sentence-builder.component';
 import { VersionSelectorComponent } from './exercice-types/stroke-wrong-answer/version-selector/version-selector.component';
 import { StrokeAnswerDisplayComponent } from './exercice-types/stroke-wrong-answer/stroke-answer-display/stroke-answer-display.component';
-const MaterialModules = [MatStepperModule, MatDialogModule, MatIconModule, MatCardModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, DragDropModule, MatSelectModule, MatButtonModule, MatTooltipModule,
+import { WordBuilderComponent } from './exercice-types/stroke-wrong-answer/stroke-sentence/word-builder/word-builder.component';
+const MaterialModules = [MatButtonToggleModule, MatStepperModule, MatDialogModule, MatIconModule, MatCardModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, DragDropModule, MatSelectModule, MatButtonModule, MatTooltipModule,
 ];
 
 
@@ -101,7 +104,8 @@ const MaterialModules = [MatStepperModule, MatDialogModule, MatIconModule, MatCa
     GeneralTablesStudentDisplayComponent,
     SentenceBuilderComponent,
     VersionSelectorComponent,
-    StrokeAnswerDisplayComponent
+    StrokeAnswerDisplayComponent,
+    WordBuilderComponent
   ],
   providers: [],
   exports: [

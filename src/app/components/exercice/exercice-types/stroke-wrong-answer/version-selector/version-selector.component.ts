@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 // DIALOGS
 import { SentenceBuilderComponent } from '../stroke-sentence/sentence-builder/sentence-builder.component';
+import { WordBuilderComponent } from '../stroke-sentence/word-builder/word-builder.component';
 
 @Component({
   selector: 'ines-version-selector',
@@ -45,12 +46,14 @@ export class VersionSelectorComponent implements OnInit {
     let BLOCK_CREATOR_ACORDING_TO_TYPE: any;
     if (this.CHOSEN_VARATION === "sentence")
       BLOCK_CREATOR_ACORDING_TO_TYPE = SentenceBuilderComponent;
+    if (this.CHOSEN_VARATION === "word")
+      BLOCK_CREATOR_ACORDING_TO_TYPE = WordBuilderComponent;
 
     this.dialog
       .open(BLOCK_CREATOR_ACORDING_TO_TYPE, {
         width: '70%',
-        maxWidth: '800px',
-        maxHeight: '80vh',
+        maxWidth: '1000px',
+        maxHeight: '90vh',
       }).afterClosed().subscribe((result) => {
         if (result) {
           this.dialogRef.close(result);

@@ -20,6 +20,7 @@ export class StrokeAnswerDisplayComponent implements OnInit {
   strokeSentence = false;
   MIRROR_SENTENCES_ARRAY: any[];
   finalBoolean = true;
+  value: any;
 
   constructor(private render: Renderer2) { }
 
@@ -29,6 +30,7 @@ export class StrokeAnswerDisplayComponent implements OnInit {
 
   private initExercice() {
     this.exercice.blocks.forEach((block: any) => {
+      console.log(block);
       // SENTENCE BLOCKS
       if (block.exerciceBlockType === ExerciceBlockTypes.ANSWER_TO_STROKE) {
         this.MIRROR_SENTENCES_ARRAY = Array(0);
@@ -37,10 +39,8 @@ export class StrokeAnswerDisplayComponent implements OnInit {
     });
   }
 
-
-
   // SENTENCES LOGIC
-  keepTrackOfFinalResult(action: string, index: number) {
+  keepTrackOfFinalResultForSentences(action: string, index: number) {
     this.exercice.blocks.map(block => {
       const SENTENCE_ARRAY = block.blockParams['sentences'].sentencesArray;
 
@@ -58,10 +58,46 @@ export class StrokeAnswerDisplayComponent implements OnInit {
   toggleStroke(event: any, index: number) {
     if (event.target.className.includes('strokedSentence')) {
       this.render.removeClass(event.target, "strokedSentence");
-      this.keepTrackOfFinalResult('', index);
+      this.keepTrackOfFinalResultForSentences('', index);
     } else {
       this.render.addClass(event.target, "strokedSentence");
-      this.keepTrackOfFinalResult('stroked', index);
+      this.keepTrackOfFinalResultForSentences('stroked', index);
+    }
+
+    this.answerChange.emit(this.finalBoolean);
+    this.canGoNext.emit(true);
+  }
+
+  // WORDS LOGIC
+  keepTrackOfFinalResultForWords(action: string, sentenceIndex: number, wordIndex: number) {
+    this.exercice.blocks.map(block => {
+      const WORDS_ARRAY = block.blockParams['sentencesWithWords'].sentencesArray[sentenceIndex].wordsArray;
+
+      if ((action === 'stroked'))
+        this.MIRROR_SENTENCES_ARRAY.push(WORDS_ARRAY[wordIndex]);
+      else
+        this.MIRROR_SENTENCES_ARRAY = this.MIRROR_SENTENCES_ARRAY.filter(e => e !== WORDS_ARRAY[wordIndex]);
+
+
+      console.table(WORDS_ARRAY);
+      console.table(this.MIRROR_SENTENCES_ARRAY);
+
+
+      // The following conditions relies on at least one element being marked as 'wrong' by the teacher
+      // otherwise this will always output useless data
+      this.finalBoolean = (this.MIRROR_SENTENCES_ARRAY.filter(e => e.isWrong === false).length === 0) && (this.MIRROR_SENTENCES_ARRAY.filter(e => e.isWrong === true).length >= 1);
+      console.log('::: FINAL ::: ', this.finalBoolean);
+
+    })
+  }
+
+  toggleStrokeForWords(event: any, index: number, i: number) {
+    if (event.target.className.includes('strokedSentence')) {
+      this.render.removeClass(event.target, "strokedSentence");
+      this.keepTrackOfFinalResultForWords('', index, i);
+    } else {
+      this.render.addClass(event.target, "strokedSentence");
+      this.keepTrackOfFinalResultForWords('stroked', index, i);
     }
 
     this.answerChange.emit(this.finalBoolean);
