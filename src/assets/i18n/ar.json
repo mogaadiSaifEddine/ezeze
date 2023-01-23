@@ -47,7 +47,8 @@
     "chat": "دردشة",
     "teachers-area": "فضاء الأساتذة",
     "chapter-list": "قائمة الفصول",
-    "admin": "المشرف"
+    "admin": "المشرف",
+    "parentSpaceTitle": ""
   },
   "home": {
     "216-70-241-900-1": "(216) 70241900",
@@ -243,5 +244,15 @@
   "watch-video": "شاهد الفيديو",
   "you-can-update-the-name-last-name-school-and-group-of-a-chosen-account": "يمكنك تحديث الاسم واسم العائلة والمدرسة ومجموعة الحساب المختار.",
   "delete-a-student-account": "احذف حساب الطالب",
-  "token-capacity": "سعة الرمز:"
+  "token-capacity": "سعة الرمز:",
+  "exercise": {
+    "add": {
+      "table-columns": {
+        "correctValue": "القيمة الصحيحة",
+        "value": "قيمة"
+      }
+    }
+  },
+  "go-to-dashboard-1": "الذهاب إلى لوحة القيادة",
+  "good-job-1": "أحسنت!"
 }

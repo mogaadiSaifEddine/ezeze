@@ -1,7 +1,4 @@
-.container {
-  background-color: white;
-  padding-top: 3%;
-}
+
 form mat-form-field {
   width: 100%;
   margin-bottom: 3px;
@@ -42,14 +39,6 @@ form mat-form-field {
   float: right;
   top: -24px;
   right: -24px;
-}
-
-.close-icon {
-  transition: 1s ease-in-out;
-}
-
-.close-icon:hover {
-  transform: rotate(180deg);
 }
 
 ::ng-deep .icon-outside .close-button {

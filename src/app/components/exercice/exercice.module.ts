@@ -61,6 +61,7 @@ import { ShapesGroupsBuilderComponent } from './exercice-types/stroke-wrong-answ
 import { TextUnderImageBuilderComponent } from './exercice-types/tables/text-under-image-builder/text-under-image-builder.component';
 const MaterialModules = [MatButtonToggleModule, MatStepperModule, MatDialogModule, MatIconModule, MatCardModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, DragDropModule, MatSelectModule, MatButtonModule, MatTooltipModule,
 ];
+import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters.component';
 
 
 @NgModule({
@@ -110,6 +111,8 @@ const MaterialModules = [MatButtonToggleModule, MatStepperModule, MatDialogModul
     WordBuilderComponent,
     ShapesGroupsBuilderComponent,
     TextUnderImageBuilderComponent
+    FillLettersComponent
+
   ],
   providers: [],
   exports: [
@@ -141,6 +144,7 @@ const MaterialModules = [MatButtonToggleModule, MatStepperModule, MatDialogModul
     EquationDisplayComponent,
     GeneralTablesStudentDisplayComponent,
     StrokeAnswerDisplayComponent
+    FillLettersComponent
   ]
 })
 export class ExerciceModule { }

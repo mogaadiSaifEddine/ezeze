@@ -158,7 +158,7 @@
   "actions": "Actions",
   "block": "Block",
   "exercice": "Exercice",
-  "label": "Étiquette",
+  "label": "Labelle",
   "nom-de-lexercice": "Nom de l'exercice",
   "ordre": "Ordre",
   "question-de-lexercice": "Question de l'exercice",
@@ -245,5 +245,13 @@
   "watch-video": "Regarder la vidéo",
   "you-can-update-the-name-last-name-school-and-group-of-a-chosen-account": "Vous pouvez mettre à jour le nom, le prénom, l'école et le groupe d'un compte choisi.",
   "delete-a-student-account": "Supprimer un compte étudiant",
-  "token-capacity": "Capacité de jeton :"
+  "token-capacity": "Capacité de jeton :",
+  "exercise": {
+    "add": {
+      "table-columns": {
+        "correctValue": "Valeur correcte",
+        "value": "Valeur"
+      }
+    }
+  }
 }
