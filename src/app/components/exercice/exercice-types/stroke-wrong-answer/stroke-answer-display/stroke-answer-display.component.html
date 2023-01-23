@@ -33,6 +33,13 @@
                 </p>
             </div>
 
+
+            <!-- shapes and images -->
+            <div class="IMAGES-GRID" *ngIf="block.blockParams['shapesAndImages']?.sentencesArray.length>0">
+                <img *ngFor="let SENTENCE of block.blockParams['shapesAndImages'].sentencesArray; let index=index" [src]="SENTENCE.sentenceBody" class="stroked"
+                    (click)="toggleStrokeForShapesAndImages($event, index)">
+            </div>
+
         </section>
     </mat-card-content>
 </mat-card>

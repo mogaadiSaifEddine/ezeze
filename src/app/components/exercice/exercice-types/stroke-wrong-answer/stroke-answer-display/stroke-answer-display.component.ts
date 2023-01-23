@@ -104,6 +104,35 @@ export class StrokeAnswerDisplayComponent implements OnInit {
     this.canGoNext.emit(true);
   }
 
+  // SHAPES AND IMAGES
+  keepTrackOfFinalResultForShapesAndImages(action: string, index: number) {
+    this.exercice.blocks.map(block => {
+      const SENTENCE_ARRAY = block.blockParams['shapesAndImages'].sentencesArray;
+
+      if ((action === 'stroked'))
+        this.MIRROR_SENTENCES_ARRAY.push(SENTENCE_ARRAY[index]);
+      else
+        this.MIRROR_SENTENCES_ARRAY = this.MIRROR_SENTENCES_ARRAY.filter(e => e !== SENTENCE_ARRAY[index]);
+
+      // The following conditions relies on at least one element being marked as 'wrong' by the teacher
+      // otherwise this will always output useless data
+      this.finalBoolean = (this.MIRROR_SENTENCES_ARRAY.filter(e => e.isWrong === false).length === 0) && (this.MIRROR_SENTENCES_ARRAY.filter(e => e.isWrong === true).length >= 1);
+    })
+  }
+
+  toggleStrokeForShapesAndImages(event: any, index: number) {
+    if (event.target.className.includes('strokedSentence')) {
+      this.render.removeClass(event.target, "strokedSentence");
+      this.keepTrackOfFinalResultForShapesAndImages('', index);
+    } else {
+      this.render.addClass(event.target, "strokedSentence");
+      this.keepTrackOfFinalResultForShapesAndImages('stroked', index);
+    }
+
+    this.answerChange.emit(this.finalBoolean);
+    this.canGoNext.emit(true);
+  }
+
   ngOnDestroy() {
     this.exercice.blocks.forEach((block: any) => {
       if (block.exerciceBlockType === ExerciceBlockTypes.ANSWER_TO_STROKE) {

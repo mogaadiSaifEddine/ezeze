@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 // DIALOGS
 import { SentenceBuilderComponent } from '../stroke-sentence/sentence-builder/sentence-builder.component';
 import { WordBuilderComponent } from '../stroke-sentence/word-builder/word-builder.component';
-
+import { ShapesGroupsBuilderComponent } from '../stroke-sentence/shapes-groups-builder/shapes-groups-builder.component';
 @Component({
   selector: 'ines-version-selector',
   templateUrl: './version-selector.component.html',
@@ -48,6 +48,8 @@ export class VersionSelectorComponent implements OnInit {
       BLOCK_CREATOR_ACORDING_TO_TYPE = SentenceBuilderComponent;
     if (this.CHOSEN_VARATION === "word")
       BLOCK_CREATOR_ACORDING_TO_TYPE = WordBuilderComponent;
+    if (this.CHOSEN_VARATION === "image")
+      BLOCK_CREATOR_ACORDING_TO_TYPE = ShapesGroupsBuilderComponent;
 
     this.dialog
       .open(BLOCK_CREATOR_ACORDING_TO_TYPE, {

@@ -32,3 +32,28 @@
     flex-direction: row;
     align-items: center;
 }
+
+
+.IMAGES-GRID {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #000;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+    img {
+        cursor: crosshair;
+        width: auto;
+        max-width: 200px;
+
+        &:hover {
+            filter: grayscale(100%);
+        }
+    }
+
+    .strokedSentence {
+        filter: opacity(20%);
+        border: 3px solid #721c24;
+    }
+}
