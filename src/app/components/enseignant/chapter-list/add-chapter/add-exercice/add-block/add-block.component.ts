@@ -42,7 +42,6 @@ export class AddBlockComponent implements OnInit {
     DRAG_DROP: [ExerciceBlockTypes.DRAG_DROP_IMAGE_LIST],
     DRAG_WORDS: [ExerciceBlockTypes.HIGHLIGHT_TEXT, ExerciceBlockTypes.TEXT, ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.BREAK],
     FILL_LETTERS: [ExerciceBlockTypes.TEXT],
-    LISTEN: [ExerciceBlockTypes.AUDIO_IMAGE],
     HOTSPOT: [],
     [Exercise_Types.DRAG_SYLLABLES]: [],
     [Exercise_Types.PUT_IN_FRAME]: [],

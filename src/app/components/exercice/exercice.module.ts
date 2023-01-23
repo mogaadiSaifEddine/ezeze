@@ -110,7 +110,7 @@ import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters
     StrokeAnswerDisplayComponent,
     WordBuilderComponent,
     ShapesGroupsBuilderComponent,
-    TextUnderImageBuilderComponent
+    TextUnderImageBuilderComponent,
     FillLettersComponent
 
   ],
@@ -143,7 +143,7 @@ import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters
     InitEquationFormComponent,
     EquationDisplayComponent,
     GeneralTablesStudentDisplayComponent,
-    StrokeAnswerDisplayComponent
+    StrokeAnswerDisplayComponent,
     FillLettersComponent
   ]
 })
