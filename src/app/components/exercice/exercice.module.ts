@@ -57,6 +57,7 @@ import { SentenceBuilderComponent } from './exercice-types/stroke-wrong-answer/s
 import { VersionSelectorComponent } from './exercice-types/stroke-wrong-answer/version-selector/version-selector.component';
 import { StrokeAnswerDisplayComponent } from './exercice-types/stroke-wrong-answer/stroke-answer-display/stroke-answer-display.component';
 import { WordBuilderComponent } from './exercice-types/stroke-wrong-answer/stroke-sentence/word-builder/word-builder.component';
+import { ShapesGroupsBuilderComponent } from './exercice-types/stroke-wrong-answer/stroke-sentence/shapes-groups-builder/shapes-groups-builder.component';
 const MaterialModules = [MatButtonToggleModule, MatStepperModule, MatDialogModule, MatIconModule, MatCardModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, DragDropModule, MatSelectModule, MatButtonModule, MatTooltipModule,
 ];
 
@@ -105,7 +106,8 @@ const MaterialModules = [MatButtonToggleModule, MatStepperModule, MatDialogModul
     SentenceBuilderComponent,
     VersionSelectorComponent,
     StrokeAnswerDisplayComponent,
-    WordBuilderComponent
+    WordBuilderComponent,
+    ShapesGroupsBuilderComponent
   ],
   providers: [],
   exports: [
