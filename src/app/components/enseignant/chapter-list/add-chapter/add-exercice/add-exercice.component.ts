@@ -13,6 +13,7 @@ import { ExercicePreviewComponent } from './exercice-preview/exercice-preview.co
 import { InitEquationFormComponent } from 'src/app/components/exercice/exercice-types/tables/vertical-equations/init-equation-form/init-equation-form.component';
 import { GeneralTablesBuilderComponent } from 'src/app/components/exercice/exercice-types/tables/general-purpose-tables/general-tables-builder/general-tables-builder.component';
 import { VersionSelectorComponent } from 'src/app/components/exercice/exercice-types/stroke-wrong-answer/version-selector/version-selector.component';
+import { TextUnderImageBuilderComponent } from 'src/app/components/exercice/exercice-types/tables/text-under-image-builder/text-under-image-builder.component';
 
 @Component({
   selector: 'app-add-exercice',
@@ -136,6 +137,8 @@ export class AddExerciceComponent implements OnInit {
       BLOCK_FORM_ACCORDING_TO_TYPE = GeneralTablesBuilderComponent;
     else if (element.toString() === "STROKE_WRONG_ANSWER")
       BLOCK_FORM_ACCORDING_TO_TYPE = VersionSelectorComponent;
+    else if (element.toString() === "TEXT_UNDER_IMAGE")
+      BLOCK_FORM_ACCORDING_TO_TYPE = TextUnderImageBuilderComponent;
     else
       BLOCK_FORM_ACCORDING_TO_TYPE = AddBlockComponent;
 
