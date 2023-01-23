@@ -1,17 +1,19 @@
 <app-drag-drop *ngIf="!loading && currentExercise.type === TYPES.DRAG_DROP" [exercice]="currentExercise" [(answer)]="answer" (canGoNext)="canGoNext($event)"></app-drag-drop>
-<app-correspondence
-  *ngIf="!loading && currentExercise.type === TYPES.CORRESPONDANCE"
-  [exercice]="currentExercise"
-  [isCheckMode]="isAnswerChecked"
-  [(answer)]="answer"
+<app-correspondence *ngIf="!loading && currentExercise.type === TYPES.CORRESPONDANCE" [exercice]="currentExercise" [isCheckMode]="isAnswerChecked" [(answer)]="answer"
   (canGoNext)="canGoNext($event)"></app-correspondence>
-<app-multiple-answers
-  *ngIf="!loading && currentExercise.type === TYPES.MULTIPLE_RESPONSE"
-  [exercice]="currentExercise"
-  [(answer)]="answer"
-  (canGoNext)="canGoNext($event)"></app-multiple-answers>
+<app-multiple-answers *ngIf="!loading && currentExercise.type === TYPES.MULTIPLE_RESPONSE" [exercice]="currentExercise" [(answer)]="answer" (canGoNext)="canGoNext($event)"></app-multiple-answers>
 
 <app-color-the-text *ngIf="!loading && currentExercise.type === TYPES.WORD_COLORATION" [exercice]="currentExercise" [(answer)]="answer" (canGoNext)="canGoNext($event)"></app-color-the-text>
+
+<ines-text-under-image *ngIf="!loading && currentExercise.type === TYPES.TEXT_UNDER_IMAGE" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></ines-text-under-image>
+
+<ines-equation-display *ngIf="!loading && currentExercise.type === TYPES.VERTICAL_EQUATION" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></ines-equation-display>
+
+<ines-general-tables-student-display *ngIf="!loading && currentExercise.type === TYPES.GENERAL_TABLES" [exercice]="currentExercise" (canGoNext)="canGoNext($event)"
+  [(answer)]="answer"></ines-general-tables-student-display>
+
+<ines-stroke-answer-display *ngIf="!loading && currentExercise.type === TYPES.STROKE_WRONG_ANSWER" [exercice]="currentExercise" (canGoNext)="canGoNext($event)"
+  [(answer)]="answer"></ines-stroke-answer-display>
 
 <app-multiple-choice *ngIf="!loading && currentExercise.type === TYPES.MULTIPLE_CHOICE" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-multiple-choice>
 
@@ -33,10 +35,10 @@
 
 <app-corresponding-arrow *ngIf="!loading && currentExercise.type === TYPES.LINK_ARROW" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-corresponding-arrow>
 
-
 <app-hotspot *ngIf="!loading && currentExercise.type === TYPES.HOTSPOT" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-hotspot>
 
-<app-drag-words *ngIf="!loading && currentExercise.type === TYPES.DRAG_WORDS" [isCheckMode]="isAnswerChecked" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-drag-words>
+<app-drag-words *ngIf="!loading && currentExercise.type === TYPES.DRAG_WORDS" [isCheckMode]="isAnswerChecked" [exercice]="currentExercise" (canGoNext)="canGoNext($event)"
+  [(answer)]="answer"></app-drag-words>
 
 <div class="stepper">
   <button *ngIf="!isAnswerChecked" [disabled]="!canGoNextQuestion" mat-raised-button color="primary" (click)="checkAnswer()">

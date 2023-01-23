@@ -1,0 +1,64 @@
+.triggerButton {
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+}
+
+#watchVideoButton {
+    .icon {
+        font-size: .5rem;
+    }
+}
+
+.pulse {
+    background: #3f51b5;
+    animation: animate-pulse 3s linear infinite;
+}
+
+.sidenavContent {
+    padding: 20px;
+    width: auto;
+    max-width: 50%;
+    height: auto;
+    margin-top: 4.5rem;
+    text-align: justify;
+    color: #000;
+
+    background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+
+    img {
+        width: 600px;
+    }
+
+    h5 {
+        margin: 1rem;
+        font-weight: bold;
+        text-transform: capitalize;
+    }
+
+    header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+@keyframes animate-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgb(63, 81, 181, 0.7), 0 0 0 0 rgb(63, 81, 181, 0.7);
+    }
+
+    40% {
+        box-shadow: 0 0 0 50px rgb(63, 81, 181, 0.0), 0 0 0 0 rgb(63, 81, 181, 0.7);
+    }
+
+    80% {
+        box-shadow: 0 0 0 50px rgb(63, 81, 181, 0.0), 0 0 0 30px rgb(63, 81, 181, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgb(63, 81, 181, 0.0), 0 0 0 30px rgb(63, 81, 181, 0);
+    }
+
+}

@@ -1,0 +1,64 @@
+.equationGrid {
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 50px;
+    overflow-y: scroll;
+
+    .equationCard {
+
+        table {
+            border-collapse: collapse;
+            width: auto;
+
+            td {
+                border: none;
+                width: 50px;
+            }
+
+            tr {
+                position: relative;
+            }
+        }
+
+        .numberInput {
+            border: none;
+            text-align: right;
+            width: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            outline: none;
+        }
+
+        // DYNAMIC CLASSES
+        .equationEndLine {
+            border-top: 2px solid #000;
+            padding: 1rem 0;
+        }
+
+        .signsHolder {
+            position: relative;
+            width: 60px;
+
+            .equalSign,
+            .operator {
+                position: absolute;
+                left: 0;
+                top: 0;
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+
+            .operator {
+                top: -50px;
+            }
+        }
+
+        .studentCanWriteHere {
+            border-bottom: 1px solid #605975;
+            font-weight: normal;
+            outline: none;
+        }
+    }
+}

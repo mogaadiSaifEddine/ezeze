@@ -1,0 +1,64 @@
+<mat-card>
+
+    <header>
+        <h3>Add [sentence (xxx, xxx, ...) ]</h3>
+        <div>
+            <a href="https://i.imgur.com/Bwn1Zl9.png" target="_blank" mat-raised-button color="primary">
+                <mat-icon>help</mat-icon>
+            </a>
+            <button (click)="AddNewSentenceGroupWithWordsArray($event)" mat-raised-button color="accent">
+                <mat-icon>add</mat-icon>
+                Sentence
+            </button>
+        </div>
+    </header>
+
+    <mat-card-content>
+        <section id="sentencesManager">
+            <form [formGroup]="paragraphsFormGroup">
+                <div formArrayName="sentencesArray">
+
+                    <div *ngFor="let tempSentenceGroup of getSentencesFormArray.controls; let i = index" [formGroupName]="i" class="mat-elevation-z2 sentceFormGroup">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Sentence</mat-label>
+                            <input type="text" matInput formControlName="sentenceBody" style="width: 420px !important; margin-right: 1rem;">
+                        </mat-form-field>
+                        <button (click)="removeSentenceGroupWithWordsArray(i)" mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+                        <!-- ===== WORDS ===== -->
+                        <mat-button-toggle-group>
+                            <input type="number" #wordsCount min="2" mat-button-toggle style="width: 100px; font-size: 1.2rem;">
+                            <mat-button-toggle (click)="addNewWordsFormGroupToSentenceArray(tempSentenceGroup.get('wordsArray'), wordsCount)" mat-raised-button color="primary">
+                                <mat-icon>add</mat-icon>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+
+                        <div class="singleWordsGroup" formArrayName="wordsArray">
+                            <span *ngIf="tempSentenceGroup.get('wordsArray')['controls'].length>=1"><strong>(&nbsp;</strong></span>
+
+                            <div *ngFor="let tempWordGroup of tempSentenceGroup.get('wordsArray')['controls']; let i = index" [formGroupName]="i" class="wordsFormGroup">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>word</mat-label>
+                                    <input type="text" matInput formControlName="wordBody">
+                                </mat-form-field>
+                                <mat-checkbox formControlName="isWrong" value=true><em>Wrong</em></mat-checkbox>
+                                <button (click)="removeWordsFormGroupToSentenceArray(tempSentenceGroup.get('wordsArray'), i)" mat-icon-button color="warn">
+                                    <mat-icon>delete_outline</mat-icon>
+                                </button>
+                                <strong *ngIf="!((i+1) ===tempSentenceGroup.get('wordsArray')['controls'].length)">,&nbsp;</strong>
+                            </div>
+
+                            <span *ngIf="tempSentenceGroup.get('wordsArray')['controls'].length>=1"><strong>&nbsp;)</strong></span>
+                            <button (click)="assignWordsToSentence(tempSentenceGroup.get('wordsArray'))">ASSIGN</button>
+                        </div>
+                        <!-- END OF SENTENCES -->
+                    </div>
+
+                </div>
+            </form>
+        </section>
+    </mat-card-content>
+
+    <div mat-dialog-actions [align]="'end'">
+        <button mat-raised-button color="primary" (click)="saveSentences()">Save</button>
+    </div>
+</mat-card>

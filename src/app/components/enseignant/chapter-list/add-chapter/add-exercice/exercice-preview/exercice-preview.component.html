@@ -8,6 +8,14 @@
 
 <app-correspondence *ngIf="data.currentExercise.type === TYPES.CORRESPONDANCE" [exercice]="data.currentExercise"></app-correspondence>
 
+<ines-text-under-image *ngIf="data.currentExercise.type === TYPES.TEXT_UNDER_IMAGE" [exercice]="data.currentExercise"></ines-text-under-image>
+
+<ines-general-tables-student-display *ngIf="data.currentExercise.type === TYPES.GENERAL_TABLES" [exercice]="data.currentExercise"></ines-general-tables-student-display>
+
+<ines-stroke-answer-display *ngIf="data.currentExercise.type === TYPES.STROKE_WRONG_ANSWER" [exercice]="data.currentExercise"></ines-stroke-answer-display>
+
+<ines-equation-display *ngIf="data.currentExercise.type === TYPES.VERTICAL_EQUATION" [exercice]="data.currentExercise"></ines-equation-display>
+
 <app-multiple-answers *ngIf="data.currentExercise.type === TYPES.MULTIPLE_RESPONSE" [exercice]="data.currentExercise"></app-multiple-answers>
 
 <app-color-the-text *ngIf="data.currentExercise.type === TYPES.WORD_COLORATION" [exercice]="data.currentExercise"></app-color-the-text>

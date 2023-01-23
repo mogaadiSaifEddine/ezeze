@@ -25,6 +25,7 @@ export class AddNewComponent implements OnInit {
   schoolsList = null;
   countTracker = this.sharedService.currentCount;
   disableAddButton = false;
+  tokenCapacity = this.sharedService.currentTokenData.numberUsers;
 
   constructor(
     private fb: FormBuilder,
@@ -91,6 +92,7 @@ export class AddNewComponent implements OnInit {
     });
     // updating the internal count
     this.countTracker += 1;
+    this.tokenCapacity -= 1;
     this.getStudentsFormArray.push(tmpStudentFormGroup);
     this.trackCount(this.countTracker);
   }
@@ -106,6 +108,7 @@ export class AddNewComponent implements OnInit {
     this.getStudentsFormArray.removeAt(i);
     // updating the internal count
     this.countTracker -= 1;
+    this.tokenCapacity += 1;
     this.trackCount(this.countTracker);
   }
 

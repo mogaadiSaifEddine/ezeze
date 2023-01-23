@@ -55,7 +55,15 @@ const MATERIAL_MODULES = [
   MatSlideToggleModule
 ];
 @NgModule({
-  declarations: [ExercicePreviewComponent, ChapterListComponent, AddChapterComponent, SerieCardComponent, AddExerciceComponent, AddBlockComponent, AddSerieComponent],
+  declarations: [
+    ExercicePreviewComponent,
+    ChapterListComponent,
+    AddChapterComponent,
+    SerieCardComponent,
+    AddExerciceComponent,
+    AddBlockComponent,
+    AddSerieComponent
+  ],
   imports: [ExerciceModule, CommonModule, EnseignantRoutingModule, MATERIAL_MODULES, AngularEditorModule, ReactiveFormsModule, NgxMatFileInputModule, TranslateModule.forChild({})]
 })
 export class EnseignantModule { }

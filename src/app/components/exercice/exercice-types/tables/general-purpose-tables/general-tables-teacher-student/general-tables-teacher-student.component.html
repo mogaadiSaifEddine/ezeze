@@ -1,0 +1,33 @@
+<mat-dialog-content class="mat-typography">
+    <mat-stepper #stepper [linear]="true">
+        <mat-step>
+            <ng-template matStepLabel>Shown to students</ng-template>
+            <main>
+                <table>
+                    <tr *ngFor="let row of MATRIX; let even = even; let odd = odd; let indexRow = index" [ngClass]="{ odd: odd, even: even }">
+                        <td *ngFor="let field of row; let indexColumn= index">
+                            <input type="text" class="textInput" (change)="keepData($event, indexRow, indexColumn, 'TEACHER')">
+                        </td>
+                    </tr>
+                </table>
+            </main>
+
+            <button mat-flat-button color="primary" matStepperNext class="row mt-2">Next</button>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Correct Values</ng-template>
+            <main>
+                <table>
+                    <tr *ngFor="let row of MATRIX_TEACHER let even = even; let odd = odd; let indexRow = index" [ngClass]="{ odd: odd, even: even }">
+                        <td *ngFor="let field of row; let indexColumn= index">
+                            <input type="text" class="textInput" (change)="keepData($event, indexRow, indexColumn, 'STUDENT')" [value]="MATRIX_TEACHER[indexRow][indexColumn] ?? ''">
+                        </td>
+                    </tr>
+                </table>
+            </main>
+
+            <button mat-flat-button matStepperPrevious class="col mt-2">Back</button>
+            <button mat-flat-button color="primary" class="col mt-2" (click)="save()">Save</button>
+        </mat-step>
+    </mat-stepper>
+</mat-dialog-content>
