@@ -174,6 +174,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDialogModule,
     NgxMatFileInputModule,
     MatExpansionModule,
+
     OffcanvasModule,
     MatPaginatorModule,
     ToastrModule.forRoot(),
