@@ -61,6 +61,10 @@ const routes: Routes = [
         loadChildren: () => import('./components/enseignant/enseignant.module').then((m) => m.EnseignantModule)
       },
       {
+        path: 'advisor',
+        loadChildren: () => import('./components/advisor/advisor.module').then((m) => m.AdvisorModule)
+      },
+      {
         path: 'admin-panel',
         loadChildren: () => import('./components/admin/admin.module').then((m) => m.AdminModule)
       },
