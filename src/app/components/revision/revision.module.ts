@@ -30,7 +30,7 @@ import { ChapterCardComponent } from './chapter-list/chapter-card/chapter-card.c
 const MatModules = [MatButtonModule, MatCardModule, MatDialogModule, MatIconModule, MatTooltipModule, MatProgressBarModule];
 
 @NgModule({
-  imports: [RevisionRoutingModule, ExerciceModule, CommonModule, MatModules, ExerciceModule, TranslateModule],
+  imports: [RevisionRoutingModule, ExerciceModule, CommonModule, MatModules, TranslateModule],
   declarations: [
     RevisionComponent,
     AquiredContentEvaluationComponent,
@@ -47,4 +47,4 @@ const MatModules = [MatButtonModule, MatCardModule, MatDialogModule, MatIconModu
   ],
   providers: [RevisionService]
 })
-export class RevisionModule {}
+export class RevisionModule { }

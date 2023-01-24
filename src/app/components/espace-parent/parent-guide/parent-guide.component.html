@@ -1,0 +1,65 @@
+<mat-drawer #drawer class="sidenavContent" mode="side">
+    <header>
+        <h4>{{ 'help' | translate }}</h4>
+        <a mat-raised-button color="primary" href="https://youtu.be/102J-7QRl98" target="_blank">
+            {{ 'watch-video' | translate }}
+            <mat-icon class="icon">launch</mat-icon>
+        </a>
+    </header>
+
+    <!-- TOKEN MANAGEMENT -->
+    <h5>{{ 'token-management' | translate }}</h5>
+    <mat-accordion>
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{ 'how-to-add-a-token' | translate }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>{{ 'to-add-a-token-click-the-add-token-button-and-type-in-the-one-youve-got' | translate }}</p>
+            <img src="https://imgur.com/vKA5KXW.gif" (click)="open(0)">
+        </mat-expansion-panel>
+
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{ 'how-to-check-a-token-details' | translate }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>{{ 'if-youve-already-assigned-a-token-to-a-student-account-a-special-icon-will-display-next-to-the-token-value' | translate }}</p>
+            <p>{{ 'use-that-icon-to-display-all-the-that-tokens-details' | translate }}</p>
+            <img src="https://imgur.com/eF7wZk0.gif" (click)="open(1)">
+        </mat-expansion-panel>
+    </mat-accordion>
+
+
+    <!-- CRUD STUDENT -->
+    <h5>{{ 'student-accounts-management' | translate }}</h5>
+    <mat-accordion>
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{ 'how-to-add-a-student-account' | translate }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>{{ 'once-the-token-has-been-validated-you-will-get-a-screen-where-you-can-add-as-many-student-accounts-as-your-token-allows-for' | translate }}</p>
+            <img src="https://imgur.com/VYZ1yJ1.gif" (click)="open(2)">
+        </mat-expansion-panel>
+
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{ 'how-to-update-a-student-account' | translate }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>{{ 'use-the-pen-icon-to-modify-a-students-account-data' | translate }}</p>
+            <p>{{ 'you-can-update-the-name-last-name-school-and-group-of-a-chosen-account' | translate }}</p>
+            <img src="https://imgur.com/wvv9dIC.gif" (click)="open(3)">
+        </mat-expansion-panel>
+
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{ 'how-to-delete-a-student-account' | translate }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>{{ 'use-the-trash-bin-icon-to-delete-a-students-account' | translate }}</p>
+            <p>{{ 'please-not-that-this-action-is-unreversable-once-an-account-has-been-deleted-the-token-capacity-will-update-to-include-a-new-empty-spot' | translate }}</p>
+            <img src="https://imgur.com/YdqlNul.gif" (click)="open(4)">
+        </mat-expansion-panel>
+    </mat-accordion>
+    <!-- END OF GUIDE -->
+</mat-drawer>
+<button mat-fab color="primary" class="pulse triggerButton" (click)="drawer.toggle()">
+    <mat-icon>help</mat-icon>
+</button>

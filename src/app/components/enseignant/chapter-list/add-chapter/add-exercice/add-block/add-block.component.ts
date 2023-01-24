@@ -42,14 +42,18 @@ export class AddBlockComponent implements OnInit {
     DRAG_DROP: [ExerciceBlockTypes.DRAG_DROP_IMAGE_LIST],
     DRAG_WORDS: [ExerciceBlockTypes.HIGHLIGHT_TEXT, ExerciceBlockTypes.TEXT, ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.BREAK],
     FILL_LETTERS: [ExerciceBlockTypes.TEXT],
-    LISTEN: [ExerciceBlockTypes.AUDIO_IMAGE],
     HOTSPOT: [],
-    DRAG_SYLLABLES: [],
-    PUT_IN_FRAME: [],
-    OUTSIDER_ELEMENT: [],
-    ARITHMETIC_TREE: [],
-    FILL_BLANKS_IMG: [],
-    COLOR_SHAPE: []
+    [Exercise_Types.DRAG_SYLLABLES]: [],
+    [Exercise_Types.PUT_IN_FRAME]: [],
+    [Exercise_Types.OUTSIDER_ELEMENT]: [],
+    [Exercise_Types.LISTEN]: [ExerciceBlockTypes.AUDIO_IMAGE],
+    [Exercise_Types.ARITHMETIC_TREE]: [],
+    [Exercise_Types.FILL_BLANKS_IMG]: [],
+    [Exercise_Types.COLOR_SHAPE]: [],
+    TEXT_UNDER_IMAGE: [ExerciceBlockTypes.IMAGE_WITH_TEXT],
+    VERTICAL_EQUATION: [ExerciceBlockTypes.EQUATION],
+    GENERAL_TABLES: [ExerciceBlockTypes.TABLE],
+    STROKE_WRONG_ANSWER: [ExerciceBlockTypes.ANSWER_TO_STROKE]
   };
   readonly showFieldsFor: Record<Exercise_Types, () => void> = {
     LIKERT_SCALE: () => this.showFieldsForLikertScale(),
@@ -57,32 +61,48 @@ export class AddBlockComponent implements OnInit {
     CORRESPONDANCE: () => this.showFieldsForCorrespondance(),
     WORD_COLORATION: () => this.showFieldsForWordColoration(),
     FILL_LETTERS: (): void => this.showFieldsForFillLetters(),
-    LISTEN: (): void => this.showFieldsForListening(),
-    MULTIPLE_CHOICE: (): void => {},
-    MULTIPLE_RESPONSE: (): void => {},
-    TRUE_FALSE: (): void => {},
-    SHORT_RESPONSE: (): void => {},
-    FILL_EMPTY_FIELDS: (): void => {},
-    SEQUENCING: (): void => {},
-    HOTSPOT: (): void => {},
-    DRAG_DROP: (): void => {},
-    DRAG_WORDS: (): void => {},
-    SELECT_FROM_LIST: (): void => {},
-    WRITING: (): void => {},
-    LINK_ARROW: (): void => {},
-    DRAG_SYLLABLES: (): void => {},
-    PUT_IN_FRAME: (): void => {},
-    OUTSIDER_ELEMENT: (): void => {},
-    ARITHMETIC_TREE: (): void => {},
-    FILL_BLANKS_IMG: (): void => {},
-    COLOR_SHAPE: (): void => {}
+    MULTIPLE_CHOICE: (): void => { },
+    MULTIPLE_RESPONSE: (): void => { },
+    TRUE_FALSE: (): void => { },
+    SHORT_RESPONSE: (): void => { },
+    FILL_EMPTY_FIELDS: (): void => { },
+    SEQUENCING: (): void => { },
+    HOTSPOT: (): void => { },
+    DRAG_DROP: (): void => { },
+    DRAG_WORDS: (): void => { },
+    SELECT_FROM_LIST: (): void => { },
+    WRITING: (): void => { },
+    TEXT_UNDER_IMAGE: () => this.showFieldsForTextUnderImage(),
+    VERTICAL_EQUATION: () => this.showFieldsForVerticalEquation(),
+    GENERAL_TABLES: () => this.showFieldsForGeneralTable(),
+    STROKE_WRONG_ANSWER: () => this.showFieldsForStrokeTheWrongAnswer(),
+    LINK_ARROW: (): void => { },
+    [Exercise_Types.DRAG_SYLLABLES]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.PUT_IN_FRAME]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.OUTSIDER_ELEMENT]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.LISTEN]: (): void => this.showFieldsForListening(),
+    [Exercise_Types.ARITHMETIC_TREE]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.FILL_BLANKS_IMG]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.COLOR_SHAPE]: function (): void {
+      throw new Error('Function not implemented.');
+    }
   };
 
   constructor(
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: { block: ExerciceBlock; exercice_type: string },
     private dialogRef: MatDialogRef<AddBlockComponent>
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -141,6 +161,48 @@ export class AddBlockComponent implements OnInit {
       this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correcte';
       this.addCorrectValueValidator();
       this.addLabelValidator();
+    }
+  }
+
+  showFieldsForTextUnderImage() {
+    if (this.blockForm.get('exerciceBlockType').value === 20) {
+      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
+      this.fieldData.showCorrectValue = true; // show to teacher and test to get the score
+      this.fieldData.showPlaceholder = false;
+      this.fieldData.showValue = true;
+      this.fieldData
+      this.fieldData.labelHolder = 'Veuiller saisir la question';
+      this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correct';
+      this.addCorrectValueValidator();
+    }
+  }
+
+  showFieldsForVerticalEquation() {
+    if (this.blockForm.get('exerciceBlockType').value === 21) {
+      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
+      this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
+      this.fieldData.showPlaceholder = false;
+      this.fieldData.showValue = true;
+      this.fieldData
+    }
+  }
+  showFieldsForGeneralTable() {
+    if (this.blockForm.get('exerciceBlockType').value === 22) {
+      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
+      this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
+      this.fieldData.showPlaceholder = false;
+      this.fieldData.showValue = true;
+      this.fieldData
+    }
+  }
+
+  showFieldsForStrokeTheWrongAnswer() {
+    if (this.blockForm.get('exerciceBlockType').value === 23) {
+      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
+      this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
+      this.fieldData.showPlaceholder = false;
+      this.fieldData.showValue = true;
+      this.fieldData
     }
   }
 

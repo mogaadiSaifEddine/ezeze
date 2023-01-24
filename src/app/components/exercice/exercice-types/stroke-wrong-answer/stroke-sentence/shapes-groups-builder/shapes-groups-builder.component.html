@@ -1,0 +1,38 @@
+<mat-card>
+
+    <header>
+        <h3>Add elements of a group</h3>
+        <button (click)="addNewGroupToSentencesArray($event)" mat-raised-button color="accent">
+            <mat-icon>add</mat-icon>
+        </button>
+    </header>
+
+    <mat-card-content>
+        <section id="sentencesManager">
+            <form [formGroup]="sentencesFormGroup">
+                <div formArrayName="sentencesArray">
+                    <table>
+                        <tr *ngFor="let tmpFormGroup of getSentencesFormArray.controls; let i = index" [formGroupName]="i">
+                            <td>
+                                <mat-form-field appearance="outline" style="width: 400px;">
+                                    <mat-label>Image url</mat-label>
+                                    <input type="text" matInput formControlName="sentenceBody" placeholder="https://....">
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-checkbox formControlName="isWrong" value=true>Wrong</mat-checkbox>
+                            </td>
+                            <td>
+                                <button (click)="removeGroupToSentencesArray(i)" mat-icon-button color="warn" class="mt-2"><mat-icon>delete_outline</mat-icon></button>
+                            </td>
+                        <tr>
+                    </table>
+                </div>
+            </form>
+        </section>
+    </mat-card-content>
+
+    <div mat-dialog-actions [align]="'end'">
+        <button mat-raised-button color="primary" (click)="saveSentences()">Save</button>
+    </div>
+</mat-card>

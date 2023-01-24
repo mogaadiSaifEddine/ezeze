@@ -1,4 +1,6 @@
 <!-- Used to hold any potiential toasts from the application; DO NOT DELETE -->
 <div [@pageFadeAnimation]="getRouteData()">
-  <router-outlet ></router-outlet>
+  <mat-drawer-container class="drawerContainer" autosize>
+    <router-outlet></router-outlet>
+  </mat-drawer-container>
 </div>
