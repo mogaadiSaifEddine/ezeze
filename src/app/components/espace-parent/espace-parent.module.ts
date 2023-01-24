@@ -30,6 +30,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { VouchercheckComponent } from './dialogs/vouchercheck/vouchercheck.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
 
@@ -63,6 +65,7 @@ const MATERIAL_MODULES = [
     VouchercheckComponent,
     ParentGuideComponent
   ],
+
   imports: [
     CommonModule,
     EspaceParentRoutingModule,
@@ -73,5 +76,4 @@ const MATERIAL_MODULES = [
   ],
   providers: [DatePipe]
 })
-
-export class EspaceParentModule { }
+export class EspaceParentModule {}

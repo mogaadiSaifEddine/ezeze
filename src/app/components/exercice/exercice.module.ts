@@ -50,6 +50,8 @@ import { EquationLayoutBuilderComponent } from './exercice-types/tables/vertical
 import { EquationDisplayComponent } from './exercice-types/tables/vertical-equations/equation-display/equation-display.component';
 // EDIROE
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { ListeningComponent } from './exercice-types/listening/listening.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { GeneralTablesBuilderComponent } from './exercice-types/tables/general-purpose-tables/general-tables-builder/general-tables-builder.component';
 import { GeneralTablesTeacherStudentComponent } from './exercice-types/tables/general-purpose-tables/general-tables-teacher-student/general-tables-teacher-student.component';
 import { GeneralTablesStudentDisplayComponent } from './exercice-types/tables/general-purpose-tables/general-tables-student-display/general-tables-student-display.component';
@@ -61,10 +63,21 @@ import { ShapesGroupsBuilderComponent } from './exercice-types/stroke-wrong-answ
 import { TextUnderImageBuilderComponent } from './exercice-types/tables/text-under-image-builder/text-under-image-builder.component';
 const MaterialModules = [MatButtonToggleModule, MatStepperModule, MatDialogModule, MatIconModule, MatCardModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, DragDropModule, MatSelectModule, MatButtonModule, MatTooltipModule,
 ];
-import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters.component';
 
+import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters.component';
+const MaterialModules = [
+  MatCardModule,
+  MatRadioModule,
+  MatCheckboxModule,
+  MatFormFieldModule,
+  DragDropModule,
+  MatSelectModule,
+  MatButtonModule,
+  MatTooltipModule
+];
 
 @NgModule({
+
   imports: [
     MaterialModules,
     TranslateModule,
@@ -98,6 +111,7 @@ import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters
     DrawLinesComponent,
     LineAnchorDirective,
     FalfoulComponent,
+    ListeningComponent,
     TextUnderImageComponent,
     InitEquationFormComponent,
     EquationLayoutBuilderComponent,
@@ -147,4 +161,4 @@ import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters
     FillLettersComponent
   ]
 })
-export class ExerciceModule { }
+export class ExerciceModule {}

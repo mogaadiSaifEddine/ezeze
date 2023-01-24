@@ -23,8 +23,10 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   navSrvss: Subscription;
   constructor(private chapterService: ChapitreService, private translateService: TranslateService) {}
 
-
   ngOnInit() {
+    this.chapterService.isMenuOpened.subscribe((el) => {
+      this.loadingMenu = !el;
+    });
     if (this.group_id) {
       this.chapterService.getChaptersByGroup(this.group_id).subscribe((res) => {
         this.navItems = this.filterNavItemsByUser(this.userType);
@@ -50,13 +52,12 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
       return this.navItems.filter((nav) => {
         return nav?.url?.includes('parent');
       });
-    if (userType === 'student') 
+    if (userType === 'student')
       return this.navItems.filter((nav) => ['modules', 'revision', 'clubs', 'chat'].some((el) => nav.id.includes(el)));
-    if (userType === 'teacher') 
+    if (userType === 'teacher')
       return this.navItems.filter((nav) => ['modules', 'chapter', 'Clubs', 'chat'].some((el) => nav.id.includes(el)));
     // if (userType === 'student') return this.navItems.filter((nav) => ['Modules', 'Révision', 'Clubs', 'Messagerie'].some((el) => nav.id.includes(el)));
-    if (userType === 'admin') 
-      return this.navItems;
+    if (userType === 'admin') return this.navItems;
     return [];
   }
   translate(item): void {
