@@ -27,8 +27,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
-
-
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -61,11 +59,11 @@ import { StrokeAnswerDisplayComponent } from './exercice-types/stroke-wrong-answ
 import { WordBuilderComponent } from './exercice-types/stroke-wrong-answer/stroke-sentence/word-builder/word-builder.component';
 import { ShapesGroupsBuilderComponent } from './exercice-types/stroke-wrong-answer/stroke-sentence/shapes-groups-builder/shapes-groups-builder.component';
 import { TextUnderImageBuilderComponent } from './exercice-types/tables/text-under-image-builder/text-under-image-builder.component';
-const MaterialModules = [MatButtonToggleModule, MatStepperModule, MatDialogModule, MatIconModule, MatCardModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, DragDropModule, MatSelectModule, MatButtonModule, MatTooltipModule,
-];
-
-import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters.component';
 const MaterialModules = [
+  MatButtonToggleModule,
+  MatStepperModule,
+  MatDialogModule,
+  MatIconModule,
   MatCardModule,
   MatRadioModule,
   MatCheckboxModule,
@@ -76,10 +74,12 @@ const MaterialModules = [
   MatTooltipModule
 ];
 
-@NgModule({
+import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters.component';
 
+@NgModule({
   imports: [
     MaterialModules,
+    SharedModule,
     TranslateModule,
     FormsModule,
     MatInputModule,
@@ -126,7 +126,6 @@ const MaterialModules = [
     ShapesGroupsBuilderComponent,
     TextUnderImageBuilderComponent,
     FillLettersComponent
-
   ],
   providers: [],
   exports: [
