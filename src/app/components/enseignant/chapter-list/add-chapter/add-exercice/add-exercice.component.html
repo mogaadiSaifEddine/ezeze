@@ -109,10 +109,11 @@
         </div>
       </ng-container>
     </div>
-    <div class="button-container mt-auto">
-      <button (click)="onSubmit()" type="submit" class="post-button" mat-raised-button>
-        {{ this.data.exercice ? 'update' : 'add' }}
-      </button>
-      <button (click)="openPreview()" type="submit" class="post-button" mat-raised-button>Live Preview</button>
-    </div>
+  </div>
+
+  <div class="button-container mt-auto">
+    <button (click)="onSubmit()" type="submit" class="post-button" mat-raised-button>
+      {{ this.data.exercice ? 'update' : 'add' }}
+    </button>
+    <button (click)="openPreview()" type="submit" class="post-button" mat-raised-button>Live Preview</button>
   </div>
