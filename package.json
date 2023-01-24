@@ -46,6 +46,7 @@
     "mapbox-gl": "^2.10.0",
     "module-name": "^0.0.1-security",
     "moment": "^2.29.4",
+    "ngx-lightbox": "^3.0.0",
     "ngx-mapbox-gl": "^9.1.0",
     "ngx-perfect-scrollbar": "^10.1.1",
     "ngx-toastr": "^15.2.2",
