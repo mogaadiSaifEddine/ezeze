@@ -256,6 +256,8 @@ export class AddBlockComponent implements OnInit {
       blockOrder: [this.data.block?.blockOrder],
       isAdmissable: [this.data.block?.isAdmissable],
       exercice_Block_Id: [this.data.block?.exerciceBlockId],
+      imageFile: [''],
+      audioFile: [''],
       blockParams: [this.data.block?.blockParams]
     });
   }
@@ -265,16 +267,18 @@ export class AddBlockComponent implements OnInit {
       this.exerciceTypeToTypesKeysMap[this.data.exercice_type].includes(x)
     );
     if (this.blockTypes.length === 1) {
-      this.blockForm.get('exerciceBlockType').patchValue(this.blockTypes[0])
-      this.checkFieldsToShow()
-    };
+      this.blockForm.get('exerciceBlockType').patchValue(this.blockTypes[0]);
+      this.checkFieldsToShow();
+    }
   }
   saveBlock() {
     const c = {};
     c[this.blockForm.value.label] = this.blockForm.value.correctValue;
 
     const block =
-      this.blockForm.value.exerciceBlockType === ExerciceBlockTypes.COLORATE_TEXT ? { ...this.blockForm.value, correctValue: JSON.stringify(c) } : this.blockForm.value;
+      this.blockForm.value.exerciceBlockType === ExerciceBlockTypes.COLORATE_TEXT
+        ? { ...this.blockForm.value, correctValue: JSON.stringify(c) }
+        : this.blockForm.value;
 
     this.dialogRef.close(block);
   }

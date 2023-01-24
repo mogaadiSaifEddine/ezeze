@@ -196,12 +196,43 @@ export class AddExerciceComponent implements OnInit {
     if (this.exerciceForm.valid && this.checkBlocks()) {
       if (this.data.exercice) {
         this.serieService.updateExercice(exercice, this.data.exercice.ex_id).subscribe(async (res: Exercice) => {
+          exercice.blocks.forEach((element, index) => {
+            let files = [];
+            console.log(files);
+
+            if (element.imageFile) {
+              files.push(element.imageFile);
+            }
+            if (element.audioFile) {
+              files.push(element.audioFile);
+            }
+            if (files.length)
+              this.serieService.addExerciceBlockFile(files, Number(res.blocks[index].exercice_Block_Id)).subscribe((resFileBlock) => {
+                console.log(resFileBlock);
+                console.log(files);
+              });
+          });
           if (this.exerciceForm.get('file').value !== null)
             (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => { });
           this.dialogRef.close(true);
         });
       } else {
         this.serieService.addExercice(exercice, this.data.serieId).subscribe(async (res: Exercice) => {
+          exercice.blocks.forEach((element, index) => {
+            let files = [];
+
+            if (element.imageFile) {
+              files.push(element.imageFile);
+            }
+            if (element.audioFile) {
+              files.push(element.audioFile);
+            }
+            if (files.length)
+              this.serieService.addExerciceBlockFile(files, Number(res.blocks[index].exercice_Block_Id)).subscribe((resFileBlock) => {
+                console.log(resFileBlock);
+                console.log(files);
+              });
+          });
           if (this.exerciceForm.get('file').value !== null)
             (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => { });
           this.dialogRef.close(true);
@@ -216,7 +247,7 @@ export class AddExerciceComponent implements OnInit {
   resetBlocks(type: any) {
     this.dataSource = [];
     if (type === Exercise_Types.FILL_LETTERS) {
-      this.displayedColumns = ['ordre', 'value', 'correctValue', 'action']
+      this.displayedColumns = ['ordre', 'value', 'correctValue', 'action'];
     } else {
       this.displayedColumns = ['ordre', 'type', 'label', 'action'];
     }
