@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -16,6 +18,9 @@ export class SharedService {
   currentCount = 0;
   currentToken = null;
   currentTokenData = null;
+  serverApi = environment.serverApi;
+  constructor(
+    private http:HttpClient
+  ) { }
 
-  constructor() { }
 }

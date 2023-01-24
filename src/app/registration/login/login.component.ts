@@ -198,6 +198,8 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/espace-parent']);
           } else if (res?.profession === 'admin') {
             this.router.navigate(['/dashboard']);
+          }else if (res?.profession === 'advisor') {
+            this.router.navigate(['/advisor/chapter-list']);
           }
           this.toastr.success('Welcome Again!', 'Toastr fun!');
         });

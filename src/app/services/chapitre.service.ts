@@ -16,7 +16,9 @@ export class ChapitreService {
   getchapitre() {
     return this.http.get<Chapter[]>(this.serverApi + 'Elearning/' + 'Chapter/teacher/' + this.user_id);
   }
-
+  getInvalidChapters(){
+    return this.http.get<Chapter[]>(this.serverApi + 'Elearning/Chapter/advisor/' );
+  }
   deleteChapter(id: number) {
     return this.http.delete(this.serverApi + 'Elearning/' + 'Chapter/' + id);
   }
