@@ -55,7 +55,10 @@
               "file-saver",
               "@coreui/chartjs/dist/js/coreui-chartjs.js",
               "moment",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "mapbox-gl",
+              "lodash",
+              "@cordobo/qrcode"
             ]
           },
           "configurations": {
