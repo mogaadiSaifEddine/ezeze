@@ -26,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { DragSyllablesComponent } from './exercice-types/drag-syllables/drag-syllables.component';
 
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -88,6 +89,7 @@ import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters
     ReactiveFormsModule
   ],
   declarations: [
+    DragSyllablesComponent,
     MultipleChoiceComponent,
     MultipleAnswersComponent,
     TrueFalseComponent,
@@ -129,6 +131,7 @@ import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters
   ],
   providers: [],
   exports: [
+    DragSyllablesComponent,
     MultipleChoiceComponent,
     MultipleAnswersComponent,
     TrueFalseComponent,

@@ -33,6 +33,7 @@ import { ExercicePreviewComponent } from './chapter-list/add-chapter/add-exercic
 import { ExerciceModule } from '../exercice/exercice.module';
 // EDIROE
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { WordsSyllablesExerciceInputComponent } from './chapter-list/add-chapter/add-exercice/words-syllables-exercice/words-syllables-exercice.component';
 
 const MATERIAL_MODULES = [
   MatGridListModule,
@@ -56,14 +57,16 @@ const MATERIAL_MODULES = [
 ];
 @NgModule({
   declarations: [
+    WordsSyllablesExerciceInputComponent,
     ExercicePreviewComponent,
-    ChapterListComponent,
-    AddChapterComponent,
-    SerieCardComponent,
-    AddExerciceComponent,
-    AddBlockComponent,
+    ChapterListComponent, 
+    AddChapterComponent, 
+    SerieCardComponent, 
+    AddExerciceComponent, 
+    AddBlockComponent, 
     AddSerieComponent
   ],
-  imports: [ExerciceModule, CommonModule, EnseignantRoutingModule, MATERIAL_MODULES, AngularEditorModule, ReactiveFormsModule, NgxMatFileInputModule, TranslateModule.forChild({})]
+  imports: [
+    ExerciceModule, CommonModule, EnseignantRoutingModule, MATERIAL_MODULES, AngularEditorModule, ReactiveFormsModule, NgxMatFileInputModule, TranslateModule.forChild({})]
 })
 export class EnseignantModule { }

@@ -35,8 +35,7 @@
       </div>
     </form>
   </div>
-
-  <div class="col-md-7" *ngIf="!['HOTSPOT'].includes(formControls.type.value)">
+  <div class="col-md-7" *ngIf="!['DRAG_SYLLABLES','HOTSPOT'].includes(exerciceForm.get('type').value)">
     <h2 mat-dialog-title>{{ 'block' | translate }}</h2>
     <mat-panel-description class="add-button">
       <button [disabled]="!this.formControls.type.value" mat-raised-button color="primary" (click)="openBlockDialog(formControls.type.value)">
@@ -110,10 +109,12 @@
       </ng-container>
     </div>
   </div>
-
+  <app-words-syllables-exercice class="col-md-7" [(wordsSyllablesForm)]="wordsSyllablesForm" [defaultForm]="data.exercice" *ngIf="exerciceForm.get('type').value === 'DRAG_SYLLABLES'"></app-words-syllables-exercice>
+  
   <div class="button-container mt-auto">
     <button (click)="onSubmit()" type="submit" class="post-button" mat-raised-button>
       {{ this.data.exercice ? 'update' : 'add' }}
     </button>
     <button (click)="openPreview()" type="submit" class="post-button" mat-raised-button>Live Preview</button>
   </div>
+
