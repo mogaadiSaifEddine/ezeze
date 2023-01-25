@@ -178,3 +178,24 @@ mat-card {
 img {
   margin-left: 5%;
 }
+
+
+
+.list-syllables{
+  display: flex;
+}
+.syllable{
+  padding: 10px 0px;
+  padding-left: 3px;
+}
+.syllable:hover{
+  cursor: pointer;
+}
+.word-container{
+  display: flex;
+  align-items: center;
+
+  .full-word{
+    margin-left: 10px;
+  }
+}

@@ -97,7 +97,13 @@
 
   [(answer)]="answer"></app-drag-words>
 
-<app-drag-syllables *ngIf="!loading && currentExercise.type === TYPES.DRAG_WORDS" [isCheckMode]="isAnswerChecked" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-drag-syllables>
+<app-drag-syllables 
+  *ngIf="!loading && 
+  currentExercise.type === TYPES.DRAG_SYLLABLES" 
+  [isCheckMode]="isAnswerChecked" 
+  [exercice]="currentExercise" 
+  (canGoNext)="canGoNext($event)" 
+  [(answer)]="answer"></app-drag-syllables>
 
 <div class="stepper">
   <button *ngIf="!isAnswerChecked" [disabled]="!canGoNextQuestion" mat-raised-button color="primary" (click)="checkAnswer()">

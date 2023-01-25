@@ -1,40 +1,25 @@
 <mat-card *ngIf="exercice.name">
   <div class="question-container">
-    <mat-card-content [innerText]="exercice?.name" style="text-align: center"> </mat-card-content>
+    <mat-card-content [innerHtml]="exercice?.name" style="text-align: center"> </mat-card-content>
   </div>
 </mat-card>
 
 <mat-card class="card-container">
   <div class="question-container">
-    <mat-card-title [innerText]="exercice.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+    <mat-card-title [innerHtml]="exercice.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
       <br />
     </mat-card-title>
   </div>
   <mat-card-content [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
-    <div cdkDropListGroup>
-      <div class="example-container">
-        <div class="example-list">
-          <div class="puzzle-shape" *ngFor="let item of correspandance_left">
-            <!-- <img src="{{ '../../../../assets/images/' + item.placeholder + '.jpg' }}" alt="" /> -->
-            <div class="text">
-              {{ item.label }}
-            </div>
-            <span [id]="" #endingElement class="female-piece"></span>
-          </div>
+     <div class="word-container" *ngFor="let word of wordsList; let wordPosition = index">
+      <div cdkDropList cdkDropListOrientation="horizontal"  class="list-syllables" (cdkDropListDropped)="drop($event,word.blockFileList)">
+        <div class="syllable" *ngFor="let syllable of word.blockFileList ; let syllableIndex=index" cdkDrag>
+          {{syllable}} <span *ngIf="syllableIndex!=word.blockFileList.length-1">-</span>
         </div>
       </div>
-
-      <div class="example-container">
-        <div cdkDropList cdkDropListLockAxis="y" [cdkDropListData]="correspandance_right" class="example-list" (cdkDropListDropped)="drop($event)">
-          <div class="puzzle-shape" *ngFor="let item of correspandance_right" cdkDrag>
-            <div class="text">
-              {{ item.label }}
-            </div>
-
-            <span #startingElement class="male-piece"> </span>
-          </div>
-        </div>
-      </div>
+      <span class="full-word">
+        : {{word.blockFileList.join('')}}
+      </span>
     </div>
   </mat-card-content>
 </mat-card>

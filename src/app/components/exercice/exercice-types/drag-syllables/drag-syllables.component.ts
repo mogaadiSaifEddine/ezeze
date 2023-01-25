@@ -10,7 +10,7 @@ import { RevisionService } from 'src/app/services/revision.service';
   templateUrl: './drag-syllables.component.html',
   styleUrls: ['./drag-syllables.component.scss']
 })
-export class DragSyllablesComponent implements OnInit, OnChanges {
+export class DragSyllablesComponent implements OnInit {
   @Input() exercice: Exercice;
   @Input() answer: boolean;
   @Input() isCheckMode: boolean;
@@ -18,10 +18,20 @@ export class DragSyllablesComponent implements OnInit, OnChanges {
   @Output() canGoNext: EventEmitter<boolean> = new EventEmitter<boolean>();
   correspandance_left: ExerciceBlock[] = [];
   correspandance_right: ExerciceBlock[] = [];
+  wordsList=[]
 
   constructor(private revisionService: RevisionService) {}
 
   ngOnInit(): void {
+    this.exercice.blocks.map(block=>{
+      block.blockFileList = block.correctValue.split('/')
+      block.blockFileList=block.blockFileList.splice(0,block.blockFileList.length-1)
+      this.shuffle(block.blockFileList)
+    })
+    
+    this.wordsList =this.exercice.blocks
+    console.log("EXERCICE",this.exercice)
+    
     this.exercice.question = this.exercice.question.split('#').join('\n');
     this.exercice.name = this.exercice.name.split('#').join('\n');
 
@@ -30,60 +40,51 @@ export class DragSyllablesComponent implements OnInit, OnChanges {
         block.value ? (block.value = '') : '';
       });
     });
-    this.initExercice();
-  }
-  private initExercice() {
     this.canGoNext.emit(true);
-    this.correspandance_left = [];
-    this.correspandance_right = [];
-    this.correspandance_left = [...this.exercice.blocks.filter((b) => b.exerciceBlockType === ExerciceBlockTypes.CORRESPONDANCE_LEFT)];
-
-    this.exercice.blocks
-      .filter((b) => b.exerciceBlockType === ExerciceBlockTypes.CORRESPONDANCE_RIGHT)
-      .forEach((block) => {
-        if (this.isCheckMode) {
-          this.correspandance_right[this.correspandance_left.findIndex((b) => b.exerciceBlockType === ExerciceBlockTypes.CORRESPONDANCE_LEFT && b.correctValue === block.value)] =
-            block;
-        } else {
-          this.correspandance_right.push(block);
-        }
-      });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['exercice']) {
-      this.initExercice();
-    }
-  }
-  drop(event: CdkDragDrop<ExerciceBlock[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      if (event.container.data.length === 0) {
-        transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
-      } else {
-        transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, 1);
-        transferArrayItem(event.container.data, event.previousContainer.data, 0, event.previousIndex);
-      }
-    }
+  // drop(event: CdkDragDrop<ExerciceBlock[]>) {
+  //   if (event.previousContainer === event.container) {
+  //     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  //   } else {
+  //     if (event.container.data.length === 0) {
+  //       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+  //     } else {
+  //       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, 1);
+  //       transferArrayItem(event.container.data, event.previousContainer.data, 0, event.previousIndex);
+  //     }
+  //   }
 
-    for (let index = 0; index < event.container.data.length; index++) {
-      const block = event.container.data[index];
-      this.correspandance_left[index].value = block.value;
-    }
-    this.exercice.blocks = this.correspandance_left.concat(this.correspandance_right);
+  //   for (let index = 0; index < event.container.data.length; index++) {
+  //     const block = event.container.data[index];
+  //     this.correspandance_left[index].value = block.value;
+  //   }
+  //   this.exercice.blocks = this.correspandance_left.concat(this.correspandance_right);
 
+  //   this.checkCorrectValues();
+  //   this.canGoNext.emit(true);
+  // }
+
+  drop(event: CdkDragDrop<string[]>,word) {
+    console.log(event)
+    moveItemInArray(word, event.previousIndex, event.currentIndex);
     this.checkCorrectValues();
-    this.canGoNext.emit(true);
+
+    console.log(word)
+    console.log(this.wordsList)
   }
   checkCorrectValues() {
     let allCorrect = true;
     this.exercice.blocks.forEach((block) => {
-      if (block.exerciceBlockType === ExerciceBlockTypes.CORRESPONDANCE_LEFT && block.value !== block.correctValue) {
+      if (block.blockFileList.join('/')+'/' != block.correctValue) {
         allCorrect = false;
       }
     });
 
     this.answerChange.emit(allCorrect);
+  }
+
+  shuffle(array) {
+    array.sort(() => Math.random() - 0.5);
   }
 }
