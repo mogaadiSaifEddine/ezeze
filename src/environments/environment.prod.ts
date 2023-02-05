@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
-  serverApi: 'http://197.13.31.221:8081/',
+  // serverApi: 'http://197.13.31.221:8081/',
+  serverApi: 'http://41.231.122.153:8081/',
   chapterByTeacher: 'Chapter/',
   group: 'group/',
   matieres: 'Chapter/matieres/{userId}',
