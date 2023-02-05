@@ -14,6 +14,7 @@ import { InitEquationFormComponent } from 'src/app/components/exercice/exercice-
 import { GeneralTablesBuilderComponent } from 'src/app/components/exercice/exercice-types/tables/general-purpose-tables/general-tables-builder/general-tables-builder.component';
 import { VersionSelectorComponent } from 'src/app/components/exercice/exercice-types/stroke-wrong-answer/version-selector/version-selector.component';
 import { TextUnderImageBuilderComponent } from 'src/app/components/exercice/exercice-types/tables/text-under-image-builder/text-under-image-builder.component';
+import { ParagraphBuilderComponent } from 'src/app/components/exercice/exercice-types/separate-text/paragraph-builder/paragraph-builder.component';
 
 @Component({
   selector: 'app-add-exercice',
@@ -145,6 +146,8 @@ export class AddExerciceComponent implements OnInit {
       BLOCK_FORM_ACCORDING_TO_TYPE = VersionSelectorComponent;
     else if (element.toString() === "TEXT_UNDER_IMAGE")
       BLOCK_FORM_ACCORDING_TO_TYPE = TextUnderImageBuilderComponent;
+    else if (element.toString() === "SEPARATE_TEXT")
+      BLOCK_FORM_ACCORDING_TO_TYPE = ParagraphBuilderComponent;
     else
       BLOCK_FORM_ACCORDING_TO_TYPE = AddBlockComponent;
 

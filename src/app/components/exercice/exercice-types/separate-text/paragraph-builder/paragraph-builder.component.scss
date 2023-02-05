@@ -1,0 +1,32 @@
+section{
+    width: auto;
+    max-width: 1000px;
+    height: auto;
+    margin: auto;
+
+    textarea{
+        width: 100%;
+    }
+
+    #virtualKeyboardBuilder{
+        background-color: #F7F7F7;
+        padding: .5rem 1rem;
+        font-size: 1rem;
+        color: #262626;
+
+        label{
+            display: inline-block;
+            margin: 0 .5rem;
+            padding: .5rem;
+            cursor: pointer;
+            
+            &:hover{
+                background-color: #bebebe;
+            }
+
+            input{
+                margin-right: .5rem;
+            }
+        }
+    }
+}
