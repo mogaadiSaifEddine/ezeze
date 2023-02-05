@@ -10,6 +10,8 @@
 
 <ines-equation-display *ngIf="!loading && currentExercise.type === TYPES.VERTICAL_EQUATION" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></ines-equation-display>
 
+<ines-paragraph-display *ngIf="!loading && currentExercise.type === TYPES.VERTICAL_EQUATION" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></ines-paragraph-display>
+
 <ines-general-tables-student-display *ngIf="!loading && currentExercise.type === TYPES.GENERAL_TABLES" [exercice]="currentExercise" (canGoNext)="canGoNext($event)"
   [(answer)]="answer"></ines-general-tables-student-display>
 

@@ -164,7 +164,8 @@ import { ParagraphDisplayComponent } from './exercice-types/separate-text/paragr
     EquationDisplayComponent,
     GeneralTablesStudentDisplayComponent,
     StrokeAnswerDisplayComponent,
-    FillLettersComponent
+    FillLettersComponent,
+    ParagraphDisplayComponent
   ]
 })
 export class ExerciceModule {}
