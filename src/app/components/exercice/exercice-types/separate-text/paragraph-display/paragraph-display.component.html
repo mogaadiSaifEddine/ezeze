@@ -9,6 +9,13 @@
         <div [innerHTML]="exercice?.question"></div><br>
     </div>
     <mat-card-content class="equationGrid" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
-
+        <section id="showOneParaph" *ngFor="let block of exercice?.blocks; let index = index;">
+            <!-- VIRTUAL KEYBOARD -->
+            <mat-button-toggle-group id="virtualKeyboard">
+                <mat-button-toggle *ngFor="let entry of block.blockParams['virtualKeyboard']" [value]="entry" (click)="inertSymbol(entry)">{{entry}}</mat-button-toggle>
+            </mat-button-toggle-group>
+            <!-- EDITOR FOR STUDENTS -->
+            <textarea (click)="logCaretPosition($event)" [(ngModel)]="CURRENT_TXT" autofocus></textarea>
+        </section>
     </mat-card-content>
 </mat-card>

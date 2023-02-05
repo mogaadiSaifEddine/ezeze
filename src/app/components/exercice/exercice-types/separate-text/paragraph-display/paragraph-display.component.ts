@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Exercice } from 'src/app/model/Exercice';
 import { ExerciceBlock } from 'src/app/model/ExerciceBlock';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
@@ -15,7 +15,9 @@ export class ParagraphDisplayComponent implements OnInit {
   @Input() answer: boolean;
   @Output() answerChange = new EventEmitter<boolean>();
   @Output() canGoNext = new EventEmitter<boolean>();
-  IS_CORRECT_COMBINATION = false;
+  CURRENT_CARET_POSITION: any;
+  CORRECT_TXT = '';
+  CURRENT_TXT = '';
 
   constructor() { }
 
@@ -27,14 +29,25 @@ export class ParagraphDisplayComponent implements OnInit {
     this.exercice.blocks.forEach((block: any) => {
       if (block.exerciceBlockType === ExerciceBlockTypes.TEXT_TO_SEPARATE) {
         block.blockParams = JSON.parse(block.blockParams);
+        this.CORRECT_TXT = block.blockParams['paragToValidateAgainst'];
+        this.CURRENT_TXT = block.blockParams['paragToShow'];
+        this.CURRENT_CARET_POSITION = this.CURRENT_TXT.length;
       }
     });
   }
 
-  valueChanged() {
+  // HEPER METHODS
+  logCaretPosition(event: any) {
+    this.CURRENT_CARET_POSITION = event.target.selectionStart;
+  }
 
-    // this.answerChange.emit(this.IS_CORRECT_COMBINATION);
-    // this.canGoNext.emit(true);
+  inertSymbol(symbol: string) {
+    const LEGACY_STRING = this.CURRENT_TXT;
+    this.CURRENT_TXT = LEGACY_STRING.substring(0, this.CURRENT_CARET_POSITION) + symbol + LEGACY_STRING.substring(this.CURRENT_CARET_POSITION);
+
+    const ANSWER_IS_CORRECT = this.CORRECT_TXT === this.CURRENT_TXT;
+    this.answerChange.emit(ANSWER_IS_CORRECT);
+    this.canGoNext.emit(true);
   }
 
   ngOnDestroy() {
@@ -44,5 +57,4 @@ export class ParagraphDisplayComponent implements OnInit {
       }
     });
   }
-
 }

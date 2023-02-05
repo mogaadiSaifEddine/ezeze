@@ -54,7 +54,7 @@ export class ParagraphBuilderComponent implements OnInit {
       value: null,
       blockOrder: null,
       files: null,
-      exerciceBlockType: ExerciceBlockTypes.EQUATION,
+      exerciceBlockType: ExerciceBlockTypes.TEXT_TO_SEPARATE,
       blockParams: JSON.stringify(FINALCOMBINATION)
     }
 

@@ -1,0 +1,19 @@
+#virtualKeyboard {
+    font-size: 1rem;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+textarea {
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+    border: none;
+    background-color: #F7F7F7;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-top: 1rem;
+    resize: none;
+    position: relative;
+}
