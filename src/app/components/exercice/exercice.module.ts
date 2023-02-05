@@ -77,6 +77,7 @@ const MaterialModules = [
 
 import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters.component';
 import { ParagraphBuilderComponent } from './exercice-types/separate-text/paragraph-builder/paragraph-builder.component';
+import { ParagraphDisplayComponent } from './exercice-types/separate-text/paragraph-display/paragraph-display.component';
 
 @NgModule({
   imports: [
@@ -129,7 +130,8 @@ import { ParagraphBuilderComponent } from './exercice-types/separate-text/paragr
     ShapesGroupsBuilderComponent,
     TextUnderImageBuilderComponent,
     FillLettersComponent,
-    ParagraphBuilderComponent
+    ParagraphBuilderComponent,
+    ParagraphDisplayComponent
   ],
   providers: [],
   exports: [

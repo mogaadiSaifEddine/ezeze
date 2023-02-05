@@ -1,0 +1,14 @@
+<mat-card *ngIf="exercice.name">
+    <div class="question-container">
+        <mat-card-title [innerHTML]="exercice?.name" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></mat-card-title>
+    </div>
+</mat-card>
+
+<mat-card>
+    <div class="question-container">
+        <div [innerHTML]="exercice?.question"></div><br>
+    </div>
+    <mat-card-content class="equationGrid" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+
+    </mat-card-content>
+</mat-card>
