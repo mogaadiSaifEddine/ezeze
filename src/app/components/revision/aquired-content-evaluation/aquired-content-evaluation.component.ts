@@ -91,6 +91,8 @@ export class AquiredContentEvaluationComponent implements OnInit {
   }
   loadSerie() {
     this.revisionService.exerciceSerie.subscribe((serie: any[]) => {
+      console.log(serie);
+
       if (!serie) return;
       this.serieExercice = serie;
 
@@ -104,12 +106,24 @@ export class AquiredContentEvaluationComponent implements OnInit {
     });
   }
   getUserData() {
+    console.log(this.serieExercice);
+
     const userconnected = localStorage.getItem('userconnected');
     this.userService.getUser(userconnected).subscribe((res) => {
       this.UserId = res.user_id;
 
       this.revisionService.getLastExerciceId(this.UserId).subscribe(
         (el) => {
+          console.log(this.evaluationContent.exercices);
+
+          console.log(
+            this.exercice1Content.exercices.length == 0 &&
+              this.exercice2Content.exercices.length == 0 &&
+              this.exercice3Content.exercices.length == 0 &&
+              this.prerequisiteContent.exercices.length == 0 &&
+              this.evaluationContent.exercices.length == 0
+          );
+
           this.loading = false;
           // this.serieType = el.serie;
           this.serieType = 'EVALUATION';

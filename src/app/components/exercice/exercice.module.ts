@@ -75,6 +75,7 @@ const MaterialModules = [
 ];
 
 import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters.component';
+import { DragImgWordComponent } from './exercice-types/drag-img-word/drag-img-word.component';
 
 @NgModule({
   imports: [
@@ -125,7 +126,8 @@ import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters
     WordBuilderComponent,
     ShapesGroupsBuilderComponent,
     TextUnderImageBuilderComponent,
-    FillLettersComponent
+    FillLettersComponent,
+    DragImgWordComponent
   ],
   providers: [],
   exports: [

@@ -51,7 +51,6 @@
     "module-name": "^0.0.1-security",
     "moment": "^2.29.4",
     "ngx-lightbox": "^3.0.0",
-
     "ngx-mapbox-gl": "^9.1.0",
     "ngx-perfect-scrollbar": "^10.1.1",
     "ngx-toastr": "^15.2.2",
@@ -73,6 +72,7 @@
     "@types/bootstrap": "^5.2.1",
     "@types/googlemaps": "^3.43.3",
     "@types/jasmine": "^4.0.3",
+    "@types/lodash": "^4.14.191",
     "@types/mapbox-gl": "^2.7.6",
     "@types/node": "^16.11.43",
     "@typescript-eslint/eslint-plugin": "5.29.0",

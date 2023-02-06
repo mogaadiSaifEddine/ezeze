@@ -1,0 +1,62 @@
+<mat-card *ngIf="exercice.name">
+  <div class="question-container">
+    <mat-card-content style="text-align: center">
+      {{ exercice?.name }}
+    </mat-card-content>
+  </div>
+</mat-card>
+
+<mat-card>
+  <div class="question-container">
+    <mat-card-title [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+      Faites correspondre les éléments suivants avec leurs noms:
+    </mat-card-title>
+
+    <mat-card-content [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+      <div cdkDropListGroup class="paragraph-container">
+        <span>
+          <ng-container *ngFor="let section of sections; let j = index">
+            <span *ngIf="section.type === 'text'">{{ section.value }}</span>
+
+            <img
+              (click)="openInputField(j)"
+              *ngIf="section.type === 'img' && !section.opened"
+              class="example-box"
+              [src]="section.value"
+              alt="" />
+            <input
+              cdkDropList
+              class="fillable-input"
+              *ngIf="section.type === 'input' || section.opened"
+              placeholder="..."
+              [maxlength]="section.maxLength"
+              [(ngModel)]="sectionsCopy[j].value"
+              value=""
+              [name]="'input' + j"
+              [size]="section.maxLength > 1 ? section.maxLength - 1 : 1"
+              required />
+          </ng-container>
+        </span>
+        <br />
+        <div
+          *ngIf="exerciceType != 'img-to-text'"
+          cdkDropList
+          cdkDropListOrientation="horizontal"
+          [cdkDropListData]="valuesList"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let item of valuesList" cdkDrag>{{ item }}</div>
+        </div>
+        <div
+          *ngIf="exerciceType == 'img-to-text'"
+          cdkDropList
+          cdkDropListOrientation="horizontal"
+          [cdkDropListData]="valuesList"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <img class="example-box" [src]="item" *ngFor="let item of valuesList" cdkDrag />
+        </div>
+      </div>
+    </mat-card-content>
+  </div>
+</mat-card>
