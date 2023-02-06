@@ -23,7 +23,15 @@
           </mat-error>
         </mat-form-field>
 
-        <angular-editor formControlName="name" [config]="editorConfig" id="angularEditor"></angular-editor>
+        <div class="mt-1 mb-1">
+          <mat-slide-toggle (change)="toggleEditorForQG()">Use input text</mat-slide-toggle>
+          <angular-editor formControlName="name" [config]="editorConfig" id="angularEditor" *ngIf="useEditorQG"></angular-editor>
+
+          <mat-form-field class="example-full-width mt-1" appearance="outline" appearance="outline" *ngIf="!(useEditorQG)">
+            <mat-label>Question Général</mat-label>
+            <input type="text" matInput formControlName="name">
+          </mat-form-field>
+        </div>
 
         <mat-form-field appearance="outline">
           <ngx-mat-file-input placeholder="Image question generale" formControlName="file"> </ngx-mat-file-input>

@@ -26,6 +26,7 @@ export class AddExerciceComponent implements OnInit {
   @ViewChild('hotspotImg') hotspotImg;
   currentExercice: Exercice;
   useEditor = true;
+  useEditorQG = true;
   constructor(
     private serieService: SerieService,
     private fb: FormBuilder,
@@ -134,6 +135,9 @@ export class AddExerciceComponent implements OnInit {
 
   toggleEditor() {
     this.useEditor = !this.useEditor;
+  }
+  toggleEditorForQG() {
+    this.useEditorQG = !this.useEditorQG;
   }
 
   openBlockDialog(element?: ExerciceBlock) {
