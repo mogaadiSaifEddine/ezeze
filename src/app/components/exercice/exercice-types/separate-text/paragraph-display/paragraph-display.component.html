@@ -6,7 +6,7 @@
 
 <mat-card>
     <div class="question-container">
-        <div [innerHTML]="exercice?.question"></div><br>
+        <div [innerHTML]="exercice?.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></div><br>
     </div>
     <mat-card-content class="equationGrid" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
         <section id="showOneParaph" *ngFor="let block of exercice?.blocks; let index = index;">

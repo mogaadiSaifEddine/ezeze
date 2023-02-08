@@ -6,11 +6,11 @@
 
 <mat-card>
     <div class="question-container">
-        <div [innerHTML]="exercice?.question"></div><br>
+        <div [innerHTML]="exercice?.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></div><br>
     </div>
     <mat-card-content class="tableGrid" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
 
-        <table *ngFor="let block of exercice?.blocks; let index = index;">
+        <table *ngFor="let block of exercice?.blocks; let index = index;" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
             <tr *ngFor="let row of block.blockParams['teacher_matrix'] let indexRow = index">
                 <td *ngFor="let field of row; let indexColumn= index">
                     <input type="text" class="textInput" [ngClass]="(block.blockParams['teacher_matrix'][indexRow][indexColumn]?.length<1) && 'studentCanWriteHere'"

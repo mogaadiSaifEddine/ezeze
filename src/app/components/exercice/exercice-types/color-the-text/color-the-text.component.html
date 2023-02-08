@@ -16,7 +16,7 @@
     <!-- <mat-card-title [innerText]="exercice.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
       <br />
     </mat-card-title> -->
-    <div [innerHTML]="exercice?.question"></div><br>
+    <div [innerHTML]="exercice?.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></div><br>
     <mat-card-content class="container flex mt-5 justify-content-center align-items-center" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
       <div class="display" *ngFor="let element of textToHighlight">
         <app-color-the-text-element *ngIf="element != 'br'" [correctColored]="correctValue" (colorChange)="valueChanged($event)" [element]="element" [color]="ChosenColor">
