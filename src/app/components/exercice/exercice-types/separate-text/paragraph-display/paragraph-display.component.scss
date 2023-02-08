@@ -1,13 +1,7 @@
-#virtualKeyboard {
-    font-size: 1rem;
-    text-align: center;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-
 textarea {
     width: 100%;
     height: auto;
+    min-height: 120px;
     padding: 1rem;
     border: none;
     background-color: #F7F7F7;
@@ -16,4 +10,5 @@ textarea {
     margin-top: 1rem;
     resize: none;
     position: relative;
+    direction: inherit;
 }

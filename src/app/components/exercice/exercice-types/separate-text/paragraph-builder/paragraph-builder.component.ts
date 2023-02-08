@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ExerciceBlock } from 'src/app/model/ExerciceBlock';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
@@ -10,11 +10,11 @@ import { ExcerciceserviceService } from 'src/app/service/excerciceservice.servic
   styleUrls: ['./paragraph-builder.component.scss']
 })
 export class ParagraphBuilderComponent implements OnInit {
+  @ViewChild('separatorsInput') separatorsInput!: ElementRef;
 
-  virtualKeyboardEntries = ['/', '\'', '*', '.', '-', '_'];
+  virtualKeyboardEntries = [];
   teachersParagraph: any;
   correctParagraph: any;
-  chosenSeparators = [];
   ParagraphBlock: ExerciceBlock;
 
 
@@ -23,25 +23,17 @@ export class ParagraphBuilderComponent implements OnInit {
     private dialogRef: MatDialogRef<ParagraphBuilderComponent>
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  updateSeparatorsArray() {
+    this.virtualKeyboardEntries = [...this.separatorsInput.nativeElement.value];
   }
 
-  updateSeparatorsArray(event: any){
-    const CURRENT_ENTRY = {
-      symbol: event.target.value,
-      checked: event.target.checked,
-    }
-    if (CURRENT_ENTRY.checked === true)
-    this.chosenSeparators.push(CURRENT_ENTRY.symbol)
-    else 
-    this.chosenSeparators = this.chosenSeparators.filter(entry=>entry!==CURRENT_ENTRY.symbol)
-  }
-
-  save(){
+  save() {
     const FINALCOMBINATION = {
       paragToShow: this.teachersParagraph,
       paragToValidateAgainst: this.correctParagraph,
-      virtualKeyboard: this.chosenSeparators
+      virtualKeyboard: this.virtualKeyboardEntries
     }
 
     this.ParagraphBlock = {

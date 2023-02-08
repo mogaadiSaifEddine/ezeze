@@ -3,11 +3,9 @@
         <h1>Paragraph builder</h1>
         <header>
             <p>Select what separators to include in the virtual keyboard.</p>
-            <div id="virtualKeyboardBuilder" (change)="updateSeparatorsArray($event)">
-                <label *ngFor="let virtualKeyboardEntry of virtualKeyboardEntries">
-                    <input type="checkbox" [value]="virtualKeyboardEntry" [name]="virtualKeyboardEntry">
-                    <strong>{{virtualKeyboardEntry}}</strong>
-                </label>
+            <!-- INPUT DIFFERENT SEPARATORS -->
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Input different separators (.;,/\*...)" #separatorsInput (change)="updateSeparatorsArray()">
             </div>
         </header>
 
