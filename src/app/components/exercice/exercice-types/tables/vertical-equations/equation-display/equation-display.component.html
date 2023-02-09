@@ -6,15 +6,16 @@
 
 <mat-card>
     <div class="question-container">
-        <div [innerHTML]="exercice?.question"></div><br>
+        <div [innerHTML]="exercice?.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></div><br>
     </div>
     <mat-card-content class="equationGrid" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
         <!-- TABLE === 1 EUATION -->
         <table class="equationCard" *ngFor="let block of exercice?.blocks; let index = index;">
             <tr *ngFor="let row of block.blockParams['teacher_matrix'] let indexRow = index">
                 <td *ngFor="let field of row; let indexColumn= index" [ngClass]="(indexRow === block.blockParams['matrixLayout'].numRows-1) && 'equationEndLine'">
-                    <input type="number" min="0" class="numberInput" [ngClass]="(block.blockParams['student_matrix'][indexRow][indexColumn]?.length>0) && 'studentCanWriteHere'"
-                        [readonly]="block.blockParams['teacher_matrix'][indexRow][indexColumn]?.length>0" [value]="block.blockParams['teacher_matrix'][indexRow][indexColumn]"
+
+                    <input type="number" min="0" class="numberInput" [ngClass]="(block.blockParams['teacher_matrix'][indexRow][indexColumn]?.length<1) && 'studentCanWriteHere'"
+                        [value]="block.blockParams['teacher_matrix'][indexRow][indexColumn]" [readonly]="block.blockParams['teacher_matrix'][indexRow][indexColumn]?.length>0"
                         *ngIf="!(indexRow === block.blockParams['matrixLayout'].numRows-1 && indexColumn === 0)"
                         (change)="valueChanged($event, index, block.blockParams['student_matrix'][indexRow][indexColumn])">
 

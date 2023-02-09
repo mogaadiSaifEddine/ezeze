@@ -91,7 +91,7 @@ const routes: Routes = [
   // {path:"acceuil",redirectTo:'active'},
   { path: 'login', component: LoginComponent },
 
-  { path: 'accueil', component: AccueilComponent },
+  { path: 'accueil', component: LoginComponent },
   { path: 'signup', component: LoginComponent },
   { path: 'active', component: ActivecompteComponent }
 ];
@@ -107,4 +107,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
