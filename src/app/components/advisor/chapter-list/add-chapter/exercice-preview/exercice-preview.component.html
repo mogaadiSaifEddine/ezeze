@@ -1,0 +1,37 @@
+<div class="header">
+    <button mat-icon-button class="right close-button" [mat-dialog-close]="true">
+        <mat-icon class="close-icon" color="warn">close</mat-icon>
+    </button>
+
+</div>
+<app-drag-drop *ngIf="data.currentExercise.type === TYPES.DRAG_DROP" [exercice]="data.currentExercise"></app-drag-drop>
+
+<app-correspondence *ngIf="data.currentExercise.type === TYPES.CORRESPONDANCE" [exercice]="data.currentExercise"></app-correspondence>
+
+<app-multiple-answers *ngIf="data.currentExercise.type === TYPES.MULTIPLE_RESPONSE" [exercice]="data.currentExercise"></app-multiple-answers>
+
+<app-color-the-text *ngIf="data.currentExercise.type === TYPES.WORD_COLORATION" [exercice]="data.currentExercise"></app-color-the-text>
+
+<app-multiple-choice *ngIf="data.currentExercise.type === TYPES.MULTIPLE_CHOICE" [exercice]="data.currentExercise"></app-multiple-choice>
+
+<app-true-false *ngIf="data.currentExercise.type === TYPES.TRUE_FALSE" [exercice]="data.currentExercise"></app-true-false>
+
+<app-short-response *ngIf="data.currentExercise.type === TYPES.SHORT_RESPONSE" [exercice]="data.currentExercise"></app-short-response>
+
+<app-fill-empty-fields *ngIf="data.currentExercise.type === TYPES.FILL_EMPTY_FIELDS" [exercice]="data.currentExercise"></app-fill-empty-fields>
+
+<app-sequencing *ngIf="data.currentExercise.type === TYPES.SEQUENCING" [exercice]="data.currentExercise"></app-sequencing>
+
+<app-numeric *ngIf="data.currentExercise.type === TYPES.NUMERIC" [exercice]="data.currentExercise"></app-numeric>
+
+<app-select-from-list *ngIf="data.currentExercise.type === TYPES.SELECT_FROM_LIST" [exercice]="data.currentExercise"></app-select-from-list>
+
+<app-likert-scale *ngIf="data.currentExercise.type === TYPES.LIKERT_SCALE" [exercice]="data.currentExercise"></app-likert-scale>
+
+<app-writing *ngIf="data.currentExercise.type === TYPES.WRITING" [exercice]="data.currentExercise"></app-writing>
+
+<app-corresponding-arrow *ngIf="data.currentExercise.type === TYPES.LINK_ARROW" [exercice]="data.currentExercise"></app-corresponding-arrow>
+
+<app-hotspot *ngIf="data.currentExercise.type === TYPES.HOTSPOT" [exercice]="data.currentExercise"></app-hotspot>
+
+<app-drag-words *ngIf="data.currentExercise.type === TYPES.DRAG_WORDS"  [exercice]="data.currentExercise"></app-drag-words>

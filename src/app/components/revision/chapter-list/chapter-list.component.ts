@@ -15,8 +15,9 @@ export class ChapterListComponent implements OnInit {
   ngOnInit(): void {
     this.chapterService.chapterList.subscribe({
       next: (value) => {
-        this.chapterList = value;
+        console.log(value);
 
+        this.chapterList = value;
       }
     });
   }

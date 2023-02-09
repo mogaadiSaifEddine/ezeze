@@ -55,6 +55,7 @@ export class ChapterListComponent implements OnInit {
   openSerieDialog(element) {
     this.serieService.getSerieByChapter(element.chapter_id).subscribe((res) => {
       const serie = res;
+      this.chapterService.isMenuOpened.next(false);
       const dialogRef = this.dialog.open(AddSerieComponent, {
         width: '1200px',
         height: 'fit-content',
@@ -65,13 +66,18 @@ export class ChapterListComponent implements OnInit {
         }
       });
       dialogRef.afterClosed().subscribe((result) => {
+        this.chapterService.isMenuOpened.next(true);
+
         if (result) this.getallchapters();
       });
     });
   }
 
   openDialog(element?): void {
+    this.chapterService.isMenuOpened.next(false);
+
     const dialogRef = this.dialog
+
       .open(AddChapterComponent, {
         width: '50%',
         height: '70vh',
@@ -80,6 +86,8 @@ export class ChapterListComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((result) => {
+        this.chapterService.isMenuOpened.next(true);
+
         this.getallchapters();
       });
   }

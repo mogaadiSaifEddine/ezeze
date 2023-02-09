@@ -10,6 +10,10 @@ import { Exercise_Types } from 'src/app/model/Exercice_type';
 import { SerieService } from 'src/app/services/serie.service';
 import { AddBlockComponent } from './add-block/add-block.component';
 import { ExercicePreviewComponent } from './exercice-preview/exercice-preview.component';
+import { InitEquationFormComponent } from 'src/app/components/exercice/exercice-types/tables/vertical-equations/init-equation-form/init-equation-form.component';
+import { GeneralTablesBuilderComponent } from 'src/app/components/exercice/exercice-types/tables/general-purpose-tables/general-tables-builder/general-tables-builder.component';
+import { VersionSelectorComponent } from 'src/app/components/exercice/exercice-types/stroke-wrong-answer/version-selector/version-selector.component';
+import { TextUnderImageBuilderComponent } from 'src/app/components/exercice/exercice-types/tables/text-under-image-builder/text-under-image-builder.component';
 
 @Component({
   selector: 'app-add-exercice',
@@ -26,7 +30,7 @@ export class AddExerciceComponent implements OnInit {
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<AddExerciceComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { exercice: Exercice; serieId: number; chapterId: number }
-  ) {}
+  ) { }
   hotspotsList = [];
   correctAnswerMode = false;
   displayedColumns: string[] = ['ordre', 'type', 'label', 'action'];
@@ -126,10 +130,22 @@ export class AddExerciceComponent implements OnInit {
   }
 
   openBlockDialog(element?: ExerciceBlock) {
+    let BLOCK_FORM_ACCORDING_TO_TYPE: any;
+    if (['VERTICAL_EQUATION'].includes(element.toString()))
+      BLOCK_FORM_ACCORDING_TO_TYPE = InitEquationFormComponent;
+    else if (element.toString() === "GENERAL_TABLES")
+      BLOCK_FORM_ACCORDING_TO_TYPE = GeneralTablesBuilderComponent;
+    else if (element.toString() === "STROKE_WRONG_ANSWER")
+      BLOCK_FORM_ACCORDING_TO_TYPE = VersionSelectorComponent;
+    else if (element.toString() === "TEXT_UNDER_IMAGE")
+      BLOCK_FORM_ACCORDING_TO_TYPE = TextUnderImageBuilderComponent;
+    else
+      BLOCK_FORM_ACCORDING_TO_TYPE = AddBlockComponent;
+
     this.dialog
-      .open(AddBlockComponent, {
-        width: '700px',
-        maxWidth: '700px',
+      .open(BLOCK_FORM_ACCORDING_TO_TYPE, {
+        width: '70%',
+        maxWidth: '70%',
         maxHeight: '100vh',
         panelClass: 'my-custom-dialog-class',
         data: {
@@ -137,8 +153,7 @@ export class AddExerciceComponent implements OnInit {
           exercice_type: this.exerciceForm.get('type').value
         }
       })
-      .afterClosed()
-      .subscribe((result) => {
+      .afterClosed().subscribe((result) => {
         if (result) {
           result.blockOrder = this.order++;
           this.dataSource = [...this.dataSource, result];
@@ -181,14 +196,45 @@ export class AddExerciceComponent implements OnInit {
     if (this.exerciceForm.valid && this.checkBlocks()) {
       if (this.data.exercice) {
         this.serieService.updateExercice(exercice, this.data.exercice.ex_id).subscribe(async (res: Exercice) => {
+          exercice.blocks.forEach((element, index) => {
+            let files = [];
+            console.log(files);
+
+            if (element.imageFile) {
+              files.push(element.imageFile);
+            }
+            if (element.audioFile) {
+              files.push(element.audioFile);
+            }
+            if (files.length)
+              this.serieService.addExerciceBlockFile(files, Number(res.blocks[index].exercice_Block_Id)).subscribe((resFileBlock) => {
+                console.log(resFileBlock);
+                console.log(files);
+              });
+          });
           if (this.exerciceForm.get('file').value !== null)
-            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => {});
+            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => { });
           this.dialogRef.close(true);
         });
       } else {
         this.serieService.addExercice(exercice, this.data.serieId).subscribe(async (res: Exercice) => {
+          exercice.blocks.forEach((element, index) => {
+            let files = [];
+
+            if (element.imageFile) {
+              files.push(element.imageFile);
+            }
+            if (element.audioFile) {
+              files.push(element.audioFile);
+            }
+            if (files.length)
+              this.serieService.addExerciceBlockFile(files, Number(res.blocks[index].exercice_Block_Id)).subscribe((resFileBlock) => {
+                console.log(resFileBlock);
+                console.log(files);
+              });
+          });
           if (this.exerciceForm.get('file').value !== null)
-            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => {});
+            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => { });
           this.dialogRef.close(true);
         });
       }
@@ -201,7 +247,7 @@ export class AddExerciceComponent implements OnInit {
   resetBlocks(type: any) {
     this.dataSource = [];
     if (type === Exercise_Types.FILL_LETTERS) {
-      this.displayedColumns = ['ordre', 'value', 'correctValue', 'action']
+      this.displayedColumns = ['ordre', 'value', 'correctValue', 'action'];
     } else {
       this.displayedColumns = ['ordre', 'type', 'label', 'action'];
     }

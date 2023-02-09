@@ -18,7 +18,7 @@ export class MultipleChoiceComponent implements OnInit, OnChanges {
   readonly ExerciceBlockTypes = ExerciceBlockTypes;
   imageBlock: ExerciceBlock = null;
 
-  constructor(private revisionService: RevisionService) {}
+  constructor(private revisionService: RevisionService) { }
 
   ngOnInit(): void {
     this.exercice.question = this.exercice.question.split('#').join('\n');
@@ -37,9 +37,9 @@ export class MultipleChoiceComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['exercice']) {
-      this.initExercice();
-    }
+    // if (changes['exercice']) {
+    //   this.initExercice();
+    // }
   }
   valueChanged(event) {
     this.answerChange.emit(JSON.stringify(event.source._checked) === event.value.correctValue);

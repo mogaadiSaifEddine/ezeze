@@ -1,0 +1,25 @@
+<mat-card>
+  <div class="question-container">
+    <!-- <mat-card-content [innerText]="exercice?.name" style="text-align: center"> </mat-card-content> -->
+    <div [innerHTML]="exercice?.name"></div>
+  </div>
+</mat-card>
+<mat-card>
+  <div class="container">
+    <div
+      [ngClass]="{ 'selectd-image': block.exercice_Block_Id == selectedBlock?.exercice_Block_Id }"
+      class="block-container"
+      *ngFor="let block of exercice.blocks">
+      <div *ngFor="let item of block.blockFileList">
+        <img
+          (click)="selectBlock(block)"
+          *ngIf="item.type.includes('image')"
+          src="{{ 'Elearning/filgetter/block/' + item.url | fileGetter }}" />
+        <audio *ngIf="!item.type.includes('image')" controls>
+          <!-- <source src="horse.ogg" type="audio/ogg"> -->
+          <source src="{{ 'Elearning/filgetter/block/' + item.url | fileGetter }}" type="audio/mpeg" />
+        </audio>
+      </div>
+    </div>
+  </div>
+</mat-card>

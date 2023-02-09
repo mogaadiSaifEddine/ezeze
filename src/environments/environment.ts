@@ -59,7 +59,9 @@ export const environment = {
   exerciceBlock: 'exerciceBlock/',
   serieExercice: 'serie_exercice/',
   userAnswer: 'UserAnswer/',
-  getScoreSerie: 'UserAnswer/score/{userId}/{serie_exercice_id}'
+  getScoreSerie: 'UserAnswer/score/{userId}/{serie_exercice_id}',
+
+  filesSrc: 'filegetter/{{fileurl}}'
 };
 
 /*

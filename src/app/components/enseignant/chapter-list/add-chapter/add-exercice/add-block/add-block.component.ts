@@ -42,14 +42,23 @@ export class AddBlockComponent implements OnInit {
     DRAG_DROP: [ExerciceBlockTypes.DRAG_DROP_IMAGE_LIST],
     DRAG_WORDS: [ExerciceBlockTypes.HIGHLIGHT_TEXT, ExerciceBlockTypes.TEXT, ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.BREAK],
     FILL_LETTERS: [ExerciceBlockTypes.TEXT],
-    LISTEN: [ExerciceBlockTypes.AUDIO_IMAGE],
     HOTSPOT: [],
-    DRAG_SYLLABLES: [],
-    PUT_IN_FRAME: [],
-    OUTSIDER_ELEMENT: [],
-    ARITHMETIC_TREE: [],
-    FILL_BLANKS_IMG: [],
-    COLOR_SHAPE: []
+    [Exercise_Types.DRAG_SYLLABLES]: [],
+    [Exercise_Types.PUT_IN_FRAME]: [],
+    [Exercise_Types.OUTSIDER_ELEMENT]: [],
+    [Exercise_Types.LISTEN]: [ExerciceBlockTypes.AUDIO_IMAGE],
+    [Exercise_Types.ARITHMETIC_TREE]: [],
+    [Exercise_Types.FILL_BLANKS_IMG]: [
+      ExerciceBlockTypes.INPUT_TEXT,
+      ExerciceBlockTypes.BREAK,
+      ExerciceBlockTypes.HIGHLIGHT_TEXT,
+      ExerciceBlockTypes.TEXT
+    ],
+    [Exercise_Types.COLOR_SHAPE]: [],
+    TEXT_UNDER_IMAGE: [ExerciceBlockTypes.IMAGE_WITH_TEXT],
+    VERTICAL_EQUATION: [ExerciceBlockTypes.EQUATION],
+    GENERAL_TABLES: [ExerciceBlockTypes.TABLE],
+    STROKE_WRONG_ANSWER: [ExerciceBlockTypes.ANSWER_TO_STROKE]
   };
   readonly showFieldsFor: Record<Exercise_Types, () => void> = {
     LIKERT_SCALE: () => this.showFieldsForLikertScale(),
@@ -57,7 +66,6 @@ export class AddBlockComponent implements OnInit {
     CORRESPONDANCE: () => this.showFieldsForCorrespondance(),
     WORD_COLORATION: () => this.showFieldsForWordColoration(),
     FILL_LETTERS: (): void => this.showFieldsForFillLetters(),
-    LISTEN: (): void => this.showFieldsForListening(),
     MULTIPLE_CHOICE: (): void => {},
     MULTIPLE_RESPONSE: (): void => {},
     TRUE_FALSE: (): void => {},
@@ -69,13 +77,28 @@ export class AddBlockComponent implements OnInit {
     DRAG_WORDS: (): void => {},
     SELECT_FROM_LIST: (): void => {},
     WRITING: (): void => {},
+    TEXT_UNDER_IMAGE: () => this.showFieldsForTextUnderImage(),
+    VERTICAL_EQUATION: () => this.showFieldsForVerticalEquation(),
+    GENERAL_TABLES: () => this.showFieldsForGeneralTable(),
+    STROKE_WRONG_ANSWER: () => this.showFieldsForStrokeTheWrongAnswer(),
     LINK_ARROW: (): void => {},
-    DRAG_SYLLABLES: (): void => {},
-    PUT_IN_FRAME: (): void => {},
-    OUTSIDER_ELEMENT: (): void => {},
-    ARITHMETIC_TREE: (): void => {},
-    FILL_BLANKS_IMG: (): void => {},
-    COLOR_SHAPE: (): void => {}
+    [Exercise_Types.DRAG_SYLLABLES]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.PUT_IN_FRAME]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.OUTSIDER_ELEMENT]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.LISTEN]: (): void => this.showFieldsForListening(),
+    [Exercise_Types.ARITHMETIC_TREE]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    FILL_BLANKS_IMG: (): void => this.showFieldsForFillBlanksIMG(),
+    [Exercise_Types.COLOR_SHAPE]: function (): void {
+      throw new Error('Function not implemented.');
+    }
   };
 
   constructor(
@@ -96,6 +119,7 @@ export class AddBlockComponent implements OnInit {
       this.fieldData.valueHolder = "Selectioner l'url de l'image";
       this.addValueValidator();
     } else {
+      this.fieldData.showSelectType = false;
       const showFieldsForExerciceType = this.showFieldsFor[this.data.exercice_type];
       if (showFieldsForExerciceType) {
         showFieldsForExerciceType();
@@ -108,9 +132,9 @@ export class AddBlockComponent implements OnInit {
 
     this.fieldData.valueHolder = 'Veuiller saisir la valeur';
     this.fieldData.labelHolder = 'Veuiller saisir le label';
-
-    this.blockForm.get('label').addValidators([Validators.required]);
-    this.blockForm.get('value').addValidators([Validators.required]);
+    this.fieldData.showValue = false;
+    // this.blockForm.get('label').addValidators([Validators.required]);
+    // this.blockForm.get('value').addValidators([Validators.required]);
     this.blockForm.get('placeholder').clearValidators();
 
     if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.BREAK) {
@@ -144,6 +168,56 @@ export class AddBlockComponent implements OnInit {
     }
   }
 
+  showFieldsForTextUnderImage() {
+    if (this.blockForm.get('exerciceBlockType').value === 20) {
+      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
+      this.fieldData.showCorrectValue = true; // show to teacher and test to get the score
+      this.fieldData.showPlaceholder = false;
+      this.fieldData.showValue = true;
+      this.fieldData;
+      this.fieldData.labelHolder = 'Veuiller saisir la question';
+      this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correct';
+      this.addCorrectValueValidator();
+    }
+  }
+
+  showFieldsForVerticalEquation() {
+    if (this.blockForm.get('exerciceBlockType').value === 21) {
+      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
+      this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
+      this.fieldData.showPlaceholder = false;
+      this.fieldData.showValue = true;
+      this.fieldData;
+    }
+  }
+  showFieldsForGeneralTable() {
+    if (this.blockForm.get('exerciceBlockType').value === 22) {
+      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
+      this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
+      this.fieldData.showPlaceholder = false;
+      this.fieldData.showValue = true;
+      this.fieldData;
+    }
+  }
+
+  showFieldsForStrokeTheWrongAnswer() {
+    if (this.blockForm.get('exerciceBlockType').value === 23) {
+      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
+      this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
+      this.fieldData.showPlaceholder = false;
+      this.fieldData.showValue = true;
+      this.fieldData;
+    }
+  }
+  showFieldsForFillBlanksIMG() {
+    this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
+    this.fieldData.showCorrectValue = true; // show to teacher and test to get the score
+    this.fieldData.showPlaceholder = false;
+    this.fieldData.showValue = true;
+    this.fieldData.showSelectType = true;
+    this.fieldData.showOrder = true;
+    this.fieldData.correctValueHolder = 'Veuillez saisir la réponse avec les séparateurs (exp: Ines<A>cademy)';
+  }
   showFieldsForCorrespondance() {
     this.fieldData.showOnly(['showLabel', 'showValue', 'showPlaceholder']);
 
@@ -194,8 +268,19 @@ export class AddBlockComponent implements OnInit {
       blockOrder: [this.data.block?.blockOrder],
       isAdmissable: [this.data.block?.isAdmissable],
       exercice_Block_Id: [this.data.block?.exerciceBlockId],
+      imageFile: [''],
+      audioFile: [''],
       blockParams: [this.data.block?.blockParams]
     });
+    this.blockForm
+      .get('blockOrder')
+      .valueChanges.subscribe(
+        (val) =>
+          (this.fieldData.valueHolder =
+            val == 'img-to-text'
+              ? 'Veuiller saisir les valeurs correctes separées par un virgule'
+              : 'Veuiller saisir les imagesseparées par un virgule')
+      );
   }
 
   filterTypes() {
@@ -203,16 +288,18 @@ export class AddBlockComponent implements OnInit {
       this.exerciceTypeToTypesKeysMap[this.data.exercice_type].includes(x)
     );
     if (this.blockTypes.length === 1) {
-      this.blockForm.get('exerciceBlockType').patchValue(this.blockTypes[0])
-      this.checkFieldsToShow()
-    };
+      this.blockForm.get('exerciceBlockType').patchValue(this.blockTypes[0]);
+      this.checkFieldsToShow();
+    }
   }
   saveBlock() {
     const c = {};
     c[this.blockForm.value.label] = this.blockForm.value.correctValue;
 
     const block =
-      this.blockForm.value.exerciceBlockType === ExerciceBlockTypes.COLORATE_TEXT ? { ...this.blockForm.value, correctValue: JSON.stringify(c) } : this.blockForm.value;
+      this.blockForm.value.exerciceBlockType === ExerciceBlockTypes.COLORATE_TEXT
+        ? { ...this.blockForm.value, correctValue: JSON.stringify(c) }
+        : this.blockForm.value;
 
     this.dialogRef.close(block);
   }

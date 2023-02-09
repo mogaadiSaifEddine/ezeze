@@ -10,6 +10,9 @@ import { AddNewComponent } from './dialogs/student-forms/add-new/add-new.compone
 import { ViewEditComponent } from './dialogs/student-forms/view-edit/view-edit.component';
 import { DeleteConfirmationComponent } from 'src/app/components/espace-parent/dialogs/delete-confirmation/delete-confirmation.component';
 import { TokenDetailsComponent } from 'src/app/components/espace-parent/dialogs/token-details/token-details.component';
+import { ParentGuideComponent } from './parent-guide/parent-guide.component';
+
+import { LightboxModule } from 'ngx-lightbox';
 
 // MATERIAL
 import { MatIconModule } from '@angular/material/icon';
@@ -27,8 +30,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { VouchercheckComponent } from './dialogs/vouchercheck/vouchercheck.component';
-
-
+import { SharedModule } from 'src/app/shared/shared.module';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 const MATERIAL_MODULES = [
   MatIconModule,
@@ -44,7 +47,8 @@ const MATERIAL_MODULES = [
   MatExpansionModule,
   MatProgressSpinnerModule,
   MatMenuModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatSidenavModule
 ];
 
 @NgModule({
@@ -55,16 +59,11 @@ const MATERIAL_MODULES = [
     ViewEditComponent,
     DeleteConfirmationComponent,
     TokenDetailsComponent,
-    VouchercheckComponent
+    VouchercheckComponent,
+    ParentGuideComponent
   ],
-  imports: [
-    CommonModule,
-    EspaceParentRoutingModule,
-    MATERIAL_MODULES,
-    ReactiveFormsModule,
-    TranslateModule.forChild({})
-  ],
+
+  imports: [CommonModule, EspaceParentRoutingModule, MATERIAL_MODULES, ReactiveFormsModule, TranslateModule.forChild({}), LightboxModule],
   providers: [DatePipe]
 })
-
-export class EspaceParentModule { }
+export class EspaceParentModule {}

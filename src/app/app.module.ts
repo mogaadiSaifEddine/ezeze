@@ -74,6 +74,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MultipleAnswersComponent } from './components/exercice/exercice-types/multiple-answers/multiple-answers.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -174,6 +175,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDialogModule,
     NgxMatFileInputModule,
     MatExpansionModule,
+    MatSidenavModule,
 
     OffcanvasModule,
     MatPaginatorModule,
@@ -208,4 +210,4 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

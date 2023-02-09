@@ -2,7 +2,9 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
     "analytics": false,
-    "schematicCollections": ["@angular-eslint/schematics"]
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -44,7 +46,8 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/scss/styles.scss",
               "node_modules/@ctrl/ngx-emoji-mart/picker.css",
-              "mapbox-gl/dist/mapbox-gl.css"
+              "mapbox-gl/dist/mapbox-gl.css",
+              "./node_modules/ngx-lightbox/lightbox.css"
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
@@ -73,6 +76,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "proxy.conf.json",
+                  "with": "proxy.conf.test.json"
                 }
               ],
               "outputHashing": "all"
@@ -94,6 +101,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.test.ts"
+                },
+                {
+                  "replace": "proxy.conf.json",
+                  "with": "proxy.conf.test.json"
                 }
               ],
               "outputHashing": "all"
@@ -116,7 +127,8 @@
               "browserTarget": "ines-academy-frontend:build:production"
             },
             "development": {
-              "browserTarget": "ines-academy-frontend:build:development"
+              "browserTarget": "ines-academy-frontend:build:development",
+              "proxyConfig": "proxy.conf.test.json"
             }
           },
           "defaultConfiguration": "development"
@@ -135,15 +147,24 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/image.png", "src/assets"],
-            "styles": ["./node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "src/scss/styles.scss"],
+            "assets": [
+              "src/image.png",
+              "src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/scss/styles.scss"
+            ],
             "scripts": []
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
