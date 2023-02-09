@@ -7,29 +7,31 @@
   </button>
 </div>
 <app-main-screen (startEvaluation)="startEvaluation($event)" *ngIf="showMainScreen"></app-main-screen>
+<!--ok  -->
 
-<app-achievement-screen *ngIf="showGoNextStepScreen" (goNextStep)="goNextStep($event)"></app-achievement-screen>
-
-<div class="container" *ngIf="evaluationMode && !!serieExercice">
+<!-- quiz -->
+<div class="container" *ngIf="!showGoNextStepScreen && evaluationMode && !!serieExercice">
   <app-pass-test [evaluationContent]="evaluationContent" (finalScore)="evaluationTestFinished($event)"></app-pass-test>
 </div>
+<!--  -->
 
-<div class="container" *ngIf="prerequisiteMode && !!serieExercice">
+<!--  -->
+<div class="container" *ngIf="!showGoNextStepScreen && prerequisiteMode && !!serieExercice">
   <app-pass-test [evaluationContent]="prerequisiteContent" (finalScore)="prerequisiteTestFinished($event)"></app-pass-test>
 </div>
 
-<div *ngIf="showExercicesMode && selectedExercice==1">
+<div *ngIf="!showGoNextStepScreen && showExercicesMode && selectedExercice == 1">
   <app-pass-test [evaluationContent]="exercice1Content" (finalScore)="testFinished($event)"></app-pass-test>
 </div>
-<div *ngIf="showExercicesMode && selectedExercice==2">
+<div *ngIf="!showGoNextStepScreen && showExercicesMode && selectedExercice == 2">
   <app-pass-test [evaluationContent]="exercice2Content" (finalScore)="testFinished($event)"></app-pass-test>
 </div>
-<div *ngIf="showExercicesMode && selectedExercice==3">
+<div *ngIf="!showGoNextStepScreen && showExercicesMode && selectedExercice == 3">
   <app-pass-test [evaluationContent]="exercice3Content" (finalScore)="testFinished($event)"></app-pass-test>
 </div>
 <app-score-screen [score]="score" *ngIf="showFinalScore"> </app-score-screen>
 
-<div *ngIf="showCourseReminderMode && !!serieExercice">
+<!-- <div *ngIf="showCourseReminderMode && !!serieExercice">
   <button id="test-aquisitions-btn" (click)="goToExercices()" mat-raised-button color="primary">{{ 'revision.test-your-knowledge' | translate }}</button>
   <br />
   <video controls>
@@ -37,7 +39,7 @@
     <source src="assets/sample_videos/addition.ogg" type="video/ogg" />
     {{ 'revision.your-browser-does-not-support-html-video' | translate }}
   </video>
-
+  
   <div *ngIf="showCourseReminderMode">
     <button id="test-aquisitions-btn" (click)="goToExercices()" mat-raised-button color="primary">{{ 'revision.test-your-knowledge' | translate }}</button>
     <br />
@@ -50,6 +52,9 @@
   <div *ngIf="showExercicesMode">
     <app-pass-test [evaluationContent]="evaluationContent" (finalScore)="testFinished($event)"></app-pass-test>
   </div>
-
+  
   <app-score-screen [score]="score" *ngIf="showFinalScore"> </app-score-screen>
-</div>
+</div> -->
+
+<app-achievement-screen *ngIf="showGoNextStepScreen" (goNextStep)="goNextStep($event)"></app-achievement-screen>
+<!-- ok ... this one triggers after each section  -->
