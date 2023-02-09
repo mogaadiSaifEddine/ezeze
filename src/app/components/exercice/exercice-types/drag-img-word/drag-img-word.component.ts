@@ -4,6 +4,9 @@ import { Exercice } from 'src/app/model/Exercice';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
 import { FillLettersSection } from 'src/app/types/exercise';
 import * as _ from 'lodash';
+import { indexOf } from 'lodash';
+import { MatDialog } from '@angular/material/dialog';
+import { SelectImageComponent } from 'src/app/shared/select-image/select-image.component';
 @Component({
   selector: 'ines-drag-img-word',
   templateUrl: './drag-img-word.component.html',
@@ -35,7 +38,7 @@ export class DragImgWordComponent implements OnInit {
       //
     }
   }
-  constructor() {}
+  constructor(private matDialog: MatDialog) {}
   ngOnInit(): void {
     this.initExercice();
   }
@@ -43,10 +46,7 @@ export class DragImgWordComponent implements OnInit {
   private initExercice() {
     this.exerciceType = <string>(<any>this.exercice.blocks[0].placeholder);
 
-    console.log(this.exerciceType);
-
     const brackets = this.exercice.rtl ? ['>', '<'] : ['<', '>'];
-    console.log(brackets);
 
     const block = this.exercice.blocks[0];
     const value = <string>block.value;
@@ -71,36 +71,13 @@ export class DragImgWordComponent implements OnInit {
     }
     this.correctValuesList = this.sections.filter((el) => ['input', 'img'].includes(el.type));
 
-    console.log(this.correctValuesList);
-    console.log(this.valuesList);
     this.sectionsCopy = _.cloneDeep(this.sections);
     this.sectionsCopy.map((el) => {
-      if (['input', 'img'].includes(el.type)) el.value = '';
+      //  to verif again while exercice tyepe === img to text
+      if (['img'].includes(el.type)) el.value = '';
 
       return el;
     });
-    console.log(this.sections);
-
-    // if (this.isCheckMode) {
-    //   this.valuesList = block.value ? (<string>block.value).split('/') : [];
-    //   this.exercice.blocks.forEach((block, index) => {
-    //     if (block.exerciceBlockType === this.ExerciceBlockTypes.INPUT_TEXT) {
-    //       this.inputLists[index] = [block.correctValue];
-    //       this.valuesList.splice(
-    //         this.valuesList.findIndex((v) => v === block.correctValue),
-    //         1
-    //       );
-    //     }
-    //   });
-    // } else {
-    //   this.valuesList = block.value ? (<string>block.value).split('/') : [];
-    //   this.exercice.blocks.forEach((block, index) => {
-    //     if (block.exerciceBlockType === this.ExerciceBlockTypes.INPUT_TEXT) {
-    //       this.inputLists[index] = [];
-    //     }
-    //   });
-    // }
-    console.debug(this.exercice, this.inputLists, this.valuesList);
   }
   openInputField(i) {
     this.openedField = this.sections[i];
@@ -130,11 +107,34 @@ export class DragImgWordComponent implements OnInit {
   }
   checkCorrectValues() {
     let correct = true;
-    this.exercice.blocks.forEach((block, index) => {
-      if (block.exerciceBlockType === 'INPUT_TEXT' && block.correctValue !== this.inputLists[index] ? this.inputLists[index][0] : false) {
-        correct = false;
-      }
+    this.sections.forEach((block, index) => {
+      const indexInCorrectList = this.correctValuesList.findIndex((el) => el.value == block.value);
+      if (indexInCorrectList !== -1)
+        if (this.sectionsCopy?.[index]?.value !== this.valuesList?.[indexInCorrectList]) {
+          correct = false;
+        }
     });
     this.answerChange.emit(correct);
+    this.canGoNext.emit(true);
+  }
+
+  openSelectImage(value?) {
+    this.matDialog
+      .open(
+        SelectImageComponent,
+
+        {
+          data: {
+            imgs: this.valuesList
+          },
+          width: '80%',
+          height: '80%'
+        }
+      )
+      .afterClosed()
+      .subscribe((resValue) => {
+        value.value = resValue;
+        value.changed = true;
+      });
   }
 }

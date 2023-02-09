@@ -9,25 +9,25 @@
 <mat-card>
   <div class="question-container">
     <mat-card-title [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
-      Faites correspondre les éléments suivants avec leurs noms:
+      {{ exercice.question }}
     </mat-card-title>
 
     <mat-card-content [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
-      <div cdkDropListGroup class="paragraph-container">
+      <div *ngIf="exerciceType != 'text-to-img'" class="paragraph-container">
         <span>
           <ng-container *ngFor="let section of sections; let j = index">
             <span *ngIf="section.type === 'text'">{{ section.value }}</span>
 
             <img
               (click)="openInputField(j)"
-              *ngIf="section.type === 'img' && !section.opened"
+              *ngIf="section.type === 'img' && !section.opened && !(!!sectionsCopy[j].value && section.type === 'img')"
               class="example-box"
               [src]="section.value"
               alt="" />
+
             <input
-              cdkDropList
               class="fillable-input"
-              *ngIf="section.type === 'input' || section.opened"
+              *ngIf="section.type === 'input' || section.opened || (!!sectionsCopy[j].value && section.type === 'img')"
               placeholder="..."
               [maxlength]="section.maxLength"
               [(ngModel)]="sectionsCopy[j].value"
@@ -38,25 +38,41 @@
           </ng-container>
         </span>
         <br />
-        <div
-          *ngIf="exerciceType != 'img-to-text'"
-          cdkDropList
-          cdkDropListOrientation="horizontal"
-          [cdkDropListData]="valuesList"
-          class="example-list"
-          (cdkDropListDropped)="drop($event)">
-          <div class="example-box" *ngFor="let item of valuesList" cdkDrag>{{ item }}</div>
-        </div>
-        <div
-          *ngIf="exerciceType == 'img-to-text'"
-          cdkDropList
-          cdkDropListOrientation="horizontal"
-          [cdkDropListData]="valuesList"
-          class="example-list"
-          (cdkDropListDropped)="drop($event)">
-          <img class="example-box" [src]="item" *ngFor="let item of valuesList" cdkDrag />
-        </div>
+      </div>
+      <div *ngIf="exerciceType == 'text-to-img'" class="paragraph-container">
+        <span>
+          <ng-container *ngFor="let section of sections; let j = index">
+            <span *ngIf="section.type === 'text'">{{ section.value }}</span>
+
+            <img
+              (click)="openInputField(j)"
+              *ngIf="section.type === 'img' && !section.opened && !(!!sectionsCopy[j].value && section.type === 'img')"
+              class="example-box"
+              [src]="section.value"
+              alt="" />
+
+            <img (click)="openSelectImage(sectionsCopy[j])" *ngIf="!!sectionsCopy[j].changed" [src]="sectionsCopy[j].value" />
+            <span
+              (click)="openSelectImage(sectionsCopy[j])"
+              style="cursor: pointer"
+              *ngIf="section.type === 'input' && !sectionsCopy[j].changed">
+              {{ sectionsCopy[j].value }}
+            </span>
+            <!-- <input
+              class="fillable-input"
+              *ngIf="section.type === 'input' || section.opened || (!!sectionsCopy[j].value && section.type === 'img')"
+              placeholder="..."
+              [maxlength]="section.maxLength"
+              [(ngModel)]="sectionsCopy[j].value"
+              value=""
+              [name]="'input' + j"
+              [size]="section.maxLength > 1 ? section.maxLength - 1 : 1"
+              required /> -->
+          </ng-container>
+        </span>
+        <br />
       </div>
     </mat-card-content>
   </div>
+  <button mat-button mat-stroked-button (click)="checkCorrectValues()">submit</button>
 </mat-card>

@@ -1,0 +1,5 @@
+<div class="grid">
+  <div *ngFor="let item of data.imgs">
+    <img (click)="close(item)" [src]="item" alt="" />
+  </div>
+</div>
