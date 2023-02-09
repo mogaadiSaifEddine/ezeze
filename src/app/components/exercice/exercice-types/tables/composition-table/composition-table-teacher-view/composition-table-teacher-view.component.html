@@ -1,0 +1,32 @@
+<mat-dialog-content class="mat-typography">
+  <ng-template matStepLabel>Correct Values</ng-template>
+  <main>
+    <table>
+      <tr>
+        <!--- <td colspan="3">{{ type === 'Number' ? 'قسم الوحدات البسيطة' : (type ==='size'?'':'') }}</td> -->
+        <td *ngIf="this.complexity > 3" colspan="3">قسم الوحدات البسيطة</td>
+        <td *ngIf="this.complexity > 3" colspan="3">قسم الآلاف</td>
+        <td *ngIf="this.complexity > 6" colspan="3">قسم الملايين</td>
+      </tr>
+      <tr>
+        <td>احاد</td>
+        <td>عشرات</td>
+        <td>مئات</td>
+        <td *ngIf="this.complexity > 3">احاد</td>
+        <td *ngIf="this.complexity > 3">عشرات</td>
+        <td *ngIf="this.complexity > 3">مئات</td>
+        <td *ngIf="this.complexity > 6">احاد</td>
+        <td *ngIf="this.complexity > 6">عشرات</td>
+        <td *ngIf="this.complexity > 6">مئات</td>
+      </tr>
+
+      <tr *ngFor="let row of MATRIX; let indexRow = index">
+        <td *ngFor="let field of row; let indexCol = index">
+          <input type="text" class="textInput" (change)="keepData($event, indexRow, indexCol)" />
+        </td>
+      </tr>
+    </table>
+  </main>
+
+  <button mat-flat-button color="primary" class="col mt-2" (click)="save()">Save</button>
+</mat-dialog-content>
