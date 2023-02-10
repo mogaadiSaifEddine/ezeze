@@ -175,17 +175,23 @@ export class AquiredContentEvaluationComponent implements OnInit {
   }
   goNextStep(event) {
     this.showGoNextStepScreen = false;
+
+    console.log(
+      this.exercice1Content.exercices.length > 0 || this.exercice2Content.exercices.length > 0 || this.exercice3Content.exercices.length > 0
+    );
+
     if (
-      (this.exercice1Content.exercices.length > 0 ||
-        this.exercice2Content.exercices.length > 0 ||
-        this.exercice3Content.exercices.length > 0) &&
-      this.prerequisiteContent.exercices.length > 0
+      this.exercice1Content.exercices.length > 0 ||
+      this.exercice2Content.exercices.length > 0 ||
+      this.exercice3Content.exercices.length > 0
     ) {
       if (this.score < 30) {
         this.prerequisiteMode = true;
       } else if (this.score < 50) {
         this.showCourseReminderMode = true;
       } else {
+        console.log('  this.showExercicesMode ');
+
         this.showExercicesMode = true;
       }
     } else {
@@ -212,6 +218,16 @@ export class AquiredContentEvaluationComponent implements OnInit {
       user: this.UserId
     };
 
+    console.log(score);
+
+    // this.showExercicesMode = true;
+    this.selectedExercice = 1;
+    if (score < 50) {
+      this.prerequisiteMode = true;
+    } else {
+      this.prerequisiteMode = false;
+      this.showCourseReminderMode = false;
+    }
     // this.revisionService.addUserAnswer(userAnswer).subscribe((res) => {});
     this.score = score;
     this.evaluationMode = false;
@@ -225,7 +241,8 @@ export class AquiredContentEvaluationComponent implements OnInit {
       score: score,
       user: this.UserId
     };
-
+    this.showExercicesMode = true;
+    this.selectedExercice = 1;
     // this.revisionService.addUserAnswer(userAnswer).subscribe((res) => {});
 
     this.score = score;
@@ -248,7 +265,7 @@ export class AquiredContentEvaluationComponent implements OnInit {
 
   testFinished(score) {
     let id = '0';
-
+    this.showGoNextStepScreen = true;
     this.showExercicesMode = false;
     switch (this.selectedExercice) {
       case 1:
@@ -264,6 +281,8 @@ export class AquiredContentEvaluationComponent implements OnInit {
       case 3:
         id = this.exercice3Content.id;
         this.showFinalScore = true;
+        this.showGoNextStepScreen = false;
+
         break;
     }
     const userAnswer = {
@@ -271,11 +290,12 @@ export class AquiredContentEvaluationComponent implements OnInit {
       score: score,
       user: this.UserId
     };
+    console.log('here end of section');
 
     // this.revisionService.addUserAnswer(userAnswer).subscribe((res) => {});
   }
   goToDashboard() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/revision/matieres']);
   }
 
   startEvaluation(event) {

@@ -1,0 +1,63 @@
+<section id="generalPurposeTableInitializer">
+  <header>
+    <h1>Table Details</h1>
+  </header>
+
+  <mat-stepper #stepper linear>
+    <mat-step [stepControl]="tableForm">
+      <ng-template matStepLabel>Table Parameters</ng-template>
+      <main>
+        <form [formGroup]="tableForm" (ngSubmit)="buildTable()">
+          <!-- ROWS & COLUMNS -->
+          <div class="row">
+            <div class="col-6">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Number of rows ⬅️ ➡️</mat-label>
+                <input type="number" matInput formControlName="numRows" placeholder="Ex. 2" min="1" />
+                <mat-hint>Type in the number of rows for this equation</mat-hint>
+                <mat-error *ngIf="tableForm.get('numRows').hasError('required')">Number of rows is <strong>required</strong></mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-6">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Complexity</mat-label>
+                <mat-select formControlName="complexity">
+                  <mat-option *ngFor="let complexity of [3, 6, 9]" [value]="complexity">
+                    {{ complexity }}
+                  </mat-option>
+                </mat-select>
+                <mat-hint>Choose the complexity of the table </mat-hint>
+                <mat-error *ngIf="tableForm.get('complexity').hasError('required')">Complexity is <strong>required</strong></mat-error>
+              </mat-form-field>
+            </div>
+            <!-- <div class="col-4">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Type</mat-label>
+                <mat-select formControlName="type">
+                  <mat-option *ngFor="let type of ['Number', 'Space', 'Size']" [value]="type">
+                    {{ type }}
+                  </mat-option>
+                </mat-select>
+                <mat-hint>Choose the type of the table </mat-hint>
+                <mat-error *ngIf="tableForm.get('type').hasError('required')">Type is <strong>required</strong></mat-error>
+              </mat-form-field>
+            </div>
+            -->
+          </div>
+
+          <div class="col mt-1">
+            <button mat-flat-button color="primary" matStepperNext>Build Table</button>
+          </div>
+        </form>
+      </main>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Correct Values</ng-template>
+      <ng-template matStepContent="">
+        <ines-composition-table-teacher-view></ines-composition-table-teacher-view>
+      </ng-template>
+    </mat-step>
+  </mat-stepper>
+</section>
