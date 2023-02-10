@@ -1,0 +1,21 @@
+<mat-card *ngIf="exercice.name">
+    <div class="question-container">
+        <mat-card-title [innerHTML]="exercice?.name" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></mat-card-title>
+    </div>
+</mat-card>
+
+<mat-card>
+    <div class="question-container">
+        <div [innerHTML]="exercice?.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></div><br>
+    </div>
+    <mat-card-content class="equationGrid" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+        <section id="showOneParaph" *ngFor="let block of exercice?.blocks; let index = index;">
+            <!-- VIRTUAL KEYBOARD -->
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-primary" *ngFor="let entry of block.blockParams['virtualKeyboard']" (click)="inertSymbol(entry)">{{entry}}</button>
+            </div>
+            <!-- EDITOR FOR STUDENTS -->
+            <textarea (click)="logCaretPosition($event)" [(ngModel)]="CURRENT_TXT" autofocus></textarea>
+        </section>
+    </mat-card-content>
+</mat-card>

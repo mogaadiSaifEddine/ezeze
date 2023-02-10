@@ -76,6 +76,8 @@ const MaterialModules = [
 ];
 
 import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters.component';
+import { ParagraphBuilderComponent } from './exercice-types/separate-text/paragraph-builder/paragraph-builder.component';
+import { ParagraphDisplayComponent } from './exercice-types/separate-text/paragraph-display/paragraph-display.component';
 
 @NgModule({
   imports: [
@@ -127,7 +129,9 @@ import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters
     WordBuilderComponent,
     ShapesGroupsBuilderComponent,
     TextUnderImageBuilderComponent,
-    FillLettersComponent
+    FillLettersComponent,
+    ParagraphBuilderComponent,
+    ParagraphDisplayComponent
   ],
   providers: [],
   exports: [
@@ -160,7 +164,8 @@ import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters
     EquationDisplayComponent,
     GeneralTablesStudentDisplayComponent,
     StrokeAnswerDisplayComponent,
-    FillLettersComponent
+    FillLettersComponent,
+    ParagraphDisplayComponent
   ]
 })
 export class ExerciceModule {}

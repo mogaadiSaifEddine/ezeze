@@ -2,6 +2,7 @@ table {
     width: 100%;
     display: block;
     border-collapse: collapse;
+    margin-top: 1rem;
 
     td {
         border: 1px solid #605975;
@@ -19,7 +20,7 @@ table {
 }
 
 .studentCanWriteHere {
-    background-color: #D3D2D2;
+    background-color: #F7F7F7;
     font-weight: normal;
     outline: none;
 }

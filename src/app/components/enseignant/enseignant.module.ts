@@ -5,7 +5,7 @@ import { EnseignantRoutingModule } from './enseignant-routing.module';
 import { ChapterListComponent } from './chapter-list/chapter-list.component';
 import { AddChapterComponent } from './chapter-list/add-chapter/add-chapter.component';
 import { MatStepperModule } from '@angular/material/stepper';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -59,14 +59,14 @@ const MATERIAL_MODULES = [
   declarations: [
     WordsSyllablesExerciceInputComponent,
     ExercicePreviewComponent,
-    ChapterListComponent, 
-    AddChapterComponent, 
-    SerieCardComponent, 
-    AddExerciceComponent, 
-    AddBlockComponent, 
+    ChapterListComponent,
+    AddChapterComponent,
+    SerieCardComponent,
+    AddExerciceComponent,
+    AddBlockComponent,
     AddSerieComponent
   ],
   imports: [
-    ExerciceModule, CommonModule, EnseignantRoutingModule, MATERIAL_MODULES, AngularEditorModule, ReactiveFormsModule, NgxMatFileInputModule, TranslateModule.forChild({})]
+    ExerciceModule, CommonModule, FormsModule, EnseignantRoutingModule, MATERIAL_MODULES, AngularEditorModule, ReactiveFormsModule, NgxMatFileInputModule, TranslateModule.forChild({})]
 })
 export class EnseignantModule { }
