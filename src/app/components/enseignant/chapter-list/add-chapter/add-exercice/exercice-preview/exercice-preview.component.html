@@ -16,6 +16,8 @@
 
 <ines-equation-display *ngIf="data.currentExercise.type === TYPES.VERTICAL_EQUATION" [exercice]="data.currentExercise"></ines-equation-display>
 
+<ines-paragraph-display *ngIf="data.currentExercise.type === TYPES.SEPARATE_TEXT" [exercice]="data.currentExercise"></ines-paragraph-display>
+
 <app-multiple-answers *ngIf="data.currentExercise.type === TYPES.MULTIPLE_RESPONSE" [exercice]="data.currentExercise"></app-multiple-answers>
 
 <app-color-the-text *ngIf="data.currentExercise.type === TYPES.WORD_COLORATION" [exercice]="data.currentExercise"></app-color-the-text>

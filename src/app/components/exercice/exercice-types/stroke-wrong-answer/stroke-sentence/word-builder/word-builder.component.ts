@@ -66,8 +66,6 @@ export class WordBuilderComponent implements OnInit {
 
 
   saveSentences() {
-    console.log(this.paragraphsFormGroup.value);
-
     if (this.paragraphsFormGroup.valid) {
       const PARAMS = {
         sentencesWithWords: this.paragraphsFormGroup.value

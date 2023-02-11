@@ -10,7 +10,7 @@
     <!-- <mat-card-title [innerText]="exercice.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
       <br />
     </mat-card-title> -->
-    <div [innerHTML]="exercice?.question"></div><br>
+    <div [innerHTML]="exercice?.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></div><br>
   </div>
   <draw-lines [lines]="lines">
     <div class="block-container">
