@@ -26,11 +26,13 @@ import { ModuleListComponent } from './module-list/module-list.component';
 import { ChapterListComponent } from './chapter-list/chapter-list.component';
 import { ModuleCardComponent } from './module-list/module-card/module-card.component';
 import { ChapterCardComponent } from './chapter-list/chapter-card/chapter-card.component';
+import { SharedModule } from '@coreui/angular';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 const MatModules = [MatButtonModule, MatCardModule, MatDialogModule, MatIconModule, MatTooltipModule, MatProgressBarModule];
 
 @NgModule({
-  imports: [RevisionRoutingModule, ExerciceModule, CommonModule, MatModules, TranslateModule],
+  imports: [RevisionRoutingModule, ExerciceModule, CommonModule, MatModules, TranslateModule, SharedModule, NgxExtendedPdfViewerModule],
   declarations: [
     RevisionComponent,
     AquiredContentEvaluationComponent,
@@ -47,4 +49,4 @@ const MatModules = [MatButtonModule, MatCardModule, MatDialogModule, MatIconModu
   ],
   providers: [RevisionService]
 })
-export class RevisionModule { }
+export class RevisionModule {}

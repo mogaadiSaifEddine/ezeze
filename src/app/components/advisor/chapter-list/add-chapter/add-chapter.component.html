@@ -11,31 +11,43 @@
           <mat-select (selectionChange)="onGroupChange()" formControlName="groupe" placeholder="classe">
             <mat-option *ngFor="let class of classes" [value]="class.id">{{ class.name }}</mat-option>
           </mat-select>
-          <mat-error *ngIf="!regiForm.get('groupe').valid && regiForm.get('groupe').touched"> {{ 'please-select-any-item' | translate }} </mat-error>
+          <mat-error *ngIf="!regiForm.get('groupe').valid && regiForm.get('groupe').touched">
+            {{ 'please-select-any-item' | translate }}
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field *ngIf="!this.data" appearance="outline">
           <mat-label>{{ 'type-chapitre' | translate }}</mat-label>
           <mat-select (valueChange)="addChapterValidation()" formControlName="type">
-            <mat-option *ngFor="let type of CHAPTER_TYPE | keyvalue | slice: 2:4; let i = index" [value]="type.value">{{ type.key }}</mat-option>
+            <mat-option *ngFor="let type of CHAPTER_TYPE | keyvalue | slice: 2:4; let i = index" [value]="type.value">{{
+              type.key
+            }}</mat-option>
           </mat-select>
           <mat-error *ngIf="!regiForm.get('type').valid && regiForm.get('type').touched"> {{ 'errors.required' | translate }} </mat-error>
         </mat-form-field>
 
-        <mat-form-field *ngIf="!this.data && this.regiForm.get('type').value === 1 && this.regiForm.get('groupe').value" appearance="outline">
+        <mat-form-field
+          *ngIf="!this.data && this.regiForm.get('type').value === 1 && this.regiForm.get('groupe').value"
+          appearance="outline">
           <mat-label>{{ 'matiere' | translate }}</mat-label>
           <mat-select formControlName="matiere">
             <mat-option *ngFor="let matiere of matieres" [value]="matiere.chapter_id">{{ matiere.name }}</mat-option>
           </mat-select>
-          <mat-error *ngIf="!regiForm.get('matiere').valid && regiForm.get('matiere').touched"> {{ 'sil-vous-entre-le-nom-de-la-matiere' | translate }} </mat-error>
+          <mat-error *ngIf="!regiForm.get('matiere').valid && regiForm.get('matiere').touched">
+            {{ 'sil-vous-entre-le-nom-de-la-matiere' | translate }}
+          </mat-error>
         </mat-form-field>
 
-        <mat-form-field *ngIf="(this.regiForm.get('type').value === 1 && this.regiForm.get('groupe').value) || this.data" appearance="outline">
+        <mat-form-field
+          *ngIf="(this.regiForm.get('type').value === 1 && this.regiForm.get('groupe').value) || this.data"
+          appearance="outline">
           <mat-label>{{ 'trimestre' | translate }}</mat-label>
           <mat-select formControlName="trimestre">
             <mat-option *ngFor="let trimestre of trimestres | keyvalue" [value]="trimestre.key">{{ trimestre.value }}</mat-option>
           </mat-select>
-          <mat-error *ngIf="!regiForm.get('trimestre').valid && regiForm.get('trimestre').touched"> {{ 'veuiller-selectioner-le-trimestre' | translate }} </mat-error>
+          <mat-error *ngIf="!regiForm.get('trimestre').valid && regiForm.get('trimestre').touched">
+            {{ 'veuiller-selectioner-le-trimestre' | translate }}
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -43,20 +55,37 @@
 
           <input formControlName="name" matInput placeholder="{{ 'nom-chapitre' | translate }}" />
         </mat-form-field>
+        <mat-form-field
+          *ngIf="(this.regiForm.get('type').value === 1 && this.regiForm.get('groupe').value) || this.data"
+          appearance="outline">
+          <mat-label>{{ 'nom-chapitre' | translate }}</mat-label>
+
+          <input formControlName="resumer_cour" matInput placeholder="{{ 'rappel-de-cours' | translate }}" />
+        </mat-form-field>
+        <mat-form-field
+          *ngIf="(this.regiForm.get('type').value === 1 && this.regiForm.get('groupe').value) || this.data"
+          appearance="outline">
+          <mat-label>{{ 'nom-chapitre' | translate }}</mat-label>
+          qqqqqqqqqqqqqqqq
+          <input matInput placeholder="{{ 'carte-conceptuelle' | translate }}" formControlName="catre_conceptuelle" />
+        </mat-form-field>
       </form>
 
-      <form *ngIf="(this.regiForm.get('type').value === 1 && this.regiForm.get('groupe').value) || this.data" [formGroup]="filesForm">
+      <!-- <form *ngIf="(this.regiForm.get('type').value === 1 && this.regiForm.get('groupe').value) || this.data" [formGroup]="filesForm">
         <mat-form-field appearance="outline">
           <ngx-mat-file-input placeholder="{{ 'rappel-de-cours' | translate }}" formControlName="resumer_cour"> </ngx-mat-file-input>
-          <mat-error *ngIf="!filesForm.get('resumer_cour').valid && filesForm.get('resumer_cour').touched"> {{ 'sil-vous-entre-le-resume-de-cours' | translate }} </mat-error>
+          <mat-error *ngIf="!filesForm.get('resumer_cour').valid && filesForm.get('resumer_cour').touched">
+            {{ 'sil-vous-entre-le-resume-de-cours' | translate }}
+          </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <ngx-mat-file-input placeholder="{{ 'carte-conceptuelle' | translate }}" formControlName="catre_conceptuelle"> </ngx-mat-file-input>
+          <ngx-mat-file-input placeholder="{{ 'carte-conceptuelle' | translate }}" formControlName="catre_conceptuelle">
+          </ngx-mat-file-input>
           <mat-error *ngIf="!filesForm.get('catre_conceptuelle').valid && filesForm.get('catre_conceptuelle').touched">
             {{ 'sil-vous-entre-la-carte-conceptuelle' | translate }}
           </mat-error>
         </mat-form-field>
-      </form>
+      </form> -->
     </div>
 
     <div>

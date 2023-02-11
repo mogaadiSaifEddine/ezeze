@@ -66,27 +66,30 @@ export class AquiredContentEvaluationComponent implements OnInit {
   }
   loadFile() {
     this.revisionService.chapter.subscribe((chapter: Chapter) => {
-      if (chapter.catre_conceptuelle)
-        this.chapterService.getFileCart(chapter.catre_conceptuelle.carte_id).subscribe((res) => {
-          this.fileTypeCart = chapter.catre_conceptuelle.name.includes('mp4')
-            ? 'video'
-            : chapter.catre_conceptuelle.name.includes('pdf')
-            ? 'pdf'
-            : 'image';
-          if (this.fileTypeCart !== 'pdf') {
-            const objectURL = URL.createObjectURL(res);
-            this.fileCard = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-          } else this.fileCard = res;
-        });
-      if (chapter.course)
-        this.chapterService.getFileCourse(chapter.course.carte_id).subscribe((res) => {
-          this.fileTypeCourse = chapter.course.name.includes('mp4') ? 'video' : chapter.course.name.includes('pdf') ? 'pdf' : 'image';
-          if (this.fileTypeCourse !== 'pdf') {
-            const objectURL = URL.createObjectURL(res);
-            this.fileCourse = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-          } else this.fileCourse = res;
-          //
-        });
+      console.log(chapter);
+
+      this.chapter = chapter;
+      // if (chapter.catre_conceptuelle)
+      //   this.chapterService.getFileCart(chapter.catre_conceptuelle.carte_id).subscribe((res) => {
+      //     this.fileTypeCart = chapter.catre_conceptuelle.name.includes('mp4')
+      //       ? 'video'
+      //       : chapter.catre_conceptuelle.name.includes('pdf')
+      //       ? 'pdf'
+      //       : 'image';
+      //     if (this.fileTypeCart !== 'pdf') {
+      //       const objectURL = URL.createObjectURL(res);
+      //       this.fileCard = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      //     } else this.fileCard = res;
+      //   });
+      // if (chapter.course)
+      //   this.chapterService.getFileCourse(chapter.course.carte_id).subscribe((res) => {
+      //     this.fileTypeCourse = chapter.course.name.includes('mp4') ? 'video' : chapter.course.name.includes('pdf') ? 'pdf' : 'image';
+      //     if (this.fileTypeCourse !== 'pdf') {
+      //       const objectURL = URL.createObjectURL(res);
+      //       this.fileCourse = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      //     } else this.fileCourse = res;
+      //     //
+      //   });
     });
   }
   loadSerie() {
@@ -319,64 +322,13 @@ export class AquiredContentEvaluationComponent implements OnInit {
     return bytes.buffer;
   }
   openCourseReminder() {
-    // var blob = new Blob([this._base64ToArrayBuffer(this.fileCourse)], {
-    //   type: 'application/doc'
-    // });
-    // const url = URL.createObjectURL(blob);
-
-    if (!this.fileCourse) {
-      this.toastr.error('There is no course Reminder to show ');
-      return;
-    }
-    if (this.fileTypeCourse === 'pdf') {
-      const blob = new Blob([this.fileCourse], { type: 'application/pdf' });
-      const blobURL = URL.createObjectURL(blob);
-
-      window.open(blobURL);
-      return;
-    }
-
-    this.dialog
-      .open(ShowCourseComponent, {
-        maxHeight: '90vh',
-        position: {
-          top: window.innerWidth > 767 ? '5%' : '20%',
-          left: window.innerWidth > 767 ? '30%' : ''
-        },
-        data: { imgSrc: this.fileCourse, imageType: this.fileTypeCourse },
-        disableClose: true
-      })
-      .afterClosed()
-      .subscribe((res) => {});
+    window.open(this.chapter.coursePRstring, '_blank');
   }
 
   // getFile() {
   //   this.chapterService.getFileCart(cha);
   // }
   openConceptMap() {
-    if (!this.fileCard) {
-      this.toastr.error('There is no course Reminder to show ');
-      return;
-    }
-    if (this.fileTypeCart === 'pdf') {
-      const blob = new Blob([this.fileCard], { type: 'application/pdf' });
-      const blobURL = URL.createObjectURL(blob);
-
-      window.open(blobURL);
-      return;
-    }
-    this.dialog
-      .open(ShowConceptMapComponent, {
-        maxHeight: '90vh',
-        position: {
-          top: window.innerWidth > 767 ? '5%' : '20%',
-          left: window.innerWidth > 767 ? '30%' : ''
-        },
-
-        data: { imgSrc: this.fileCard, imageType: this.fileTypeCart },
-        disableClose: true
-      })
-      .afterClosed()
-      .subscribe((res) => {});
+    window.open(this.chapter.catre_conceptuelle, '_blank');
   }
 }

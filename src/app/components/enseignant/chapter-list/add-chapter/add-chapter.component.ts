@@ -25,6 +25,7 @@ export class AddChapterComponent implements OnInit {
   chapitre: Chapter;
   classes: Group[];
   matieres: any;
+  matieresCopy: any;
   trimestres = Trimestre;
   Prer: prerquis[];
   chap: Chapter[];
@@ -55,12 +56,11 @@ export class AddChapterComponent implements OnInit {
       type: [ChapterType.MATIERE, Validators.required],
       matiere: [null],
       groupe: [this.data?.group.id, Validators.required],
-      trimestre: [this.data?.trimestre]
+      trimestre: [this.data?.trimestre],
+      catre_conceptuelle: [this.data?.catre_conceptuelle],
+      coursePRstring: [this.data?.coursePRstring]
     });
-    this.filesForm = this.fb.group({
-      catre_conceptuelle: [null],
-      resumer_cour: [null]
-    });
+    this.filesForm = this.fb.group({});
   }
 
   selectFile(event: any) {
@@ -84,27 +84,35 @@ export class AddChapterComponent implements OnInit {
   onFormSubmit(): void {
     if (this.regiForm.valid) {
       if (this.data) {
-        this.chapterservice.updateChapter(this.regiForm.value, this.data.chapter_id, this.regiForm.get('groupe').value).subscribe(async (res: Chapter) => {
-          if (this.filesForm.get('resumer_cour').value !== null)
-            (await this.chapterservice.uploadVideo(this.filesForm.get('resumer_cour').value, res.chapter_id)).subscribe((res) => {});
+        this.chapterservice
+          .updateChapter(this.regiForm.value, this.data.chapter_id, this.regiForm.get('groupe').value)
+          .subscribe(async (res: Chapter) => {
+            // if (this.filesForm.get('resumer_cour').value !== null)
+            //   (await this.chapterservice.uploadVideo(this.filesForm.get('resumer_cour').value, res.chapter_id)).subscribe((res) => {});
 
-          if (this.filesForm.get('catre_conceptuelle').value !== null)
-            setTimeout(async () => {
-              (await this.chapterservice.uploadFile(this.filesForm.get('catre_conceptuelle').value, res.chapter_id)).subscribe((res) => {});
-            }, 500);
-          this.dialog.closeAll();
-        });
+            // if (this.filesForm.get('catre_conceptuelle').value !== null)
+            //   setTimeout(async () => {
+            //     (await this.chapterservice.uploadFile(this.filesForm.get('catre_conceptuelle').value, res.chapter_id)).subscribe(
+            //       (res) => {}
+            //     );
+            //   }, 500);
+            this.dialog.closeAll();
+          });
       } else {
         this.chapitre = this.regiForm.value;
-        this.chapterservice.addChapter({ chapterType: this.regiForm.value.type, ...this.regiForm.value }, this.regiForm.get('groupe').value).subscribe(async (res: Chapter) => {
-          if (this.filesForm.get('resumer_cour').value !== null)
-            (await this.chapterservice.uploadVideo(this.filesForm.get('resumer_cour').value, res.chapter_id)).subscribe((res) => {});
-          if (this.filesForm.get('catre_conceptuelle').value !== null)
-            setTimeout(async () => {
-              (await this.chapterservice.uploadFile(this.filesForm.get('catre_conceptuelle').value, res.chapter_id)).subscribe((res) => {});
-            }, 500);
-          this.dialog.closeAll();
-        });
+        this.chapterservice
+          .addChapter({ chapterType: this.regiForm.value.type, ...this.regiForm.value }, this.regiForm.get('groupe').value)
+          .subscribe(async (res: Chapter) => {
+            // if (this.filesForm.get('resumer_cour').value !== null)
+            //   (await this.chapterservice.uploadVideo(this.filesForm.get('resumer_cour').value, res.chapter_id)).subscribe((res) => {});
+            // if (this.filesForm.get('catre_conceptuelle').value !== null)
+            //   setTimeout(async () => {
+            //     (await this.chapterservice.uploadFile(this.filesForm.get('catre_conceptuelle').value, res.chapter_id)).subscribe(
+            //       (res) => {}
+            //     );
+            //   }, 500);
+            this.dialog.closeAll();
+          });
       }
     }
   }
@@ -112,6 +120,7 @@ export class AddChapterComponent implements OnInit {
   getMatieres() {
     this.chapterservice.getMatieres().subscribe((data) => {
       this.matieres = data;
+      this.matieresCopy = data;
     });
   }
   getAllGroupe() {
@@ -135,10 +144,10 @@ export class AddChapterComponent implements OnInit {
   }
 
   onGroupChange() {
-    this.chapterservice.getMatieres().subscribe((res) => {
-      this.matieres = res;
+    this.matieres = this.matieresCopy.filter((mat) => mat.group.id === this.regiForm.get('groupe').value);
+    // this.chapterservice.getMatieres().subscribe((res) => {
+    //   this.matieres = res;
 
-      this.matieres = this.matieres.filter((mat) => mat.group.id === this.regiForm.get('groupe').value);
-    });
+    // });
   }
 }
