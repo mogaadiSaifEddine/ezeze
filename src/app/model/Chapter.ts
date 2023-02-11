@@ -5,30 +5,35 @@ import { Exercice } from './Exercice';
 import { prerquis } from './prerquis';
 
 export interface Chapter {
-  chapterType: string;
-  chapter_id: number;
-  children: ChapterChildren[];
-  name: string;
-  url: string;
-  pre_required_chapterList: prerquis[];
-  resumer_courList: any;
+  chapterType?: string;
+  chapter_id?: number;
+  children?: ChapterChildren[];
+  name?: string;
+  url?: string;
+  pre_required_chapterList?: prerquis[];
+  resumer_courList?: any;
   catre_conceptuelles?: any;
-  catre_conceptuelle: any;
-  exerciceSeries: CourseSeries;
-  exercices: Exercice[];
-  course: any;
+  catre_conceptuelle?: any;
+  exerciceSeries?: CourseSeries;
+  exercices?: Exercice[];
+  course?: any;
+  resume_cour?: any;
+  trimestre?: Trimestre;
+
+  sousChapitres?: any[];
+  coursePRstring?: string;
 }
 
 export interface ChapterChildren {
-  chapter_id: number;
-  name: string;
-  url: string;
-  pre_required_chapterList: prerquis[];
-  resumer_courList: any;
+  chapter_id?: number;
+  name?: string;
+  url?: string;
+  pre_required_chapterList?: prerquis[];
+  resumer_courList?: any;
   catre_conceptuelles?: any;
-  catre_conceptuelle: any;
-  exerciceSeries: CourseSeries;
-  exercices: Exercice[];
+  catre_conceptuelle?: any;
+  exerciceSeries?: CourseSeries;
+  exercices?: Exercice[];
 }
 
 export enum ChapterType {
