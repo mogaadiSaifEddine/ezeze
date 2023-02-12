@@ -33,6 +33,7 @@ export interface Chapter {
   sousChapitres: any[];
   exerciceSeries: any[];
   group?: Group;
+  coursePRstring?: string;
 }
 export class MinimizedUser {
   user_id: number;

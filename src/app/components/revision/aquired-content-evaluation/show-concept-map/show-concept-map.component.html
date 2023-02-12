@@ -8,6 +8,8 @@
     </div>
   </div>
   <div class="body">
+    <ngx-extended-pdf-viewer [src]="'assets/example.pdf'" [useBrowserLocale]="true"></ngx-extended-pdf-viewer>
+
     <img *ngIf="data.imageType === 'image'" [src]="data.imgSrc" width="100%" />
     <video *ngIf="data.imageType === 'video'" class="library" controls preload="auto" data-config="some-js-object-here">
       <source [src]="data.imgSrc" type="video/mp4" />
