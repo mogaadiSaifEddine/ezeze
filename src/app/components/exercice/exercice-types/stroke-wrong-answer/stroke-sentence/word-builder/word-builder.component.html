@@ -1,20 +1,70 @@
 <mat-card>
 
     <header>
-        <h3>Add [sentence (xxx, xxx, ...) ]</h3>
         <div>
             <a href="https://i.imgur.com/Bwn1Zl9.png" target="_blank" mat-raised-button color="primary">
                 <mat-icon>help</mat-icon>
             </a>
-            <button (click)="AddNewSentenceGroupWithWordsArray($event)" mat-raised-button color="accent">
+            <button (click)="addNewGroupToArray()" mat-raised-button color="accent">
                 <mat-icon>add</mat-icon>
-                Sentence
+                New group
             </button>
         </div>
     </header>
 
     <mat-card-content>
-        <section id="sentencesManager">
+
+
+        <!--   GROUP FORM THAT HAS THE FORM GROUP (senttences, words) -->
+        <form [formGroup]="BIG_GROUP_FORM">
+            <div formArrayName="GROUP_ARRAY">
+                <!-- SUB CONTROLS FOR EACH ADDING GROUPS -->
+                <ng-container *ngFor="let FGROUP of GET_FORM_ARRAY.controls; let i = index;">
+
+                    <!-- <div class="card" style="width: 100%;">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <button>new sentence</button>
+                                <button>new group of words</button>
+                            </h5>
+
+                            <div [formGroupName]="i">
+                                <input type="text" name="something" formControlName="SUB_CONTROL_1">
+                                <input type="text" name="something" formControlName="SUB_CONTROL_2">
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="card mt-1" [formGroupName]="i">
+                        <div class="card-body positoin-relative">
+                            <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" (click)="deleteCurrentGroup(i)">delete</span>
+                            <!-- CONTROLS FOR ADDING SENTENCE/WORDS GROUP -->
+                            <div class="mt-1 mb-1 p-1">
+                                <button type="button" class="btn btn-outline-primary me-1 btn-sm"><i class="bi bi-plus"></i>Sentence</button>
+                                <button type="button" class="btn btn-outline-warning btn-sm"><i class="bi bi-plus"></i>Words group</button>
+                            </div>
+                            <input type="text" name="something" formControlName="SUB_CONTROL_1">
+                            <input type="text" name="something" formControlName="SUB_CONTROL_2">
+                        </div>
+                    </div>
+
+
+                    <!-- <button (click)="deleteGroupFromArray(i)">DELETE CONTROL</button> -->
+                </ng-container>
+
+            </div>
+        </form>
+
+
+
+
+
+
+
+
+
+        <!-- ******LEGACY MOTHERFUCKER******** -->
+        <!-- ******
             <form [formGroup]="paragraphsFormGroup">
                 <div formArrayName="sentencesArray">
 
@@ -24,7 +74,7 @@
                             <input type="text" matInput formControlName="sentenceBody" style="width: 420px !important; margin-right: 1rem;">
                         </mat-form-field>
                         <button (click)="removeSentenceGroupWithWordsArray(i)" mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
-                        <!-- ===== WORDS ===== -->
+
                         <mat-button-toggle-group>
                             <input type="number" #wordsCount min="2" mat-button-toggle style="width: 100px; font-size: 1.2rem;">
                             <mat-button-toggle (click)="addNewWordsFormGroupToSentenceArray(tempSentenceGroup.get('wordsArray'), wordsCount)" mat-raised-button color="primary">
@@ -50,12 +100,16 @@
                             <span *ngIf="tempSentenceGroup.get('wordsArray')['controls'].length>=1"><strong>&nbsp;)</strong></span>
                             <button (click)="assignWordsToSentence(tempSentenceGroup.get('wordsArray'))">ASSIGN</button>
                         </div>
-                        <!-- END OF SENTENCES -->
+
                     </div>
 
                 </div>
             </form>
-        </section>
+        -->
+
+
+
+        <!-- END OF MAT CARD -->
     </mat-card-content>
 
     <div mat-dialog-actions [align]="'end'">
