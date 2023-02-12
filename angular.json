@@ -38,7 +38,7 @@
               "src/assets",
               {
                 "glob": "**/*",
-                "input": "./node_modules/@kolkov/angular-editor/assets/",
+                "input": ".//@kolkov/angular-editor/assets/",
                 "output": "./assets/fonts/"
               }
             ],
