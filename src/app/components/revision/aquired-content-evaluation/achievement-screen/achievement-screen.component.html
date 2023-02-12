@@ -1,8 +1,14 @@
 <mat-card class="welcome-container">
   <h1>{{ 'revision.good-job' | translate }}</h1>
   <div class="text">{{ 'revision.now-lets-go-to-the-next-step' | translate }}</div>
-  <img class="img" src="assets/images/achievement-image.webp" alt="next step" />
-  <button id="start-evaluation-btn" mat-fab matTooltip="Next" color="warn" (click)="triggerNextStep()" aria-label="Example icon button with a home icon">
+  <!-- <img class="img" src="assets/images/achievement-image.webp" alt="next step" /> -->
+  <button
+    id="start-evaluation-btn"
+    mat-fab
+    matTooltip="Next"
+    color="warn"
+    (click)="triggerNextStep()"
+    aria-label="Example icon button with a home icon">
     <mat-icon>navigate_next</mat-icon>
   </button>
 </mat-card>

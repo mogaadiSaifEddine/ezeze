@@ -11,7 +11,7 @@
       <!-- <mat-card-title [innerText]="exercice.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
         <br />
       </mat-card-title> -->
-      <div [innerHTML]="exercice?.question"></div><br>
+      <div [innerHTML]="exercice?.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></div><br>
       <mat-card-content class="answers-container" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">{{ exercice.name }}</mat-card-content>
     </mat-card>
 

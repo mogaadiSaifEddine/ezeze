@@ -79,6 +79,8 @@ import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters
 import { CompositionTableBuilderComponent } from './exercice-types/tables/composition-table/composition-table-builder/composition-table-builder.component';
 import { CompositionTableTeacherViewComponent } from './exercice-types/tables/composition-table/composition-table-teacher-view/composition-table-teacher-view.component';
 import { CompositionTableStudentDisplayComponent } from './exercice-types/tables/composition-table/composition-table-student-display/composition-table-student-display.component';
+import { ParagraphBuilderComponent } from './exercice-types/separate-text/paragraph-builder/paragraph-builder.component';
+import { ParagraphDisplayComponent } from './exercice-types/separate-text/paragraph-display/paragraph-display.component';
 
 @NgModule({
   imports: [
@@ -134,6 +136,8 @@ import { CompositionTableStudentDisplayComponent } from './exercice-types/tables
     CompositionTableBuilderComponent,
     CompositionTableTeacherViewComponent,
     CompositionTableStudentDisplayComponent
+    ParagraphBuilderComponent,
+    ParagraphDisplayComponent
   ],
   providers: [],
   exports: [
@@ -166,7 +170,8 @@ import { CompositionTableStudentDisplayComponent } from './exercice-types/tables
     EquationDisplayComponent,
     GeneralTablesStudentDisplayComponent,
     StrokeAnswerDisplayComponent,
-    FillLettersComponent
+    FillLettersComponent,
+    ParagraphDisplayComponent
   ]
 })
 export class ExerciceModule {}

@@ -55,12 +55,11 @@ export class AddChapterComponent implements OnInit {
       type: [ChapterType.MATIERE, Validators.required],
       matiere: [null],
       groupe: [this.data?.group.id, Validators.required],
-      trimestre: [this.data?.trimestre]
-    });
-    this.filesForm = this.fb.group({
+      trimestre: [this.data?.trimestre],
       catre_conceptuelle: [null],
       resumer_cour: [null]
     });
+    this.filesForm = this.fb.group({});
   }
 
   selectFile(event: any) {
@@ -84,27 +83,35 @@ export class AddChapterComponent implements OnInit {
   onFormSubmit(): void {
     if (this.regiForm.valid) {
       if (!!this.data) {
-        this.chapterservice.updateChapter(this.regiForm.value, this.data.chapter_id, this.regiForm.get('groupe').value).subscribe(async (res: Chapter) => {
-          if (this.filesForm.get('resumer_cour').value !== null)
-            (await this.chapterservice.uploadVideo(this.filesForm.get('resumer_cour').value, res.chapter_id)).subscribe((res) => {});
+        this.chapterservice
+          .updateChapter(this.regiForm.value, this.data.chapter_id, this.regiForm.get('groupe').value)
+          .subscribe(async (res: Chapter) => {
+            if (this.filesForm.get('resumer_cour').value !== null)
+              (await this.chapterservice.uploadVideo(this.filesForm.get('resumer_cour').value, res.chapter_id)).subscribe((res) => {});
 
-          if (this.filesForm.get('catre_conceptuelle').value !== null)
-            setTimeout(async () => {
-              (await this.chapterservice.uploadFile(this.filesForm.get('catre_conceptuelle').value, res.chapter_id)).subscribe((res) => {});
-            }, 500);
-          this.dialog.closeAll();
-        });
+            if (this.filesForm.get('catre_conceptuelle').value !== null)
+              setTimeout(async () => {
+                (await this.chapterservice.uploadFile(this.filesForm.get('catre_conceptuelle').value, res.chapter_id)).subscribe(
+                  (res) => {}
+                );
+              }, 500);
+            this.dialog.closeAll();
+          });
       } else {
         this.chapitre = this.regiForm.value;
-        this.chapterservice.addChapter({ chapterType: this.regiForm.value.type, ...this.regiForm.value }, this.regiForm.get('groupe').value).subscribe(async (res: Chapter) => {
-          if (this.filesForm.get('resumer_cour').value !== null)
-            (await this.chapterservice.uploadVideo(this.filesForm.get('resumer_cour').value, res.chapter_id)).subscribe((res) => {});
-          if (this.filesForm.get('catre_conceptuelle').value !== null)
-            setTimeout(async () => {
-              (await this.chapterservice.uploadFile(this.filesForm.get('catre_conceptuelle').value, res.chapter_id)).subscribe((res) => {});
-            }, 500);
-          this.dialog.closeAll();
-        });
+        this.chapterservice
+          .addChapter({ chapterType: this.regiForm.value.type, ...this.regiForm.value }, this.regiForm.get('groupe').value)
+          .subscribe(async (res: Chapter) => {
+            if (this.filesForm.get('resumer_cour').value !== null)
+              (await this.chapterservice.uploadVideo(this.filesForm.get('resumer_cour').value, res.chapter_id)).subscribe((res) => {});
+            if (this.filesForm.get('catre_conceptuelle').value !== null)
+              setTimeout(async () => {
+                (await this.chapterservice.uploadFile(this.filesForm.get('catre_conceptuelle').value, res.chapter_id)).subscribe(
+                  (res) => {}
+                );
+              }, 500);
+            this.dialog.closeAll();
+          });
       }
     }
   }

@@ -10,7 +10,7 @@
     <!-- <mat-card-title [innerText]="exercice.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
       <br />
     </mat-card-title> -->
-    <div [innerHTML]="exercice?.question"></div><br>
+    <div [innerHTML]="exercice?.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></div><br>
     <mat-card-content [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
       <ng-container *ngFor="let block of exercice.blocks; let index = index">
         <span *ngIf="block.exerciceBlockType === ExerciceBlockTypes.TEXT">

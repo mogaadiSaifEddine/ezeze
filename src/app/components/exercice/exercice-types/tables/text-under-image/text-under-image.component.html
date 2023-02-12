@@ -6,7 +6,7 @@
 
 <mat-card>
     <div class="question-container">
-        <div [innerHTML]="exercice?.question"></div><br>
+        <div [innerHTML]="exercice?.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></div><br>
     </div>
     <mat-card-content class="textUnderImagEGrid" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
         <div class="textUnderImageCard" *ngFor="let block of exercice?.blocks; let index;">

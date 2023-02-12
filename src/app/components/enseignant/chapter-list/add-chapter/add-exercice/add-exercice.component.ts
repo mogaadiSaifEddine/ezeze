@@ -15,6 +15,8 @@ import { GeneralTablesBuilderComponent } from 'src/app/components/exercice/exerc
 import { VersionSelectorComponent } from 'src/app/components/exercice/exercice-types/stroke-wrong-answer/version-selector/version-selector.component';
 import { TextUnderImageBuilderComponent } from 'src/app/components/exercice/exercice-types/tables/text-under-image-builder/text-under-image-builder.component';
 import { CompositionTableBuilderComponent } from 'src/app/components/exercice/exercice-types/tables/composition-table/composition-table-builder/composition-table-builder.component';
+import { ParagraphBuilderComponent } from 'src/app/components/exercice/exercice-types/separate-text/paragraph-builder/paragraph-builder.component';
+
 
 @Component({
   selector: 'app-add-exercice',
@@ -25,6 +27,8 @@ export class AddExerciceComponent implements OnInit {
   @Output() chapterId: EventEmitter<number> = new EventEmitter<number>();
   @ViewChild('hotspotImg') hotspotImg;
   currentExercice: Exercice;
+  useEditor = true;
+  useEditorQG = true;
   constructor(
     private serieService: SerieService,
     private fb: FormBuilder,
@@ -46,6 +50,7 @@ export class AddExerciceComponent implements OnInit {
   imageLoaded = false;
   showPreview = false;
   selectedExercice: Exercice;
+
   wordsSyllablesForm: FormGroup;
   // EDITOR CONFIGURATION
   editorConfig: AngularEditorConfig = {
@@ -130,6 +135,13 @@ export class AddExerciceComponent implements OnInit {
     });
   }
 
+  toggleEditor() {
+    this.useEditor = !this.useEditor;
+  }
+  toggleEditorForQG() {
+    this.useEditorQG = !this.useEditorQG;
+  }
+
   openBlockDialog(element?: ExerciceBlock) {
     let BLOCK_FORM_ACCORDING_TO_TYPE: any;
     if (['VERTICAL_EQUATION'].includes(element.toString())) BLOCK_FORM_ACCORDING_TO_TYPE = InitEquationFormComponent;
@@ -161,6 +173,7 @@ export class AddExerciceComponent implements OnInit {
 
   onSubmit() {
     let exercice;
+
     if (this.exerciceForm.get('type').value == 'HOTSPOT') {
       this.setHotspotExercice();
 
@@ -274,6 +287,7 @@ export class AddExerciceComponent implements OnInit {
         value: ''
       });
     });
+
   }
   checkBlocks() {
     return this.dataSource.length > 0;
@@ -356,5 +370,6 @@ export class AddExerciceComponent implements OnInit {
 
   test() {
     console.log(this.wordsSyllablesForm.value);
+
   }
 }

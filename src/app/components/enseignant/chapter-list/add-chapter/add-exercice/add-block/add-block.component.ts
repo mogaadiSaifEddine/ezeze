@@ -54,7 +54,8 @@ export class AddBlockComponent implements OnInit {
     VERTICAL_EQUATION: [ExerciceBlockTypes.EQUATION],
     GENERAL_TABLES: [ExerciceBlockTypes.TABLE],
     STROKE_WRONG_ANSWER: [ExerciceBlockTypes.ANSWER_TO_STROKE],
-    [Exercise_Types.COMPOSITION_TABLE]: []
+    [Exercise_Types.COMPOSITION_TABLE]: [],
+    SEPARATE_TEXT: [ExerciceBlockTypes.TEXT_TO_SEPARATE]
   };
   readonly showFieldsFor: Record<Exercise_Types, () => void> = {
     LIKERT_SCALE: () => this.showFieldsForLikertScale(),
@@ -95,6 +96,7 @@ export class AddBlockComponent implements OnInit {
     VERTICAL_EQUATION: () => this.showFieldsForVerticalEquation(),
     GENERAL_TABLES: () => this.showFieldsForGeneralTable(),
     STROKE_WRONG_ANSWER: () => this.showFieldsForStrokeTheWrongAnswer(),
+    SEPARATE_TEXT: () => this.showFieldsForSeparateText(),
     LINK_ARROW: (): void => {
       this.showFiledsForLinkArrow();
     },
@@ -189,7 +191,7 @@ export class AddBlockComponent implements OnInit {
   }
 
   showFieldsForTextUnderImage() {
-    if (this.blockForm.get('exerciceBlockType').value === 20) {
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.IMAGE_WITH_TEXT) {
       this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
       this.fieldData.showCorrectValue = true; // show to teacher and test to get the score
       this.fieldData.showPlaceholder = false;
@@ -202,7 +204,7 @@ export class AddBlockComponent implements OnInit {
   }
 
   showFieldsForVerticalEquation() {
-    if (this.blockForm.get('exerciceBlockType').value === 21) {
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.EQUATION) {
       this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
       this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
       this.fieldData.showPlaceholder = false;
@@ -211,7 +213,7 @@ export class AddBlockComponent implements OnInit {
     }
   }
   showFieldsForGeneralTable() {
-    if (this.blockForm.get('exerciceBlockType').value === 22) {
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.TABLE) {
       this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
       this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
       this.fieldData.showPlaceholder = false;
@@ -221,7 +223,18 @@ export class AddBlockComponent implements OnInit {
   }
 
   showFieldsForStrokeTheWrongAnswer() {
-    if (this.blockForm.get('exerciceBlockType').value === 23) {
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.ANSWER_TO_STROKE) {
+      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
+      this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
+      this.fieldData.showPlaceholder = false;
+      this.fieldData.showValue = true;
+      this.fieldData;
+    }
+  }
+  showFieldsForSeparateText() {
+    // console.log('BLOCK NUMBER BEING RETURNE FROM THE BACKK IS :::: ', this.blockForm.get('exerciceBlockType').value);
+    
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.TEXT_TO_SEPARATE) {
       this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
       this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
       this.fieldData.showPlaceholder = false;

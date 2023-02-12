@@ -19,6 +19,6 @@ export class ScoreScreenComponent implements OnInit {
   }
 
   goToDashboard() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/revision/matieres']);
   }
 }

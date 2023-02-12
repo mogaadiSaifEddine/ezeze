@@ -1,0 +1,31 @@
+<mat-dialog-content class="mat-typography">
+    <section>
+        <h1>Paragraph builder</h1>
+        <header>
+            <p>Select what separators to include in the virtual keyboard.</p>
+            <!-- INPUT DIFFERENT SEPARATORS -->
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Input different separators (.;,/\*...)" #separatorsInput (change)="updateSeparatorsArray()">
+            </div>
+        </header>
+
+        <mat-stepper #stepper [linear]="true">
+            <mat-step>
+                <ng-template matStepLabel>Student's view</ng-template>
+                <main>
+                    <textarea name="teachersParagraph" id="teachersParagraph" cols="30" rows="10" [(ngModel)]="teachersParagraph"></textarea>
+                </main>
+                <button mat-flat-button color="primary" matStepperNext class="row mt-2">Next</button>
+            </mat-step>
+
+            <mat-step>
+                <ng-template matStepLabel>Correct Values</ng-template>
+                <main>
+                    <textarea name="studentsParagraph" id="studentsParagraph" cols="30" rows="10" [(ngModel)]="correctParagraph" [value]="teachersParagraph ?? ''"></textarea>
+                </main>
+                <button mat-flat-button matStepperPrevious class="col mt-2">Back</button>
+                <button mat-flat-button color="primary" class="col mt-2" (click)="save()">Save</button>
+            </mat-step>
+        </mat-stepper>
+    </section>
+</mat-dialog-content>
