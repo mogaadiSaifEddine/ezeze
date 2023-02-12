@@ -1,3 +1,8 @@
+<!-- 
+  ################################### LAYOUT COMPONENTS
+-->
+
+<!-- FIXED HEADER WITH RDC AND CC -->
 <div class="tool-buttons-container mt-2">
   <button mat-fab color="primary" matTooltip="Course reminder" (click)="openCourseReminder()" class="pulse">
     <mat-icon>assignment</mat-icon>
@@ -6,16 +11,24 @@
     <mat-icon>bookmark</mat-icon>
   </button>
 </div>
-<app-main-screen (startEvaluation)="startEvaluation($event)" *ngIf="showMainScreen"></app-main-screen>
-<!--ok  -->
 
-<!-- quiz -->
+<!-- START SCREEN WITH ANIMATED SVG, DISPLAYS ONLY ONCE -->
+<app-main-screen (startEvaluation)="startEvaluation($event)" *ngIf="showMainScreen"></app-main-screen>
+
+<!-- "GOOD JOB" SCREEN, DISPLAYS AFTER EACH SECTION 'S DONE'  -->
+<app-achievement-screen *ngIf="showGoNextStepScreen" (goNextStep)="goNextStep($event)"></app-achievement-screen>
+
+
+<!-- 
+  ################################### ACTUAL PACKAGE CONTENT
+-->
+
+<!-- QUIZ -->
 <div class="container" *ngIf="!showGoNextStepScreen && evaluationMode && !!serieExercice">
   <app-pass-test [evaluationContent]="evaluationContent" (finalScore)="evaluationTestFinished($event)"></app-pass-test>
 </div>
-<!--  -->
 
-<!--  -->
+<!-- Exercises (L1, L2, and L3) -->
 <div class="container" *ngIf="!showGoNextStepScreen && prerequisiteMode && !!serieExercice">
   <app-pass-test [evaluationContent]="prerequisiteContent" (finalScore)="prerequisiteTestFinished($event)"></app-pass-test>
 </div>
@@ -30,31 +43,3 @@
   <app-pass-test [evaluationContent]="exercice3Content" (finalScore)="testFinished($event)"></app-pass-test>
 </div>
 <app-score-screen [score]="score" *ngIf="showFinalScore"> </app-score-screen>
-
-<!-- <div *ngIf="showCourseReminderMode && !!serieExercice">
-  <button id="test-aquisitions-btn" (click)="goToExercices()" mat-raised-button color="primary">{{ 'revision.test-your-knowledge' | translate }}</button>
-  <br />
-  <video controls>
-    <source src="assets/sample_videos/addition.mp4" type="video/mp4" />
-    <source src="assets/sample_videos/addition.ogg" type="video/ogg" />
-    {{ 'revision.your-browser-does-not-support-html-video' | translate }}
-  </video>
-  
-  <div *ngIf="showCourseReminderMode">
-    <button id="test-aquisitions-btn" (click)="goToExercices()" mat-raised-button color="primary">{{ 'revision.test-your-knowledge' | translate }}</button>
-    <br />
-    <video controls>
-      <source src="assets/sample_videos/addition.mp4" type="video/mp4" />
-      <source src="assets/sample_videos/addition.ogg" type="video/ogg" />
-      {{ 'revision.your-browser-does-not-support-html-video' | translate }}
-    </video>
-  </div>
-  <div *ngIf="showExercicesMode">
-    <app-pass-test [evaluationContent]="evaluationContent" (finalScore)="testFinished($event)"></app-pass-test>
-  </div>
-  
-  <app-score-screen [score]="score" *ngIf="showFinalScore"> </app-score-screen>
-</div> -->
-
-<app-achievement-screen *ngIf="showGoNextStepScreen" (goNextStep)="goNextStep($event)"></app-achievement-screen>
-<!-- ok ... this one triggers after each section  -->

@@ -27,7 +27,7 @@ export class PassTestComponent implements OnInit {
 
   loading = true;
 
-  constructor(private revisionService: RevisionService, private userService: UserService, private ss: SharedService) {}
+  constructor(private revisionService: RevisionService, private userService: UserService, private ss: SharedService) { }
 
   ngOnInit(): void {
     const userconnected = JSON.parse(localStorage.getItem('user_details'));
@@ -64,7 +64,6 @@ export class PassTestComponent implements OnInit {
       score: this.score,
       scoreToSend: this.answer ? 1 : 0,
       serie: this.evaluationContent.seriesType,
-
       user: this.UserId
     };
 
@@ -75,14 +74,10 @@ export class PassTestComponent implements OnInit {
   }
 
   canGoNext(event) {
-    console.log(this.answer);
-
     // let there be true
     this.canGoNextQuestion = true;
   }
   checkAnswer() {
-    console.log(this.answer);
-
     if (this.answer !== null) {
       this.sendUserAnswerToTheServer();
       this.isAnswerChecked = true;
