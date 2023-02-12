@@ -53,7 +53,8 @@ export class AddBlockComponent implements OnInit {
     TEXT_UNDER_IMAGE: [ExerciceBlockTypes.IMAGE_WITH_TEXT],
     VERTICAL_EQUATION: [ExerciceBlockTypes.EQUATION],
     GENERAL_TABLES: [ExerciceBlockTypes.TABLE],
-    STROKE_WRONG_ANSWER: [ExerciceBlockTypes.ANSWER_TO_STROKE]
+    STROKE_WRONG_ANSWER: [ExerciceBlockTypes.ANSWER_TO_STROKE],
+    [Exercise_Types.COMPOSITION_TABLE]: []
   };
   readonly showFieldsFor: Record<Exercise_Types, () => void> = {
     LIKERT_SCALE: () => this.showFieldsForLikertScale(),
@@ -114,6 +115,9 @@ export class AddBlockComponent implements OnInit {
       throw new Error('Function not implemented.');
     },
     [Exercise_Types.COLOR_SHAPE]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.COMPOSITION_TABLE]: function (): void {
       throw new Error('Function not implemented.');
     }
   };
