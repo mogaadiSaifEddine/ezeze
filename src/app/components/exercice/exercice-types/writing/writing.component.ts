@@ -65,7 +65,7 @@ export class WritingComponent implements OnInit, OnChanges {
   readonly ExerciceBlockTypes = ExerciceBlockTypes;
   imageBlock: ExerciceBlock = null;
 
-  constructor(private revisionService: RevisionService) {}
+  constructor(private revisionService: RevisionService) { }
 
   ngOnInit(): void {
     this.exercice.question = this.exercice.question.split('#').join('\n');
@@ -87,7 +87,7 @@ export class WritingComponent implements OnInit, OnChanges {
     }
   }
 
-  valueChanged() {
+  valueChanged(event: any) {
     this.answerChange.emit(this.selectedBlock.value === this.selectedBlock.correctValue);
     this.canGoNext.emit(true);
   }

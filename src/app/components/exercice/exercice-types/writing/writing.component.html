@@ -22,7 +22,7 @@
         <mat-label>{{ block.label }}</mat-label>
         <textarea rows="5" matInput [(ngModel)]="block.value" required></textarea>
       </mat-form-field> -->
-      <angular-editor [(ngModel)]="block.value" [config]="editorConfig" (change)="valueChanged()" id="angular-editor"></angular-editor>
+      <angular-editor [(ngModel)]="block.value" [config]="editorConfig" (ngModelChange)="valueChanged($event)" id="angular-editor"></angular-editor>
     </mat-card-content>
   </div>
 </mat-card>

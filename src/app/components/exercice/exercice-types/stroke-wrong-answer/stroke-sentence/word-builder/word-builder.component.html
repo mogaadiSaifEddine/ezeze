@@ -21,23 +21,9 @@
                 <!-- SUB CONTROLS FOR EACH ADDING GROUPS -->
                 <ng-container *ngFor="let FGROUP of GET_FORM_ARRAY.controls; let i = index;">
 
-                    <!-- <div class="card" style="width: 100%;">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <button>new sentence</button>
-                                <button>new group of words</button>
-                            </h5>
-
-                            <div [formGroupName]="i">
-                                <input type="text" name="something" formControlName="SUB_CONTROL_1">
-                                <input type="text" name="something" formControlName="SUB_CONTROL_2">
-                            </div>
-                        </div>
-                    </div> -->
-
                     <div class="card mt-1" [formGroupName]="i">
                         <div class="card-body positoin-relative">
-                            <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" (click)="deleteCurrentGroup(i)">delete</span>
+                            <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" (click)="deleteCurrentGroup(i)"></span>
                             <!-- CONTROLS FOR ADDING SENTENCE/WORDS GROUP -->
                             <div class="mt-1 mb-1 p-1">
                                 <button type="button" class="btn btn-outline-primary me-1 btn-sm"><i class="bi bi-plus"></i>Sentence</button>
