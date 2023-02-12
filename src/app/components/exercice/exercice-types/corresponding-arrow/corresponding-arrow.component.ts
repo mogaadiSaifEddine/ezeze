@@ -41,22 +41,17 @@ export class CorrespondingArrowComponent implements OnInit {
       }
     });
 
+    console.log(this.exercice);
   }
 
   listenToClick(x, direction: string): void {
-
-
-
     if (direction === 'left' && this.leftArrow == 0) {
-
       this.selectedBox = x;
       this.leftArrow = x;
-
     } else if (this.rightArrow == 0 && direction === 'right' && this.leftArrow != 0) {
       this.selectedBox = 0;
 
       this.rightArrow = x;
-
 
       this.lines = [
         ...this.lines,

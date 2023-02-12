@@ -1,14 +1,15 @@
 <div class="header">
-    <button mat-icon-button class="right close-button" [mat-dialog-close]="true">
-        <mat-icon class="close-icon" color="warn">close</mat-icon>
-    </button>
-
+  <button mat-icon-button class="right close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon" color="warn">close</mat-icon>
+  </button>
 </div>
 <app-drag-drop *ngIf="data.currentExercise.type === TYPES.DRAG_DROP" [exercice]="data.currentExercise"></app-drag-drop>
 
 <app-correspondence *ngIf="data.currentExercise.type === TYPES.CORRESPONDANCE" [exercice]="data.currentExercise"></app-correspondence>
 
-<app-multiple-answers *ngIf="data.currentExercise.type === TYPES.MULTIPLE_RESPONSE" [exercice]="data.currentExercise"></app-multiple-answers>
+<app-multiple-answers
+  *ngIf="data.currentExercise.type === TYPES.MULTIPLE_RESPONSE"
+  [exercice]="data.currentExercise"></app-multiple-answers>
 
 <app-color-the-text *ngIf="data.currentExercise.type === TYPES.WORD_COLORATION" [exercice]="data.currentExercise"></app-color-the-text>
 
@@ -18,7 +19,9 @@
 
 <app-short-response *ngIf="data.currentExercise.type === TYPES.SHORT_RESPONSE" [exercice]="data.currentExercise"></app-short-response>
 
-<app-fill-empty-fields *ngIf="data.currentExercise.type === TYPES.FILL_EMPTY_FIELDS" [exercice]="data.currentExercise"></app-fill-empty-fields>
+<app-fill-empty-fields
+  *ngIf="data.currentExercise.type === TYPES.FILL_EMPTY_FIELDS"
+  [exercice]="data.currentExercise"></app-fill-empty-fields>
 
 <app-sequencing *ngIf="data.currentExercise.type === TYPES.SEQUENCING" [exercice]="data.currentExercise"></app-sequencing>
 
@@ -34,4 +37,4 @@
 
 <app-hotspot *ngIf="data.currentExercise.type === TYPES.HOTSPOT" [exercice]="data.currentExercise"></app-hotspot>
 
-<app-drag-words *ngIf="data.currentExercise.type === TYPES.DRAG_WORDS"  [exercice]="data.currentExercise"></app-drag-words>
+<app-drag-words *ngIf="data.currentExercise.type === TYPES.DRAG_WORDS" [exercice]="data.currentExercise"></app-drag-words>
