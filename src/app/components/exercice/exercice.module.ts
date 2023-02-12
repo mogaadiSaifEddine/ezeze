@@ -47,7 +47,7 @@ import { TextUnderImageComponent } from './exercice-types/tables/text-under-imag
 import { InitEquationFormComponent } from './exercice-types/tables/vertical-equations/init-equation-form/init-equation-form.component';
 import { EquationLayoutBuilderComponent } from './exercice-types/tables/vertical-equations/equation-layout-builder/equation-layout-builder.component';
 import { EquationDisplayComponent } from './exercice-types/tables/vertical-equations/equation-display/equation-display.component';
-// EDIROE
+// MEDIROE
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ListeningComponent } from './exercice-types/listening/listening.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -135,7 +135,7 @@ import { ParagraphDisplayComponent } from './exercice-types/separate-text/paragr
     FillLettersComponent,
     CompositionTableBuilderComponent,
     CompositionTableTeacherViewComponent,
-    CompositionTableStudentDisplayComponent
+    CompositionTableStudentDisplayComponent,
     ParagraphBuilderComponent,
     ParagraphDisplayComponent
   ],
@@ -171,7 +171,8 @@ import { ParagraphDisplayComponent } from './exercice-types/separate-text/paragr
     GeneralTablesStudentDisplayComponent,
     StrokeAnswerDisplayComponent,
     FillLettersComponent,
-    ParagraphDisplayComponent
+    ParagraphDisplayComponent,
+    CompositionTableStudentDisplayComponent
   ]
 })
 export class ExerciceModule {}
