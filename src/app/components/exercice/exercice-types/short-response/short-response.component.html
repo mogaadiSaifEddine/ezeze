@@ -27,7 +27,7 @@
             <mat-label>Answer</mat-label>
             <input matInput [(ngModel)]="question.value" required />
           </mat-form-field> -->
-          <angular-editor [(ngModel)]="question.value" [config]="editorConfig" (change)="valueChanged()" id="angular-editor"></angular-editor>
+          <angular-editor [(ngModel)]="question.value" [config]="editorConfig" (ngModelChange)="valueChanged($event)" id="angular-editor"></angular-editor>
         </div>
 
         <br *ngIf="question.exerciceBlockType === ExerciceBlockTypes.BREAK" />
