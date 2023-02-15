@@ -45,16 +45,25 @@ export class PassTestComponent implements OnInit {
     );
   }
 
-  nextQuestion() {
-    if (this.currentExercise.ex_id === this.evaluationContent.exercices[this.evaluationContent.exercices.length - 1].ex_id) {
-      this.finalScore.emit(this.score);
-    } else {
+  nextQuestion(action: string) {
+    if (action === "baypass") {
       this.revisionService.resetFormSub.next(true);
       this.answer = null;
       this.isAnswerChecked = false;
       this.exerciceIndex++;
       this.currentExercise = this.evaluationContent.exercices[this.exerciceIndex];
       this.canGoNextQuestion = true;
+    } else {
+      if (this.currentExercise.ex_id === this.evaluationContent.exercices[this.evaluationContent.exercices.length - 1].ex_id) {
+        this.finalScore.emit(this.score);
+      } else {
+        this.revisionService.resetFormSub.next(true);
+        this.answer = null;
+        this.isAnswerChecked = false;
+        this.exerciceIndex++;
+        this.currentExercise = this.evaluationContent.exercices[this.exerciceIndex];
+        this.canGoNextQuestion = true;
+      }
     }
     this.ss.showFalfoul.next(false);
   }
@@ -66,8 +75,7 @@ export class PassTestComponent implements OnInit {
       serie: this.evaluationContent.seriesType,
       user: this.UserId
     };
-
-    if (userAnswer.id !== null) this.revisionService.addUserAnswer({ ...userAnswer, score: userAnswer.scoreToSend }).subscribe((res) => {});
+    if (userAnswer.id !== null) this.revisionService.addUserAnswer({ ...userAnswer, score: userAnswer.scoreToSend }).subscribe((res) => { });
     if (this.answer) {
       this.score = this.score + 100 / this.evaluationContent.exercices.length;
     }
