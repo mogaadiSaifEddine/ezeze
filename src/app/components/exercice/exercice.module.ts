@@ -81,6 +81,7 @@ import { CompositionTableTeacherViewComponent } from './exercice-types/tables/co
 import { CompositionTableStudentDisplayComponent } from './exercice-types/tables/composition-table/composition-table-student-display/composition-table-student-display.component';
 import { ParagraphBuilderComponent } from './exercice-types/separate-text/paragraph-builder/paragraph-builder.component';
 import { ParagraphDisplayComponent } from './exercice-types/separate-text/paragraph-display/paragraph-display.component';
+import { ExerciseNotFoundComponent } from './exercise-not-found/exercise-not-found.component';
 
 @NgModule({
   imports: [
@@ -137,7 +138,8 @@ import { ParagraphDisplayComponent } from './exercice-types/separate-text/paragr
     CompositionTableTeacherViewComponent,
     CompositionTableStudentDisplayComponent,
     ParagraphBuilderComponent,
-    ParagraphDisplayComponent
+    ParagraphDisplayComponent,
+    ExerciseNotFoundComponent
   ],
   providers: [],
   exports: [
