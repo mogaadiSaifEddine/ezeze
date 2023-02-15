@@ -82,7 +82,8 @@ import { CompositionTableStudentDisplayComponent } from './exercice-types/tables
 import { ParagraphBuilderComponent } from './exercice-types/separate-text/paragraph-builder/paragraph-builder.component';
 import { ParagraphDisplayComponent } from './exercice-types/separate-text/paragraph-display/paragraph-display.component';
 import { ExerciseNotFoundComponent } from './exercise-not-found/exercise-not-found.component';
-
+// DIRECTIVES
+import { ResizeInputDirective } from 'src/app/directives/resize-input.directive';
 @NgModule({
   imports: [
     MaterialModules,
@@ -139,7 +140,8 @@ import { ExerciseNotFoundComponent } from './exercise-not-found/exercise-not-fou
     CompositionTableStudentDisplayComponent,
     ParagraphBuilderComponent,
     ParagraphDisplayComponent,
-    ExerciseNotFoundComponent
+    ExerciseNotFoundComponent,
+    ResizeInputDirective
   ],
   providers: [],
   exports: [
@@ -174,7 +176,8 @@ import { ExerciseNotFoundComponent } from './exercise-not-found/exercise-not-fou
     StrokeAnswerDisplayComponent,
     FillLettersComponent,
     ParagraphDisplayComponent,
-    CompositionTableStudentDisplayComponent
+    CompositionTableStudentDisplayComponent,
+    ResizeInputDirective
   ]
 })
-export class ExerciceModule {}
+export class ExerciceModule { }
