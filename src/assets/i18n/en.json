@@ -182,7 +182,7 @@
   "ex-mia": "Ex. Mia",
   "filter": "Filter",
   "add-token": "Add Token",
-  "education": "Education",
+  "education": "",
   "token-details": "Token details",
   "attached-to-account-s-0": "Attached to account(s)",
   "users-capacity-0": "Users capacity",
@@ -251,6 +251,5 @@
         "correctValue": "Correct Value"
       }
     }
-  },
-  "education": ""
+  }
 }
