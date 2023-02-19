@@ -24,22 +24,22 @@
 -->
 
 <!-- QUIZ -->
-<div class="container" *ngIf="!showGoNextStepScreen && evaluationMode && !!serieExercice">
+<div class="container" *ngIf="!showGoNextStepScreen && evaluationMode && (!!evaluationContent.exercices.length)">
   <app-pass-test [evaluationContent]="evaluationContent" (finalScore)="evaluationTestFinished($event)"></app-pass-test>
 </div>
 
 <!-- Exercises (L1, L2, and L3) -->
-<div class="container" *ngIf="!showGoNextStepScreen && prerequisiteMode && !!serieExercice">
+<div class="container" *ngIf="!showGoNextStepScreen && prerequisiteMode && (!!prerequisiteContent.exercices.length)">
   <app-pass-test [evaluationContent]="prerequisiteContent" (finalScore)="prerequisiteTestFinished($event)"></app-pass-test>
 </div>
 
-<div *ngIf="!showGoNextStepScreen && showExercicesMode && selectedExercice == 1">
+<div *ngIf="!showGoNextStepScreen && showExercicesMode && selectedExercice == 1 && (!!exercice1Content.exercices.length)">
   <app-pass-test [evaluationContent]="exercice1Content" (finalScore)="testFinished($event)"></app-pass-test>
 </div>
-<div *ngIf="!showGoNextStepScreen && showExercicesMode && selectedExercice == 2">
+<div *ngIf="!showGoNextStepScreen && showExercicesMode && selectedExercice == 2   && (!!exercice2Content.exercices.length)">
   <app-pass-test [evaluationContent]="exercice2Content" (finalScore)="testFinished($event)"></app-pass-test>
 </div>
-<div *ngIf="!showGoNextStepScreen && showExercicesMode && selectedExercice == 3">
+<div *ngIf="!showGoNextStepScreen && showExercicesMode && selectedExercice == 3  && (!!exercice3Content.exercices.length)">
   <app-pass-test [evaluationContent]="exercice3Content" (finalScore)="testFinished($event)"></app-pass-test>
 </div>
 <app-score-screen [score]="score" *ngIf="showFinalScore"> </app-score-screen>

@@ -11,7 +11,7 @@ import { ChapitreService } from 'src/app/services/chapitre.service';
 import { Chapter } from 'src/app/model/Chapter';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
-
+import * as _ from 'lodash';
 @Component({
   selector: 'app-aquired-content-evaluation',
   templateUrl: './aquired-content-evaluation.component.html',
@@ -49,6 +49,7 @@ export class AquiredContentEvaluationComponent implements OnInit {
     PREREQUISITE: this.prerequisiteMode,
     EXERCICE: this.showExercicesMode
   };
+  _ = _
   chapter: Chapter;
   constructor(
     private router: Router,
@@ -58,7 +59,7 @@ export class AquiredContentEvaluationComponent implements OnInit {
     private userService: UserService,
     private sanitizer: DomSanitizer,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadSerie();
@@ -190,6 +191,10 @@ export class AquiredContentEvaluationComponent implements OnInit {
     ) {
       if (this.score < 30) {
         this.prerequisiteMode = true;
+        // if (this.prerequisiteContent.exercices.length) {
+        // return
+        // }
+        // this.showExercicesMode = true
       } else if (this.score < 50) {
         this.showCourseReminderMode = true;
       } else {

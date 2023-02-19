@@ -6,31 +6,31 @@
         <mat-stepper [linear]="isLinear" #stepper>
             <mat-step [stepControl]="tokenForm" class="firstStep">
                 <mat-progress-bar mode="indeterminate" *ngIf="tokenIsBeingChecked"></mat-progress-bar>
-                <ng-template matStepLabel>Add a New Vourcher</ng-template>
+                <ng-template matStepLabel>{{ 'add-a-new-vourcher' | translate }}</ng-template>
                 <div class="stepBody">
                     <form [formGroup]="tokenForm">
                         <div mat-dialog-content class="mat-typography">
-                            <p>You are about to add a new voucher.</p>
-                            <p>This will allow you to add new students account(s).</p>
+                            <p>{{ 'you-are-about-to-add-a-new-voucher' | translate }}</p>
+                            <p>{{ 'this-will-allow-you-to-add-new-students-account-s' | translate }}</p>
 
                             <mat-form-field appearance="outline">
-                                <mat-label>Token</mat-label>
-                                <input type="text" formControlName='token' matInput placeholder="Ex. 1665003584" [disabled]="tokenIsValid">
+                                <mat-label>{{ 'token' | translate }}</mat-label>
+                                <input type="text" formControlName='token' matInput placeholder="{{ 'ex-1665003584' | translate }}" [disabled]="tokenIsValid">
                                 <mat-error *ngIf="getTokenInput.hasError('required')">
-                                    Token is <strong>required</strong>
+                                    {{ 'token-is' | translate }} <strong>required</strong>
                                 </mat-error>
                             </mat-form-field>
                             <mat-error *ngIf="showError">
-                                Invalid token!
+                                {{ 'invalid-token' | translate }}
                             </mat-error>
                         </div>
 
                         <div mat-dialog-actions align="end" class="stepFooter">
-                            <button mat-button (click)="close()">Cancel</button>
+                            <button mat-button (click)="close()">{{ 'cancel' | translate }}</button>
                             <!-- button to trigger check -->
                             <button mat-flat-button color="primary" (click)="verifyToken()" [disabled]="!tokenForm.valid" *ngIf="!tokenIsBeingChecked && !tokenIsValid || this.tokenForm.invalid">
                                 <mat-icon>check_circle_outline</mat-icon>
-                                Verify
+                                {{ 'verify' | translate }}
                             </button>
                             <!-- check is in progress loader -->
                             <button mat-flat-button [disabled]="true" *ngIf="tokenIsBeingChecked">
@@ -40,7 +40,7 @@
                             </button>
                             <!-- check is done, and token is valid -->
                             <button mat-flat-button color="accent" matStepperNext *ngIf="tokenIsValid">
-                                Next
+                                {{ 'revision.next' | translate }}
                                 <mat-icon>arrow_forward</mat-icon>
                             </button>
                         </div>
@@ -49,9 +49,9 @@
             </mat-step>
             <!-- AFTER TOKEN HAS BEEN VERIFIED, CHOOSE ACTION TO PROCEED -->
             <mat-step [stepControl]="">
-                <ng-template matStepLabel>Choose action</ng-template>
+                <ng-template matStepLabel>{{ 'choose-action' | translate }}</ng-template>
                 <div class="stepBody">
-                    <p>How do you wish to proceed ?</p>
+                    <p>{{ 'how-do-you-wish-to-proceed' | translate }}</p>
 
                     <div class="buttonGroup">
                         <div (click)="openAddStudentDialog()" class="triggerCard">
@@ -59,8 +59,8 @@
                                 <mat-icon>group_add</mat-icon>
                             </div>
                             <div class="cardBody">
-                                <h2>Add account</h2>
-                                <p>Add new students using the generated token.</p>
+                                <h2>{{ 'add-account' | translate }}</h2>
+                                <p>{{ 'add-new-students-using-the-generated-token' | translate }}</p>
                             </div>
                         </div>
 
@@ -69,8 +69,8 @@
                                 <mat-icon>people</mat-icon>
                             </div>
                             <div class="cardBody" (click)="showManageStudentAccountGuide()">
-                                <h2>update account</h2>
-                                <p>Update an existing account by replacing an expired token.</p>
+                                <h2>{{ 'update-account' | translate }}</h2>
+                                <p>{{ 'update-an-existing-account-by-replacing-an-expired-token' | translate }}</p>
                             </div>
                         </div>
                     </div>

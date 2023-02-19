@@ -35,7 +35,7 @@ export class AddExerciceComponent implements OnInit {
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<AddExerciceComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { exercice: Exercice; serieId: number; chapterId: number }
-  ) {}
+  ) { }
   hotspotsList = [];
   correctAnswerMode = false;
   displayedColumns: string[] = ['ordre', 'type', 'label', 'action'];
@@ -144,11 +144,12 @@ export class AddExerciceComponent implements OnInit {
 
   openBlockDialog(element?: ExerciceBlock) {
     let BLOCK_FORM_ACCORDING_TO_TYPE: any;
-    if (['VERTICAL_EQUATION'].includes(element.toString())) BLOCK_FORM_ACCORDING_TO_TYPE = InitEquationFormComponent;
+    if (element.toString() === 'VERTICAL_EQUATION') BLOCK_FORM_ACCORDING_TO_TYPE = InitEquationFormComponent;
     else if (element.toString() === 'GENERAL_TABLES') BLOCK_FORM_ACCORDING_TO_TYPE = GeneralTablesBuilderComponent;
     else if (element.toString() === 'STROKE_WRONG_ANSWER') BLOCK_FORM_ACCORDING_TO_TYPE = VersionSelectorComponent;
     else if (element.toString() === 'TEXT_UNDER_IMAGE') BLOCK_FORM_ACCORDING_TO_TYPE = TextUnderImageBuilderComponent;
     else if (element.toString() === 'COMPOSITION_TABLE') BLOCK_FORM_ACCORDING_TO_TYPE = CompositionTableBuilderComponent;
+    else if (element.toString() === 'SEPARATE_TEXT') BLOCK_FORM_ACCORDING_TO_TYPE = ParagraphBuilderComponent;
     else BLOCK_FORM_ACCORDING_TO_TYPE = AddBlockComponent;
 
     this.dialog
@@ -214,7 +215,7 @@ export class AddExerciceComponent implements OnInit {
               });
           });
           if (this.exerciceForm.get('file').value !== null)
-            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => {});
+            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => { });
           this.dialogRef.close(true);
         });
       } else {
@@ -235,7 +236,7 @@ export class AddExerciceComponent implements OnInit {
               });
           });
           if (this.exerciceForm.get('file').value !== null)
-            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => {});
+            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => { });
           this.dialogRef.close(true);
         });
       }
