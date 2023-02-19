@@ -16,9 +16,6 @@ export class WordBuilderComponent implements OnInit {
   sentenceWithWordsBlock: ExerciceBlock;
   BIG_GROUP_FORM !: FormGroup;
 
-
-
-
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<WordBuilderComponent>
@@ -30,52 +27,36 @@ export class WordBuilderComponent implements OnInit {
 
   createBigGroupForm() {
     this.BIG_GROUP_FORM = this.fb.group({
-      SENTENCE_GROUP_ARRAY: this.fb.array([]),
-      WORDS_GROUP_ARRAY: this.fb.array([])
+      GROUP: this.fb.array([])
     })
   }
 
-  // ****SENTENCES
+  /**
+   * GROUP CAN BE EITHER A SENTENCE OR A WORD
+   * The formControl will allow teachers to specify which one is it
+   */
 
-  get GET_SENTENCES_FROM_ARRAY(): FormArray {
-    return this.BIG_GROUP_FORM.get('SENTENCE_GROUP_ARRAY') as FormArray;
+  get GET_GROUP_FROM_ARRAY(): FormArray {
+    return this.BIG_GROUP_FORM.get('GROUP') as FormArray;
   }
 
   addNewSentenceGroupToArray() {
     const NEW_FORM_GROUP = this.fb.group({
-      SENTENCE_CONTROL: []
+      GROUP_CONTROL: [null, Validators.required],
+      TYPE_CONTROL: ['sentence', Validators.required],
+      STATUS_CONTROL: [true]
     });
-    this.GET_SENTENCES_FROM_ARRAY.push(NEW_FORM_GROUP);
+    this.GET_GROUP_FROM_ARRAY.push(NEW_FORM_GROUP);
   }
 
   deleteCurrentSentenceFromGroup(index: number) {
-    this.GET_SENTENCES_FROM_ARRAY.removeAt(index);
+    this.GET_GROUP_FROM_ARRAY.removeAt(index);
   }
-
-  // ****WORDS
-
-  get GET_WORDS_FROM_ARRAY(): FormArray {
-    return this.BIG_GROUP_FORM.get('WORDS_GROUP_ARRAY') as FormArray;
-  }
-
-  addNewWordGroupToArray() {
-    const NEW_FORM_GROUP = this.fb.group({
-      WORD_CONTROL: []
-    });
-    const res = [...Array(parseInt(this.wordsCount.nativeElement.value))].map((_: any, index: number) => {
-      this.GET_WORDS_FROM_ARRAY.push(NEW_FORM_GROUP);
-    });
-  }
-
-  deleteCurrentWordFromGroup(index: number) {
-    console.log("GIVEN INDEX IS ::: ", index, " ELEMENT THERE IS ::: ", this.GET_WORDS_FROM_ARRAY[index]);
-
-    this.GET_WORDS_FROM_ARRAY.removeAt(index);
-  }
-
 
   saveSentences() {
+    console.log(this.BIG_GROUP_FORM.valid, 'FINAL FORM TO SEND IS ::: ', this.BIG_GROUP_FORM.value);
     if (this.BIG_GROUP_FORM.valid) {
+
       const PARAMS = {
         sentencesWithWords: this.BIG_GROUP_FORM.value
       }
