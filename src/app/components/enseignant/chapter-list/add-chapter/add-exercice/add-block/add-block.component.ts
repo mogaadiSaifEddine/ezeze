@@ -34,7 +34,6 @@ export class AddBlockComponent implements OnInit {
     WORD_COLORATION: [
       ExerciceBlockTypes.COLOR,
       ExerciceBlockTypes.HIGHLIGHT_TEXT,
-      ExerciceBlockTypes.COLORATE_TEXT,
       ExerciceBlockTypes.BREAK
     ],
     SELECT_FROM_LIST: [ExerciceBlockTypes.TEXT, ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.BREAK],
@@ -81,8 +80,8 @@ export class AddBlockComponent implements OnInit {
     SEQUENCING: (): void => {
       this.showFiledsForSequencing();
     },
-    HOTSPOT: (): void => {},
-    DRAG_DROP: (): void => {},
+    HOTSPOT: (): void => { },
+    DRAG_DROP: (): void => { },
     DRAG_WORDS: (): void => {
       this.showFiledsForDragWords();
     },
@@ -128,7 +127,7 @@ export class AddBlockComponent implements OnInit {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: { block: ExerciceBlock; exercice_type: string },
     private dialogRef: MatDialogRef<AddBlockComponent>
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -233,7 +232,7 @@ export class AddBlockComponent implements OnInit {
   }
   showFieldsForSeparateText() {
     // console.log('BLOCK NUMBER BEING RETURNE FROM THE BACKK IS :::: ', this.blockForm.get('exerciceBlockType').value);
-    
+
     if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.TEXT_TO_SEPARATE) {
       this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
       this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
