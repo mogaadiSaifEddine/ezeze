@@ -16,8 +16,7 @@ import { VersionSelectorComponent } from 'src/app/components/exercice/exercice-t
 import { TextUnderImageBuilderComponent } from 'src/app/components/exercice/exercice-types/tables/text-under-image-builder/text-under-image-builder.component';
 import { CompositionTableBuilderComponent } from 'src/app/components/exercice/exercice-types/tables/composition-table/composition-table-builder/composition-table-builder.component';
 import { ParagraphBuilderComponent } from 'src/app/components/exercice/exercice-types/separate-text/paragraph-builder/paragraph-builder.component';
-
-
+import * as _ from 'lodash';
 @Component({
   selector: 'app-add-exercice',
   templateUrl: './add-exercice.component.html',
@@ -35,7 +34,7 @@ export class AddExerciceComponent implements OnInit {
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<AddExerciceComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { exercice: Exercice; serieId: number; chapterId: number }
-  ) { }
+  ) {}
   hotspotsList = [];
   correctAnswerMode = false;
   displayedColumns: string[] = ['ordre', 'type', 'label', 'action'];
@@ -215,7 +214,7 @@ export class AddExerciceComponent implements OnInit {
               });
           });
           if (this.exerciceForm.get('file').value !== null)
-            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => { });
+            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => {});
           this.dialogRef.close(true);
         });
       } else {
@@ -236,7 +235,7 @@ export class AddExerciceComponent implements OnInit {
               });
           });
           if (this.exerciceForm.get('file').value !== null)
-            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => { });
+            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => {});
           this.dialogRef.close(true);
         });
       }
@@ -288,7 +287,6 @@ export class AddExerciceComponent implements OnInit {
         value: ''
       });
     });
-
   }
   checkBlocks() {
     return this.dataSource.length > 0;
@@ -351,26 +349,30 @@ export class AddExerciceComponent implements OnInit {
       blocks: this.dataSource
     };
     if (this.exerciceForm.valid && this.checkBlocks()) {
-      this.selectedExercice = exercice;
-      this.dialog.open(ExercicePreviewComponent, {
-        width: '70%',
-        maxWidth: '85%',
-        maxHeight: '90vh',
-        position: {
-          top: '10%',
-          left: '15%'
-        },
-        panelClass: 'my-custom-dialog-class',
+      this.selectedExercice = _.cloneDeep(exercice);
+      this.dialog
+        .open(ExercicePreviewComponent, {
+          width: '70%',
+          maxWidth: '85%',
+          maxHeight: '90vh',
+          position: {
+            top: '10%',
+            left: '15%'
+          },
+          panelClass: 'my-custom-dialog-class',
 
-        data: {
-          currentExercise: this.selectedExercice
-        }
-      });
+          data: {
+            currentExercise: this.selectedExercice
+          }
+        })
+        .afterClosed()
+        .subscribe((res) => {
+          this.selectedExercice = exercice;
+        });
     }
   }
 
   test() {
     console.log(this.wordsSyllablesForm.value);
-
   }
 }
