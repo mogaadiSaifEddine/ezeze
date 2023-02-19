@@ -7,6 +7,7 @@ import { RevisionService } from 'src/app/services/revision.service';
 import { SerieService } from 'src/app/services/serie.service';
 import { environment } from 'src/environments/environment';
 
+
 @Component({
   selector: 'app-numeric',
   templateUrl: './numeric.component.html',
@@ -18,6 +19,9 @@ export class NumericComponent implements OnInit, OnChanges {
   api = environment.serverApi;
   loading = true;
 
+
+  questionCopy
+
   @Input() exercice: Exercice;
   @Input() answer: boolean;
   @Output() answerChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -25,16 +29,23 @@ export class NumericComponent implements OnInit, OnChanges {
   readonly ExerciceBlockTypes = ExerciceBlockTypes;
   imageBlock: ExerciceBlock = null;
 
-  constructor(private revisionService: RevisionService, private serieService: SerieService, private sanitizer: DomSanitizer) {}
+  constructor(private revisionService: RevisionService, private serieService: SerieService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.exercice.question = this.exercice.question.split('#').join('\n');
     this.exercice.name = this.exercice.name.split('#').join('\n');
-    this.getImageFile();
+    // this.getImageFile();
 
     this.revisionService.resetFormSub.subscribe((res) => {
       this.questions ? (this.questions.value = '') : '';
     });
+    this.questionCopy = this.questions
+    if (this.exercice['rtl']) {
+      this.questions.map(oneQuestionToBeReversed => {
+        const currentLabel = oneQuestionToBeReversed['label'];
+        oneQuestionToBeReversed['label'] = this.reverseEquationToArabic(currentLabel);
+      });
+    }
     this.initExercice();
 
   }
@@ -71,5 +82,30 @@ export class NumericComponent implements OnInit, OnChanges {
     });
     this.answerChange.emit(correct);
     this.canGoNext.emit(true);
+  }
+
+
+  private reverseEquationToArabic(questionLabel: any) {
+    const ARABIC_NUMBERS = questionLabel.split(/[-+*/=]+/).reverse();
+    const ARABIC_OPERATION = questionLabel.split(/[0-9]/).reverse();
+    let FINAL_ARABIC = '';
+    let counter = 0;
+
+    // MAP AND CONCATENATE
+    ARABIC_OPERATION.map((field: any, index: number) => {
+      if (field === '') {
+        counter++;
+        FINAL_ARABIC += ARABIC_NUMBERS[counter];
+      }
+      else {
+        FINAL_ARABIC += field;
+      }
+    });
+
+    return FINAL_ARABIC;
+  }
+
+  ngOnDestroy() {
+    this.questions = this.questionCopy
   }
 }
