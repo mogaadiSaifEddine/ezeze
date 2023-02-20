@@ -1,55 +1,55 @@
 <div id="tokenDetailsDialog">
-    <h2 mat-dialog-title>Token details</h2>
+    <h2 mat-dialog-title>{{ 'token-details' | translate }}</h2>
 
     <mat-dialog-content class="mat-typography">
         <table>
             <tr>
-                <th>Token</th>
+                <th>{{ 'token' | translate }}</th>
                 <td><span id="truncatedToken">{{tokenDetails.value}}</span></td>
             </tr>
             <tr>
-                <th>Created At</th>
+                <th>{{ 'created-at-0' | translate }}</th>
                 <td>{{tokenDetails.creationDate}}</td>
             </tr>
             <tr>
-                <th>Expires on</th>
+                <th>{{ 'expires-on-0' | translate }}</th>
                 <td>{{tokenDetails.expirationDate}}</td>
             </tr>
             <tr>
-                <th>Users capacity</th>
+                <th>{{ 'users-capacity-0' | translate }}</th>
                 <td>{{tokenDetails.numberUsers}}</td>
             </tr>
             <tr>
-                <th>Attached to account(s)</th>
+                <th>{{ 'attached-to-account-s-0' | translate }}</th>
                 <td>{{tokenDetails.usedUsersNumber}}</td>
             </tr>
         </table>
         <!-- RESPONSIVE LAYOUT -->
         <ul>
             <li>
-                Token
+                {{ 'token' | translate }}
                 <span>{{tokenDetails.value}}</span>
             </li>
             <li>
-                Created At
+                {{ 'created-at-0' | translate }}
                 <span>{{tokenDetails.creationDate}}</span>
             </li>
             <li>
-                Expires on
+                {{ 'expires-on-0' | translate }}
                 <span>{{tokenDetails.expirationDate}}</span>
             </li>
             <li>
-                Users capacity
+                {{ 'users-capacity-0' | translate }}
                 <span>{{tokenDetails.numberUsers}}</span>
             </li>
             <li>
-                Attached to account(s)
+                {{ 'attached-to-account-s-0' | translate }}
                 <span>{{tokenDetails.usedUsersNumber}}</span>
             </li>
         </ul>
     </mat-dialog-content>
 
     <mat-dialog-actions align="end">
-        <button mat-button mat-dialog-close>Close</button>
+        <button mat-button mat-dialog-close>{{ 'common.close' | translate }}</button>
     </mat-dialog-actions>
 </div>
