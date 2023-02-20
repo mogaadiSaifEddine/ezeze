@@ -1,100 +1,49 @@
 <mat-card>
-
-    <header>
-        <div>
-            <a href="https://i.imgur.com/Bwn1Zl9.png" target="_blank" mat-raised-button color="primary">
-                <mat-icon>help</mat-icon>
-            </a>
-            <button (click)="addNewGroupToArray()" mat-raised-button color="accent">
-                <mat-icon>add</mat-icon>
-                New group
-            </button>
-        </div>
-    </header>
-
     <mat-card-content>
-
-
-        <!--   GROUP FORM THAT HAS THE FORM GROUP (senttences, words) -->
+        <!-- ONLY ADD ONE GROUP PER BLOCK INSTEAD OF MULTIPLE ONES -->
         <form [formGroup]="BIG_GROUP_FORM">
-            <div formArrayName="GROUP_ARRAY">
-                <!-- SUB CONTROLS FOR EACH ADDING GROUPS -->
-                <ng-container *ngFor="let FGROUP of GET_FORM_ARRAY.controls; let i = index;">
-
-                    <div class="card mt-1" [formGroupName]="i">
-                        <div class="card-body positoin-relative">
-                            <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" (click)="deleteCurrentGroup(i)"></span>
-                            <!-- CONTROLS FOR ADDING SENTENCE/WORDS GROUP -->
-                            <div class="mt-1 mb-1 p-1">
-                                <button type="button" class="btn btn-outline-primary me-1 btn-sm"><i class="bi bi-plus"></i>Sentence</button>
-                                <button type="button" class="btn btn-outline-warning btn-sm"><i class="bi bi-plus"></i>Words group</button>
-                            </div>
-                            <input type="text" name="something" formControlName="SUB_CONTROL_1">
-                            <input type="text" name="something" formControlName="SUB_CONTROL_2">
-                        </div>
+            <div class="card mt-1">
+                <div class="card-body positoin-relative">
+                    <!-- CONTROLS -->
+                    <div class="mt-1 mb-1 p-1 d-flex flex-row justify-content-start align-items-center">
+                        <button type="button" class="btn btn-outline-primary me-1 btn-sm" (click)="addNewSentenceGroupToArray()">Add sentence / word</button>
                     </div>
 
+                    <!-- BODY -->
 
-                    <!-- <button (click)="deleteGroupFromArray(i)">DELETE CONTROL</button> -->
-                </ng-container>
+                    <div formArrayName="GROUP">
+                        <!-- SENTENCES -->
+                        <ng-container *ngFor="let FGROUP of GET_GROUP_FROM_ARRAY.controls; let i = index;">
 
+                            <!-- VALUE | IS A WORD (if yes, display IS WRONG) | DELETE -->
+                            <div class="input-group mt-1 mb-1" [formGroupName]="i">
+                                <!-- TYPE -->
+                                <div class="input-group-text">
+                                    <input class="form-check-input mt-0" type="checkbox" value="word" [id]="'sentenceType'+i" formControlName="TYPE_CONTROL">
+                                    &nbsp;
+                                    <label [for]="'sentenceType'+i">word</label>
+                                </div>
+
+                                <!-- VALUE -->
+                                <input type="text" formControlName="GROUP_CONTROL" class="form-control border border-primary" style="width: 200px !important;">
+
+                                <!-- STATUS -->
+                                <div class="input-group-text">
+                                    <input class="form-check-input mt-0" formControlName="STATUS_CONTROL" type="checkbox" [value]="false" [id]="'answerIsWrong'+i">
+                                    &nbsp;
+                                    <label [for]="'answerIsWrong'+i">wrong</label>
+                                </div>
+
+                                <!-- DELETE -->
+                                <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteCurrentSentenceFromGroup(i)"><i class="bi bi-trash3"></i></button>
+                            </div>
+                        </ng-container>
+                    </div>
+
+                    <!-- END OF ONE GROUP -->
+                </div>
             </div>
         </form>
-
-
-
-
-
-
-
-
-
-        <!-- ******LEGACY MOTHERFUCKER******** -->
-        <!-- ******
-            <form [formGroup]="paragraphsFormGroup">
-                <div formArrayName="sentencesArray">
-
-                    <div *ngFor="let tempSentenceGroup of getSentencesFormArray.controls; let i = index" [formGroupName]="i" class="mat-elevation-z2 sentceFormGroup">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Sentence</mat-label>
-                            <input type="text" matInput formControlName="sentenceBody" style="width: 420px !important; margin-right: 1rem;">
-                        </mat-form-field>
-                        <button (click)="removeSentenceGroupWithWordsArray(i)" mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
-
-                        <mat-button-toggle-group>
-                            <input type="number" #wordsCount min="2" mat-button-toggle style="width: 100px; font-size: 1.2rem;">
-                            <mat-button-toggle (click)="addNewWordsFormGroupToSentenceArray(tempSentenceGroup.get('wordsArray'), wordsCount)" mat-raised-button color="primary">
-                                <mat-icon>add</mat-icon>
-                            </mat-button-toggle>
-                        </mat-button-toggle-group>
-
-                        <div class="singleWordsGroup" formArrayName="wordsArray">
-                            <span *ngIf="tempSentenceGroup.get('wordsArray')['controls'].length>=1"><strong>(&nbsp;</strong></span>
-
-                            <div *ngFor="let tempWordGroup of tempSentenceGroup.get('wordsArray')['controls']; let i = index" [formGroupName]="i" class="wordsFormGroup">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>word</mat-label>
-                                    <input type="text" matInput formControlName="wordBody">
-                                </mat-form-field>
-                                <mat-checkbox formControlName="isWrong" value=true><em>Wrong</em></mat-checkbox>
-                                <button (click)="removeWordsFormGroupToSentenceArray(tempSentenceGroup.get('wordsArray'), i)" mat-icon-button color="warn">
-                                    <mat-icon>delete_outline</mat-icon>
-                                </button>
-                                <strong *ngIf="!((i+1) ===tempSentenceGroup.get('wordsArray')['controls'].length)">,&nbsp;</strong>
-                            </div>
-
-                            <span *ngIf="tempSentenceGroup.get('wordsArray')['controls'].length>=1"><strong>&nbsp;)</strong></span>
-                            <button (click)="assignWordsToSentence(tempSentenceGroup.get('wordsArray'))">ASSIGN</button>
-                        </div>
-
-                    </div>
-
-                </div>
-            </form>
-        -->
-
-
-
         <!-- END OF MAT CARD -->
     </mat-card-content>
 

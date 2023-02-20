@@ -12,6 +12,9 @@
         border: none;
         background: transparent;
         cursor: crosshair;
+        height: auto;
+        word-wrap: break-word;
+        word-break: break-all;
 
         &:hover {
             color: #383d41;

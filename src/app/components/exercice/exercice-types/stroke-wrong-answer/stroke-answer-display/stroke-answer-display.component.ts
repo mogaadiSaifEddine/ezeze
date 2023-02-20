@@ -1,10 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Exercice } from 'src/app/model/Exercice';
-import { ExerciceBlock } from 'src/app/model/ExerciceBlock';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
 import * as _ from 'lodash';
 import { Renderer2 } from '@angular/core';
-
 
 @Component({
   selector: 'ines-stroke-answer-display',
@@ -30,7 +28,6 @@ export class StrokeAnswerDisplayComponent implements OnInit {
 
   private initExercice() {
     this.exercice.blocks.forEach((block: any) => {
-      console.log(block);
       // SENTENCE BLOCKS
       if (block.exerciceBlockType === ExerciceBlockTypes.ANSWER_TO_STROKE) {
         this.MIRROR_SENTENCES_ARRAY = Array(0);

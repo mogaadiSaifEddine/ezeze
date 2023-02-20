@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import * as _ from 'lodash';
 import { Exercice } from 'src/app/model/Exercice';
 import { ExerciceBlock } from 'src/app/model/ExerciceBlock';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
@@ -18,6 +19,9 @@ export class NumericComponent implements OnInit, OnChanges {
   api = environment.serverApi;
   loading = true;
 
+  questionCopy;
+  exerciceCopy;
+
   @Input() exercice: Exercice;
   @Input() answer: boolean;
   @Output() answerChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -28,15 +32,22 @@ export class NumericComponent implements OnInit, OnChanges {
   constructor(private revisionService: RevisionService, private serieService: SerieService, private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
+    this.exerciceCopy = _.cloneDeep(this.exercice);
     this.exercice.question = this.exercice.question.split('#').join('\n');
     this.exercice.name = this.exercice.name.split('#').join('\n');
-    this.getImageFile();
+    // this.getImageFile();
 
     this.revisionService.resetFormSub.subscribe((res) => {
       this.questions ? (this.questions.value = '') : '';
     });
+    this.questionCopy = this.questions;
+    if (this.exercice['rtl']) {
+      this.questions.map((oneQuestionToBeReversed) => {
+        const currentLabel = oneQuestionToBeReversed['label'];
+        oneQuestionToBeReversed['label'] = this.reverseEquationToArabic(currentLabel);
+      });
+    }
     this.initExercice();
-
   }
   private initExercice() {
     this.answerChange.emit(false);
@@ -71,5 +82,36 @@ export class NumericComponent implements OnInit, OnChanges {
     });
     this.answerChange.emit(correct);
     this.canGoNext.emit(true);
+  }
+
+  private reverseEquationToArabic(questionLabel: any) {
+    const ARABIC_NUMBERS = questionLabel.split(/[-+*/=]+/).reverse();
+
+    const ARABIC_OPERATION = questionLabel
+      .split(/[0-9]/)
+      .reverse()
+      .filter((el) => el !== '');
+    let FINAL_ARABIC = '';
+    let counter = 0;
+    let counter2 = 0;
+    console.log(ARABIC_OPERATION);
+    console.log(ARABIC_NUMBERS);
+
+    // MAP AND CONCATENATE
+    ARABIC_NUMBERS.map((field: any, index: number) => {
+      FINAL_ARABIC += field;
+
+      if (ARABIC_OPERATION.length) FINAL_ARABIC += ARABIC_OPERATION[0];
+      ARABIC_OPERATION.shift();
+    });
+    console.log(FINAL_ARABIC);
+
+    return FINAL_ARABIC;
+  }
+
+  ngOnDestroy() {
+    console.log(this.exerciceCopy);
+    this.exercice = this.exerciceCopy;
+    this.questions = this.questionCopy;
   }
 }
