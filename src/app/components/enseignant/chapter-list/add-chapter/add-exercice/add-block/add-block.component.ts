@@ -142,9 +142,7 @@ export class AddBlockComponent implements OnInit {
     let outputString = '';
     // inputArray.shift();
     // inputArray.pop();
-    console.log(inputArray);
 
-    console.log('lkjsdh s');
     outputString = inputArray.join(' ');
 
     // inputString.patchValue('\u202C' + outputString.trim() + '\u202B');
@@ -153,7 +151,6 @@ export class AddBlockComponent implements OnInit {
   convertWeightString(inputString) {
     const inputArray = inputString.split(' ');
     let outputString = '';
-    console.log('lkjsdh s');
     outputString = inputArray.join(' ');
 
     // inputString.patchValue('\u202B' + outputString.trim() + '\u202C');
@@ -257,8 +254,6 @@ export class AddBlockComponent implements OnInit {
     }
   }
   showFieldsForSeparateText() {
-    // console.log('BLOCK NUMBER BEING RETURNE FROM THE BACKK IS :::: ', this.blockForm.get('exerciceBlockType').value);
-
     if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.TEXT_TO_SEPARATE) {
       this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
       this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
@@ -413,10 +408,8 @@ export class AddBlockComponent implements OnInit {
       blockParams: [this.data.block?.blockParams]
     });
     // this.blockForm.get('label').valueChanges.subscribe((el) => {
-    //   console.log(el);
 
     //   this.x = this.convertWeightString(el);
-    //   console.log(this.x);
     // });
   }
 
