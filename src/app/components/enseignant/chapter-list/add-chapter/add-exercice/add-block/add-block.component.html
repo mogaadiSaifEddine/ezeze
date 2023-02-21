@@ -11,7 +11,7 @@
         {{ 'please-select-any-item' | translate }}
       </mat-error>
     </mat-form-field>
-
+    <!-- <button *ngIf="this.data.exercice_type == ExTypes.NUMERIC && !!data.rtl">Formatter</button> -->
     <mat-form-field *ngIf="fieldData.showLabel" appearance="outline">
       <input formControlName="label" matInput [placeholder]="fieldData.labelHolder" />
     </mat-form-field>
@@ -36,6 +36,9 @@
     <mat-form-field appearance="outline">
       <ngx-mat-file-input placeholder="Attachez  ici le fichier vocal" formControlName="audioFile"> </ngx-mat-file-input>
     </mat-form-field>
+    {{ data.rtl }}
+    {{ data | json }}
+    <span *ngIf="!!data.rtl && this.data.exercice_type == ExTypes.NUMERIC">{{ x }}</span>
     <div class="add-button">
       <button type="submit" class="post-button" (click)="saveBlock()" mat-raised-button>
         {{ 'ajouter-block' | translate }}

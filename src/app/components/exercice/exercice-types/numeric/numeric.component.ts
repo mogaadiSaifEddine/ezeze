@@ -18,6 +18,7 @@ export class NumericComponent implements OnInit, OnChanges {
   questions;
   api = environment.serverApi;
   loading = true;
+  arabicValue = '';
 
   questionCopy;
   exerciceCopy;
@@ -83,10 +84,26 @@ export class NumericComponent implements OnInit, OnChanges {
     this.answerChange.emit(correct);
     this.canGoNext.emit(true);
   }
+  convertWeightString(inputString) {
+    const inputArray = inputString.split(' ');
+    let outputString = '';
 
+    for (let i = 0; i < inputArray.length; i++) {
+      // if (i == inputArray.length - 2) {
+      outputString += inputArray[i] + ' ';
+      // }
+      // else if (i == inputArray.length - 1) {
+      //   // outputString += inputArray[i].replace('+') + ' \u0643\u063A';
+      // } else {
+      //   outputString += inputArray[i] + ' ';
+      // }
+    }
+
+    return '\u202B' + outputString.trim() + '\u202C';
+  }
   private reverseEquationToArabic(questionLabel: any) {
     const ARABIC_NUMBERS = questionLabel.split(/[-+*/=]+/).reverse();
-
+    this.arabicValue = this.convertWeightString(questionLabel);
     const ARABIC_OPERATION = questionLabel
       .split(/[0-9]/)
       .reverse()

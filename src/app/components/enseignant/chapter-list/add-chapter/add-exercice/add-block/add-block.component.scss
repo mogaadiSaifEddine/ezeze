@@ -1,10 +1,12 @@
 :host ::ng-deep mat-dialog-container cdk-dialog-container ng-tns-c334-28 ng-trigger ng-trigger-dialogContainer ng-star-inserted {
   width: 700px;
 }
+
 .container {
   background-color: white;
   padding-top: 3%;
 }
+
 form mat-form-field {
   width: 100%;
   margin-bottom: 3px;
@@ -20,6 +22,7 @@ form mat-form-field {
   justify-content: center;
   margin: 1%;
 }
+
 .post-button {
   padding: 0.6em 3em;
   font-size: 12px;
@@ -45,4 +48,77 @@ form mat-form-field {
 
 .post-button:active {
   transform: translateY(-1px);
+}
+
+.input-sizer {
+
+  input {
+    resize: horizontal;
+    width: 200px;
+  }
+
+  input:active {
+    width: auto;
+  }
+
+  input:focus {
+    min-width: 200px;
+  }
+
+  .custom-input:active {
+    width: auto;
+    resize: horizontal;
+  }
+
+  display: inline-grid;
+  vertical-align: top;
+  align-items: center;
+  position: relative;
+  border: solid 1px var(--cms-grey);
+  margin: 5px;
+  border-radius: 5px;
+  min-width: 100px;
+  background: white;
+  font-family: 'OpenSansRegular';
+
+  &.stacked {
+    padding: .5em;
+    align-items: stretch;
+
+    &::after,
+    input,
+    textarea {
+      grid-area: 2 / 1;
+    }
+  }
+
+  &::after,
+  input,
+  textarea {
+    width: auto;
+    font: inherit;
+    padding: 0.25em;
+    margin: 0;
+    resize: none;
+    background: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    min-width: 200px;
+  }
+
+  &::after {
+    content: attr(data-value) ' ';
+    visibility: hidden;
+    white-space: pre-wrap;
+  }
+
+  &:focus-within {
+
+
+    textarea:focus,
+    input:focus {
+      outline: none;
+    }
+  }
 }

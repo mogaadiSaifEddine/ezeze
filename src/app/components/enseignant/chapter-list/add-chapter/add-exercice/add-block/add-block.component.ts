@@ -5,6 +5,7 @@ import { ExerciceBlock } from 'src/app/model/ExerciceBlock';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
 import { Exercise_Types } from 'src/app/model/Exercice_type';
 import { FieldData } from 'src/app/helpers/block';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-add-block',
@@ -17,9 +18,10 @@ export class AddBlockComponent implements OnInit {
   blockForm: FormGroup;
   readonly EXERCICE_BLOCK_TYPES = ExerciceBlockTypes;
   blockTypes: ExerciceBlockTypes[];
-
+  // convertedstring = '2 كغ  10  + كغ';
   fieldData = new FieldData();
-
+  x = '';
+  readonly ExTypes = Exercise_Types;
   readonly exerciceTypeToTypesKeysMap: Record<Exercise_Types, ExerciceBlockTypes[]> = {
     CORRESPONDANCE: [ExerciceBlockTypes.CORRESPONDANCE_LEFT, ExerciceBlockTypes.CORRESPONDANCE_RIGHT],
     LINK_ARROW: [ExerciceBlockTypes.ARROW_LEFT, ExerciceBlockTypes.ARROW_RIGHT],
@@ -31,11 +33,7 @@ export class AddBlockComponent implements OnInit {
     LIKERT_SCALE: [ExerciceBlockTypes.INPUT_TEXT],
     MULTIPLE_RESPONSE: [ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.QUESTION],
     NUMERIC: [ExerciceBlockTypes.INPUT_NUMBER],
-    WORD_COLORATION: [
-      ExerciceBlockTypes.COLOR,
-      ExerciceBlockTypes.HIGHLIGHT_TEXT,
-      ExerciceBlockTypes.BREAK
-    ],
+    WORD_COLORATION: [ExerciceBlockTypes.COLOR, ExerciceBlockTypes.HIGHLIGHT_TEXT, ExerciceBlockTypes.BREAK],
     SELECT_FROM_LIST: [ExerciceBlockTypes.TEXT, ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.BREAK],
     FILL_EMPTY_FIELDS: [ExerciceBlockTypes.TEXT, ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.BREAK],
     DRAG_DROP: [ExerciceBlockTypes.DRAG_DROP_IMAGE_LIST],
@@ -80,8 +78,8 @@ export class AddBlockComponent implements OnInit {
     SEQUENCING: (): void => {
       this.showFiledsForSequencing();
     },
-    HOTSPOT: (): void => { },
-    DRAG_DROP: (): void => { },
+    HOTSPOT: (): void => {},
+    DRAG_DROP: (): void => {},
     DRAG_WORDS: (): void => {
       this.showFiledsForDragWords();
     },
@@ -125,13 +123,43 @@ export class AddBlockComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { block: ExerciceBlock; exercice_type: string },
+    @Inject(MAT_DIALOG_DATA) public data: { block: ExerciceBlock; exercice_type: string; rtl?: boolean },
     private dialogRef: MatDialogRef<AddBlockComponent>
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
+    this.blockForm
+      .get('label')
+      .valueChanges.pipe(filter(() => !!this.data.rtl))
+      .subscribe((el) => {
+        console.log('aaaaaaaaa');
+
+        if (!this.data.rtl) this.x = this.convertWeightString(el);
+      });
     this.filterTypes();
+  }
+  convertWeightStringInvers(inputString) {
+    const inputArray = inputString.slice(1, -1).split(' ');
+    let outputString = '';
+    // inputArray.shift();
+    // inputArray.pop();
+    console.log(inputArray);
+
+    console.log('lkjsdh s');
+    outputString = inputArray.join(' ');
+
+    // inputString.patchValue('\u202C' + outputString.trim() + '\u202B');
+    return '\u202C' + outputString.trim() + '\u202B';
+  }
+  convertWeightString(inputString) {
+    const inputArray = inputString.split(' ');
+    let outputString = '';
+    console.log('lkjsdh s');
+    outputString = inputArray.join(' ');
+
+    // inputString.patchValue('\u202B' + outputString.trim() + '\u202C');
+    return '\u202B' + outputString.trim() + '\u202C';
   }
   checkFieldsToShow() {
     this.fieldData.resetFieldData();
@@ -375,7 +403,7 @@ export class AddBlockComponent implements OnInit {
   initForm() {
     this.blockForm = this.fb.group({
       exerciceBlockType: [this.block?.exerciceBlockType, [Validators.required]],
-      label: [this.data.block?.label],
+      label: [this.data.block?.label ?? ''],
       correctValue: [this.data.block?.correctValue],
       placeholder: [this.data.block?.placeholder],
       value: [this.data.block?.value],
@@ -386,6 +414,12 @@ export class AddBlockComponent implements OnInit {
       audioFile: [''],
       blockParams: [this.data.block?.blockParams]
     });
+    // this.blockForm.get('label').valueChanges.subscribe((el) => {
+    //   console.log(el);
+
+    //   this.x = this.convertWeightString(el);
+    //   console.log(this.x);
+    // });
   }
 
   filterTypes() {

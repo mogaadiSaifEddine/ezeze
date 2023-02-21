@@ -159,7 +159,8 @@ export class AddExerciceComponent implements OnInit {
         panelClass: 'my-custom-dialog-class',
         data: {
           block: element,
-          exercice_type: this.exerciceForm.get('type').value
+          exercice_type: this.exerciceForm.get('type').value,
+          rtl: this.exerciceForm.get('rtl').value
         }
       })
       .afterClosed()
