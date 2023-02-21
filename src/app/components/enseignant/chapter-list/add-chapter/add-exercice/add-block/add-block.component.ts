@@ -133,9 +133,7 @@ export class AddBlockComponent implements OnInit {
       .get('label')
       .valueChanges.pipe(filter(() => !!this.data.rtl))
       .subscribe((el) => {
-        console.log('aaaaaaaaa');
-
-        if (!this.data.rtl) this.x = this.convertWeightString(el);
+        if (!!this.data.rtl) this.x = this.convertWeightString(el);
       });
     this.filterTypes();
   }
