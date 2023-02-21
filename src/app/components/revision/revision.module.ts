@@ -12,6 +12,8 @@ import { ShowCourseComponent } from './course-reminder/show-course/show-course.c
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 import { ShowConceptMapComponent } from './aquired-content-evaluation/show-concept-map/show-concept-map.component';
 
 import { MainScreenComponent } from './aquired-content-evaluation/main-screen/main-screen.component';
@@ -29,7 +31,7 @@ import { ChapterCardComponent } from './chapter-list/chapter-card/chapter-card.c
 import { SharedModule } from '@coreui/angular';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
-const MatModules = [MatButtonModule, MatCardModule, MatDialogModule, MatIconModule, MatTooltipModule, MatProgressBarModule];
+const MatModules = [MatButtonModule, MatCardModule, MatDialogModule, MatIconModule, MatTooltipModule, MatProgressBarModule,MatProgressSpinnerModule];
 
 @NgModule({
   imports: [RevisionRoutingModule, ExerciceModule, CommonModule, MatModules, TranslateModule, SharedModule, NgxExtendedPdfViewerModule],
@@ -49,4 +51,4 @@ const MatModules = [MatButtonModule, MatCardModule, MatDialogModule, MatIconModu
   ],
   providers: [RevisionService]
 })
-export class RevisionModule {}
+export class RevisionModule { }

@@ -26,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DragSyllablesComponent } from './exercice-types/drag-syllables/drag-syllables.component';
 
 import { CommonModule } from '@angular/common';
@@ -72,7 +73,8 @@ const MaterialModules = [
   DragDropModule,
   MatSelectModule,
   MatButtonModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatProgressSpinnerModule
 ];
 
 import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters.component';
