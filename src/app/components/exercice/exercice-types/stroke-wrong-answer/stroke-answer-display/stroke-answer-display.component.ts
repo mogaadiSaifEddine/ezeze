@@ -66,28 +66,34 @@ export class StrokeAnswerDisplayComponent implements OnInit {
   }
 
   // WORDS LOGIC
-  keepTrackOfFinalResultForWords(action: string, sentenceIndex: number, wordIndex: number) {
+  keepTrackOfFinalResultForWords(action: string, sentenceIndex: number) {
     this.exercice.blocks.map(block => {
-      const WORDS_ARRAY = block.blockParams['sentencesWithWords'].GROUP[sentenceIndex].wordsArray;
-
+      const WORDS_ARRAY = block.blockParams['sentencesWithWords'].GROUP;
+      console.table(WORDS_ARRAY);
       if ((action === 'stroked'))
-        this.MIRROR_SENTENCES_ARRAY.push(WORDS_ARRAY[wordIndex]);
+        this.MIRROR_SENTENCES_ARRAY.push(WORDS_ARRAY[sentenceIndex]);
       else
-        this.MIRROR_SENTENCES_ARRAY = this.MIRROR_SENTENCES_ARRAY.filter(e => e !== WORDS_ARRAY[wordIndex]);
+        this.MIRROR_SENTENCES_ARRAY = this.MIRROR_SENTENCES_ARRAY.filter(e => e !== WORDS_ARRAY[sentenceIndex]);
 
       // The following conditions relies on at least one element being marked as 'wrong' by the teacher
       // otherwise this will always output useless data
-      this.finalBoolean = (this.MIRROR_SENTENCES_ARRAY.filter(e => e.isWrong === false).length === 0) && (this.MIRROR_SENTENCES_ARRAY.filter(e => e.isWrong === true).length >= 1);
+      this.finalBoolean = (this.MIRROR_SENTENCES_ARRAY.filter(e => e.STATUS_CONTROL === true).length >= 1) && (this.MIRROR_SENTENCES_ARRAY.filter(e => e.STATUS_CONTROL !== true).length === 0);
+      console.table(this.MIRROR_SENTENCES_ARRAY);
+      console.log(this.MIRROR_SENTENCES_ARRAY.filter(e => e.STATUS_CONTROL === true));
+      console.log(this.MIRROR_SENTENCES_ARRAY.filter(e => e.STATUS_CONTROL !== true));
+
+      console.log('FINAL BOOLEAN EVALUATED :: ', this.finalBoolean);
+
     })
   }
 
-  toggleStrokeForWords(event: any, index: number, i: number) {
+  toggleStrokeForWords(event: any, index: number) {
     if (event.target.className.includes('strokedSentence')) {
       this.render.removeClass(event.target, "strokedSentence");
-      this.keepTrackOfFinalResultForWords('', index, i);
+      this.keepTrackOfFinalResultForWords('', index);
     } else {
       this.render.addClass(event.target, "strokedSentence");
-      this.keepTrackOfFinalResultForWords('stroked', index, i);
+      this.keepTrackOfFinalResultForWords('stroked', index);
     }
 
     this.answerChange.emit(this.finalBoolean);
