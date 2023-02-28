@@ -69,7 +69,6 @@ export class StrokeAnswerDisplayComponent implements OnInit {
   keepTrackOfFinalResultForWords(action: string, sentenceIndex: number) {
     this.exercice.blocks.map(block => {
       const WORDS_ARRAY = block.blockParams['sentencesWithWords'].GROUP;
-      console.table(WORDS_ARRAY);
       if ((action === 'stroked'))
         this.MIRROR_SENTENCES_ARRAY.push(WORDS_ARRAY[sentenceIndex]);
       else
@@ -78,12 +77,6 @@ export class StrokeAnswerDisplayComponent implements OnInit {
       // The following conditions relies on at least one element being marked as 'wrong' by the teacher
       // otherwise this will always output useless data
       this.finalBoolean = (this.MIRROR_SENTENCES_ARRAY.filter(e => e.STATUS_CONTROL === true).length >= 1) && (this.MIRROR_SENTENCES_ARRAY.filter(e => e.STATUS_CONTROL !== true).length === 0);
-      console.table(this.MIRROR_SENTENCES_ARRAY);
-      console.log(this.MIRROR_SENTENCES_ARRAY.filter(e => e.STATUS_CONTROL === true));
-      console.log(this.MIRROR_SENTENCES_ARRAY.filter(e => e.STATUS_CONTROL !== true));
-
-      console.log('FINAL BOOLEAN EVALUATED :: ', this.finalBoolean);
-
     })
   }
 
