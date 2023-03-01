@@ -8,21 +8,23 @@
     <div class="question-container">
         <div [innerHTML]="exercice?.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></div><br>
     </div>
-    <mat-card-content class="equationGrid" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
-        <section *ngFor="let block of exercice.blocks">
+    <mat-card-content [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+        <ng-container *ngFor="let block of exercice.blocks">
             <!-- sentences with words -->
             <p class="d-flex flex-row  SENTENCESWITHWORDS" *ngIf="block.blockParams['sentencesWithWords']?.GROUP.length>0">
                 <span *ngFor="let SENTENCE of block.blockParams['sentencesWithWords'].GROUP; let index=index;" style="display: flex; align-items: center;">
                     <!-- DISPLAY THIS ELEMNT IF IT IS A SENTENCE -->
                     <ng-container *ngIf="!SENTENCE.TYPE_CONTROL">{{SENTENCE.GROUP_CONTROL}}</ng-container>
+
                     <!-- DISPLAY THIS ELEMNT IF IT IS A WORD -->
-                    <ng-container *ngIf="(block.blockParams['sentencesWithWords'].GROUP[index-1]?.TYPE_CONTROL!=true)"><strong>&nbsp;(&nbsp;</strong></ng-container>
-                    <input type="text" [value]="SENTENCE.GROUP_CONTROL" (click)="toggleStrokeForWords($event, index)" readonly style="max-width: 100px !important; width: fit-content;"
-                        *ngIf="SENTENCE.TYPE_CONTROL ===true" />
+                    <ng-container
+                        *ngIf="(block.blockParams['sentencesWithWords'].GROUP[index-1]?.TYPE_CONTROL!=true) && (block.blockParams['sentencesWithWords'].GROUP[index]?.TYPE_CONTROL===true)"><strong>&nbsp;(&nbsp;</strong></ng-container>
+                    <input type="text" [value]="SENTENCE.GROUP_CONTROL" (click)="toggleStrokeForWords($event, index)" readonly class="wordInput" *ngIf="SENTENCE.TYPE_CONTROL ===true" />
                     <ng-container *ngIf="block.blockParams['sentencesWithWords'].GROUP[index+1]?.TYPE_CONTROL===true"><strong>,&nbsp;</strong></ng-container>
-                    <ng-container *ngIf="block.blockParams['sentencesWithWords'].GROUP[index+1]?.TYPE_CONTROL!==true"><strong>&nbsp;)&nbsp;</strong></ng-container>
+                    <ng-container
+                        *ngIf="block.blockParams['sentencesWithWords'].GROUP[index+1]?.TYPE_CONTROL!==true && (block.blockParams['sentencesWithWords'].GROUP[index]?.TYPE_CONTROL===true)"><strong>&nbsp;)&nbsp;</strong></ng-container>
                 </span>
             </p>
-        </section>
+        </ng-container>
     </mat-card-content>
 </mat-card>
