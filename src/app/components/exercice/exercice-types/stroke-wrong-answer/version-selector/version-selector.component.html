@@ -5,15 +5,6 @@
     </header>
 
     <mat-card-content>
-        <!-- <div class="radioOptins" (change)="handleUserTypeSelection($event)">
-            <label *ngFor="let varation of exerciseVarations;" for={{varation.type}}>
-                <input type="radio" name='exerciseVaration' value={{varation.type}} id={{varation.type}} />
-                <div class="contentContainer">
-                    <img src={{varation.thumbnail}} (load)="'....'" alt="thumbnail">
-                </div>
-            </label>
-        </div> -->
-        <!-- BOOTSTRAP ONE -->
         <div class="btn-group" role="group" (change)="handleUserTypeSelection($event)">
             <ng-container *ngFor="let varation of exerciseVarations;">
                 <label [htmlFor]="varation.type" class="me-1">

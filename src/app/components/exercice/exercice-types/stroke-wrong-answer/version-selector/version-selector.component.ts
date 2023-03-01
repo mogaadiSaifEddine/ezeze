@@ -17,10 +17,6 @@ export class VersionSelectorComponent implements OnInit {
       thumbnail: "https://i.imgur.com/Gk00wl2.png"
     },
     {
-      type: "word",
-      thumbnail: "https://i.imgur.com/vq0VjfS.png"
-    },
-    {
       type: "image",
       thumbnail: "https://i.imgur.com/5BVzB77.png"
     }
@@ -46,8 +42,6 @@ export class VersionSelectorComponent implements OnInit {
     let BLOCK_CREATOR_ACORDING_TO_TYPE: any;
     if (this.CHOSEN_VARATION === "sentence")
       BLOCK_CREATOR_ACORDING_TO_TYPE = SentenceBuilderComponent;
-    if (this.CHOSEN_VARATION === "word")
-      BLOCK_CREATOR_ACORDING_TO_TYPE = WordBuilderComponent;
     if (this.CHOSEN_VARATION === "image")
       BLOCK_CREATOR_ACORDING_TO_TYPE = ShapesGroupsBuilderComponent;
 
