@@ -35,11 +35,9 @@ export class ModuleCardComponent implements OnInit {
   ];
   iconToDislay = '';
 
-  constructor(private router: Router, private chapterService: ChapitreService) {}
+  constructor(private router: Router, private chapterService: ChapitreService) { }
 
   ngOnInit(): void {
-    console.log(this.matiere);
-
     this.iconToDislay = this.cardIcons.filter((ci) => ci.name === this.matiere.name.trim())[0].url;
   }
 
