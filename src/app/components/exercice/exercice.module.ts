@@ -58,7 +58,7 @@ import { GeneralTablesStudentDisplayComponent } from './exercice-types/tables/ge
 import { SentenceBuilderComponent } from './exercice-types/stroke-wrong-answer/stroke-sentence/sentence-builder/sentence-builder.component';
 import { VersionSelectorComponent } from './exercice-types/stroke-wrong-answer/version-selector/version-selector.component';
 import { StrokeAnswerDisplayComponent } from './exercice-types/stroke-wrong-answer/stroke-answer-display/stroke-answer-display.component';
-import { WordBuilderComponent } from './exercice-types/stroke-wrong-answer/stroke-sentence/word-builder/word-builder.component';
+import { WordBuilderComponent } from './exercice-types/stroke-wrong-answer/stroke-word/word-builder/word-builder.component';
 import { ShapesGroupsBuilderComponent } from './exercice-types/stroke-wrong-answer/stroke-sentence/shapes-groups-builder/shapes-groups-builder.component';
 import { TextUnderImageBuilderComponent } from './exercice-types/tables/text-under-image-builder/text-under-image-builder.component';
 const MaterialModules = [
@@ -86,6 +86,7 @@ import { ParagraphDisplayComponent } from './exercice-types/separate-text/paragr
 import { ExerciseNotFoundComponent } from './exercise-not-found/exercise-not-found.component';
 // DIRECTIVES
 import { ResizeInputDirective } from 'src/app/directives/resize-input.directive';
+import { WordDisplayComponent } from './exercice-types/stroke-wrong-answer/stroke-word/word-display/word-display.component';
 @NgModule({
   imports: [
     MaterialModules,
@@ -143,7 +144,8 @@ import { ResizeInputDirective } from 'src/app/directives/resize-input.directive'
     ParagraphBuilderComponent,
     ParagraphDisplayComponent,
     ExerciseNotFoundComponent,
-    ResizeInputDirective
+    ResizeInputDirective,
+    WordDisplayComponent
   ],
   providers: [],
   exports: [
@@ -179,7 +181,9 @@ import { ResizeInputDirective } from 'src/app/directives/resize-input.directive'
     FillLettersComponent,
     ParagraphDisplayComponent,
     CompositionTableStudentDisplayComponent,
-    ResizeInputDirective
+    ResizeInputDirective,
+    WordDisplayComponent
+
   ]
 })
 export class ExerciceModule { }

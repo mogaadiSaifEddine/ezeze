@@ -1,0 +1,25 @@
+.SENTENCESWITHWORDS {
+    width: 100%;
+
+    .strokedSentence {
+        text-decoration: line-through;
+        color: #721c24;
+        background-color: #f8d7da;
+    }
+
+    input[type="text"] {
+        display: block;
+        outline: none;
+        border: none;
+        background: transparent;
+        cursor: crosshair;
+        height: auto;
+        word-wrap: break-word;
+        word-break: break-all;
+
+        &:hover {
+            color: #383d41;
+            background-color: #e2e3e5;
+        }
+    }
+}

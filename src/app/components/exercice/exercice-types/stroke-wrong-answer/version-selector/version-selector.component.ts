@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 // DIALOGS
 import { SentenceBuilderComponent } from '../stroke-sentence/sentence-builder/sentence-builder.component';
-import { WordBuilderComponent } from '../stroke-sentence/word-builder/word-builder.component';
+import { WordBuilderComponent } from '../stroke-word/word-builder/word-builder.component';
 import { ShapesGroupsBuilderComponent } from '../stroke-sentence/shapes-groups-builder/shapes-groups-builder.component';
 @Component({
   selector: 'ines-version-selector',

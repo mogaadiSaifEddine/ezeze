@@ -16,6 +16,7 @@ import { VersionSelectorComponent } from 'src/app/components/exercice/exercice-t
 import { TextUnderImageBuilderComponent } from 'src/app/components/exercice/exercice-types/tables/text-under-image-builder/text-under-image-builder.component';
 import { CompositionTableBuilderComponent } from 'src/app/components/exercice/exercice-types/tables/composition-table/composition-table-builder/composition-table-builder.component';
 import { ParagraphBuilderComponent } from 'src/app/components/exercice/exercice-types/separate-text/paragraph-builder/paragraph-builder.component';
+import { WordBuilderComponent } from 'src/app/components/exercice/exercice-types/stroke-wrong-answer/stroke-word/word-builder/word-builder.component';
 import * as _ from 'lodash';
 @Component({
   selector: 'app-add-exercice',
@@ -34,7 +35,7 @@ export class AddExerciceComponent implements OnInit {
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<AddExerciceComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { exercice: Exercice; serieId: number; chapterId: number }
-  ) {}
+  ) { }
   hotspotsList = [];
   correctAnswerMode = false;
   displayedColumns: string[] = ['ordre', 'type', 'label', 'action'];
@@ -146,6 +147,7 @@ export class AddExerciceComponent implements OnInit {
     if (element.toString() === 'VERTICAL_EQUATION') BLOCK_FORM_ACCORDING_TO_TYPE = InitEquationFormComponent;
     else if (element.toString() === 'GENERAL_TABLES') BLOCK_FORM_ACCORDING_TO_TYPE = GeneralTablesBuilderComponent;
     else if (element.toString() === 'STROKE_WRONG_ANSWER') BLOCK_FORM_ACCORDING_TO_TYPE = VersionSelectorComponent;
+    else if (element.toString() === 'STROKE_WRONG_WORD') BLOCK_FORM_ACCORDING_TO_TYPE = WordBuilderComponent;
     else if (element.toString() === 'TEXT_UNDER_IMAGE') BLOCK_FORM_ACCORDING_TO_TYPE = TextUnderImageBuilderComponent;
     else if (element.toString() === 'COMPOSITION_TABLE') BLOCK_FORM_ACCORDING_TO_TYPE = CompositionTableBuilderComponent;
     else if (element.toString() === 'SEPARATE_TEXT') BLOCK_FORM_ACCORDING_TO_TYPE = ParagraphBuilderComponent;
@@ -214,7 +216,7 @@ export class AddExerciceComponent implements OnInit {
               });
           });
           if (this.exerciceForm.get('file').value !== null)
-            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => {});
+            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => { });
           this.dialogRef.close(true);
         });
       } else {
@@ -235,7 +237,7 @@ export class AddExerciceComponent implements OnInit {
               });
           });
           if (this.exerciceForm.get('file').value !== null)
-            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => {});
+            (await this.serieService.uploadFile(this.exerciceForm.get('file').value, res.ex_id)).subscribe((res) => { });
           this.dialogRef.close(true);
         });
       }

@@ -17,21 +17,6 @@
                     [value]="SENTENCE.sentenceBody" class="stroked" inesResizeInput />
             </div>
 
-            <!-- sentences with words -->
-            <p class="d-flex flex-row  SENTENCESWITHWORDS" *ngIf="block.blockParams['sentencesWithWords']?.GROUP.length>0">
-                <span *ngFor="let SENTENCE of block.blockParams['sentencesWithWords'].GROUP; let index=index;" style="display: flex; align-items: center;">
-                    <!-- DISPLAY THIS ELEMNT IF IT IS A SENTENCE -->
-                    <ng-container *ngIf="!SENTENCE.TYPE_CONTROL">{{SENTENCE.GROUP_CONTROL}}</ng-container>
-                    <!-- DISPLAY THIS ELEMNT IF IT IS A WORD -->
-                    <ng-container *ngIf="(block.blockParams['sentencesWithWords'].GROUP[index-1]?.TYPE_CONTROL!=true)"><strong>&nbsp;(&nbsp;</strong></ng-container>
-                    <input type="text" [value]="SENTENCE.GROUP_CONTROL" (click)="toggleStrokeForWords($event, index)" readonly style="max-width: 100px !important; width: fit-content;"
-                        *ngIf="SENTENCE.TYPE_CONTROL ===true" />
-                    <ng-container *ngIf="block.blockParams['sentencesWithWords'].GROUP[index+1]?.TYPE_CONTROL===true"><strong>,&nbsp;</strong></ng-container>
-                    <ng-container *ngIf="block.blockParams['sentencesWithWords'].GROUP[index+1]?.TYPE_CONTROL!==true"><strong>&nbsp;)&nbsp;</strong></ng-container>
-                </span>
-            </p>
-
-
             <!-- shapes and images -->
             <div class="IMAGES-GRID" *ngIf="block.blockParams['shapesAndImages']?.sentencesArray.length>0">
                 <img *ngFor="let SENTENCE of block.blockParams['shapesAndImages'].sentencesArray; let index=index" [src]="SENTENCE.sentenceBody" class="stroked"

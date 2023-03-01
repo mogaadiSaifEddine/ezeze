@@ -14,6 +14,8 @@
 
 <ines-stroke-answer-display *ngIf="data.currentExercise.type === TYPES.STROKE_WRONG_ANSWER" [exercice]="data.currentExercise"></ines-stroke-answer-display>
 
+<ines-word-display *ngIf="data.currentExercise.type === TYPES.STROKE_WRONG_ANSWER" [exercice]="data.currentExercise"></ines-word-display>
+
 <ines-equation-display *ngIf="data.currentExercise.type === TYPES.VERTICAL_EQUATION" [exercice]="data.currentExercise"></ines-equation-display>
 
 <ines-paragraph-display *ngIf="data.currentExercise.type === TYPES.SEPARATE_TEXT" [exercice]="data.currentExercise"></ines-paragraph-display>
@@ -44,6 +46,6 @@
 
 <app-hotspot *ngIf="data.currentExercise.type === TYPES.HOTSPOT" [exercice]="data.currentExercise"></app-hotspot>
 
-<app-drag-words *ngIf="data.currentExercise.type === TYPES.DRAG_WORDS"  [exercice]="data.currentExercise"></app-drag-words>
+<app-drag-words *ngIf="data.currentExercise.type === TYPES.DRAG_WORDS" [exercice]="data.currentExercise"></app-drag-words>
 
-<ines-fill-letters *ngIf="data.currentExercise.type === TYPES.FILL_LETTERS"  [exercice]="data.currentExercise"></ines-fill-letters>
+<ines-fill-letters *ngIf="data.currentExercise.type === TYPES.FILL_LETTERS" [exercice]="data.currentExercise"></ines-fill-letters>
