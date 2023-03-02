@@ -20,7 +20,7 @@ export class ColorTheTextComponent implements OnInit, OnChanges {
   correctValue = [];
   colors: ExerciceBlock[] = [];
   ChosenColor: string;
-  constructor() {}
+  constructor() { }
 
   chooseColor(color: string) {
     this.ChosenColor = color;
@@ -36,7 +36,7 @@ export class ColorTheTextComponent implements OnInit, OnChanges {
     this.colors = [];
     this.exercice.blocks.forEach((block) => {
       if (block.exerciceBlockType === ExerciceBlockTypes.HIGHLIGHT_TEXT || block.exerciceBlockType === ExerciceBlockTypes.BREAK) {
-        if (block.exerciceBlockType === ExerciceBlockTypes.BREAK) 
+        if (block.exerciceBlockType === ExerciceBlockTypes.BREAK)
           this.textToHighlight.push('br');
         else
           block.label.split(' ').forEach((word: string) => {
@@ -45,8 +45,6 @@ export class ColorTheTextComponent implements OnInit, OnChanges {
       } else if (block.exerciceBlockType === ExerciceBlockTypes.COLOR) {
         this.colors.push(block);
       } else {
-
-
         this.correctValue.push(JSON.parse(block.correctValue));
       }
     });

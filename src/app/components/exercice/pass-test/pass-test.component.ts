@@ -37,12 +37,20 @@ export class PassTestComponent implements OnInit {
       (res) => {
         this.currentExercise = this.evaluationContent.exercices.find((ex) => ex.ex_id === res.id) || this.evaluationContent.exercices[0];
         this.loading = false;
+        this.formatGeneralQuestion();
       },
       (error) => {
         this.currentExercise = this.evaluationContent.exercices[0];
         this.loading = false;
+        this.formatGeneralQuestion();
       }
     );
+  }
+
+  private formatGeneralQuestion() {
+    const searchRegExp = /\W*(@BREAK)\W*/g;
+    const CONTENT = this.currentExercise.name.replace(searchRegExp, "<br>");
+    this.currentExercise.name = CONTENT;
   }
 
   nextQuestion(action: string) {
