@@ -40,8 +40,6 @@ export class CorrespondingArrowComponent implements OnInit {
         this.arrow_right.push(block);
       }
     });
-
-    console.log(this.exercice);
   }
 
   listenToClick(x, direction: string): void {

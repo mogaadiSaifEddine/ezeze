@@ -201,7 +201,6 @@ export class AddExerciceComponent implements OnInit {
         this.serieService.updateExercice(exercice, this.data.exercice.ex_id).subscribe(async (res: Exercice) => {
           exercice.blocks.forEach((element, index) => {
             let files = [];
-            console.log(files);
 
             if (element.imageFile) {
               files.push(element.imageFile);
@@ -211,8 +210,6 @@ export class AddExerciceComponent implements OnInit {
             }
             if (files.length)
               this.serieService.addExerciceBlockFile(files, Number(res.blocks[index].exercice_Block_Id)).subscribe((resFileBlock) => {
-                console.log(resFileBlock);
-                console.log(files);
               });
           });
           if (this.exerciceForm.get('file').value !== null)
@@ -232,8 +229,6 @@ export class AddExerciceComponent implements OnInit {
             }
             if (files.length)
               this.serieService.addExerciceBlockFile(files, Number(res.blocks[index].exercice_Block_Id)).subscribe((resFileBlock) => {
-                console.log(resFileBlock);
-                console.log(files);
               });
           });
           if (this.exerciceForm.get('file').value !== null)
@@ -274,7 +269,6 @@ export class AddExerciceComponent implements OnInit {
     let i = 0;
     this.wordsSyllablesForm.value.words.forEach((word, index) => {
       let localWord = '';
-      console.log('WORD', word.word);
       word.word.forEach((syllable) => {
         localWord += syllable.syllable + '/';
       });
@@ -372,9 +366,5 @@ export class AddExerciceComponent implements OnInit {
           this.selectedExercice = exercice;
         });
     }
-  }
-
-  test() {
-    console.log(this.wordsSyllablesForm.value);
   }
 }

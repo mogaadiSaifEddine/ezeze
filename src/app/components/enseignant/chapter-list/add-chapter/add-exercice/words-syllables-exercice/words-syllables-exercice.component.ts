@@ -18,7 +18,6 @@ export class WordsSyllablesExerciceInputComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-    console.log(this.defaultForm)
     if(this.defaultForm){
       this.setDefaultForm();
       this.removeWord(this.wordsForm.value.words.length-1)
@@ -38,7 +37,6 @@ export class WordsSyllablesExerciceInputComponent implements OnInit {
 
     this.wordsForm.valueChanges.subscribe(res=>{
       this.wordsSyllablesFormChange.emit(this.wordsForm);
-      console.log(res)
     })
   }
   setDefaultForm(){
@@ -91,18 +89,11 @@ export class WordsSyllablesExerciceInputComponent implements OnInit {
   removeWord(i:number) {
     this.words.removeAt(i);
   }
-  onSubmit() {
-    console.log(this.wordsForm.value);
-  }
   get words() : FormArray {
     return this.wordsForm.get("words") as FormArray
   }
   addWord() {
     this.words.push(new FormControl(''));
-  }
-
-  test(){
-    console.log(this.wordsForm.value)
   }
 
 }

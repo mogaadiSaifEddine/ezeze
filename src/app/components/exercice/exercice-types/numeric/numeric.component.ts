@@ -94,8 +94,6 @@ export class NumericComponent implements OnInit, OnChanges {
     let FINAL_ARABIC = '';
     let counter = 0;
     let counter2 = 0;
-    console.log(ARABIC_OPERATION);
-    console.log(ARABIC_NUMBERS);
 
     // MAP AND CONCATENATE
     ARABIC_NUMBERS.map((field: any, index: number) => {
@@ -104,13 +102,10 @@ export class NumericComponent implements OnInit, OnChanges {
       if (ARABIC_OPERATION.length) FINAL_ARABIC += ARABIC_OPERATION[0];
       ARABIC_OPERATION.shift();
     });
-    console.log(FINAL_ARABIC);
-
     return FINAL_ARABIC;
   }
 
   ngOnDestroy() {
-    console.log(this.exerciceCopy);
     this.exercice = this.exerciceCopy;
     this.questions = this.questionCopy;
   }

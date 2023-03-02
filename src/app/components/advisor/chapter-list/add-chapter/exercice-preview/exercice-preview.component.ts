@@ -9,11 +9,10 @@ import { Exercise_Types } from 'src/app/model/Exercice_type';
   styleUrls: ['./exercice-preview.component.scss']
 })
 export class ExercicePreviewComponent implements OnInit {
-  
+
   readonly TYPES = Exercise_Types;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {currentExercise:Exercice}){}
-  ngOnInit(){
-    console.log("DAAAAATTA",this.data.currentExercise)
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { currentExercise: Exercice }) { }
+  ngOnInit() {
   }
 }

@@ -18,20 +18,19 @@ export class DragSyllablesComponent implements OnInit {
   @Output() canGoNext: EventEmitter<boolean> = new EventEmitter<boolean>();
   correspandance_left: ExerciceBlock[] = [];
   correspandance_right: ExerciceBlock[] = [];
-  wordsList=[]
+  wordsList = []
 
-  constructor(private revisionService: RevisionService) {}
+  constructor(private revisionService: RevisionService) { }
 
   ngOnInit(): void {
-    this.exercice.blocks.map(block=>{
+    this.exercice.blocks.map(block => {
       block.blockFileList = block.correctValue.split('/')
-      block.blockFileList=block.blockFileList.splice(0,block.blockFileList.length-1)
+      block.blockFileList = block.blockFileList.splice(0, block.blockFileList.length - 1)
       this.shuffle(block.blockFileList)
     })
-    
-    this.wordsList =this.exercice.blocks
-    console.log("EXERCICE",this.exercice)
-    
+
+    this.wordsList = this.exercice.blocks
+
     this.exercice.question = this.exercice.question.split('#').join('\n');
     this.exercice.name = this.exercice.name.split('#').join('\n');
 
@@ -65,18 +64,14 @@ export class DragSyllablesComponent implements OnInit {
   //   this.canGoNext.emit(true);
   // }
 
-  drop(event: CdkDragDrop<string[]>,word) {
-    console.log(event)
+  drop(event: CdkDragDrop<string[]>, word) {
     moveItemInArray(word, event.previousIndex, event.currentIndex);
     this.checkCorrectValues();
-
-    console.log(word)
-    console.log(this.wordsList)
   }
   checkCorrectValues() {
     let allCorrect = true;
     this.exercice.blocks.forEach((block) => {
-      if (block.blockFileList.join('/')+'/' != block.correctValue) {
+      if (block.blockFileList.join('/') + '/' != block.correctValue) {
         allCorrect = false;
       }
     });

@@ -242,8 +242,6 @@ export class AddBlockComponent implements OnInit {
     }
   }
   showFieldsForSeparateText() {
-    // console.log('BLOCK NUMBER BEING RETURNE FROM THE BACKK IS :::: ', this.blockForm.get('exerciceBlockType').value);
-
     if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.TEXT_TO_SEPARATE) {
       this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
       this.fieldData.showCorrectValue = false; // show to teacher and test to get the score

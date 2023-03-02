@@ -17,36 +17,32 @@ export class SerieCardComponent implements OnInit {
   @Input() serie: any;
   @Input() chapter_id: number;
   @Input() serie_id: number;
-  @Input() chapter:any;
-  @Output() changedChapter:EventEmitter<boolean>=new EventEmitter<boolean>();
+  @Input() chapter: any;
+  @Output() changedChapter: EventEmitter<boolean> = new EventEmitter<boolean>();
   displayedColumns: string[] = ['ordre', 'exercice', 'type', 'action'];
-  constructor(public dialog: MatDialog, private serieService: SerieService,private chapterService:ChapitreService) {}
+  constructor(public dialog: MatDialog, private serieService: SerieService, private chapterService: ChapitreService) { }
   dataSource: any;
 
   ngOnInit(): void {
-    this.dataSource =new MatTableDataSource<any>(this.serie.filter(serie=>!serie.valid)) ;
-    console.log("Chapter",this.chapter)
+    this.dataSource = new MatTableDataSource<any>(this.serie.filter(serie => !serie.valid));
   }
 
   closeDialog() {
     this.dialog.closeAll();
   }
 
-  validateExercice(element){
-    console.log(element);
-    element.valid=true;
-    this.serieService.updateExercice(element,element.ex_id).subscribe(res=>{
-      let index = this.dataSource.data.findIndex(element=>element===element);
-      this.dataSource.data.splice(index,1);
-    
-      console.log(this.dataSource.data)
-      this.dataSource =new MatTableDataSource<any>(this.dataSource.data) ;
+  validateExercice(element) {
+    element.valid = true;
+    this.serieService.updateExercice(element, element.ex_id).subscribe(res => {
+      let index = this.dataSource.data.findIndex(element => element === element);
+      this.dataSource.data.splice(index, 1);
+      this.dataSource = new MatTableDataSource<any>(this.dataSource.data);
       this.changedChapter.emit(true);
     })
 
   }
-  
-  reject(element){
+
+  reject(element) {
     this.dialog.open(CommentRejectionComponent, {
       width: '70%',
       maxWidth: '70%',
@@ -60,17 +56,15 @@ export class SerieCardComponent implements OnInit {
       data: {
         currentExercise: element
       }
-    }).afterClosed().subscribe(res=>{
-      if(res){
+    }).afterClosed().subscribe(res => {
+      if (res) {
         element.
-        this.serieService.updateExercice(element,element.ex_id).subscribe(res=>{
-          let index = this.dataSource.data.findIndex(element=>element===element);
-          this.dataSource.data.splice(index,1);
-        
-          console.log(this.dataSource.data)
-          this.dataSource =new MatTableDataSource<any>(this.dataSource.data) ;
-          this.changedChapter.emit(true);
-        })
+          this.serieService.updateExercice(element, element.ex_id).subscribe(res => {
+            let index = this.dataSource.data.findIndex(element => element === element);
+            this.dataSource.data.splice(index, 1);
+            this.dataSource = new MatTableDataSource<any>(this.dataSource.data);
+            this.changedChapter.emit(true);
+          })
       }
     });
 
@@ -84,7 +78,7 @@ export class SerieCardComponent implements OnInit {
     });
   }
 
-  openPreview(element){
+  openPreview(element) {
     this.dialog.open(ExercicePreviewComponent, {
       width: '70%',
       maxWidth: '70%',
