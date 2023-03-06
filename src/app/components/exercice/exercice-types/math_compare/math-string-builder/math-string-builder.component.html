@@ -1,1 +1,20 @@
-<p>math-string-builder works!</p>
+<section id="container">
+    <h1 mat-dialog-title>Create elements to compare</h1>
+    <div mat-dialog-content>
+        <h3>What to display</h3>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i class="bi bi-eye"></i></span>
+            <input type="text" class="form-control" placeholder="Input numbers" #separatorsInput>
+        </div>
+
+        <h3>Correct values</h3>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i class="bi bi-check-all"></i></span>
+            <input type="text" class="form-control" placeholder="Input numbers" #separatorsInput>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-flat-button class="col mt-2">Back</button>
+        <button mat-flat-button color="primary" class="col mt-2" (click)="save()">Save</button>
+    </div>
+</section>
