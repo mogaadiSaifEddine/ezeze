@@ -49,3 +49,5 @@
 <app-drag-words *ngIf="data.currentExercise.type === TYPES.DRAG_WORDS" [exercice]="data.currentExercise"></app-drag-words>
 
 <ines-fill-letters *ngIf="data.currentExercise.type === TYPES.FILL_LETTERS" [exercice]="data.currentExercise"></ines-fill-letters>
+
+<ines-math-string-display *ngIf="data.currentExercise.type === TYPES.MATH_COMPARE" [exercice]="data.currentExercise"></ines-math-string-display>

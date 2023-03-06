@@ -186,7 +186,8 @@ import { MathStringDisplayComponent } from './exercice-types/math_compare/math-s
     ParagraphDisplayComponent,
     CompositionTableStudentDisplayComponent,
     ResizeInputDirective,
-    WordDisplayComponent
+    WordDisplayComponent,
+    MathStringDisplayComponent
 
   ]
 })
