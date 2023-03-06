@@ -1,17 +1,19 @@
 <section id="container">
     <h1 mat-dialog-title>Create elements to compare</h1>
     <div mat-dialog-content>
-        <h3>What to display</h3>
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1"><i class="bi bi-eye"></i></span>
-            <input type="text" class="form-control" placeholder="Input numbers" #separatorsInput>
-        </div>
+        <form [formGroup]="mathForm">
+            <h3>What to display</h3>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-eye"></i></span>
+                <input type="text" class="form-control" placeholder="Input numbers" formControlName='numbers'>
+            </div>
 
-        <h3>Correct values</h3>
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1"><i class="bi bi-check-all"></i></span>
-            <input type="text" class="form-control" placeholder="Input numbers" #separatorsInput>
-        </div>
+            <h3>Correct values</h3>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-check-all"></i></span>
+                <input type="text" class="form-control" placeholder="Input correct string" formControlName='correctString'>
+            </div>
+        </form>
     </div>
     <div mat-dialog-actions>
         <button mat-flat-button class="col mt-2">Back</button>
