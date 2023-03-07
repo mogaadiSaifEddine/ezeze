@@ -55,7 +55,8 @@ export class AddBlockComponent implements OnInit {
     STROKE_WRONG_ANSWER: [ExerciceBlockTypes.ANSWER_TO_STROKE],
     [Exercise_Types.COMPOSITION_TABLE]: [],
     SEPARATE_TEXT: [ExerciceBlockTypes.TEXT_TO_SEPARATE],
-    STROKE_WRONG_WORD: [ExerciceBlockTypes.WORD_TO_STROKE]
+    STROKE_WRONG_WORD: [ExerciceBlockTypes.WORD_TO_STROKE],
+    MATH_COMPARE: [ExerciceBlockTypes.MATH_STRING],
   };
   readonly showFieldsFor: Record<Exercise_Types, () => void> = {
     LIKERT_SCALE: () => this.showFieldsForLikertScale(),
@@ -98,6 +99,7 @@ export class AddBlockComponent implements OnInit {
     STROKE_WRONG_ANSWER: () => this.showFieldsForStrokeTheWrongAnswer(),
     STROKE_WRONG_WORD: () => this.showFieldsForStrokeTheWrongWord(),
     SEPARATE_TEXT: () => this.showFieldsForSeparateText(),
+    MATH_COMPARE: () => this.showFieldsForMathComapre(),
     LINK_ARROW: (): void => {
       this.showFiledsForLinkArrow();
     },
@@ -243,6 +245,15 @@ export class AddBlockComponent implements OnInit {
   }
   showFieldsForSeparateText() {
     if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.TEXT_TO_SEPARATE) {
+      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
+      this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
+      this.fieldData.showPlaceholder = false;
+      this.fieldData.showValue = true;
+      this.fieldData;
+    }
+  }
+  showFieldsForMathComapre() {
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.MATH_STRING) {
       this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
       this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
       this.fieldData.showPlaceholder = false;

@@ -87,6 +87,8 @@ import { ExerciseNotFoundComponent } from './exercise-not-found/exercise-not-fou
 // DIRECTIVES
 import { ResizeInputDirective } from 'src/app/directives/resize-input.directive';
 import { WordDisplayComponent } from './exercice-types/stroke-wrong-answer/stroke-word/word-display/word-display.component';
+import { MathStringBuilderComponent } from './exercice-types/math_compare/math-string-builder/math-string-builder.component';
+import { MathStringDisplayComponent } from './exercice-types/math_compare/math-string-display/math-string-display.component';
 @NgModule({
   imports: [
     MaterialModules,
@@ -145,7 +147,9 @@ import { WordDisplayComponent } from './exercice-types/stroke-wrong-answer/strok
     ParagraphDisplayComponent,
     ExerciseNotFoundComponent,
     ResizeInputDirective,
-    WordDisplayComponent
+    WordDisplayComponent,
+    MathStringBuilderComponent,
+    MathStringDisplayComponent
   ],
   providers: [],
   exports: [
@@ -182,7 +186,8 @@ import { WordDisplayComponent } from './exercice-types/stroke-wrong-answer/strok
     ParagraphDisplayComponent,
     CompositionTableStudentDisplayComponent,
     ResizeInputDirective,
-    WordDisplayComponent
+    WordDisplayComponent,
+    MathStringDisplayComponent
 
   ]
 })

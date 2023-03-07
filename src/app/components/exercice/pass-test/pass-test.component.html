@@ -17,6 +17,8 @@
 
 <ines-word-display *ngIf="!loading && currentExercise?.type === TYPES.STROKE_WRONG_WORD" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></ines-word-display>
 
+<ines-math-string-display *ngIf="!loading && currentExercise?.type === TYPES.MATH_COMPARE" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></ines-math-string-display>
+
 <ines-composition-table-student-display *ngIf="!loading && currentExercise?.type === TYPES.COMPOSITION_TABLE" [exercice]="currentExercise" (canGoNext)="canGoNext($event)"
   [(answer)]="answer"></ines-composition-table-student-display>
 
