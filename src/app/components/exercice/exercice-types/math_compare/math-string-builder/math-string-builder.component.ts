@@ -24,23 +24,22 @@ export class MathStringBuilderComponent implements OnInit {
 
   ngOnInit(): void {
     this.mathForm = this.fb.group({
-      numbers: [null, Validators.required],
-      correctString: [null, Validators.required]
+      arrayOfNumbersOnly: [null, Validators.required],
+      arrayOfSignsOnly: [null, Validators.required]
     })
   }
 
 
   save() {
     if (this.mathForm.valid) {
-      console.log();
       this.ParagraphBlock = {
         exerciceBlockId: null,
         exerciceId: null,
         label: null,
-        correctValue: this.mathForm.value.correctString,
+        correctValue: this.mathForm.value.arrayOfSignsOnly,
         isAdmissable: null,
         placeholder: null,
-        value: this.mathForm.value.numbers,
+        value: this.mathForm.value.arrayOfNumbersOnly,
         blockOrder: null,
         files: null,
         exerciceBlockType: ExerciceBlockTypes.MATH_STRING,
