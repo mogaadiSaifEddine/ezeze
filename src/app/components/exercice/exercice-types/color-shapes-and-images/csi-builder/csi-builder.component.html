@@ -1,14 +1,31 @@
 <mat-card>
     <header>
-        <h1>BLOCK_NAME_GOES_HERE</h1>
+        <h3>Add shape or image using url</h3>
     </header>
-
     <mat-card-content>
 
-        <!-- ADD LOGIC -->
+        <form [formGroup]="blockForm">
+            <!-- URL -->
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-link-45deg"></i></span>
+                <input type="text" class="form-control" placeholder="Image url" formControlName="image_url">
+            </div>
+
+            <!-- IS COLORED OR NOT -->
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input class="form-check-input mt-0" type="checkbox" value=true>
+                    &nbsp;<span>is colored?</span>
+                </div>
+            </div>
+
+            <!-- COLOR WHEEL -->
+            <ng-container>
+                <color-sketch [color]="'#262626'" (onChangeComplete)="changeComplete($event)"></color-sketch>
+            </ng-container>
+        </form>
 
     </mat-card-content>
-
     <div mat-dialog-actions [align]="'end'">
         <button mat-raised-button color="primary" (click)="saveBlock()">Save</button>
     </div>

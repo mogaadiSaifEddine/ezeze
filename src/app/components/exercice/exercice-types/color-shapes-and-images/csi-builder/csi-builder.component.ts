@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ExerciceBlock } from 'src/app/model/ExerciceBlock';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
@@ -11,14 +12,25 @@ import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
 export class CsiBuilderComponent implements OnInit {
 
   finalBlock: ExerciceBlock;
+  blockForm: FormGroup;
 
 
   constructor(
+    private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<CsiBuilderComponent>
   ) { }
 
   ngOnInit(): void {
-    // init form if there is any
+    this.blockForm = this.formBuilder.group({
+      image_url: [null, Validators.required],
+      image_is_colored: [false, Validators.required],
+      image_color: ['#dd6565'],
+    })
+  }
+
+  changeComplete($event: any) {
+    console.log($event.color);
+
   }
 
 
