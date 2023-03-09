@@ -44,11 +44,11 @@ export class CsiBuilderComponent implements OnInit {
         correctValue: null,
         isAdmissable: null,
         placeholder: null,
-        value: this.blockForm.value,
+        value: 'nothing',
         blockOrder: null,
         files: null,
         exerciceBlockType: ExerciceBlockTypes.SHAPES_IMAGES_TO_COLOR,
-        blockParams: JSON.stringify({ params: 'insert oibject or set to null' })
+        blockParams: JSON.stringify(this.blockForm.value)
       }
       this.dialogRef.close(this.finalBlock);
     }
