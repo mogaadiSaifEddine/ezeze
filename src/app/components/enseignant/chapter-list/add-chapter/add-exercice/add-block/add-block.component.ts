@@ -57,6 +57,7 @@ export class AddBlockComponent implements OnInit {
     SEPARATE_TEXT: [ExerciceBlockTypes.TEXT_TO_SEPARATE],
     STROKE_WRONG_WORD: [ExerciceBlockTypes.WORD_TO_STROKE],
     MATH_COMPARE: [ExerciceBlockTypes.MATH_STRING],
+    COLOR_SHAPES_IMAGES: [ExerciceBlockTypes.SHAPES_IMAGES_TO_COLOR],
   };
   readonly showFieldsFor: Record<Exercise_Types, () => void> = {
     LIKERT_SCALE: () => this.showFieldsForLikertScale(),
@@ -94,12 +95,13 @@ export class AddBlockComponent implements OnInit {
       this.showFiledsForWriting();
     },
     TEXT_UNDER_IMAGE: () => this.showFieldsForTextUnderImage(),
-    VERTICAL_EQUATION: () => this.showFieldsForVerticalEquation(),
-    GENERAL_TABLES: () => this.showFieldsForGeneralTable(),
-    STROKE_WRONG_ANSWER: () => this.showFieldsForStrokeTheWrongAnswer(),
-    STROKE_WRONG_WORD: () => this.showFieldsForStrokeTheWrongWord(),
-    SEPARATE_TEXT: () => this.showFieldsForSeparateText(),
-    MATH_COMPARE: () => this.showFieldsForMathComapre(),
+    VERTICAL_EQUATION: () => this.showFieldsForDefault(),
+    GENERAL_TABLES: () => this.showFieldsForDefault(),
+    STROKE_WRONG_ANSWER: () => this.showFieldsForDefault(),
+    STROKE_WRONG_WORD: () => this.showFieldsForDefault(),
+    SEPARATE_TEXT: () => this.showFieldsForDefault(),
+    MATH_COMPARE: () => this.showFieldsForDefault(),
+    COLOR_SHAPES_IMAGES: () => this.showFieldsForDefault(),
     LINK_ARROW: (): void => {
       this.showFiledsForLinkArrow();
     },
@@ -206,54 +208,8 @@ export class AddBlockComponent implements OnInit {
     }
   }
 
-  showFieldsForVerticalEquation() {
+  showFieldsForDefault() {
     if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.EQUATION) {
-      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
-      this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
-      this.fieldData.showPlaceholder = false;
-      this.fieldData.showValue = true;
-      this.fieldData;
-    }
-  }
-  showFieldsForGeneralTable() {
-    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.TABLE) {
-      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
-      this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
-      this.fieldData.showPlaceholder = false;
-      this.fieldData.showValue = true;
-      this.fieldData;
-    }
-  }
-
-  showFieldsForStrokeTheWrongAnswer() {
-    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.ANSWER_TO_STROKE) {
-      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
-      this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
-      this.fieldData.showPlaceholder = false;
-      this.fieldData.showValue = true;
-      this.fieldData;
-    }
-  }
-  showFieldsForStrokeTheWrongWord() {
-    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.WORD_TO_STROKE) {
-      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
-      this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
-      this.fieldData.showPlaceholder = false;
-      this.fieldData.showValue = true;
-      this.fieldData;
-    }
-  }
-  showFieldsForSeparateText() {
-    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.TEXT_TO_SEPARATE) {
-      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
-      this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
-      this.fieldData.showPlaceholder = false;
-      this.fieldData.showValue = true;
-      this.fieldData;
-    }
-  }
-  showFieldsForMathComapre() {
-    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.MATH_STRING) {
       this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
       this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
       this.fieldData.showPlaceholder = false;
