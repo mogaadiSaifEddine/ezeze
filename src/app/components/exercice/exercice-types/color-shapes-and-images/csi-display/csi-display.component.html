@@ -8,10 +8,13 @@
     <div class="question-container">
         <div [innerHTML]="exercice?.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></div><br>
     </div>
-    <mat-card-content class="equationGrid" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
-        <section *ngFor="let block of exercice.blocks">
+    <mat-card-content [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }" id="iamgesGrid">
+        <section *ngFor=" let block of exercice.blocks; let index=index;">
 
-            <!-- CUSTOM LOGIC HERE -->
+            <div class="imageCard">
+                <img [src]="block.blockParams['image_url']" alt="image" style="width: 120px;">
+                <div class="colorIndicator" (click)="toggleColor($event, block.blockParams['image_color'], index)"></div>
+            </div>
 
         </section>
     </mat-card-content>
