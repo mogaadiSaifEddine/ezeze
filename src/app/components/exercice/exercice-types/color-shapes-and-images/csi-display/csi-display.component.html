@@ -1,1 +1,18 @@
-<p>csi-display works!</p>
+<mat-card *ngIf="exercice.name">
+    <div class="question-container">
+        <mat-card-title [innerHTML]="exercice?.name" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }" style="font-size: 1rem !important;"></mat-card-title>
+    </div>
+</mat-card>
+
+<mat-card>
+    <div class="question-container">
+        <div [innerHTML]="exercice?.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></div><br>
+    </div>
+    <mat-card-content class="equationGrid" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+        <section *ngFor="let block of exercice.blocks">
+
+            <!-- CUSTOM LOGIC HERE -->
+
+        </section>
+    </mat-card-content>
+</mat-card>
