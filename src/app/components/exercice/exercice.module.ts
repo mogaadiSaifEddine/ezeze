@@ -89,6 +89,8 @@ import { ResizeInputDirective } from 'src/app/directives/resize-input.directive'
 import { WordDisplayComponent } from './exercice-types/stroke-wrong-answer/stroke-word/word-display/word-display.component';
 import { MathStringBuilderComponent } from './exercice-types/math_compare/math-string-builder/math-string-builder.component';
 import { MathStringDisplayComponent } from './exercice-types/math_compare/math-string-display/math-string-display.component';
+import { CsiBuilderComponent } from './exercice-types/color-shapes-and-images/csi-builder/csi-builder.component';
+import { CsiDisplayComponent } from './exercice-types/color-shapes-and-images/csi-display/csi-display.component';
 @NgModule({
   imports: [
     MaterialModules,
@@ -149,7 +151,9 @@ import { MathStringDisplayComponent } from './exercice-types/math_compare/math-s
     ResizeInputDirective,
     WordDisplayComponent,
     MathStringBuilderComponent,
-    MathStringDisplayComponent
+    MathStringDisplayComponent,
+    CsiBuilderComponent,
+    CsiDisplayComponent
   ],
   providers: [],
   exports: [
