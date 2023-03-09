@@ -13,6 +13,7 @@ export class CsiBuilderComponent implements OnInit {
 
   finalBlock: ExerciceBlock;
   blockForm: FormGroup;
+  IS_COLORED: boolean;
 
 
   constructor(
@@ -28,27 +29,29 @@ export class CsiBuilderComponent implements OnInit {
     })
   }
 
-  changeComplete($event: any) {
-    console.log($event.color);
-
+  handleCheckBoxChange($event) {
+    this.IS_COLORED = $event.target.checked;
   }
-
 
   saveBlock() {
-    this.finalBlock = {
-      exerciceBlockId: null,
-      exerciceId: null,
-      label: null,
-      correctValue: null,
-      isAdmissable: null,
-      placeholder: null,
-      value: null,
-      blockOrder: null,
-      files: null,
-      exerciceBlockType: ExerciceBlockTypes.SHAPES_IMAGES_TO_COLOR,
-      blockParams: JSON.stringify({ params: 'insert oibject or set to null' })
-    }
+    console.log(this.blockForm.value);
 
-    this.dialogRef.close(this.finalBlock);
+    if (this.blockForm.valid) {
+      this.finalBlock = {
+        exerciceBlockId: null,
+        exerciceId: null,
+        label: null,
+        correctValue: null,
+        isAdmissable: null,
+        placeholder: null,
+        value: this.blockForm.value,
+        blockOrder: null,
+        files: null,
+        exerciceBlockType: ExerciceBlockTypes.SHAPES_IMAGES_TO_COLOR,
+        blockParams: JSON.stringify({ params: 'insert oibject or set to null' })
+      }
+      this.dialogRef.close(this.finalBlock);
+    }
   }
+
 }

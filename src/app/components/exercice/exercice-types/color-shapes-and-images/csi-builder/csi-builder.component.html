@@ -14,14 +14,14 @@
             <!-- IS COLORED OR NOT -->
             <div class="input-group mb-3">
                 <div class="input-group-text">
-                    <input class="form-check-input mt-0" type="checkbox" value=true>
+                    <input class="form-check-input mt-0" type="checkbox" value=true (change)="handleCheckBoxChange($event)" formControlName='image_is_colored'>
                     &nbsp;<span>is colored?</span>
                 </div>
             </div>
 
             <!-- COLOR WHEEL -->
-            <ng-container>
-                <color-sketch [color]="'#262626'" (onChangeComplete)="changeComplete($event)"></color-sketch>
+            <ng-container *ngIf="IS_COLORED">
+                <color-sketch [color]="'#262626'" formControlName="image_color"></color-sketch>
             </ng-container>
         </form>
 
