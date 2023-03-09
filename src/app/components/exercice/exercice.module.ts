@@ -157,6 +157,7 @@ import { CsiDisplayComponent } from './exercice-types/color-shapes-and-images/cs
   ],
   providers: [],
   exports: [
+    CsiDisplayComponent,
     DragSyllablesComponent,
     MultipleChoiceComponent,
     MultipleAnswersComponent,

@@ -10,6 +10,13 @@
 
 <ines-text-under-image *ngIf="data.currentExercise.type === TYPES.TEXT_UNDER_IMAGE" [exercice]="data.currentExercise"></ines-text-under-image>
 
+<ines-csi-display 
+    *ngIf="data.currentExercise.type === TYPES.COLOR_SHAPES_IMAGES" 
+    [exercice]="data.currentExercise"
+></ines-csi-display>
+
+
+
 <ines-general-tables-student-display *ngIf="data.currentExercise.type === TYPES.GENERAL_TABLES" [exercice]="data.currentExercise"></ines-general-tables-student-display>
 
 <ines-stroke-answer-display *ngIf="data.currentExercise.type === TYPES.STROKE_WRONG_ANSWER" [exercice]="data.currentExercise"></ines-stroke-answer-display>

@@ -19,6 +19,7 @@ import { ParagraphBuilderComponent } from 'src/app/components/exercice/exercice-
 import { WordBuilderComponent } from 'src/app/components/exercice/exercice-types/stroke-wrong-answer/stroke-word/word-builder/word-builder.component';
 import * as _ from 'lodash';
 import { MathStringBuilderComponent } from 'src/app/components/exercice/exercice-types/math_compare/math-string-builder/math-string-builder.component';
+import { CsiBuilderComponent } from 'src/app/components/exercice/exercice-types/color-shapes-and-images/csi-builder/csi-builder.component';
 @Component({
   selector: 'app-add-exercice',
   templateUrl: './add-exercice.component.html',
@@ -153,6 +154,7 @@ export class AddExerciceComponent implements OnInit {
     else if (element.toString() === 'COMPOSITION_TABLE') BLOCK_FORM_ACCORDING_TO_TYPE = CompositionTableBuilderComponent;
     else if (element.toString() === 'SEPARATE_TEXT') BLOCK_FORM_ACCORDING_TO_TYPE = ParagraphBuilderComponent;
     else if (element.toString() === 'MATH_COMPARE') BLOCK_FORM_ACCORDING_TO_TYPE = MathStringBuilderComponent;
+    else if (element.toString() === 'COLOR_SHAPES_IMAGES') BLOCK_FORM_ACCORDING_TO_TYPE = CsiBuilderComponent;
     else BLOCK_FORM_ACCORDING_TO_TYPE = AddBlockComponent;
 
     this.dialog
