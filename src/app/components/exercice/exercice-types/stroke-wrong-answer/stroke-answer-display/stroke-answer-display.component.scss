@@ -5,34 +5,12 @@
     padding: 1rem;
     border-bottom: 1px solid #565655;
 
-    input {
-        display: block;
-        margin: .5rem 0;
-        outline: none;
-        border: none;
-        background: transparent;
-        cursor: crosshair;
-
-        &:hover {
-            color: #383d41;
-            background-color: #e2e3e5;
-        }
-    }
-
     .strokedSentence {
         text-decoration: line-through;
         color: #721c24;
         background-color: #f8d7da;
     }
 }
-
-.wordsCollectionFlex {
-    width: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
 
 .IMAGES-GRID {
     width: 100%;

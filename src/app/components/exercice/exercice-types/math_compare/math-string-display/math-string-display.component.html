@@ -1,0 +1,32 @@
+<mat-card *ngIf="exercice.name">
+    <div class="question-container">
+        <mat-card-title [innerHTML]="exercice?.name" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }" style="font-size: 1rem !important;"></mat-card-title>
+    </div>
+</mat-card>
+
+<mat-card>
+    <div class="question-container">
+        <div [innerHTML]="exercice?.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></div><br>
+    </div>
+    <mat-card-content [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+        <div *ngFor="let element of ARRAY_OF_VALUES; let line=index" class="d-flex flex-row align-items-start justify-content-start mb-2">
+
+            <ng-container *ngFor="let num of element.numbersArray; let index=index;">
+                <div style="font-size: 1.5rem;" class="me-1">{{num}}</div>
+
+                <!-- COMPARAISON KEYBOARD | NOT DISPLAYED ON THE LAST ELEMENT -->
+                <div class="btn-group" role="group" *ngIf="(index!==element.numbersArray.length-1)" (change)="verifyOnChange(line, index, $event)">
+                    <input type="radio" class="btn-check" [name]="'radio-'+index+'-'+line" [id]="'btnradio1-'+index+'-'+line" value="greaterThan">
+                    <label class="btn btn-outline-primary" [for]="'btnradio1-'+index+'-'+line">&#62;</label>
+
+                    <input type="radio" class="btn-check" [name]="'radio-'+index+'-'+line" [id]="'btnradio2-'+index+'-'+line" value="lessThan">
+                    <label class="btn btn-outline-primary" [for]="'btnradio2-'+index+'-'+line">&#60;</label>
+
+                    <input type="radio" class="btn-check" [name]="'radio-'+index+'-'+line" [id]="'btnradio3-'+index+'-'+line" value="=">
+                    <label class="btn btn-outline-primary" [for]="'btnradio3-'+index+'-'+line">&#65309;</label>
+                </div>
+            </ng-container>
+
+        </div>
+    </mat-card-content>
+</mat-card>

@@ -11,7 +11,7 @@ import { ChapitreService } from 'src/app/services/chapitre.service';
 import { Chapter } from 'src/app/model/Chapter';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
-
+import * as _ from 'lodash';
 @Component({
   selector: 'app-aquired-content-evaluation',
   templateUrl: './aquired-content-evaluation.component.html',
@@ -49,6 +49,7 @@ export class AquiredContentEvaluationComponent implements OnInit {
     PREREQUISITE: this.prerequisiteMode,
     EXERCICE: this.showExercicesMode
   };
+  _ = _
   chapter: Chapter;
   constructor(
     private router: Router,
@@ -58,7 +59,7 @@ export class AquiredContentEvaluationComponent implements OnInit {
     private userService: UserService,
     private sanitizer: DomSanitizer,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadSerie();
@@ -66,27 +67,29 @@ export class AquiredContentEvaluationComponent implements OnInit {
   }
   loadFile() {
     this.revisionService.chapter.subscribe((chapter: Chapter) => {
-      if (chapter.catre_conceptuelle)
-        this.chapterService.getFileCart(chapter.catre_conceptuelle.carte_id).subscribe((res) => {
-          this.fileTypeCart = chapter.catre_conceptuelle.name.includes('mp4')
-            ? 'video'
-            : chapter.catre_conceptuelle.name.includes('pdf')
-            ? 'pdf'
-            : 'image';
-          if (this.fileTypeCart !== 'pdf') {
-            const objectURL = URL.createObjectURL(res);
-            this.fileCard = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-          } else this.fileCard = res;
-        });
-      if (chapter.course)
-        this.chapterService.getFileCourse(chapter.course.carte_id).subscribe((res) => {
-          this.fileTypeCourse = chapter.course.name.includes('mp4') ? 'video' : chapter.course.name.includes('pdf') ? 'pdf' : 'image';
-          if (this.fileTypeCourse !== 'pdf') {
-            const objectURL = URL.createObjectURL(res);
-            this.fileCourse = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-          } else this.fileCourse = res;
-          //
-        });
+
+      this.chapter = chapter;
+      // if (chapter.catre_conceptuelle)
+      //   this.chapterService.getFileCart(chapter.catre_conceptuelle.carte_id).subscribe((res) => {
+      //     this.fileTypeCart = chapter.catre_conceptuelle.name.includes('mp4')
+      //       ? 'video'
+      //       : chapter.catre_conceptuelle.name.includes('pdf')
+      //       ? 'pdf'
+      //       : 'image';
+      //     if (this.fileTypeCart !== 'pdf') {
+      //       const objectURL = URL.createObjectURL(res);
+      //       this.fileCard = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      //     } else this.fileCard = res;
+      //   });
+      // if (chapter.course)
+      //   this.chapterService.getFileCourse(chapter.course.carte_id).subscribe((res) => {
+      //     this.fileTypeCourse = chapter.course.name.includes('mp4') ? 'video' : chapter.course.name.includes('pdf') ? 'pdf' : 'image';
+      //     if (this.fileTypeCourse !== 'pdf') {
+      //       const objectURL = URL.createObjectURL(res);
+      //       this.fileCourse = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      //     } else this.fileCourse = res;
+      //     //
+      //   });
     });
   }
   loadSerie() {
@@ -152,7 +155,6 @@ export class AquiredContentEvaluationComponent implements OnInit {
           ) {
             this.router.navigate(['revision/chapitres']);
           }
-          console.log(this.serieType);
         },
         (err) => {
           this.loading = false;
@@ -189,14 +191,18 @@ export class AquiredContentEvaluationComponent implements OnInit {
   }
   goNextStep(event) {
     this.showGoNextStepScreen = false;
+
     if (
-      (this.exercice1Content.exercices.length > 0 ||
-        this.exercice2Content.exercices.length > 0 ||
-        this.exercice3Content.exercices.length > 0) &&
-      this.prerequisiteContent.exercices.length > 0
+      this.exercice1Content.exercices.length > 0 ||
+      this.exercice2Content.exercices.length > 0 ||
+      this.exercice3Content.exercices.length > 0
     ) {
       if (this.score < 30) {
         this.prerequisiteMode = true;
+        // if (this.prerequisiteContent.exercices.length) {
+        // return
+        // }
+        // this.showExercicesMode = true
       } else if (this.score < 50) {
         this.showCourseReminderMode = true;
       } else {
@@ -226,6 +232,14 @@ export class AquiredContentEvaluationComponent implements OnInit {
       user: this.UserId
     };
 
+    // this.showExercicesMode = true;
+    this.selectedExercice = 1;
+    if (score < 50) {
+      this.prerequisiteMode = true;
+    } else {
+      this.prerequisiteMode = false;
+      this.showCourseReminderMode = false;
+    }
     // this.revisionService.addUserAnswer(userAnswer).subscribe((res) => {});
     this.score = score;
     this.evaluationMode = false;
@@ -239,7 +253,8 @@ export class AquiredContentEvaluationComponent implements OnInit {
       score: score,
       user: this.UserId
     };
-
+    this.showExercicesMode = true;
+    this.selectedExercice = 1;
     // this.revisionService.addUserAnswer(userAnswer).subscribe((res) => {});
 
     this.score = score;
@@ -262,7 +277,7 @@ export class AquiredContentEvaluationComponent implements OnInit {
 
   testFinished(score) {
     let id = '0';
-
+    this.showGoNextStepScreen = true;
     this.showExercicesMode = false;
     switch (this.selectedExercice) {
       case 1:
@@ -278,6 +293,8 @@ export class AquiredContentEvaluationComponent implements OnInit {
       case 3:
         id = this.exercice3Content.id;
         this.showFinalScore = true;
+        this.showGoNextStepScreen = false;
+
         break;
     }
     const userAnswer = {
@@ -285,11 +302,10 @@ export class AquiredContentEvaluationComponent implements OnInit {
       score: score,
       user: this.UserId
     };
-
     // this.revisionService.addUserAnswer(userAnswer).subscribe((res) => {});
   }
   goToDashboard() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/revision/matieres']);
   }
 
   startEvaluation(event) {
@@ -313,64 +329,13 @@ export class AquiredContentEvaluationComponent implements OnInit {
     return bytes.buffer;
   }
   openCourseReminder() {
-    // var blob = new Blob([this._base64ToArrayBuffer(this.fileCourse)], {
-    //   type: 'application/doc'
-    // });
-    // const url = URL.createObjectURL(blob);
-
-    if (!this.fileCourse) {
-      this.toastr.error('There is no course Reminder to show ');
-      return;
-    }
-    if (this.fileTypeCourse === 'pdf') {
-      const blob = new Blob([this.fileCourse], { type: 'application/pdf' });
-      const blobURL = URL.createObjectURL(blob);
-
-      window.open(blobURL);
-      return;
-    }
-
-    this.dialog
-      .open(ShowCourseComponent, {
-        maxHeight: '90vh',
-        position: {
-          top: window.innerWidth > 767 ? '5%' : '20%',
-          left: window.innerWidth > 767 ? '30%' : ''
-        },
-        data: { imgSrc: this.fileCourse, imageType: this.fileTypeCourse },
-        disableClose: true
-      })
-      .afterClosed()
-      .subscribe((res) => {});
+    window.open(this.chapter.coursePRstring, '_blank');
   }
 
   // getFile() {
   //   this.chapterService.getFileCart(cha);
   // }
   openConceptMap() {
-    if (!this.fileCard) {
-      this.toastr.error('There is no course Reminder to show ');
-      return;
-    }
-    if (this.fileTypeCart === 'pdf') {
-      const blob = new Blob([this.fileCard], { type: 'application/pdf' });
-      const blobURL = URL.createObjectURL(blob);
-
-      window.open(blobURL);
-      return;
-    }
-    this.dialog
-      .open(ShowConceptMapComponent, {
-        maxHeight: '90vh',
-        position: {
-          top: window.innerWidth > 767 ? '5%' : '20%',
-          left: window.innerWidth > 767 ? '30%' : ''
-        },
-
-        data: { imgSrc: this.fileCard, imageType: this.fileTypeCart },
-        disableClose: true
-      })
-      .afterClosed()
-      .subscribe((res) => {});
+    window.open(this.chapter.catre_conceptuelle, '_blank');
   }
 }

@@ -2,35 +2,24 @@
     box-sizing: border-box;
 }
 
-.radioOptins {
-    box-sizing: border-box;
-    margin-top: 1rem;
-    width: 100%;
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+img {
+    filter: grayscale(100%);
+    filter: opacity(70%);
+}
 
-    input[type="radio"] {
-        display: none;
+input[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
 
-        &:checked~.contentContainer {
-            border: 2px solid #605975;
-        }
-    }
+input[type=radio]+img {
+    cursor: pointer;
+}
 
-    .contentContainer {
-        width: 100%;
-        height: auto;
-        border: 2px solid #fff;
-        cursor: pointer;
-        box-sizing: border-box;
-
-        img {
-            width: 100%;
-        }
-
-        &:hover {
-            border: 2px solid #48318e;
-        }
-    }
+input[type=radio]:checked+img {
+    outline: 3px solid red;
+    filter: grayscale(0);
+    filter: opacity(100%);
 }

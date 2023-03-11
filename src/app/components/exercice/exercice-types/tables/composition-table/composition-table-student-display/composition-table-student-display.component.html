@@ -1,0 +1,38 @@
+<mat-card *ngIf="exercice.name">
+  <div class="question-container">
+    <mat-card-title [innerHTML]="exercice?.name" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }" style="font-size: 1rem !important;"></mat-card-title>
+  </div>
+</mat-card>
+
+<mat-card>
+  <div class="question-container">
+    <div [innerHTML]="exercice?.question"></div>
+    <br />
+  </div>
+  <mat-card-content class="tableGrid" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+    <table *ngFor="let block of exercice?.blocks; let index = index">
+      <tr>
+        <td colspan="3">قسم الوحدات البسيطة</td>
+        <td *ngIf="block.blockParams['matrixLayout'].complexity > 3" colspan="3">قسم الآلاف</td>
+        <td *ngIf="block.blockParams['matrixLayout'].complexity > 6" colspan="3">قسم الملايين</td>
+      </tr>
+      <tr>
+        <td>احاد</td>
+        <td>عشرات</td>
+        <td>مئات</td>
+        <td *ngIf="block.blockParams['matrixLayout'].complexity > 3">احاد</td>
+        <td *ngIf="block.blockParams['matrixLayout'].complexity > 3">عشرات</td>
+        <td *ngIf="block.blockParams['matrixLayout'].complexity > 3">مئات</td>
+        <td *ngIf="block.blockParams['matrixLayout'].complexity > 6">احاد</td>
+        <td *ngIf="block.blockParams['matrixLayout'].complexity > 6">عشرات</td>
+        <td *ngIf="block.blockParams['matrixLayout'].complexity > 6">مئات</td>
+      </tr>
+
+      <tr *ngFor="let row of block.blockParams['STUDENT_MATRIX']; let indexRow = index">
+        <td *ngFor="let field of row; let indexColumn = index">
+          <input type="text" class="textInput studentCanWriteHere" (change)="valueChanged($event, index, block.blockParams['MATRIX_CORRECTED'][indexRow][indexColumn])" />
+        </td>
+      </tr>
+    </table>
+  </mat-card-content>
+</mat-card>

@@ -20,7 +20,6 @@ export class ListeningComponent implements OnInit {
   ngOnInit(): void {
     this.exercice.question = this.exercice.question.split('#').join('\n');
     this.exercice.name = this.exercice.name.split('#').join('\n');
-    console.log(this.exercice);
     this.answerChange.emit(false);
   }
   selectBlock(blockToSelect) {
@@ -29,22 +28,8 @@ export class ListeningComponent implements OnInit {
       else block.label = 'false';
     });
     this.selectedBlock = blockToSelect;
-    console.log(this.selectedBlock);
-
-    console.log(this.selectedBlock.value == this.selectedBlock.label);
 
     this.answerChange.emit(this.selectedBlock.value == this.selectedBlock.label);
     this.canGoNext.emit(true);
-  }
-
-  checkCorrectValues() {
-    // let allCorrect = true;
-    // // this.exercice.blocks.forEach((block) => {
-    // //   if (block.exerciceBlockType === ExerciceBlockTypes.INPUT_TEXT && block.value !== block.correctValue) {
-    // //     allCorrect = false;
-    // //   }
-    // // });
-    // if ( )
-    console.log(this.selectedBlock.value == this.selectedBlock.correctValue);
   }
 }

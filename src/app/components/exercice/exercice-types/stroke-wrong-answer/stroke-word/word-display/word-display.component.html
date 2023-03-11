@@ -1,0 +1,30 @@
+<mat-card *ngIf="exercice.name">
+    <div class="question-container">
+        <mat-card-title [innerHTML]="exercice?.name" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }" style="font-size: 1rem !important;"></mat-card-title>
+    </div>
+</mat-card>
+
+<mat-card>
+    <div class="question-container">
+        <div [innerHTML]="exercice?.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></div><br>
+    </div>
+    <mat-card-content [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+        <ng-container *ngFor="let block of exercice.blocks">
+            <!-- sentences with words -->
+            <p class="d-flex flex-row  SENTENCESWITHWORDS" *ngIf="block.blockParams['sentencesWithWords']?.GROUP.length>0">
+                <span *ngFor="let SENTENCE of block.blockParams['sentencesWithWords'].GROUP; let index=index;" style="display: flex; align-items: center;">
+                    <!-- DISPLAY THIS ELEMNT IF IT IS A SENTENCE -->
+                    <ng-container *ngIf="!SENTENCE.TYPE_CONTROL">{{SENTENCE.GROUP_CONTROL}}</ng-container>
+
+                    <!-- DISPLAY THIS ELEMNT IF IT IS A WORD -->
+                    <ng-container
+                        *ngIf="(block.blockParams['sentencesWithWords'].GROUP[index-1]?.TYPE_CONTROL!=true) && (block.blockParams['sentencesWithWords'].GROUP[index]?.TYPE_CONTROL===true)"><strong>&nbsp;(&nbsp;</strong></ng-container>
+                    <input type="text" [value]="SENTENCE.GROUP_CONTROL" (click)="toggleStrokeForWords($event, index)" readonly class="wordInput" *ngIf="SENTENCE.TYPE_CONTROL ===true" />
+                    <ng-container *ngIf="block.blockParams['sentencesWithWords'].GROUP[index+1]?.TYPE_CONTROL===true"><strong>,&nbsp;</strong></ng-container>
+                    <ng-container
+                        *ngIf="block.blockParams['sentencesWithWords'].GROUP[index+1]?.TYPE_CONTROL!==true && (block.blockParams['sentencesWithWords'].GROUP[index]?.TYPE_CONTROL===true)"><strong>&nbsp;)&nbsp;</strong></ng-container>
+                </span>
+            </p>
+        </ng-container>
+    </mat-card-content>
+</mat-card>

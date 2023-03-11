@@ -27,7 +27,7 @@ export class PassTestComponent implements OnInit {
 
   loading = true;
 
-  constructor(private revisionService: RevisionService, private userService: UserService, private ss: SharedService) {}
+  constructor(private revisionService: RevisionService, private userService: UserService, private ss: SharedService) { }
 
   ngOnInit(): void {
     const userconnected = JSON.parse(localStorage.getItem('user_details'));
@@ -38,7 +38,8 @@ export class PassTestComponent implements OnInit {
       (res) => {
         this.currentExercise = this.evaluationContent.exercices.find((ex) => ex.ex_id === res.id) || this.evaluationContent.exercices[0];
         this.loading = false;
-        console.log(this.currentExercise);
+        this.formatGeneralQuestion();
+
       },
       (error) => {
         this.currentExercise = this.evaluationContent.exercices[0];
@@ -47,16 +48,33 @@ export class PassTestComponent implements OnInit {
     );
   }
 
-  nextQuestion() {
-    if (this.currentExercise.ex_id === this.evaluationContent.exercices[this.evaluationContent.exercices.length - 1].ex_id) {
-      this.finalScore.emit(this.score);
-    } else {
+  private formatGeneralQuestion() {
+    const searchRegExp = /\W*(@BREAK)\W*/g;
+    const CONTENT = this.currentExercise.name.replace(searchRegExp, "<br>");
+    this.currentExercise.name = CONTENT;
+      }
+    );
+  }
+
+  nextQuestion(action: string) {
+    if (action === "baypass") {
       this.revisionService.resetFormSub.next(true);
       this.answer = null;
       this.isAnswerChecked = false;
       this.exerciceIndex++;
       this.currentExercise = this.evaluationContent.exercices[this.exerciceIndex];
-      this.canGoNextQuestion = false;
+      this.canGoNextQuestion = true;
+    } else {
+      if (this.currentExercise.ex_id === this.evaluationContent.exercices[this.evaluationContent.exercices.length - 1].ex_id) {
+        this.finalScore.emit(this.score);
+      } else {
+        this.revisionService.resetFormSub.next(true);
+        this.answer = null;
+        this.isAnswerChecked = false;
+        this.exerciceIndex++;
+        this.currentExercise = this.evaluationContent.exercices[this.exerciceIndex];
+        this.canGoNextQuestion = true;
+      }
     }
     this.ss.showFalfoul.next(false);
   }
@@ -66,24 +84,20 @@ export class PassTestComponent implements OnInit {
       score: this.score,
       scoreToSend: this.answer ? 1 : 0,
       serie: this.evaluationContent.seriesType,
-
       user: this.UserId
     };
+    if (userAnswer.id !== null) this.revisionService.addUserAnswer({ ...userAnswer, score: userAnswer.scoreToSend }).subscribe((res) => { });
 
-    if (userAnswer.id !== null) this.revisionService.addUserAnswer({ ...userAnswer, score: userAnswer.scoreToSend }).subscribe((res) => {});
     if (this.answer) {
       this.score = this.score + 100 / this.evaluationContent.exercices.length;
     }
   }
 
   canGoNext(event) {
-    console.log(this.answer);
-
-    this.canGoNextQuestion = event;
+    // let there be true
+    this.canGoNextQuestion = true;
   }
   checkAnswer() {
-    console.log(this.answer);
-
     if (this.answer !== null) {
       this.sendUserAnswerToTheServer();
       this.isAnswerChecked = true;

@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Inject, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { Difficulty } from 'src/app/model/Difficulty';
@@ -14,7 +14,12 @@ import { InitEquationFormComponent } from 'src/app/components/exercice/exercice-
 import { GeneralTablesBuilderComponent } from 'src/app/components/exercice/exercice-types/tables/general-purpose-tables/general-tables-builder/general-tables-builder.component';
 import { VersionSelectorComponent } from 'src/app/components/exercice/exercice-types/stroke-wrong-answer/version-selector/version-selector.component';
 import { TextUnderImageBuilderComponent } from 'src/app/components/exercice/exercice-types/tables/text-under-image-builder/text-under-image-builder.component';
-
+import { CompositionTableBuilderComponent } from 'src/app/components/exercice/exercice-types/tables/composition-table/composition-table-builder/composition-table-builder.component';
+import { ParagraphBuilderComponent } from 'src/app/components/exercice/exercice-types/separate-text/paragraph-builder/paragraph-builder.component';
+import { WordBuilderComponent } from 'src/app/components/exercice/exercice-types/stroke-wrong-answer/stroke-word/word-builder/word-builder.component';
+import * as _ from 'lodash';
+import { MathStringBuilderComponent } from 'src/app/components/exercice/exercice-types/math_compare/math-string-builder/math-string-builder.component';
+import { CsiBuilderComponent } from 'src/app/components/exercice/exercice-types/color-shapes-and-images/csi-builder/csi-builder.component';
 @Component({
   selector: 'app-add-exercice',
   templateUrl: './add-exercice.component.html',
@@ -24,6 +29,8 @@ export class AddExerciceComponent implements OnInit {
   @Output() chapterId: EventEmitter<number> = new EventEmitter<number>();
   @ViewChild('hotspotImg') hotspotImg;
   currentExercice: Exercice;
+  useEditor = true;
+  useEditorQG = true;
   constructor(
     private serieService: SerieService,
     private fb: FormBuilder,
@@ -46,6 +53,7 @@ export class AddExerciceComponent implements OnInit {
   showPreview = false;
   selectedExercice: Exercice;
 
+  wordsSyllablesForm: FormGroup;
   // EDITOR CONFIGURATION
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -129,18 +137,25 @@ export class AddExerciceComponent implements OnInit {
     });
   }
 
+  toggleEditor() {
+    this.useEditor = !this.useEditor;
+  }
+  toggleEditorForQG() {
+    this.useEditorQG = !this.useEditorQG;
+  }
+
   openBlockDialog(element?: ExerciceBlock) {
     let BLOCK_FORM_ACCORDING_TO_TYPE: any;
-    if (['VERTICAL_EQUATION'].includes(element.toString()))
-      BLOCK_FORM_ACCORDING_TO_TYPE = InitEquationFormComponent;
-    else if (element.toString() === "GENERAL_TABLES")
-      BLOCK_FORM_ACCORDING_TO_TYPE = GeneralTablesBuilderComponent;
-    else if (element.toString() === "STROKE_WRONG_ANSWER")
-      BLOCK_FORM_ACCORDING_TO_TYPE = VersionSelectorComponent;
-    else if (element.toString() === "TEXT_UNDER_IMAGE")
-      BLOCK_FORM_ACCORDING_TO_TYPE = TextUnderImageBuilderComponent;
-    else
-      BLOCK_FORM_ACCORDING_TO_TYPE = AddBlockComponent;
+    if (element.toString() === 'VERTICAL_EQUATION') BLOCK_FORM_ACCORDING_TO_TYPE = InitEquationFormComponent;
+    else if (element.toString() === 'GENERAL_TABLES') BLOCK_FORM_ACCORDING_TO_TYPE = GeneralTablesBuilderComponent;
+    else if (element.toString() === 'STROKE_WRONG_ANSWER') BLOCK_FORM_ACCORDING_TO_TYPE = VersionSelectorComponent;
+    else if (element.toString() === 'STROKE_WRONG_WORD') BLOCK_FORM_ACCORDING_TO_TYPE = WordBuilderComponent;
+    else if (element.toString() === 'TEXT_UNDER_IMAGE') BLOCK_FORM_ACCORDING_TO_TYPE = TextUnderImageBuilderComponent;
+    else if (element.toString() === 'COMPOSITION_TABLE') BLOCK_FORM_ACCORDING_TO_TYPE = CompositionTableBuilderComponent;
+    else if (element.toString() === 'SEPARATE_TEXT') BLOCK_FORM_ACCORDING_TO_TYPE = ParagraphBuilderComponent;
+    else if (element.toString() === 'MATH_COMPARE') BLOCK_FORM_ACCORDING_TO_TYPE = MathStringBuilderComponent;
+    else if (element.toString() === 'COLOR_SHAPES_IMAGES') BLOCK_FORM_ACCORDING_TO_TYPE = CsiBuilderComponent;
+    else BLOCK_FORM_ACCORDING_TO_TYPE = AddBlockComponent;
 
     this.dialog
       .open(BLOCK_FORM_ACCORDING_TO_TYPE, {
@@ -153,7 +168,8 @@ export class AddExerciceComponent implements OnInit {
           exercice_type: this.exerciceForm.get('type').value
         }
       })
-      .afterClosed().subscribe((result) => {
+      .afterClosed()
+      .subscribe((result) => {
         if (result) {
           result.blockOrder = this.order++;
           this.dataSource = [...this.dataSource, result];
@@ -162,43 +178,33 @@ export class AddExerciceComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.exerciceForm.get('type').value == 'HOTSPOT') {
-      this.dataSource = [];
-      this.dataSource.push({
-        blockOrder: 0,
-        correctValue: '',
-        exerciceBlockType: ExerciceBlockTypes.IMAGE,
-        exercice_Block_Id: null,
-        isAdmissable: null,
-        label: '',
-        placeholder: '',
-        blockParams: "{'ee':'55'}",
-        value: this.hotspotImage
-      });
+    let exercice;
 
-      this.hotspotsList.forEach((hotspot, index) => {
-        this.dataSource.push({
-          blockOrder: index + 1,
-          correctValue: hotspot.correctValue,
-          exerciceBlockType: ExerciceBlockTypes.INPUT_TEXT,
-          exercice_Block_Id: null,
-          isAdmissable: null,
-          label: hotspot.y,
-          placeholder: hotspot.x,
-          value: ''
-        });
-      });
+    if (this.exerciceForm.get('type').value == 'HOTSPOT') {
+      this.setHotspotExercice();
+
+      exercice = {
+        ...this.exerciceForm.value,
+        blocks: this.dataSource
+      };
+    } else if (this.exerciceForm.get('type').value == 'DRAG_SYLLABLES') {
+      this.setSyllablesExercice();
+
+      exercice = {
+        ...this.exerciceForm.value,
+        blocks: this.dataSource
+      };
+    } else {
+      exercice = {
+        ...this.exerciceForm.value,
+        blocks: this.dataSource
+      };
     }
-    const exercice = {
-      ...this.exerciceForm.value,
-      blocks: this.dataSource
-    };
     if (this.exerciceForm.valid && this.checkBlocks()) {
       if (this.data.exercice) {
         this.serieService.updateExercice(exercice, this.data.exercice.ex_id).subscribe(async (res: Exercice) => {
           exercice.blocks.forEach((element, index) => {
             let files = [];
-            console.log(files);
 
             if (element.imageFile) {
               files.push(element.imageFile);
@@ -208,8 +214,6 @@ export class AddExerciceComponent implements OnInit {
             }
             if (files.length)
               this.serieService.addExerciceBlockFile(files, Number(res.blocks[index].exercice_Block_Id)).subscribe((resFileBlock) => {
-                console.log(resFileBlock);
-                console.log(files);
               });
           });
           if (this.exerciceForm.get('file').value !== null)
@@ -229,8 +233,6 @@ export class AddExerciceComponent implements OnInit {
             }
             if (files.length)
               this.serieService.addExerciceBlockFile(files, Number(res.blocks[index].exercice_Block_Id)).subscribe((resFileBlock) => {
-                console.log(resFileBlock);
-                console.log(files);
               });
           });
           if (this.exerciceForm.get('file').value !== null)
@@ -240,7 +242,52 @@ export class AddExerciceComponent implements OnInit {
       }
     }
   }
+  setHotspotExercice() {
+    this.dataSource = [];
+    this.dataSource.push({
+      blockOrder: 0,
+      correctValue: '',
+      exerciceBlockType: ExerciceBlockTypes.IMAGE,
+      exercice_Block_Id: null,
+      isAdmissable: null,
+      label: '',
+      placeholder: '',
+      value: this.hotspotImage
+    });
 
+    this.hotspotsList.forEach((hotspot, index) => {
+      this.dataSource.push({
+        blockOrder: index + 1,
+        correctValue: hotspot.correctValue,
+        exerciceBlockType: ExerciceBlockTypes.INPUT_TEXT,
+        exercice_Block_Id: null,
+        isAdmissable: null,
+        label: hotspot.y,
+        placeholder: hotspot.x,
+        value: ''
+      });
+    });
+  }
+  setSyllablesExercice() {
+    this.dataSource = [];
+    let i = 0;
+    this.wordsSyllablesForm.value.words.forEach((word, index) => {
+      let localWord = '';
+      word.word.forEach((syllable) => {
+        localWord += syllable.syllable + '/';
+      });
+      this.dataSource.push({
+        blockOrder: index,
+        correctValue: localWord,
+        exerciceBlockType: ExerciceBlockTypes.INPUT_TEXT,
+        exercice_Block_Id: null,
+        isAdmissable: null,
+        label: '',
+        placeholder: '',
+        value: ''
+      });
+    });
+  }
   checkBlocks() {
     return this.dataSource.length > 0;
   }
@@ -302,21 +349,26 @@ export class AddExerciceComponent implements OnInit {
       blocks: this.dataSource
     };
     if (this.exerciceForm.valid && this.checkBlocks()) {
-      this.selectedExercice = exercice;
-      this.dialog.open(ExercicePreviewComponent, {
-        width: '70%',
-        maxWidth: '70%',
-        maxHeight: '70%',
-        position: {
-          top: '10%',
-          left: '15%'
-        },
-        panelClass: 'my-custom-dialog-class',
+      this.selectedExercice = _.cloneDeep(exercice);
+      this.dialog
+        .open(ExercicePreviewComponent, {
+          width: '70%',
+          maxWidth: '85%',
+          maxHeight: '90vh',
+          position: {
+            top: '10%',
+            left: '15%'
+          },
+          panelClass: 'my-custom-dialog-class',
 
-        data: {
-          currentExercise: this.selectedExercice
-        }
-      });
+          data: {
+            currentExercise: this.selectedExercice
+          }
+        })
+        .afterClosed()
+        .subscribe((res) => {
+          this.selectedExercice = exercice;
+        });
     }
   }
 }

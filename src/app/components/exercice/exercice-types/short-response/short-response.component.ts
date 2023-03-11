@@ -89,7 +89,7 @@ export class ShortResponseComponent implements OnInit, OnChanges {
     );
   }
 
-  valueChanged() {
+  valueChanged(event: any) {
     let correct = true;
     this.questions.forEach((element) => {
       if (element.value != element.correctValue) {

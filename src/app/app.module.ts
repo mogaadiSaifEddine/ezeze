@@ -89,6 +89,7 @@ import { AjouterExcerciceComponent } from './ajouter-excercice/ajouter-excercice
 import { MatDialogModule } from '@angular/material/dialog';
 import { ListExerciceComponent } from './list-exercice/list-exercice.component';
 import { MapComponent } from './accueil/map/map.component';
+// import { ResizeInputDirective } from './directives/resize-input.directive';
 
 //import { ActivecompteComponent } from './activecompte/activecompte.component';
 
@@ -210,4 +211,4 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

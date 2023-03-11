@@ -5,8 +5,6 @@ import { environment } from 'src/environments/environment';
 })
 export class FileGetterPipe implements PipeTransform {
   transform(path: string): string {
-    console.log(environment.serverApi + path);
-
     return environment.serverApi + path;
   }
 }

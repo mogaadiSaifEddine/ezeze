@@ -26,6 +26,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DragSyllablesComponent } from './exercice-types/drag-syllables/drag-syllables.component';
 
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -46,7 +48,10 @@ import { TextUnderImageComponent } from './exercice-types/tables/text-under-imag
 import { InitEquationFormComponent } from './exercice-types/tables/vertical-equations/init-equation-form/init-equation-form.component';
 import { EquationLayoutBuilderComponent } from './exercice-types/tables/vertical-equations/equation-layout-builder/equation-layout-builder.component';
 import { EquationDisplayComponent } from './exercice-types/tables/vertical-equations/equation-display/equation-display.component';
-// EDIROE
+import { ColorSketchModule } from 'ngx-color/sketch';
+
+
+// MEDIROE
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ListeningComponent } from './exercice-types/listening/listening.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -56,7 +61,7 @@ import { GeneralTablesStudentDisplayComponent } from './exercice-types/tables/ge
 import { SentenceBuilderComponent } from './exercice-types/stroke-wrong-answer/stroke-sentence/sentence-builder/sentence-builder.component';
 import { VersionSelectorComponent } from './exercice-types/stroke-wrong-answer/version-selector/version-selector.component';
 import { StrokeAnswerDisplayComponent } from './exercice-types/stroke-wrong-answer/stroke-answer-display/stroke-answer-display.component';
-import { WordBuilderComponent } from './exercice-types/stroke-wrong-answer/stroke-sentence/word-builder/word-builder.component';
+import { WordBuilderComponent } from './exercice-types/stroke-wrong-answer/stroke-word/word-builder/word-builder.component';
 import { ShapesGroupsBuilderComponent } from './exercice-types/stroke-wrong-answer/stroke-sentence/shapes-groups-builder/shapes-groups-builder.component';
 import { TextUnderImageBuilderComponent } from './exercice-types/tables/text-under-image-builder/text-under-image-builder.component';
 const MaterialModules = [
@@ -71,10 +76,24 @@ const MaterialModules = [
   DragDropModule,
   MatSelectModule,
   MatButtonModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatProgressSpinnerModule
 ];
 
 import { FillLettersComponent } from './exercice-types/fill-letters/fill-letters.component';
+import { CompositionTableBuilderComponent } from './exercice-types/tables/composition-table/composition-table-builder/composition-table-builder.component';
+import { CompositionTableTeacherViewComponent } from './exercice-types/tables/composition-table/composition-table-teacher-view/composition-table-teacher-view.component';
+import { CompositionTableStudentDisplayComponent } from './exercice-types/tables/composition-table/composition-table-student-display/composition-table-student-display.component';
+import { ParagraphBuilderComponent } from './exercice-types/separate-text/paragraph-builder/paragraph-builder.component';
+import { ParagraphDisplayComponent } from './exercice-types/separate-text/paragraph-display/paragraph-display.component';
+import { ExerciseNotFoundComponent } from './exercise-not-found/exercise-not-found.component';
+// DIRECTIVES
+import { ResizeInputDirective } from 'src/app/directives/resize-input.directive';
+import { WordDisplayComponent } from './exercice-types/stroke-wrong-answer/stroke-word/word-display/word-display.component';
+import { MathStringBuilderComponent } from './exercice-types/math_compare/math-string-builder/math-string-builder.component';
+import { MathStringDisplayComponent } from './exercice-types/math_compare/math-string-display/math-string-display.component';
+import { CsiBuilderComponent } from './exercice-types/color-shapes-and-images/csi-builder/csi-builder.component';
+import { CsiDisplayComponent } from './exercice-types/color-shapes-and-images/csi-display/csi-display.component';
 import { DragImgWordComponent } from './exercice-types/drag-img-word/drag-img-word.component';
 
 @NgModule({
@@ -86,9 +105,11 @@ import { DragImgWordComponent } from './exercice-types/drag-img-word/drag-img-wo
     MatInputModule,
     CommonModule,
     AngularEditorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ColorSketchModule
   ],
   declarations: [
+    DragSyllablesComponent,
     MultipleChoiceComponent,
     MultipleAnswersComponent,
     TrueFalseComponent,
@@ -127,10 +148,24 @@ import { DragImgWordComponent } from './exercice-types/drag-img-word/drag-img-wo
     ShapesGroupsBuilderComponent,
     TextUnderImageBuilderComponent,
     FillLettersComponent,
+    CompositionTableBuilderComponent,
+    CompositionTableTeacherViewComponent,
+    CompositionTableStudentDisplayComponent,
+    ParagraphBuilderComponent,
+    ParagraphDisplayComponent,
+    ExerciseNotFoundComponent,
+    ResizeInputDirective,
+    WordDisplayComponent,
+    MathStringBuilderComponent,
+    MathStringDisplayComponent,
+    CsiBuilderComponent,
+    CsiDisplayComponent,
     DragImgWordComponent
   ],
   providers: [],
   exports: [
+    CsiDisplayComponent,
+    DragSyllablesComponent,
     MultipleChoiceComponent,
     MultipleAnswersComponent,
     TrueFalseComponent,
@@ -159,7 +194,13 @@ import { DragImgWordComponent } from './exercice-types/drag-img-word/drag-img-wo
     EquationDisplayComponent,
     GeneralTablesStudentDisplayComponent,
     StrokeAnswerDisplayComponent,
-    FillLettersComponent
+    FillLettersComponent,
+    ParagraphDisplayComponent,
+    CompositionTableStudentDisplayComponent,
+    ResizeInputDirective,
+    WordDisplayComponent,
+    MathStringDisplayComponent
+
   ]
 })
-export class ExerciceModule {}
+export class ExerciceModule { }

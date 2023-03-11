@@ -1,0 +1,55 @@
+<!-- <form class="container" [formGroup]="form">
+  <div formArrayName="words">
+
+    <div *ngFor="let word of wordsControls; let i = index" [formGroupName]="i">
+      <input formControlName="name">
+      <button (click)="addWord()">Add</button>
+    </div>
+
+  </div>
+  
+</form> -->
+<form [formGroup]="wordsForm" (ngSubmit)="onSubmit()">
+ 
+ 
+  Words:
+  <div formArrayName="words">
+    <div *ngFor="let word of words.controls; let i=index">
+      <div [formGroupName]="i">
+        <div class="word-title-container">
+          <span>word {{i+1}} :</span>
+          <button class="add-btn" mat-raised-button color="primary" (click)="addSyllable(i)">    
+            <span class="material-icons">add</span>
+            Add Syllable
+          </button>
+          <button class="add-btn" mat-raised-button color="warn" (click)="removeWord(i)">    
+            Remove Word
+          </button>
+        </div>
+        <div formArrayName="word" class="word-container">
+          <div *ngFor="let syllable of getSyllableArray(i).controls; let j=index" class="word">
+            <div [formGroupName]="j" class="word-container">
+
+              <input  formControlName="syllable"/>
+              <button mat-icon-button class="right close-button" >
+                <mat-icon (click)="removeSyllable(i,j)" class="close-icon" color="warn">close</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+ 
+      </div>
+    </div>
+  </div>
+ 
+</form>
+<button mat-raised-button  (click)="addWords(true)"> 
+  <span class="material-icons">add</span>
+  Add Word
+</button>
+
+ 
+ 
+ 
+ 

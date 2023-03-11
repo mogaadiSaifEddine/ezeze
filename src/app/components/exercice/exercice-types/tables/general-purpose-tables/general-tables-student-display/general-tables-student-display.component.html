@@ -1,19 +1,19 @@
 <mat-card *ngIf="exercice.name">
     <div class="question-container">
-        <mat-card-title [innerHTML]="exercice?.name" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></mat-card-title>
+        <mat-card-title [innerHTML]="exercice?.name" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }" style="font-size: 1rem !important;"></mat-card-title>
     </div>
 </mat-card>
 
 <mat-card>
     <div class="question-container">
-        <div [innerHTML]="exercice?.question"></div><br>
+        <div [innerHTML]="exercice?.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></div><br>
     </div>
     <mat-card-content class="tableGrid" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
 
-        <table *ngFor="let block of exercice?.blocks; let index = index;">
+        <table *ngFor="let block of exercice?.blocks; let index = index;" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
             <tr *ngFor="let row of block.blockParams['teacher_matrix'] let indexRow = index">
                 <td *ngFor="let field of row; let indexColumn= index">
-                    <input type="text" class="textInput" [ngClass]="(block.blockParams['student_matrix'][indexRow][indexColumn]?.length>0) && 'studentCanWriteHere'"
+                    <input type="text" class="textInput" [ngClass]="(block.blockParams['teacher_matrix'][indexRow][indexColumn]?.length<1) && 'studentCanWriteHere'"
                         [readonly]="block.blockParams['teacher_matrix'][indexRow][indexColumn]?.length>0" [value]="block.blockParams['teacher_matrix'][indexRow][indexColumn]"
                         (change)="valueChanged($event, index, block.blockParams['student_matrix'][indexRow][indexColumn])">
                 </td>

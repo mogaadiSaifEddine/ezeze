@@ -23,20 +23,35 @@
           </mat-error>
         </mat-form-field>
 
-        <angular-editor formControlName="name" [config]="editorConfig" id="angularEditor"></angular-editor>
+        <div class="mt-1 mb-1">
+          <mat-slide-toggle (change)="toggleEditorForQG()">Use input text</mat-slide-toggle>
+          <angular-editor formControlName="name" [config]="editorConfig" id="angularEditor" *ngIf="useEditorQG"></angular-editor>
+
+          <mat-form-field class="example-full-width mt-1" appearance="outline" appearance="outline" *ngIf="!(useEditorQG)">
+            <mat-label>Question Général</mat-label>
+            <input type="text" matInput formControlName="name">
+          </mat-form-field>
+        </div>
 
         <mat-form-field appearance="outline">
           <ngx-mat-file-input placeholder="Image question generale" formControlName="file"> </ngx-mat-file-input>
         </mat-form-field>
 
-        <angular-editor formControlName="question" [config]="editorConfig" id="angularEditor" placeholder="{{ 'question-de-lexercice' | translate }}"></angular-editor>
+        <div class="mt-1 mb-1">
+          <mat-slide-toggle (change)="toggleEditor()">Use input text</mat-slide-toggle>
+          <angular-editor formControlName="question" [config]="editorConfig" id="angularEditor" placeholder="{{ 'question-de-lexercice' | translate }}" *ngIf="useEditor"></angular-editor>
+
+          <mat-form-field class="example-full-width mt-1" appearance="outline" appearance="outline" *ngIf="!(useEditor)">
+            <mat-label>Question</mat-label>
+            <input type="text" matInput formControlName="question">
+          </mat-form-field>
+        </div>
 
         <mat-slide-toggle formControlName="rtl" class="example-margin">{{ !!formControls.rtl.value ? 'RTL' : 'LTR' }} </mat-slide-toggle>
       </div>
     </form>
   </div>
-
-  <div class="col-md-7" *ngIf="!['HOTSPOT'].includes(formControls.type.value)">
+  <div class="col-md-7" *ngIf="!['DRAG_SYLLABLES','HOTSPOT'].includes(exerciceForm.get('type').value)">
     <h2 mat-dialog-title>{{ 'block' | translate }}</h2>
     <mat-panel-description class="add-button">
       <button [disabled]="!this.formControls.type.value" mat-raised-button color="primary" (click)="openBlockDialog(formControls.type.value)">
@@ -110,6 +125,8 @@
       </ng-container>
     </div>
   </div>
+  <app-words-syllables-exercice class="col-md-7" [(wordsSyllablesForm)]="wordsSyllablesForm" [defaultForm]="data.exercice"
+    *ngIf="exerciceForm.get('type').value === 'DRAG_SYLLABLES'"></app-words-syllables-exercice>
 
   <div class="button-container mt-auto">
     <button (click)="onSubmit()" type="submit" class="post-button" mat-raised-button>

@@ -34,7 +34,6 @@ export class AddBlockComponent implements OnInit {
     WORD_COLORATION: [
       ExerciceBlockTypes.COLOR,
       ExerciceBlockTypes.HIGHLIGHT_TEXT,
-      ExerciceBlockTypes.COLORATE_TEXT,
       ExerciceBlockTypes.BREAK
     ],
     SELECT_FROM_LIST: [ExerciceBlockTypes.TEXT, ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.BREAK],
@@ -58,7 +57,12 @@ export class AddBlockComponent implements OnInit {
     TEXT_UNDER_IMAGE: [ExerciceBlockTypes.IMAGE_WITH_TEXT],
     VERTICAL_EQUATION: [ExerciceBlockTypes.EQUATION],
     GENERAL_TABLES: [ExerciceBlockTypes.TABLE],
-    STROKE_WRONG_ANSWER: [ExerciceBlockTypes.ANSWER_TO_STROKE]
+    STROKE_WRONG_ANSWER: [ExerciceBlockTypes.ANSWER_TO_STROKE],
+    [Exercise_Types.COMPOSITION_TABLE]: [],
+    SEPARATE_TEXT: [ExerciceBlockTypes.TEXT_TO_SEPARATE],
+    STROKE_WRONG_WORD: [ExerciceBlockTypes.WORD_TO_STROKE],
+    MATH_COMPARE: [ExerciceBlockTypes.MATH_STRING],
+    COLOR_SHAPES_IMAGES: [ExerciceBlockTypes.SHAPES_IMAGES_TO_COLOR],
   };
   readonly showFieldsFor: Record<Exercise_Types, () => void> = {
     LIKERT_SCALE: () => this.showFieldsForLikertScale(),
@@ -66,22 +70,47 @@ export class AddBlockComponent implements OnInit {
     CORRESPONDANCE: () => this.showFieldsForCorrespondance(),
     WORD_COLORATION: () => this.showFieldsForWordColoration(),
     FILL_LETTERS: (): void => this.showFieldsForFillLetters(),
-    MULTIPLE_CHOICE: (): void => {},
-    MULTIPLE_RESPONSE: (): void => {},
-    TRUE_FALSE: (): void => {},
-    SHORT_RESPONSE: (): void => {},
-    FILL_EMPTY_FIELDS: (): void => {},
-    SEQUENCING: (): void => {},
-    HOTSPOT: (): void => {},
-    DRAG_DROP: (): void => {},
-    DRAG_WORDS: (): void => {},
-    SELECT_FROM_LIST: (): void => {},
-    WRITING: (): void => {},
+    MULTIPLE_CHOICE: (): void => {
+      this.showFiledsForMultipleChoice();
+    },
+    MULTIPLE_RESPONSE: (): void => {
+      this.showFiledsForMultipleResponse();
+    },
+    TRUE_FALSE: (): void => {
+      this.showFiledsForTrueFalse();
+    },
+    SHORT_RESPONSE: (): void => {
+      this.showFiledsForShortResponse();
+    },
+    FILL_EMPTY_FIELDS: (): void => {
+      this.showFiledsForEmptyFields();
+    },
+    SEQUENCING: (): void => {
+      this.showFiledsForSequencing();
+    },
+    HOTSPOT: (): void => { },
+    DRAG_DROP: (): void => { },
+    DRAG_WORDS: (): void => {
+      this.showFiledsForDragWords();
+    },
+    SELECT_FROM_LIST: (): void => {
+      this.showFiledsForSelectFromList();
+    },
+    WRITING: (): void => {
+      this.showFiledsForWriting();
+    },
     TEXT_UNDER_IMAGE: () => this.showFieldsForTextUnderImage(),
-    VERTICAL_EQUATION: () => this.showFieldsForVerticalEquation(),
-    GENERAL_TABLES: () => this.showFieldsForGeneralTable(),
-    STROKE_WRONG_ANSWER: () => this.showFieldsForStrokeTheWrongAnswer(),
-    LINK_ARROW: (): void => {},
+    VERTICAL_EQUATION: () => this.showFieldsForDefault(),
+    GENERAL_TABLES: () => this.showFieldsForDefault(),
+    STROKE_WRONG_ANSWER: () => this.showFieldsForDefault(),
+    STROKE_WRONG_WORD: () => this.showFieldsForDefault(),
+    SEPARATE_TEXT: () => this.showFieldsForDefault(),
+    MATH_COMPARE: () => this.showFieldsForDefault(),
+    COLOR_SHAPES_IMAGES: () => this.showFieldsForDefault(),
+    LINK_ARROW: (): void => {
+      this.showFiledsForLinkArrow();
+    },
+
     [Exercise_Types.DRAG_SYLLABLES]: function (): void {
       throw new Error('Function not implemented.');
     },
@@ -97,6 +126,9 @@ export class AddBlockComponent implements OnInit {
     },
     FILL_BLANKS_IMG: (): void => this.showFieldsForFillBlanksIMG(),
     [Exercise_Types.COLOR_SHAPE]: function (): void {
+      throw new Error('Function not implemented.');
+    },
+    [Exercise_Types.COMPOSITION_TABLE]: function (): void {
       throw new Error('Function not implemented.');
     }
   };
@@ -169,7 +201,7 @@ export class AddBlockComponent implements OnInit {
   }
 
   showFieldsForTextUnderImage() {
-    if (this.blockForm.get('exerciceBlockType').value === 20) {
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.IMAGE_WITH_TEXT) {
       this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
       this.fieldData.showCorrectValue = true; // show to teacher and test to get the score
       this.fieldData.showPlaceholder = false;
@@ -181,27 +213,9 @@ export class AddBlockComponent implements OnInit {
     }
   }
 
-  showFieldsForVerticalEquation() {
-    if (this.blockForm.get('exerciceBlockType').value === 21) {
-      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
-      this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
-      this.fieldData.showPlaceholder = false;
-      this.fieldData.showValue = true;
-      this.fieldData;
-    }
-  }
-  showFieldsForGeneralTable() {
-    if (this.blockForm.get('exerciceBlockType').value === 22) {
-      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
-      this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
-      this.fieldData.showPlaceholder = false;
-      this.fieldData.showValue = true;
-      this.fieldData;
-    }
-  }
+  showFieldsForDefault() {
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.EQUATION) {
 
-  showFieldsForStrokeTheWrongAnswer() {
-    if (this.blockForm.get('exerciceBlockType').value === 23) {
       this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
       this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
       this.fieldData.showPlaceholder = false;
@@ -256,6 +270,96 @@ export class AddBlockComponent implements OnInit {
 
     this.addValueValidator();
     this.addCorrectValueValidator();
+  }
+
+  showFiledsForEmptyFields() {
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.TEXT) {
+      this.fieldData.showOnly(['showValue']);
+      this.fieldData.valueHolder = 'Veuiller saisir le texte';
+    } else {
+      this.fieldData.showOnly(['showValue', 'showCorrectValue']);
+      this.fieldData.valueHolder = 'Veuilller saisir la valeur initiale du champ vide (optionel)';
+      this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correcte du champ';
+    }
+  }
+
+  showFiledsForMultipleChoice() {
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.RADIO) {
+      this.fieldData.showOnly(['showLabel', 'showCorrectValue', 'showValue']);
+      this.fieldData.correctValueHolder = 'Veuiller saisir true si cette valuer est correcte';
+    }
+  }
+  showFiledsForMultipleResponse() {
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.INPUT_TEXT) {
+      this.fieldData.showOnly(['showLabel', 'showCorrectValue']);
+      this.fieldData.correctValueHolder = 'Veuiller saisir true si cette valuer est correcte';
+      this.fieldData.labelHolder = 'Veullier saisir true si vous vouler que le champ soit coché initialement (optionel)';
+    }
+  }
+
+  showFiledsForTrueFalse() {
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.RADIO) {
+      this.fieldData.showOnly(['showLabel', 'showCorrectValue']);
+      this.fieldData.correctValueHolder = 'Veuiller saisir true pour la valeur correcte';
+      this.fieldData.labelHolder = 'Veuiller saisir true or false';
+    }
+  }
+
+  showFiledsForShortResponse() {
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.INPUT_TEXT) {
+      this.fieldData.showOnly(['showLabel', 'showCorrectValue']);
+      this.fieldData.labelHolder = 'Veuiller saisir la question';
+      this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correcte';
+    }
+  }
+  showFiledsForSequencing() {
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.INPUT_TEXT) {
+      this.fieldData.showOnly(['showPlaceholder', 'showCorrectValue']);
+      this.fieldData.placeHolder = 'veuiller saisir le texte';
+      this.fieldData.correctValueHolder = 'Veuiller saisir la valeur par ordre en nombre ex 1';
+    }
+  }
+  showFiledsForDragWords() {
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.INPUT_TEXT) {
+      this.fieldData.showOnly(['showCorrectValue']);
+      this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correcte';
+    } else if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.TEXT) {
+      this.fieldData.showOnly(['showValue']);
+      this.fieldData.valueHolder = 'Veuiller saisir le texte';
+    } else {
+      this.fieldData.showOnly(['showValue']);
+      this.fieldData.valueHolder = 'Veuiller saisir les mots separer avec un /';
+    }
+  }
+
+  showFiledsForSelectFromList() {
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.INPUT_TEXT) {
+      this.fieldData.showOnly(['showCorrectValue', 'showPlaceholder']);
+      this.fieldData.placeHolder = 'Veuilller saisir les champ de selection séparé avec /';
+      this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correcte';
+    } else {
+      this.fieldData.showOnly(['showValue']);
+      this.fieldData.valueHolder = 'Veuiller saisir le texte';
+    }
+  }
+
+  showFiledsForWriting() {
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.INPUT_TEXT) {
+      this.fieldData.showOnly(['showCorrectValue', 'showLabel']);
+      this.fieldData.labelHolder = 'Veuiller saisir la question';
+      this.fieldData.correctValueHolder = 'Veuiller saisir la valeur correcte';
+    }
+  }
+  showFiledsForLinkArrow() {
+    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.ARROW_LEFT) {
+      this.fieldData.showOnly(['showCorrectValue', 'showLabel', 'showValue']);
+      this.fieldData.labelHolder = 'Veuiller saisir le label';
+      this.fieldData.valueHolder = 'Veuiller saisir la valuer';
+    } else {
+      this.fieldData.showOnly(['showLabel', 'showValue']);
+      this.fieldData.labelHolder = 'Veuiller saisir le label';
+      this.fieldData.valueHolder = 'Veuiller saisir la valuer';
+    }
   }
 
   initForm() {

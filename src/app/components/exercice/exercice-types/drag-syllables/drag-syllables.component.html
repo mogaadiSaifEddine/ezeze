@@ -1,0 +1,25 @@
+<mat-card *ngIf="exercice.name">
+  <div class="question-container">
+    <mat-card-content [innerHtml]="exercice?.name" style="text-align: center"> </mat-card-content>
+  </div>
+</mat-card>
+
+<mat-card class="card-container">
+  <div class="question-container">
+    <mat-card-title [innerHtml]="exercice.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+      <br />
+    </mat-card-title>
+  </div>
+  <mat-card-content [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+     <div class="word-container" *ngFor="let word of wordsList; let wordPosition = index">
+      <div cdkDropList cdkDropListOrientation="horizontal"  class="list-syllables" (cdkDropListDropped)="drop($event,word.blockFileList)">
+        <div class="syllable" *ngFor="let syllable of word.blockFileList ; let syllableIndex=index" cdkDrag>
+          {{syllable}} <span *ngIf="syllableIndex!=word.blockFileList.length-1">-</span>
+        </div>
+      </div>
+      <span class="full-word">
+        : {{word.blockFileList.join('')}}
+      </span>
+    </div>
+  </mat-card-content>
+</mat-card>

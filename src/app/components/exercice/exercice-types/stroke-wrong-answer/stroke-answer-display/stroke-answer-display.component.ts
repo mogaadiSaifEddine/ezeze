@@ -1,10 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Exercice } from 'src/app/model/Exercice';
-import { ExerciceBlock } from 'src/app/model/ExerciceBlock';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
 import * as _ from 'lodash';
 import { Renderer2 } from '@angular/core';
-
 
 @Component({
   selector: 'ines-stroke-answer-display',
@@ -30,8 +28,7 @@ export class StrokeAnswerDisplayComponent implements OnInit {
 
   private initExercice() {
     this.exercice.blocks.forEach((block: any) => {
-      console.log(block);
-      // SENTENCE BLOCKS
+      // SENTENCE BLOCKS  
       if (block.exerciceBlockType === ExerciceBlockTypes.ANSWER_TO_STROKE) {
         this.MIRROR_SENTENCES_ARRAY = Array(0);
         block.blockParams = JSON.parse(block.blockParams);
@@ -62,42 +59,6 @@ export class StrokeAnswerDisplayComponent implements OnInit {
     } else {
       this.render.addClass(event.target, "strokedSentence");
       this.keepTrackOfFinalResultForSentences('stroked', index);
-    }
-
-    this.answerChange.emit(this.finalBoolean);
-    this.canGoNext.emit(true);
-  }
-
-  // WORDS LOGIC
-  keepTrackOfFinalResultForWords(action: string, sentenceIndex: number, wordIndex: number) {
-    this.exercice.blocks.map(block => {
-      const WORDS_ARRAY = block.blockParams['sentencesWithWords'].sentencesArray[sentenceIndex].wordsArray;
-
-      if ((action === 'stroked'))
-        this.MIRROR_SENTENCES_ARRAY.push(WORDS_ARRAY[wordIndex]);
-      else
-        this.MIRROR_SENTENCES_ARRAY = this.MIRROR_SENTENCES_ARRAY.filter(e => e !== WORDS_ARRAY[wordIndex]);
-
-
-      console.table(WORDS_ARRAY);
-      console.table(this.MIRROR_SENTENCES_ARRAY);
-
-
-      // The following conditions relies on at least one element being marked as 'wrong' by the teacher
-      // otherwise this will always output useless data
-      this.finalBoolean = (this.MIRROR_SENTENCES_ARRAY.filter(e => e.isWrong === false).length === 0) && (this.MIRROR_SENTENCES_ARRAY.filter(e => e.isWrong === true).length >= 1);
-      console.log('::: FINAL ::: ', this.finalBoolean);
-
-    })
-  }
-
-  toggleStrokeForWords(event: any, index: number, i: number) {
-    if (event.target.className.includes('strokedSentence')) {
-      this.render.removeClass(event.target, "strokedSentence");
-      this.keepTrackOfFinalResultForWords('', index, i);
-    } else {
-      this.render.addClass(event.target, "strokedSentence");
-      this.keepTrackOfFinalResultForWords('stroked', index, i);
     }
 
     this.answerChange.emit(this.finalBoolean);

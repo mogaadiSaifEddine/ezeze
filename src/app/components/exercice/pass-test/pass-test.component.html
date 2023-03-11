@@ -1,167 +1,61 @@
-{{ loading }}
+<ng-container>
 
-<app-drag-drop
-  *ngIf="!loading && currentExercise.type === TYPES.DRAG_DROP"
-  [exercice]="currentExercise"
-  [(answer)]="answer"
-  (canGoNext)="canGoNext($event)"></app-drag-drop>
-<app-correspondence
-  *ngIf="!loading && currentExercise.type === TYPES.CORRESPONDANCE"
-  [exercice]="currentExercise"
-  [isCheckMode]="isAnswerChecked"
-  [(answer)]="answer"
-  (canGoNext)="canGoNext($event)"></app-correspondence>
-<app-multiple-answers
-  *ngIf="!loading && currentExercise.type === TYPES.MULTIPLE_RESPONSE"
-  [exercice]="currentExercise"
-  [(answer)]="answer"
-  (canGoNext)="canGoNext($event)"></app-multiple-answers>
+  <app-drag-drop *ngIf="!loading && currentExercise?.type === TYPES.DRAG_DROP" [exercice]="currentExercise" [(answer)]="answer" (canGoNext)="canGoNext($event)"></app-drag-drop>
+  <app-correspondence *ngIf="!loading && currentExercise?.type === TYPES.CORRESPONDANCE" [exercice]="currentExercise" [isCheckMode]="isAnswerChecked" [(answer)]="answer"
+    (canGoNext)="canGoNext($event)"></app-correspondence>
+  <app-multiple-answers *ngIf="!loading && currentExercise?.type === TYPES.MULTIPLE_RESPONSE" [exercice]="currentExercise" [(answer)]="answer" (canGoNext)="canGoNext($event)"></app-multiple-answers>
+  <app-color-the-text *ngIf="!loading && currentExercise?.type === TYPES.WORD_COLORATION" [exercice]="currentExercise" [(answer)]="answer" (canGoNext)="canGoNext($event)"></app-color-the-text>
 
-<app-color-the-text
-  *ngIf="!loading && currentExercise.type === TYPES.WORD_COLORATION"
-  [exercice]="currentExercise"
-  [(answer)]="answer"
-  (canGoNext)="canGoNext($event)"></app-color-the-text>
 
-<ines-text-under-image
-  *ngIf="!loading && currentExercise.type === TYPES.TEXT_UNDER_IMAGE"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></ines-text-under-image>
+  <ines-csi-display *ngIf="!loading && currentExercise?.type === TYPES.COLOR_SHAPES_IMAGES" [exercice]="currentExercise" [(answer)]="answer" (canGoNext)="canGoNext($event)"></ines-csi-display>
 
-<ines-equation-display
-  *ngIf="!loading && currentExercise.type === TYPES.VERTICAL_EQUATION"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></ines-equation-display>
+  <ines-text-under-image *ngIf="!loading && currentExercise?.type === TYPES.TEXT_UNDER_IMAGE" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></ines-text-under-image>
+  <ines-equation-display *ngIf="!loading && currentExercise?.type === TYPES.VERTICAL_EQUATION" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></ines-equation-display>
+  <ines-paragraph-display *ngIf="!loading && currentExercise?.type === TYPES.SEPARATE_TEXT" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></ines-paragraph-display>
+  <ines-general-tables-student-display *ngIf="!loading && currentExercise?.type === TYPES.GENERAL_TABLES" [exercice]="currentExercise" (canGoNext)="canGoNext($event)"
+    [(answer)]="answer"></ines-general-tables-student-display>
+  <ines-stroke-answer-display *ngIf="!loading && currentExercise?.type === TYPES.STROKE_WRONG_ANSWER" [exercice]="currentExercise" (canGoNext)="canGoNext($event)"
+    [(answer)]="answer"></ines-stroke-answer-display>
 
-<ines-general-tables-student-display
-  *ngIf="!loading && currentExercise.type === TYPES.GENERAL_TABLES"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></ines-general-tables-student-display>
+  <ines-word-display *ngIf="!loading && currentExercise?.type === TYPES.STROKE_WRONG_WORD" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></ines-word-display>
+  <ines-math-string-display *ngIf="!loading && currentExercise?.type === TYPES.MATH_COMPARE" [exercice]="currentExercise" (canGoNext)="canGoNext($event)"
+    [(answer)]="answer"></ines-math-string-display>
+  <ines-composition-table-student-display *ngIf="!loading && currentExercise?.type === TYPES.COMPOSITION_TABLE" [exercice]="currentExercise" (canGoNext)="canGoNext($event)"
+    [(answer)]="answer"></ines-composition-table-student-display>
+  <app-multiple-choice *ngIf="!loading && currentExercise?.type === TYPES.MULTIPLE_CHOICE" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-multiple-choice>
+  <app-true-false *ngIf="!loading && currentExercise?.type === TYPES.TRUE_FALSE" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-true-false>
+  <app-short-response *ngIf="!loading && currentExercise?.type === TYPES.SHORT_RESPONSE" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-short-response>
+  <app-fill-empty-fields *ngIf="!loading && currentExercise?.type === TYPES.FILL_EMPTY_FIELDS" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-fill-empty-fields>
+  <app-sequencing *ngIf="!loading && currentExercise?.type === TYPES.SEQUENCING" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-sequencing>
+  <app-numeric *ngIf="!loading && currentExercise?.type === TYPES.NUMERIC" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-numeric>
+  <app-select-from-list *ngIf="!loading && currentExercise?.type === TYPES.SELECT_FROM_LIST" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-select-from-list>
+  <app-likert-scale *ngIf="!loading && currentExercise?.type === TYPES.LIKERT_SCALE" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-likert-scale>
+  <app-writing *ngIf="!loading && currentExercise?.type === TYPES.WRITING" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-writing>
+  <app-corresponding-arrow *ngIf="!loading && currentExercise?.type === TYPES.LINK_ARROW" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-corresponding-arrow>
+  <ines-listening *ngIf="!loading && currentExercise?.type === TYPES.LISTEN" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></ines-listening>
+  <app-hotspot *ngIf="!loading && currentExercise?.type === TYPES.HOTSPOT" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></app-hotspot>
+  <app-drag-words *ngIf="!loading && currentExercise?.type === TYPES.DRAG_WORDS" [isCheckMode]="isAnswerChecked" [exercice]="currentExercise" (canGoNext)="canGoNext($event)"
+    [(answer)]="answer"></app-drag-words>
+  <app-drag-syllables *ngIf="!loading && currentExercise?.type === TYPES.DRAG_SYLLABLES" [isCheckMode]="isAnswerChecked" [exercice]="currentExercise" (canGoNext)="canGoNext($event)"
+    [(answer)]="answer"></app-drag-syllables>
 
-<ines-stroke-answer-display
-  *ngIf="!loading && currentExercise.type === TYPES.STROKE_WRONG_ANSWER"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></ines-stroke-answer-display>
+</ng-container>
 
-<app-multiple-choice
-  *ngIf="!loading && currentExercise.type === TYPES.MULTIPLE_CHOICE"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></app-multiple-choice>
 
-<app-multiple-choice
-  *ngIf="!loading && currentExercise.type === TYPES.MULTIPLE_CHOICE"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></app-multiple-choice>
+<!-- WEN SHIT GOES SOUTH -->
+<!-- <ines-exercise-not-found *ngIf="!currentExercise" (canGoNext)="canGoNext($event)"></ines-exercise-not-found> -->
+<div style="height: 90vh; width: 100%;" class="d-flex flex-row align-items-center justify-content-center" *ngIf="!currentExercise"><mat-spinner></mat-spinner></div>
 
-<app-true-false
-  *ngIf="!loading && currentExercise.type === TYPES.TRUE_FALSE"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></app-true-false>
-
-<app-short-response
-  *ngIf="!loading && currentExercise.type === TYPES.SHORT_RESPONSE"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></app-short-response>
-
-<app-fill-empty-fields
-  *ngIf="!loading && currentExercise.type === TYPES.FILL_EMPTY_FIELDS"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></app-fill-empty-fields>
-
-<app-sequencing
-  *ngIf="!loading && currentExercise.type === TYPES.SEQUENCING"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></app-sequencing>
-
-<app-numeric
-  *ngIf="!loading && currentExercise.type === TYPES.NUMERIC"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></app-numeric>
-
-<app-select-from-list
-  *ngIf="!loading && currentExercise.type === TYPES.SELECT_FROM_LIST"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></app-select-from-list>
-
-<app-likert-scale
-  *ngIf="!loading && currentExercise.type === TYPES.LIKERT_SCALE"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></app-likert-scale>
-
-<app-writing
-  *ngIf="!loading && currentExercise.type === TYPES.WRITING"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></app-writing>
-
-<app-corresponding-arrow
-  *ngIf="!loading && currentExercise.type === TYPES.LINK_ARROW"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></app-corresponding-arrow>
-<ines-listening
-  *ngIf="!loading && currentExercise.type === TYPES.LISTEN"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></ines-listening>
-
-<app-hotspot
-  *ngIf="!loading && currentExercise.type === TYPES.HOTSPOT"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></app-hotspot>
-
-<app-drag-words
-  *ngIf="!loading && currentExercise.type === TYPES.DRAG_WORDS"
-  [isCheckMode]="isAnswerChecked"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></app-drag-words>
-<ines-fill-letters
-  *ngIf="currentExercise.type === TYPES.FILL_LETTERS"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></ines-fill-letters>
-
-<ines-drag-img-word
-  *ngIf="!loading && currentExercise.type === TYPES.FILL_BLANKS_IMG"
-  [isCheckMode]="isAnswerChecked"
-  [exercice]="currentExercise"
-  (canGoNext)="canGoNext($event)"
-  [(answer)]="answer"></ines-drag-img-word>
 
 <div class="stepper">
   <button *ngIf="!isAnswerChecked" [disabled]="!canGoNextQuestion" mat-raised-button color="primary" (click)="checkAnswer()">
     {{ 'revision.check-answer' | translate }}
   </button>
   <ng-container *ngIf="isAnswerChecked">
-    <button
-      *ngIf="exerciceIndex === evaluationContent.exercices.length - 1"
-      [disabled]="!canGoNextQuestion"
-      mat-raised-button
-      color="primary"
-      (click)="nextQuestion()">
+    <button *ngIf="exerciceIndex === evaluationContent.exercices.length - 1" [disabled]="!canGoNextQuestion" mat-raised-button color="primary" (click)="nextQuestion('')">
       {{ 'revision.finish-test' | translate }}
     </button>
-    <button
-      *ngIf="exerciceIndex !== evaluationContent.exercices.length - 1"
-      [disabled]="!canGoNextQuestion"
-      mat-raised-button
-      color="primary"
-      (click)="nextQuestion()">
+    <button *ngIf="exerciceIndex !== evaluationContent.exercices.length - 1" [disabled]="!canGoNextQuestion" mat-raised-button color="primary" (click)="nextQuestion('bypass')">
       {{ 'revision.next' | translate }}
     </button>
   </ng-container>

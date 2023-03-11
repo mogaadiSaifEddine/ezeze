@@ -1,0 +1,53 @@
+<mat-card>
+    <mat-card-content>
+        <!-- ONLY ADD ONE GROUP PER BLOCK INSTEAD OF MULTIPLE ONES -->
+        <form [formGroup]="BIG_GROUP_FORM">
+            <div class="card mt-1">
+                <div class="card-body positoin-relative">
+                    <!-- CONTROLS -->
+                    <div class="mt-1 mb-1 p-1 d-flex flex-row justify-content-start align-items-center">
+                        <button type="button" class="btn btn-outline-primary me-1 btn-sm" (click)="addNewSentenceGroupToArray()">Add sentence / word</button>
+                    </div>
+
+                    <!-- BODY -->
+
+                    <div formArrayName="GROUP">
+                        <!-- SENTENCES -->
+                        <ng-container *ngFor="let FGROUP of GET_GROUP_FROM_ARRAY.controls; let i = index;">
+
+                            <!-- VALUE | IS A WORD (if yes, display IS WRONG) | DELETE -->
+                            <div class="input-group mt-1 mb-1" [formGroupName]="i">
+                                <!-- TYPE -->
+                                <div class="input-group-text">
+                                    <input class="form-check-input mt-0" type="checkbox" [value]="'WORD'" [id]="'sentenceType'+i" formControlName="TYPE_CONTROL">
+                                    &nbsp;
+                                    <label [for]="'sentenceType'+i">word</label>
+                                </div>
+
+                                <!-- VALUE -->
+                                <input type="text" formControlName="GROUP_CONTROL" class="form-control border border-primary" style="width: 200px !important;">
+
+                                <!-- STATUS -->
+                                <div class="input-group-text">
+                                    <input class="form-check-input mt-0" formControlName="STATUS_CONTROL" type="checkbox" [value]="'wrong'" [id]="'answerIsWrong'+i">
+                                    &nbsp;
+                                    <label [for]="'answerIsWrong'+i">wrong</label>
+                                </div>
+
+                                <!-- DELETE -->
+                                <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteCurrentSentenceFromGroup(i)"><i class="bi bi-trash3"></i></button>
+                            </div>
+                        </ng-container>
+                    </div>
+
+                    <!-- END OF ONE GROUP -->
+                </div>
+            </div>
+        </form>
+        <!-- END OF MAT CARD -->
+    </mat-card-content>
+
+    <div mat-dialog-actions [align]="'end'">
+        <button mat-raised-button color="primary" (click)="saveSentences()">Save</button>
+    </div>
+</mat-card>

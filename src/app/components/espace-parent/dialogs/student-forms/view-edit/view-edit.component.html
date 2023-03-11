@@ -5,11 +5,11 @@
         <div>
           <button mat-flat-button color="primary" type="submit" (click)="updateStudentData()" *ngIf="viewNotEditMode">
             <mat-icon>update</mat-icon>
-            Update
+            {{ 'update' | translate }}
           </button>
           <button mat-flat-button color="primary" type="submit" (click)="updateStudentData()" *ngIf="!viewNotEditMode">
             <mat-icon>save</mat-icon>
-            Save
+            {{ 'save' | translate }}
           </button>
         </div>
         <button mat-icon-button (click)="close()">
@@ -17,22 +17,22 @@
         </button>
       </header>
 
-      <span class="formSectionHeader personal">Personal Info</span>
+      <span class="formSectionHeader personal">{{ 'personal-info' | translate }}</span>
 
       <div class="nameGroup">
         <mat-form-field class="nameInput" appearance="outline">
-          <mat-label>First name</mat-label>
+          <mat-label>{{ 'signup.first-name' | translate }}</mat-label>
           <input matInput formControlName="nameControl" />
         </mat-form-field>
 
         <mat-form-field class="lastNameInput" appearance="outline">
-          <mat-label>Last name</mat-label>
+          <mat-label>{{ 'signup.last-name' | translate }}</mat-label>
           <input matInput formControlName="lastNameControl" />
         </mat-form-field>
 
         <!-- DOB -->
         <mat-form-field appearance="outline" class="datePicker">
-          <mat-label>Date of birth</mat-label>
+          <mat-label>{{ 'common.birthdate' | translate }}</mat-label>
           <input matInput [matDatepicker]="picker" formControlName="dobControl" />
           <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -41,7 +41,7 @@
       </div>
 
       <!-- ESTABLISHMENT INFO -->
-      <span class="formSectionHeader school">School Info</span>
+      <span class="formSectionHeader school">{{ 'school-info' | translate }}</span>
 
       <div class="schoolGroup">
         <!-- <mat-form-field appearance="outline" class="schoolInput">
@@ -54,7 +54,7 @@
         </mat-form-field> -->
 
         <mat-form-field appearance="outline" class="groupInput">
-          <mat-label>Group</mat-label>
+          <mat-label>{{ 'group' | translate }}</mat-label>
           <mat-select formControlName="groupControl">
             <mat-option *ngFor="let group of groupsList; let i = index" [value]="group.id">
               {{ group.name }}
@@ -64,16 +64,16 @@
       </div>
 
       <!-- ACCOUNT DETAILS -->
-      <span class="formSectionHeader personal">Account Info</span>
+      <span class="formSectionHeader personal">{{ 'account-info' | translate }}</span>
 
       <div class="accountGroup">
         <mat-form-field class="schoolInput" appearance="outline">
-          <mat-label>Password</mat-label>
+          <mat-label>{{ 'login.mot-de-passe' | translate }}</mat-label>
           <input matInput formControlName="passwordControl" />
         </mat-form-field>
 
         <mat-form-field class="tokenInput" appearance="outline">
-          <mat-label>Token</mat-label>
+          <mat-label>{{ 'token' | translate }}</mat-label>
           <input matInput formControlName="tokenControl" />
         </mat-form-field>
       </div>

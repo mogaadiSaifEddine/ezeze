@@ -5,7 +5,7 @@ import { EnseignantRoutingModule } from './enseignant-routing.module';
 import { ChapterListComponent } from './chapter-list/chapter-list.component';
 import { AddChapterComponent } from './chapter-list/add-chapter/add-chapter.component';
 import { MatStepperModule } from '@angular/material/stepper';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -33,6 +33,7 @@ import { ExercicePreviewComponent } from './chapter-list/add-chapter/add-exercic
 import { ExerciceModule } from '../exercice/exercice.module';
 // EDIROE
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { WordsSyllablesExerciceInputComponent } from './chapter-list/add-chapter/add-exercice/words-syllables-exercice/words-syllables-exercice.component';
 
 const MATERIAL_MODULES = [
   MatGridListModule,
@@ -56,6 +57,7 @@ const MATERIAL_MODULES = [
 ];
 @NgModule({
   declarations: [
+    WordsSyllablesExerciceInputComponent,
     ExercicePreviewComponent,
     ChapterListComponent,
     AddChapterComponent,
@@ -64,6 +66,7 @@ const MATERIAL_MODULES = [
     AddBlockComponent,
     AddSerieComponent
   ],
-  imports: [ExerciceModule, CommonModule, EnseignantRoutingModule, MATERIAL_MODULES, AngularEditorModule, ReactiveFormsModule, NgxMatFileInputModule, TranslateModule.forChild({})]
+  imports: [
+    ExerciceModule, CommonModule, FormsModule, EnseignantRoutingModule, MATERIAL_MODULES, AngularEditorModule, ReactiveFormsModule, NgxMatFileInputModule, TranslateModule.forChild({})]
 })
 export class EnseignantModule { }

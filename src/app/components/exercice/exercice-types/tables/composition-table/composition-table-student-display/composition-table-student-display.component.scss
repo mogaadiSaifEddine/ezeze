@@ -1,0 +1,25 @@
+table {
+  width: 100%;
+  display: block;
+  border-collapse: collapse;
+
+  td {
+    border: 1px solid #605975;
+  }
+}
+
+.textInput {
+  border: none;
+  text-align: right;
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: bold;
+  outline: none;
+  padding: 0.5rem 1rem;
+}
+
+.studentCanWriteHere {
+  background-color: #d3d2d2;
+  font-weight: normal;
+  outline: none;
+}
