@@ -128,6 +128,8 @@ export class AddBlockComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(this.x);
+
     this.initForm();
     this.blockForm
       .get('label')
@@ -407,10 +409,6 @@ export class AddBlockComponent implements OnInit {
       audioFile: [''],
       blockParams: [this.data.block?.blockParams]
     });
-    // this.blockForm.get('label').valueChanges.subscribe((el) => {
-
-    //   this.x = this.convertWeightString(el);
-    // });
   }
 
   filterTypes() {

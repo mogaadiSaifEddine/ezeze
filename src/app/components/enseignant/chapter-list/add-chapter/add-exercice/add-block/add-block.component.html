@@ -36,10 +36,7 @@
     <mat-form-field appearance="outline">
       <ngx-mat-file-input placeholder="Attachez  ici le fichier vocal" formControlName="audioFile"> </ngx-mat-file-input>
     </mat-form-field>
-    {{ data.rtl }}
-    {{ data | json }}
 
-    {{ !!data.rtl && this.data.exercice_type == ExTypes.NUMERIC }}
     <span *ngIf="!!data.rtl && this.data.exercice_type == ExTypes.NUMERIC">{{ x }}</span>
     <div class="add-button">
       <button type="submit" class="post-button" (click)="saveBlock()" mat-raised-button>

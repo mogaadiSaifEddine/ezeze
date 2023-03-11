@@ -42,13 +42,14 @@ export class NumericComponent implements OnInit, OnChanges {
       this.questions ? (this.questions.value = '') : '';
     });
     this.questionCopy = this.questions;
-    if (this.exercice['rtl']) {
+    this.initExercice();
+    if (!!this.exercice['rtl']) {
       this.questions.map((oneQuestionToBeReversed) => {
         const currentLabel = oneQuestionToBeReversed['label'];
         oneQuestionToBeReversed['label'] = this.reverseEquationToArabic(currentLabel);
       });
     }
-    this.initExercice();
+    console.log(this.questions);
   }
   private initExercice() {
     this.answerChange.emit(false);
@@ -84,46 +85,35 @@ export class NumericComponent implements OnInit, OnChanges {
     this.answerChange.emit(correct);
     this.canGoNext.emit(true);
   }
-  convertWeightString(inputString) {
-    const inputArray = inputString.split(' ');
+  // convertWeightString(inputString) {
+  //   const inputArray = inputString.split(' ');
+  //   let outputString = '';
+
+  //   for (let i = 0; i < inputArray.length; i++) {
+  //     // if (i == inputArray.length - 2) {
+  //     outputString += inputArray[i] + ' ';
+  //     // }
+  //     // else if (i == inputArray.length - 1) {
+  //     //   // outputString += inputArray[i].replace('+') + ' \u0643\u063A';
+  //     // } else {
+  //     //   outputString += inputArray[i] + ' ';
+  //     // }
+  //   }
+
+  //   return '\u202B' + outputString.trim() + '\u202C';
+  // }
+  private reverseEquationToArabic(questionLabel: string) {
+    console.log('ques');
+
+    const inputArray = questionLabel.split(' ');
     let outputString = '';
+    // inputArray.shift();
+    // inputArray.pop();
 
-    for (let i = 0; i < inputArray.length; i++) {
-      // if (i == inputArray.length - 2) {
-      outputString += inputArray[i] + ' ';
-      // }
-      // else if (i == inputArray.length - 1) {
-      //   // outputString += inputArray[i].replace('+') + ' \u0643\u063A';
-      // } else {
-      //   outputString += inputArray[i] + ' ';
-      // }
-    }
+    outputString = inputArray.join(' ');
 
+    // inputString.patchValue('\u202C' + outputString.trim() + '\u202B');
     return '\u202B' + outputString.trim() + '\u202C';
-  }
-  private reverseEquationToArabic(questionLabel: any) {
-    const ARABIC_NUMBERS = questionLabel.split(/[-+*/=]+/).reverse();
-    this.arabicValue = this.convertWeightString(questionLabel);
-    const ARABIC_OPERATION = questionLabel
-      .split(/[0-9]/)
-      .reverse()
-      .filter((el) => el !== '');
-    let FINAL_ARABIC = '';
-    let counter = 0;
-    let counter2 = 0;
-    console.log(ARABIC_OPERATION);
-    console.log(ARABIC_NUMBERS);
-
-    // MAP AND CONCATENATE
-    ARABIC_NUMBERS.map((field: any, index: number) => {
-      FINAL_ARABIC += field;
-
-      if (ARABIC_OPERATION.length) FINAL_ARABIC += ARABIC_OPERATION[0];
-      ARABIC_OPERATION.shift();
-    });
-    console.log(FINAL_ARABIC);
-
-    return FINAL_ARABIC;
   }
 
   ngOnDestroy() {

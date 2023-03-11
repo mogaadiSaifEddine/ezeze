@@ -248,7 +248,8 @@
     "add": {
       "table-columns": {
         "value": "Value",
-        "correctValue": "Correct Value"
+        "correctValue": "Correct Value",
+        "display-in-arabic": "display in Arabic"
       }
     }
   }
