@@ -105,6 +105,7 @@ export class NumericComponent implements OnInit, OnChanges {
   private reverseEquationToArabic(questionLabel: string) {
     console.log('ques');
 
+
     const inputArray = questionLabel.split(' ');
     let outputString = '';
     // inputArray.shift();
@@ -114,10 +115,10 @@ export class NumericComponent implements OnInit, OnChanges {
 
     // inputString.patchValue('\u202C' + outputString.trim() + '\u202B');
     return '\u202B' + outputString.trim() + '\u202C';
+
   }
 
   ngOnDestroy() {
-    console.log(this.exerciceCopy);
     this.exercice = this.exerciceCopy;
     this.questions = this.questionCopy;
   }

@@ -5,17 +5,17 @@
     </header>
 
     <mat-card-content>
-        <div class="radioOptins" (change)="handleUserTypeSelection($event)">
-            <label *ngFor="let varation of exerciseVarations;" for={{varation.type}}>
-                <input type="radio" name='exerciseVaration' value={{varation.type}} id={{varation.type}} />
-                <div class="contentContainer">
-                    <img src={{varation.thumbnail}} (load)="'....'" alt="thumbnail">
-                </div>
-            </label>
+        <div class="btn-group" role="group" (change)="handleUserTypeSelection($event)">
+            <ng-container *ngFor="let varation of exerciseVarations;">
+                <label [htmlFor]="varation.type" class="me-1">
+                    <input type="radio" [value]="varation.type" [id]="varation.type" name="varationType">
+                    <img src={{varation.thumbnail}} width="200px">
+                </label>
+            </ng-container>
         </div>
     </mat-card-content>
 
     <div mat-dialog-actions>
-        <button mat-raised-button color="primary" (click)="DisplayBlockCreator()">Next</button>
+        <button mat-raised-button color="warn" (click)="DisplayBlockCreator()">Next</button>
     </div>
 </mat-card>

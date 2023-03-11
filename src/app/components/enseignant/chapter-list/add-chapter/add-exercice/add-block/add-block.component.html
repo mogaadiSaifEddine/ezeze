@@ -15,7 +15,14 @@
     <mat-form-field *ngIf="fieldData.showLabel" appearance="outline">
       <input formControlName="label" matInput [placeholder]="fieldData.labelHolder" />
     </mat-form-field>
+    <mat-form-field *ngIf="fieldData.showOrder" appearance="outline">
+      <input *ngIf="!fieldData.showSelectType" formControlName="blockOrder" matInput placeholder="{{ 'order' | translate }}" />
 
+      <mat-select *ngIf="fieldData.showSelectType" formControlName="placeholder">
+        <mat-option value="img-to-text"> {{ 'Replace Images with text ' | translate }} </mat-option>
+        <mat-option value="text-to-img"> {{ 'Replace Text withg images ' | translate }}</mat-option>
+      </mat-select>
+    </mat-form-field>
     <mat-form-field *ngIf="fieldData.showPlaceholder" appearance="outline">
       <input formControlName="placeholder" matInput [placeholder]="fieldData.placeHolder" />
     </mat-form-field>
@@ -23,12 +30,9 @@
     <mat-form-field *ngIf="fieldData.showCorrectValue" appearance="outline">
       <input formControlName="correctValue" matInput [placeholder]="fieldData.correctValueHolder" />
     </mat-form-field>
+
     <mat-form-field *ngIf="fieldData.showValue" appearance="outline">
       <input formControlName="value" matInput [placeholder]="fieldData.valueHolder" />
-    </mat-form-field>
-
-    <mat-form-field *ngIf="fieldData.showOrder" appearance="outline">
-      <input formControlName="blockOrder" matInput placeholder="{{ 'order' | translate }}" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <ngx-mat-file-input placeholder="Attachez ici l'image" formControlName="imageFile"> </ngx-mat-file-input>

@@ -19,7 +19,7 @@
                             <div class="input-group mt-1 mb-1" [formGroupName]="i">
                                 <!-- TYPE -->
                                 <div class="input-group-text">
-                                    <input class="form-check-input mt-0" type="checkbox" value="word" [id]="'sentenceType'+i" formControlName="TYPE_CONTROL">
+                                    <input class="form-check-input mt-0" type="checkbox" [value]="'WORD'" [id]="'sentenceType'+i" formControlName="TYPE_CONTROL">
                                     &nbsp;
                                     <label [for]="'sentenceType'+i">word</label>
                                 </div>
@@ -29,7 +29,7 @@
 
                                 <!-- STATUS -->
                                 <div class="input-group-text">
-                                    <input class="form-check-input mt-0" formControlName="STATUS_CONTROL" type="checkbox" [value]="false" [id]="'answerIsWrong'+i">
+                                    <input class="form-check-input mt-0" formControlName="STATUS_CONTROL" type="checkbox" [value]="'wrong'" [id]="'answerIsWrong'+i">
                                     &nbsp;
                                     <label [for]="'answerIsWrong'+i">wrong</label>
                                 </div>

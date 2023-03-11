@@ -67,7 +67,6 @@ export class AquiredContentEvaluationComponent implements OnInit {
   }
   loadFile() {
     this.revisionService.chapter.subscribe((chapter: Chapter) => {
-      console.log(chapter);
 
       this.chapter = chapter;
       // if (chapter.catre_conceptuelle)
@@ -95,6 +94,8 @@ export class AquiredContentEvaluationComponent implements OnInit {
   }
   loadSerie() {
     this.revisionService.exerciceSerie.subscribe((serie: any[]) => {
+      console.log(serie);
+
       if (!serie) return;
       this.serieExercice = serie;
 
@@ -108,12 +109,24 @@ export class AquiredContentEvaluationComponent implements OnInit {
     });
   }
   getUserData() {
+    console.log(this.serieExercice);
+
     const userconnected = localStorage.getItem('userconnected');
     this.userService.getUser(userconnected).subscribe((res) => {
       this.UserId = res.user_id;
 
       this.revisionService.getLastExerciceId(this.UserId).subscribe(
         (el) => {
+          console.log(this.evaluationContent.exercices);
+
+          console.log(
+            this.exercice1Content.exercices.length == 0 &&
+              this.exercice2Content.exercices.length == 0 &&
+              this.exercice3Content.exercices.length == 0 &&
+              this.prerequisiteContent.exercices.length == 0 &&
+              this.evaluationContent.exercices.length == 0
+          );
+
           this.loading = false;
           // this.serieType = el.serie;
           this.serieType = 'EVALUATION';
@@ -142,7 +155,6 @@ export class AquiredContentEvaluationComponent implements OnInit {
           ) {
             this.router.navigate(['revision/chapitres']);
           }
-          console.log(this.serieType);
         },
         (err) => {
           this.loading = false;
@@ -180,10 +192,6 @@ export class AquiredContentEvaluationComponent implements OnInit {
   goNextStep(event) {
     this.showGoNextStepScreen = false;
 
-    console.log(
-      this.exercice1Content.exercices.length > 0 || this.exercice2Content.exercices.length > 0 || this.exercice3Content.exercices.length > 0
-    );
-
     if (
       this.exercice1Content.exercices.length > 0 ||
       this.exercice2Content.exercices.length > 0 ||
@@ -198,8 +206,6 @@ export class AquiredContentEvaluationComponent implements OnInit {
       } else if (this.score < 50) {
         this.showCourseReminderMode = true;
       } else {
-        console.log('  this.showExercicesMode ');
-
         this.showExercicesMode = true;
       }
     } else {
@@ -225,8 +231,6 @@ export class AquiredContentEvaluationComponent implements OnInit {
       score: score,
       user: this.UserId
     };
-
-    console.log(score);
 
     // this.showExercicesMode = true;
     this.selectedExercice = 1;
@@ -298,8 +302,6 @@ export class AquiredContentEvaluationComponent implements OnInit {
       score: score,
       user: this.UserId
     };
-    console.log('here end of section');
-
     // this.revisionService.addUserAnswer(userAnswer).subscribe((res) => {});
   }
   goToDashboard() {

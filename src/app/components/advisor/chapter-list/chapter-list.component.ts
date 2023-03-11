@@ -31,7 +31,7 @@ export class ChapterListComponent implements OnInit {
   // dataSource = new MatTableDataSource<Chapter>(this.chapp);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(private chapterService: ChapitreService, private serieService: SerieService, public dialog: MatDialog) {}
+  constructor(private chapterService: ChapitreService, private serieService: SerieService, public dialog: MatDialog) { }
   displayedColumns: string[] = ['Classe', 'Trimestre', 'Matiere', 'Chapitre', 'Action'];
 
   ngOnInit(): void {
@@ -51,10 +51,8 @@ export class ChapterListComponent implements OnInit {
   }
 
   openSerieDialog(element) {
-    console.log('ELEMENT',element)
     this.serieService.getSerieByChapter(element.chapter_id).subscribe((res) => {
       const serie = res;
-      console.log("Series",res)
       const dialogRef = this.dialog.open(AddSerieComponent, {
         width: '50%',
         height: 'fit-content',
@@ -62,7 +60,7 @@ export class ChapterListComponent implements OnInit {
         data: {
           series: res,
           chapter_id: element.chapter_id,
-          chapter:element
+          chapter: element
         }
       });
       dialogRef.afterClosed().subscribe((result) => {
@@ -78,7 +76,6 @@ export class ChapterListComponent implements OnInit {
       disableClose: true,
       data: element
     });
-    console.log(element);
     dialogRef.afterClosed().subscribe((result) => {
       // if (element) {
       //   let y = this.dataSource;

@@ -32,15 +32,26 @@ export class PassTestComponent implements OnInit {
   ngOnInit(): void {
     const userconnected = JSON.parse(localStorage.getItem('user_details'));
     this.UserId = userconnected.user_id;
+    console.log(this.evaluationContent);
 
     this.revisionService.getLastExerciceId(this.UserId).subscribe(
       (res) => {
         this.currentExercise = this.evaluationContent.exercices.find((ex) => ex.ex_id === res.id) || this.evaluationContent.exercices[0];
         this.loading = false;
+        this.formatGeneralQuestion();
+
       },
       (error) => {
         this.currentExercise = this.evaluationContent.exercices[0];
         this.loading = false;
+      }
+    );
+  }
+
+  private formatGeneralQuestion() {
+    const searchRegExp = /\W*(@BREAK)\W*/g;
+    const CONTENT = this.currentExercise.name.replace(searchRegExp, "<br>");
+    this.currentExercise.name = CONTENT;
       }
     );
   }
@@ -76,6 +87,7 @@ export class PassTestComponent implements OnInit {
       user: this.UserId
     };
     if (userAnswer.id !== null) this.revisionService.addUserAnswer({ ...userAnswer, score: userAnswer.scoreToSend }).subscribe((res) => { });
+
     if (this.answer) {
       this.score = this.score + 100 / this.evaluationContent.exercices.length;
     }

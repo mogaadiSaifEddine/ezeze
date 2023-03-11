@@ -10,9 +10,18 @@
 
 <ines-text-under-image *ngIf="data.currentExercise.type === TYPES.TEXT_UNDER_IMAGE" [exercice]="data.currentExercise"></ines-text-under-image>
 
+<ines-csi-display 
+    *ngIf="data.currentExercise.type === TYPES.COLOR_SHAPES_IMAGES" 
+    [exercice]="data.currentExercise"
+></ines-csi-display>
+
+
+
 <ines-general-tables-student-display *ngIf="data.currentExercise.type === TYPES.GENERAL_TABLES" [exercice]="data.currentExercise"></ines-general-tables-student-display>
 
 <ines-stroke-answer-display *ngIf="data.currentExercise.type === TYPES.STROKE_WRONG_ANSWER" [exercice]="data.currentExercise"></ines-stroke-answer-display>
+
+<ines-word-display *ngIf="data.currentExercise.type === TYPES.STROKE_WRONG_WORD" [exercice]="data.currentExercise"></ines-word-display>
 
 <ines-equation-display *ngIf="data.currentExercise.type === TYPES.VERTICAL_EQUATION" [exercice]="data.currentExercise"></ines-equation-display>
 
@@ -44,6 +53,8 @@
 
 <app-hotspot *ngIf="data.currentExercise.type === TYPES.HOTSPOT" [exercice]="data.currentExercise"></app-hotspot>
 
-<app-drag-words *ngIf="data.currentExercise.type === TYPES.DRAG_WORDS"  [exercice]="data.currentExercise"></app-drag-words>
+<app-drag-words *ngIf="data.currentExercise.type === TYPES.DRAG_WORDS" [exercice]="data.currentExercise"></app-drag-words>
 
-<ines-fill-letters *ngIf="data.currentExercise.type === TYPES.FILL_LETTERS"  [exercice]="data.currentExercise"></ines-fill-letters>
+<ines-fill-letters *ngIf="data.currentExercise.type === TYPES.FILL_LETTERS" [exercice]="data.currentExercise"></ines-fill-letters>
+
+<ines-math-string-display *ngIf="data.currentExercise.type === TYPES.MATH_COMPARE" [exercice]="data.currentExercise"></ines-math-string-display>

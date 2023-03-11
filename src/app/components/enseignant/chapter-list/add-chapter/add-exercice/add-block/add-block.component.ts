@@ -45,14 +45,22 @@ export class AddBlockComponent implements OnInit {
     [Exercise_Types.OUTSIDER_ELEMENT]: [],
     [Exercise_Types.LISTEN]: [ExerciceBlockTypes.AUDIO_IMAGE],
     [Exercise_Types.ARITHMETIC_TREE]: [],
-    [Exercise_Types.FILL_BLANKS_IMG]: [],
+    [Exercise_Types.FILL_BLANKS_IMG]: [
+      ExerciceBlockTypes.INPUT_TEXT,
+      ExerciceBlockTypes.BREAK,
+      ExerciceBlockTypes.HIGHLIGHT_TEXT,
+      ExerciceBlockTypes.TEXT
+    ],
     [Exercise_Types.COLOR_SHAPE]: [],
     TEXT_UNDER_IMAGE: [ExerciceBlockTypes.IMAGE_WITH_TEXT],
     VERTICAL_EQUATION: [ExerciceBlockTypes.EQUATION],
     GENERAL_TABLES: [ExerciceBlockTypes.TABLE],
     STROKE_WRONG_ANSWER: [ExerciceBlockTypes.ANSWER_TO_STROKE],
     [Exercise_Types.COMPOSITION_TABLE]: [],
-    SEPARATE_TEXT: [ExerciceBlockTypes.TEXT_TO_SEPARATE]
+    SEPARATE_TEXT: [ExerciceBlockTypes.TEXT_TO_SEPARATE],
+    STROKE_WRONG_WORD: [ExerciceBlockTypes.WORD_TO_STROKE],
+    MATH_COMPARE: [ExerciceBlockTypes.MATH_STRING],
+    COLOR_SHAPES_IMAGES: [ExerciceBlockTypes.SHAPES_IMAGES_TO_COLOR],
   };
   readonly showFieldsFor: Record<Exercise_Types, () => void> = {
     LIKERT_SCALE: () => this.showFieldsForLikertScale(),
@@ -90,13 +98,17 @@ export class AddBlockComponent implements OnInit {
       this.showFiledsForWriting();
     },
     TEXT_UNDER_IMAGE: () => this.showFieldsForTextUnderImage(),
-    VERTICAL_EQUATION: () => this.showFieldsForVerticalEquation(),
-    GENERAL_TABLES: () => this.showFieldsForGeneralTable(),
-    STROKE_WRONG_ANSWER: () => this.showFieldsForStrokeTheWrongAnswer(),
-    SEPARATE_TEXT: () => this.showFieldsForSeparateText(),
+    VERTICAL_EQUATION: () => this.showFieldsForDefault(),
+    GENERAL_TABLES: () => this.showFieldsForDefault(),
+    STROKE_WRONG_ANSWER: () => this.showFieldsForDefault(),
+    STROKE_WRONG_WORD: () => this.showFieldsForDefault(),
+    SEPARATE_TEXT: () => this.showFieldsForDefault(),
+    MATH_COMPARE: () => this.showFieldsForDefault(),
+    COLOR_SHAPES_IMAGES: () => this.showFieldsForDefault(),
     LINK_ARROW: (): void => {
       this.showFiledsForLinkArrow();
     },
+
     [Exercise_Types.DRAG_SYLLABLES]: function (): void {
       throw new Error('Function not implemented.');
     },
@@ -110,9 +122,7 @@ export class AddBlockComponent implements OnInit {
     [Exercise_Types.ARITHMETIC_TREE]: function (): void {
       throw new Error('Function not implemented.');
     },
-    [Exercise_Types.FILL_BLANKS_IMG]: function (): void {
-      throw new Error('Function not implemented.');
-    },
+    FILL_BLANKS_IMG: (): void => this.showFieldsForFillBlanksIMG(),
     [Exercise_Types.COLOR_SHAPE]: function (): void {
       throw new Error('Function not implemented.');
     },
@@ -166,6 +176,7 @@ export class AddBlockComponent implements OnInit {
       this.fieldData.valueHolder = "Selectioner l'url de l'image";
       this.addValueValidator();
     } else {
+      this.fieldData.showSelectType = false;
       const showFieldsForExerciceType = this.showFieldsFor[this.data.exercice_type];
       if (showFieldsForExerciceType) {
         showFieldsForExerciceType();
@@ -178,9 +189,9 @@ export class AddBlockComponent implements OnInit {
 
     this.fieldData.valueHolder = 'Veuiller saisir la valeur';
     this.fieldData.labelHolder = 'Veuiller saisir le label';
-
-    this.blockForm.get('label').addValidators([Validators.required]);
-    this.blockForm.get('value').addValidators([Validators.required]);
+    this.fieldData.showValue = false;
+    // this.blockForm.get('label').addValidators([Validators.required]);
+    // this.blockForm.get('value').addValidators([Validators.required]);
     this.blockForm.get('placeholder').clearValidators();
 
     if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.BREAK) {
@@ -227,17 +238,9 @@ export class AddBlockComponent implements OnInit {
     }
   }
 
-  showFieldsForVerticalEquation() {
+  showFieldsForDefault() {
     if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.EQUATION) {
-      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
-      this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
-      this.fieldData.showPlaceholder = false;
-      this.fieldData.showValue = true;
-      this.fieldData;
-    }
-  }
-  showFieldsForGeneralTable() {
-    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.TABLE) {
+
       this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
       this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
       this.fieldData.showPlaceholder = false;
@@ -246,25 +249,15 @@ export class AddBlockComponent implements OnInit {
     }
   }
 
-  showFieldsForStrokeTheWrongAnswer() {
-    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.ANSWER_TO_STROKE) {
-      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
-      this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
-      this.fieldData.showPlaceholder = false;
-      this.fieldData.showValue = true;
-      this.fieldData;
-    }
+  showFieldsForFillBlanksIMG() {
+    this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
+    this.fieldData.showCorrectValue = true; // show to teacher and test to get the score
+    this.fieldData.showPlaceholder = false;
+    this.fieldData.showValue = true;
+    this.fieldData.showSelectType = true;
+    this.fieldData.showOrder = true;
+    this.fieldData.correctValueHolder = 'Veuillez saisir la réponse avec les séparateurs (exp: Ines<A>cademy)';
   }
-  showFieldsForSeparateText() {
-    if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.TEXT_TO_SEPARATE) {
-      this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
-      this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
-      this.fieldData.showPlaceholder = false;
-      this.fieldData.showValue = true;
-      this.fieldData;
-    }
-  }
-
   showFieldsForCorrespondance() {
     this.fieldData.showOnly(['showLabel', 'showValue', 'showPlaceholder']);
 
@@ -409,6 +402,15 @@ export class AddBlockComponent implements OnInit {
       audioFile: [''],
       blockParams: [this.data.block?.blockParams]
     });
+    this.blockForm
+      .get('blockOrder')
+      .valueChanges.subscribe(
+        (val) =>
+          (this.fieldData.valueHolder =
+            val == 'img-to-text'
+              ? 'Veuiller saisir les valeurs correctes separées par un virgule'
+              : 'Veuiller saisir les imagesseparées par un virgule')
+      );
   }
 
   filterTypes() {

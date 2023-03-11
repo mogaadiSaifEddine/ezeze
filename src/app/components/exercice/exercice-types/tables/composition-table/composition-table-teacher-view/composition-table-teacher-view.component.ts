@@ -20,9 +20,6 @@ export class CompositionTableTeacherViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.drawTableMatrix();
-    console.log(this.MATRIX);
-    console.log(this.numRow);
-    console.log(this.complexity);
   }
 
   drawTableMatrix() {
@@ -34,23 +31,12 @@ export class CompositionTableTeacherViewComponent implements OnInit {
 
         this.MATRIX = Array.from(Array(val?.numRows), () => new Array(this.complexity));
         this.MATRIX_CORRECTED = Array.from(Array(val?.numRows), () => new Array(this.complexity));
-
-        // console.log(this.MATRIX);
-        // console.log(this.numRow);
-        // console.log(this.complexity);
-        console.log(this.type);
       }
     });
   }
 
   keepData(event: any, row: any, column: any) {
-    console.log(this.MATRIX);
-    console.log(column);
-    console.log(row);
     this.MATRIX_CORRECTED[row][column] = event.target.value;
-    console.log(this.MATRIX_CORRECTED);
-
-    console.log(event.target.value);
   }
 
   save() {
@@ -59,7 +45,6 @@ export class CompositionTableTeacherViewComponent implements OnInit {
       MATRIX_CORRECTED: this.MATRIX_CORRECTED,
       STUDENT_MATRIX: this.MATRIX
     };
-    console.log(PARAMS);
 
     this.tableBlock = {
       exerciceBlockId: null,

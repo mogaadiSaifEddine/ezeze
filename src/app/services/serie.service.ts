@@ -15,8 +15,6 @@ export class SerieService {
     return this.http.post(environment.serverApi + 'Elearning/' + 'exercice/' + serieId, exercice);
   }
   addExerciceBlockFile(files: any[], blockId: number) {
-    console.log(files);
-
     const formData = new FormData();
     files.forEach((file, index) => {
       formData.append('file', file, file.name + index);

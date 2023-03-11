@@ -12,7 +12,6 @@ export class AddSerieComponent implements OnInit {
   constructor(private dialogRef:MatDialogRef<AddSerieComponent>,@Inject(MAT_DIALOG_DATA) public data: { series: any; chapter_id: number;chapter:any },private chapterService:ChapitreService) {}
 
   ngOnInit(): void {
-    console.log("CAHPAPAPAPTER",this.data.chapter);
     this.checkChapterValidation()
   }
 
@@ -20,7 +19,6 @@ export class AddSerieComponent implements OnInit {
     let exist = this.data.series.find(series=>{
       return this.checkInvalidExercice(series.exercices)
     })
-    console.log("EXIST",exist)
     if(!exist){
       this.data.chapter.isValid=true
       this.chapterService.updateChapter(this.data.chapter,this.data.chapter_id,this.data.chapter.group.id).subscribe(res=>{})

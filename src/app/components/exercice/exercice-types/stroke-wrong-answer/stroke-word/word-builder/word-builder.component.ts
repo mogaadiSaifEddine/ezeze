@@ -43,8 +43,8 @@ export class WordBuilderComponent implements OnInit {
   addNewSentenceGroupToArray() {
     const NEW_FORM_GROUP = this.fb.group({
       GROUP_CONTROL: [null, Validators.required],
-      TYPE_CONTROL: ['sentence', Validators.required],
-      STATUS_CONTROL: [true]
+      TYPE_CONTROL: [null],
+      STATUS_CONTROL: [null]
     });
     this.GET_GROUP_FROM_ARRAY.push(NEW_FORM_GROUP);
   }
@@ -54,9 +54,7 @@ export class WordBuilderComponent implements OnInit {
   }
 
   saveSentences() {
-    console.log(this.BIG_GROUP_FORM.valid, 'FINAL FORM TO SEND IS ::: ', this.BIG_GROUP_FORM.value);
     if (this.BIG_GROUP_FORM.valid) {
-
       const PARAMS = {
         sentencesWithWords: this.BIG_GROUP_FORM.value
       }
