@@ -94,6 +94,8 @@ import { MathStringBuilderComponent } from './exercice-types/math_compare/math-s
 import { MathStringDisplayComponent } from './exercice-types/math_compare/math-string-display/math-string-display.component';
 import { CsiBuilderComponent } from './exercice-types/color-shapes-and-images/csi-builder/csi-builder.component';
 import { CsiDisplayComponent } from './exercice-types/color-shapes-and-images/csi-display/csi-display.component';
+import { DragImgWordComponent } from './exercice-types/drag-img-word/drag-img-word.component';
+
 @NgModule({
   imports: [
     MaterialModules,
@@ -158,6 +160,7 @@ import { CsiDisplayComponent } from './exercice-types/color-shapes-and-images/cs
     MathStringDisplayComponent,
     CsiBuilderComponent,
     CsiDisplayComponent,
+    DragImgWordComponent
   ],
   providers: [],
   exports: [

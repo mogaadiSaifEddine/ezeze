@@ -47,7 +47,12 @@ export class AddBlockComponent implements OnInit {
     [Exercise_Types.OUTSIDER_ELEMENT]: [],
     [Exercise_Types.LISTEN]: [ExerciceBlockTypes.AUDIO_IMAGE],
     [Exercise_Types.ARITHMETIC_TREE]: [],
-    [Exercise_Types.FILL_BLANKS_IMG]: [],
+    [Exercise_Types.FILL_BLANKS_IMG]: [
+      ExerciceBlockTypes.INPUT_TEXT,
+      ExerciceBlockTypes.BREAK,
+      ExerciceBlockTypes.HIGHLIGHT_TEXT,
+      ExerciceBlockTypes.TEXT
+    ],
     [Exercise_Types.COLOR_SHAPE]: [],
     TEXT_UNDER_IMAGE: [ExerciceBlockTypes.IMAGE_WITH_TEXT],
     VERTICAL_EQUATION: [ExerciceBlockTypes.EQUATION],
@@ -105,6 +110,7 @@ export class AddBlockComponent implements OnInit {
     LINK_ARROW: (): void => {
       this.showFiledsForLinkArrow();
     },
+
     [Exercise_Types.DRAG_SYLLABLES]: function (): void {
       throw new Error('Function not implemented.');
     },
@@ -118,9 +124,7 @@ export class AddBlockComponent implements OnInit {
     [Exercise_Types.ARITHMETIC_TREE]: function (): void {
       throw new Error('Function not implemented.');
     },
-    [Exercise_Types.FILL_BLANKS_IMG]: function (): void {
-      throw new Error('Function not implemented.');
-    },
+    FILL_BLANKS_IMG: (): void => this.showFieldsForFillBlanksIMG(),
     [Exercise_Types.COLOR_SHAPE]: function (): void {
       throw new Error('Function not implemented.');
     },
@@ -133,7 +137,7 @@ export class AddBlockComponent implements OnInit {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: { block: ExerciceBlock; exercice_type: string },
     private dialogRef: MatDialogRef<AddBlockComponent>
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -147,6 +151,7 @@ export class AddBlockComponent implements OnInit {
       this.fieldData.valueHolder = "Selectioner l'url de l'image";
       this.addValueValidator();
     } else {
+      this.fieldData.showSelectType = false;
       const showFieldsForExerciceType = this.showFieldsFor[this.data.exercice_type];
       if (showFieldsForExerciceType) {
         showFieldsForExerciceType();
@@ -159,9 +164,9 @@ export class AddBlockComponent implements OnInit {
 
     this.fieldData.valueHolder = 'Veuiller saisir la valeur';
     this.fieldData.labelHolder = 'Veuiller saisir le label';
-
-    this.blockForm.get('label').addValidators([Validators.required]);
-    this.blockForm.get('value').addValidators([Validators.required]);
+    this.fieldData.showValue = false;
+    // this.blockForm.get('label').addValidators([Validators.required]);
+    // this.blockForm.get('value').addValidators([Validators.required]);
     this.blockForm.get('placeholder').clearValidators();
 
     if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.BREAK) {
@@ -210,6 +215,7 @@ export class AddBlockComponent implements OnInit {
 
   showFieldsForDefault() {
     if (this.blockForm.get('exerciceBlockType').value === ExerciceBlockTypes.EQUATION) {
+
       this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
       this.fieldData.showCorrectValue = false; // show to teacher and test to get the score
       this.fieldData.showPlaceholder = false;
@@ -217,7 +223,15 @@ export class AddBlockComponent implements OnInit {
       this.fieldData;
     }
   }
-
+  showFieldsForFillBlanksIMG() {
+    this.fieldData.showLabel = false; // TEXT SHOWN TO STUDENT
+    this.fieldData.showCorrectValue = true; // show to teacher and test to get the score
+    this.fieldData.showPlaceholder = false;
+    this.fieldData.showValue = true;
+    this.fieldData.showSelectType = true;
+    this.fieldData.showOrder = true;
+    this.fieldData.correctValueHolder = 'Veuillez saisir la réponse avec les séparateurs (exp: Ines<A>cademy)';
+  }
   showFieldsForCorrespondance() {
     this.fieldData.showOnly(['showLabel', 'showValue', 'showPlaceholder']);
 
@@ -362,6 +376,15 @@ export class AddBlockComponent implements OnInit {
       audioFile: [''],
       blockParams: [this.data.block?.blockParams]
     });
+    this.blockForm
+      .get('blockOrder')
+      .valueChanges.subscribe(
+        (val) =>
+          (this.fieldData.valueHolder =
+            val == 'img-to-text'
+              ? 'Veuiller saisir les valeurs correctes separées par un virgule'
+              : 'Veuiller saisir les imagesseparées par un virgule')
+      );
   }
 
   filterTypes() {

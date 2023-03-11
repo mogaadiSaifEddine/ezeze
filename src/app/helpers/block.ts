@@ -3,6 +3,8 @@ export class FieldData implements FieldDataParams {
   showCorrectValue: boolean;
   showPlaceholder: boolean;
   showValue: boolean;
+  showSelectType: boolean;
+
   showOrder: boolean;
   placeHolder = 'placeholder';
   valueHolder = 'value';
@@ -32,7 +34,7 @@ export class FieldData implements FieldDataParams {
   }
   // TODO
   showOnly(attrs: FieldDataShowParam[]): void {
-    this.showNone()
+    this.showNone();
     for (const param of attrs) {
       this[param] = true;
     }

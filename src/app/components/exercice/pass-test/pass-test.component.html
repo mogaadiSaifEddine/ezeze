@@ -46,6 +46,7 @@
 <!-- <ines-exercise-not-found *ngIf="!currentExercise" (canGoNext)="canGoNext($event)"></ines-exercise-not-found> -->
 <div style="height: 90vh; width: 100%;" class="d-flex flex-row align-items-center justify-content-center" *ngIf="!currentExercise"><mat-spinner></mat-spinner></div>
 
+
 <div class="stepper">
   <button *ngIf="!isAnswerChecked" [disabled]="!canGoNextQuestion" mat-raised-button color="primary" (click)="checkAnswer()">
     {{ 'revision.check-answer' | translate }}

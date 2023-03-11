@@ -15,17 +15,16 @@ export class RevisionComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-
       this.getSerieByChapter(Number(params['chapter_id']));
     });
   }
 
   getSerieByChapter(chapterId: number) {
-
-
     this.loading = true;
-    this.revisionService.getExerciceSerieBychapter(chapterId).subscribe((res) => {
 
+    console.log(chapterId);
+
+    this.revisionService.getExerciceSerieBychapter(chapterId).subscribe((res) => {
       this.revisionService.exerciceSerie.next(res);
     });
     this.loading = false;
