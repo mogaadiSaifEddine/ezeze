@@ -40,7 +40,6 @@ export class AddExerciceComponent implements OnInit {
   ) { }
   hotspotsList = [];
   correctAnswerMode = false;
-  displayedColumns: string[] = ['ordre', 'type', 'label', 'action'];
   hotspotImage = null;
   TYPES = Exercise_Types;
   BLOCKS: any[];
@@ -100,12 +99,16 @@ export class AddExerciceComponent implements OnInit {
       ]
     ]
   };
+  displayedColumns: string[] = ['ordre', 'type', 'label', 'action'];
+
   get formControls() {
     return this.exerciceForm?.controls;
   }
 
   ngOnInit(): void {
     this.initForm();
+    this.data.exercice.rtl && this.data.exercice.type == this.TYPES.NUMERIC && this.displayedColumns.splice(2, 0, 'arabic-display');
+    ('arabic-display');
     this.loadTable();
     if (this.data.exercice) {
       this.data.exercice.blocks.forEach((block: ExerciceBlock) => {
@@ -136,7 +139,19 @@ export class AddExerciceComponent implements OnInit {
       rtl: [this.data?.exercice?.rtl ?? false]
     });
   }
+  reverseEquationToArabic(questionLabel: string) {
+    console.log('ques');
 
+    const inputArray = questionLabel.split(' ');
+    let outputString = '';
+    // inputArray.shift();
+    // inputArray.pop();
+
+    outputString = inputArray.join(' ');
+
+    // inputString.patchValue('\u202C' + outputString.trim() + '\u202B');
+    return '\u202B' + outputString.trim() + '\u202C';
+  }
   toggleEditor() {
     this.useEditor = !this.useEditor;
   }
@@ -165,7 +180,8 @@ export class AddExerciceComponent implements OnInit {
         panelClass: 'my-custom-dialog-class',
         data: {
           block: element,
-          exercice_type: this.exerciceForm.get('type').value
+          exercice_type: this.exerciceForm.get('type').value,
+          rtl: this.exerciceForm.get('rtl').value
         }
       })
       .afterClosed()
@@ -295,6 +311,8 @@ export class AddExerciceComponent implements OnInit {
     this.dataSource = [];
     if (type === Exercise_Types.FILL_LETTERS) {
       this.displayedColumns = ['ordre', 'value', 'correctValue', 'action'];
+    } else if (type === Exercise_Types.NUMERIC && !!this.exerciceForm.get('rtl').value) {
+      this.displayedColumns = ['ordre', 'type', 'label', 'action', 'arabic-display'];
     } else {
       this.displayedColumns = ['ordre', 'type', 'label', 'action'];
     }
