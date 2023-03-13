@@ -1,15 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-
-
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
+  isLoading = new Subject<boolean>();
   showManageStudentAccountGuide = new BehaviorSubject(false);
   reloadStudentsList = new BehaviorSubject(false);
   showFalfoul = new BehaviorSubject(false);
@@ -19,8 +17,16 @@ export class SharedService {
   currentToken = null;
   currentTokenData = null;
   serverApi = environment.serverApi;
-  constructor(
-    private http:HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
+  show() {
+    console.log('showing');
 
+    this.isLoading.next(true);
+  }
+
+  hide() {
+    console.log('hiding');
+
+    this.isLoading.next(false);
+  }
 }

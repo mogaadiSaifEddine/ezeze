@@ -1,4 +1,7 @@
 <!-- Used to hold any potiential toasts from the application; DO NOT DELETE -->
+<div *ngIf="loader | async" class="overlay">
+  <div class="spinner"></div>
+</div>
 <div [@pageFadeAnimation]="getRouteData()">
   <mat-drawer-container class="drawerContainer" autosize>
     <router-outlet></router-outlet>

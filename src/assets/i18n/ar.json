@@ -249,7 +249,8 @@
     "add": {
       "table-columns": {
         "correctValue": "القيمة الصحيحة",
-        "value": "قيمة"
+        "value": "قيمة",
+        "display-in-arabic": "عرض باللغة العربية"
       }
     }
   },

@@ -12,7 +12,8 @@
   </div>
   <div class="question-container">
     <!-- <mat-card-title [innerText]="exercice.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"> </mat-card-title> -->
-    <div [innerHTML]="exercice?.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></div><br>
+    <div [innerHTML]="exercice?.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></div>
+    <br />
 
     <mat-card-content [ngStyle]="exercice['rtl'] === true && { float: 'right' }">
       <div *ngFor="let question of questions">

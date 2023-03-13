@@ -51,7 +51,7 @@ import { ForgetpasswordComponent } from './registration/forgetpassword/forgetpas
 import { ResetpasswordComponent } from './registration/resetpassword/resetpassword.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { AuthInterceptor } from './registration/interceptor/AuthInterceptor';
-
+import { LoaderInterceptor } from './loader.interceptor';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { SignupComponent } from './registration/signup/signup.component';
@@ -200,7 +200,11 @@ export function HttpLoaderFactory(http: HttpClient) {
       useClass: AuthInterceptor,
       multi: true
     },
-
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true
+    },
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
@@ -211,4 +215,4 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
