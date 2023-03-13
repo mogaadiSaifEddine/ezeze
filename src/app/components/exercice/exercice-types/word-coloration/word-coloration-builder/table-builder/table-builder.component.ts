@@ -77,7 +77,7 @@ export class TableBuilderComponent implements OnInit {
       blockOrder: null,
       files: null,
       exerciceBlockType: ExerciceBlockTypes.COLOR_PARAMS,
-      blockParams: DATA
+      blockParams: JSON.stringify(DATA)
     }
 
     this.dialogRef.close(this.finalBlock);
