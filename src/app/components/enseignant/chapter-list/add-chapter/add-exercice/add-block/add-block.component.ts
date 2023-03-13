@@ -61,6 +61,7 @@ export class AddBlockComponent implements OnInit {
     STROKE_WRONG_WORD: [ExerciceBlockTypes.WORD_TO_STROKE],
     MATH_COMPARE: [ExerciceBlockTypes.MATH_STRING],
     COLOR_SHAPES_IMAGES: [ExerciceBlockTypes.SHAPES_IMAGES_TO_COLOR],
+    WORD_COLORATION_N:[this.EXERCICE_BLOCK_TYPES.COLOR_PARAMS]
   };
   readonly showFieldsFor: Record<Exercise_Types, () => void> = {
     LIKERT_SCALE: () => this.showFieldsForLikertScale(),
@@ -107,6 +108,8 @@ export class AddBlockComponent implements OnInit {
     COLOR_SHAPES_IMAGES: () => this.showFieldsForDefault(),
     LINK_ARROW: (): void => {
       this.showFiledsForLinkArrow();
+    },
+    WORD_COLORATION_N : () =>{this.showFieldsForDefault() 
     },
 
     [Exercise_Types.DRAG_SYLLABLES]: function (): void {

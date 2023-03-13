@@ -95,6 +95,8 @@ import { MathStringDisplayComponent } from './exercice-types/math_compare/math-s
 import { CsiBuilderComponent } from './exercice-types/color-shapes-and-images/csi-builder/csi-builder.component';
 import { CsiDisplayComponent } from './exercice-types/color-shapes-and-images/csi-display/csi-display.component';
 import { DragImgWordComponent } from './exercice-types/drag-img-word/drag-img-word.component';
+import { WordColorationBuilderComponent } from './exercice-types/word-coloration/word-coloration-builder/word-coloration-builder.component';
+import { WordColorationDisplayComponent } from './exercice-types/word-coloration/word-coloration-display/word-coloration-display.component';
 
 @NgModule({
   imports: [
@@ -160,7 +162,9 @@ import { DragImgWordComponent } from './exercice-types/drag-img-word/drag-img-wo
     MathStringDisplayComponent,
     CsiBuilderComponent,
     CsiDisplayComponent,
-    DragImgWordComponent
+    DragImgWordComponent,
+    WordColorationBuilderComponent,
+    WordColorationDisplayComponent
   ],
   providers: [],
   exports: [
@@ -199,7 +203,8 @@ import { DragImgWordComponent } from './exercice-types/drag-img-word/drag-img-wo
     CompositionTableStudentDisplayComponent,
     ResizeInputDirective,
     WordDisplayComponent,
-    MathStringDisplayComponent
+    MathStringDisplayComponent,
+    WordColorationDisplayComponent,
 
   ]
 })
