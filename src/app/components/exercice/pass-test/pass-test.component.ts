@@ -53,8 +53,6 @@ export class PassTestComponent implements OnInit {
     const CONTENT = this.currentExercise.name.replace(searchRegExp, "<br>");
     this.currentExercise.name = CONTENT;
       }
-    );
-  }
 
   nextQuestion(action: string) {
     if (action === "baypass") {
