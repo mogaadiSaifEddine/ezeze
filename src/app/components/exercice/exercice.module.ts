@@ -97,6 +97,7 @@ import { CsiDisplayComponent } from './exercice-types/color-shapes-and-images/cs
 import { DragImgWordComponent } from './exercice-types/drag-img-word/drag-img-word.component';
 import { WordColorationBuilderComponent } from './exercice-types/word-coloration/word-coloration-builder/word-coloration-builder.component';
 import { WordColorationDisplayComponent } from './exercice-types/word-coloration/word-coloration-display/word-coloration-display.component';
+import { TableBuilderComponent } from './exercice-types/word-coloration/word-coloration-builder/table-builder/table-builder.component';
 
 @NgModule({
   imports: [
@@ -164,7 +165,8 @@ import { WordColorationDisplayComponent } from './exercice-types/word-coloration
     CsiDisplayComponent,
     DragImgWordComponent,
     WordColorationBuilderComponent,
-    WordColorationDisplayComponent
+    WordColorationDisplayComponent,
+    TableBuilderComponent
   ],
   providers: [],
   exports: [

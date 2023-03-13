@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ExerciceBlock } from 'src/app/model/ExerciceBlock';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
+import { ExcerciceserviceService } from 'src/app/service/excerciceservice.service';
 
 @Component({
   selector: 'ines-word-coloration-builder',
@@ -11,33 +13,45 @@ import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
 export class WordColorationBuilderComponent implements OnInit {
 
   finalBlock: ExerciceBlock;
+  setupForm: FormGroup;
+  colorWheelIsVisible = false;
 
 
   constructor(
-    private dialogRef: MatDialogRef<WordColorationBuilderComponent>
+    private dialogRef: MatDialogRef<WordColorationBuilderComponent>,
+    private fb: FormBuilder,
+    private es: ExcerciceserviceService
   ) { }
 
   ngOnInit(): void {
-    
+    this.initSetupForm();
   }
 
+  // PALETTE LOGIC
+  initSetupForm() {
+    this.setupForm = this.fb.group({
+      colors: this.fb.array([]),
+      numbersOfColumns: [2, Validators.required]
+    })
+  }
 
-  saveBlock() {
-    this.finalBlock = {
-      exerciceBlockId: null,
-      exerciceId: null,
-      label: null,
-      correctValue: null,
-      isAdmissable: null,
-      placeholder: null,
-      value: null,
-      blockOrder: null,
-      files: null,
-      exerciceBlockType: ExerciceBlockTypes.COLOR_PARAMS,
-      blockParams: null
-    }
+  get GET_FORM_ARRAY(): FormArray {
+    return this.setupForm.get('colors') as FormArray;
+  }
 
-    this.dialogRef.close(this.finalBlock);
+  addFormGroupToArray() {
+    const NEW_FORM_GROUP = this.fb.group({
+      color: [],
+    });
+
+    this.GET_FORM_ARRAY.push(NEW_FORM_GROUP);
+  }
+
+  deleteGroupFromArray(index: number) {
+    this.GET_FORM_ARRAY.removeAt(index);
+  }
+  buildTable() {
+    this.es.wordColorationArraySier.next(this.setupForm.value.numbersOfColumns);
   }
 }
 

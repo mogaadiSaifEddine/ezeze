@@ -14,6 +14,8 @@ export class ExcerciceserviceService {
   // ========
   tableInfo = new BehaviorSubject(null);
 
+  wordColorationArraySier = new BehaviorSubject(2);
+
   constructor(private _http: HttpClient) { }
   ajouterserieexetblock(exercice, id: number): Observable<any> {
 
