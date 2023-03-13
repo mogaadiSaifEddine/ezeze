@@ -48,7 +48,8 @@ import { TextUnderImageComponent } from './exercice-types/tables/text-under-imag
 import { InitEquationFormComponent } from './exercice-types/tables/vertical-equations/init-equation-form/init-equation-form.component';
 import { EquationLayoutBuilderComponent } from './exercice-types/tables/vertical-equations/equation-layout-builder/equation-layout-builder.component';
 import { EquationDisplayComponent } from './exercice-types/tables/vertical-equations/equation-display/equation-display.component';
-import { ColorSketchModule } from 'ngx-color/sketch';
+import { ColorSketchModule } from 'ngx-color/sketch'
+import { ColorChromeModule } from 'ngx-color/chrome'; // <color-circle></color-circle>
 
 
 // MEDIROE
@@ -109,6 +110,7 @@ import { TableBuilderComponent } from './exercice-types/word-coloration/word-col
     CommonModule,
     AngularEditorModule,
     ReactiveFormsModule,
+    ColorChromeModule,
     ColorSketchModule
   ],
   declarations: [

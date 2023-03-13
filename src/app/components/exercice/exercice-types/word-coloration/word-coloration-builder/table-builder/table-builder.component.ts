@@ -29,8 +29,10 @@ export class TableBuilderComponent implements OnInit {
         this.ARRAY = Array.from(Array(1), () => new Array(value));
         this.ARRAY_TEACHER = Array.from(Array(1), () => new Array(value));
         this.ARRAY_STUDENT = Array.from(Array(1), () => new Array(value));
+        this.syncStudentArrayWithDefaultValues();
       }
-    })
+    });
+
   }
 
   // Constructing the Initial matrix to show (teacher's view)
@@ -38,15 +40,32 @@ export class TableBuilderComponent implements OnInit {
     if (USER === 'TEACHER')
       this.ARRAY_TEACHER[row][column] = event.target.value;
     else
-      this.ARRAY_STUDENT[row][column] = event.target.value;
+      this.ARRAY_STUDENT[row][column] = event.color.hex;
   }
 
-
-
-
-
+  syncStudentArrayWithDefaultValues() {
+    for (var i = 0; i < this.ARRAY_STUDENT.length; i++) {
+      var ROW = this.ARRAY_STUDENT[i];
+      for (var j = 0; j < ROW.length; j++) {
+        ROW[j] = "#000000";
+      }
+    }
+  }
 
   saveBlock() {
+    const DATA = [];
+
+    for (var i = 0; i < this.ARRAY_STUDENT.length; i++) {
+      var ROW = this.ARRAY_STUDENT[i];
+      for (var j = 0; j < ROW.length; j++) {
+        const data = {
+          color: ROW[j],
+          body: this.ARRAY_TEACHER[i][j]
+        }
+        DATA.push(data);
+      }
+    }
+
     this.finalBlock = {
       exerciceBlockId: null,
       exerciceId: null,
@@ -58,7 +77,7 @@ export class TableBuilderComponent implements OnInit {
       blockOrder: null,
       files: null,
       exerciceBlockType: ExerciceBlockTypes.COLOR_PARAMS,
-      blockParams: null
+      blockParams: DATA
     }
 
     this.dialogRef.close(this.finalBlock);
