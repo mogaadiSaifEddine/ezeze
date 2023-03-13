@@ -5,52 +5,24 @@
   </header>
   <mat-card-content>
 
-    <mat-vertical-stepper [linear]="true">
-      <!-- COLOR PALETTE -->
-      <mat-step [stepControl]="setupForm">
 
-        <ng-template matStepLabel>Sentence setup</ng-template>
+    <main>
+      <ng-template matStepLabel>Sentence setup</ng-template>
 
-        <form [formGroup]="setupForm" (ngSubmit)="buildTable()">
+      <form [formGroup]="setupForm" (ngSubmit)="buildTable()">
+        <div class="input-group">
+          <span class="input-group-text">Number of coloumns</span>
+          <input type="text" class="form-control" placeholder="Ex. 5" formControlName="numbersOfColumns">
+          <input class="btn btn-primary" type="submit" value="Build Table">
+        </div>
+      </form>
+    </main>
 
-          <main id="sentenceSetup">
-            <section id="colorPicker">
-              <button type="button" class="btn btn-outline-primary mb-2" (click)="addFormGroupToArray()">
-                <i class="bi bi-plus"></i>
-                New color
-              </button>
+    <section>
+      <ng-template matStepLabel>Sentence to display</ng-template>
+      <ines-table-builder></ines-table-builder>
+    </section>
 
-              <div formArrayName="colors" id="colorsGrid">
-                <ng-container *ngFor="let FGROUP of GET_FORM_ARRAY.controls; let i = index;">
-                  <div class="input-group mb-1" [formGroupName]="i">
-                    <input type="color" class="input-group-text" class="form-control form-control-color" style="width: 50px !important;" formControlName="color">
-                    <button (click)="deleteGroupFromArray(i)" class="btn btn-danger"><i class="bi bi-trash"></i></button>
-                  </div>
-                </ng-container>
-              </div>
-            </section>
 
-            <section id="arrayBuilder">
-              <div class="input-group">
-                <span class="input-group-text">Number of coloumns</span>
-                <input type="text" class="form-control" placeholder="Ex. 5" formControlName="numbersOfColumns">
-              </div>
-
-            </section>
-          </main>
-
-          <div class="col mt-1">
-            <button mat-flat-button color="primary" matStepperNext>Build Table</button>
-          </div>
-        </form>
-
-      </mat-step>
-
-      <mat-step>
-        <ng-template matStepLabel>Sentence to display</ng-template>
-        <ines-table-builder></ines-table-builder>
-      </mat-step>
-
-    </mat-vertical-stepper>
   </mat-card-content>
 </mat-card>

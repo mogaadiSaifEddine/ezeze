@@ -25,6 +25,7 @@ export class TableBuilderComponent implements OnInit {
   ngOnInit(): void {
     this.es.wordColorationArraySier.subscribe({
       next: (value: any) => {
+        value = parseInt(value);
         this.ARRAY = Array.from(Array(1), () => new Array(value));
         this.ARRAY_TEACHER = Array.from(Array(1), () => new Array(value));
         this.ARRAY_STUDENT = Array.from(Array(1), () => new Array(value));

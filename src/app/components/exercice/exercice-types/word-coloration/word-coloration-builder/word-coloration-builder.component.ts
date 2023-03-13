@@ -30,25 +30,8 @@ export class WordColorationBuilderComponent implements OnInit {
   // PALETTE LOGIC
   initSetupForm() {
     this.setupForm = this.fb.group({
-      colors: this.fb.array([]),
       numbersOfColumns: [2, Validators.required]
     })
-  }
-
-  get GET_FORM_ARRAY(): FormArray {
-    return this.setupForm.get('colors') as FormArray;
-  }
-
-  addFormGroupToArray() {
-    const NEW_FORM_GROUP = this.fb.group({
-      color: [],
-    });
-
-    this.GET_FORM_ARRAY.push(NEW_FORM_GROUP);
-  }
-
-  deleteGroupFromArray(index: number) {
-    this.GET_FORM_ARRAY.removeAt(index);
   }
   buildTable() {
     this.es.wordColorationArraySier.next(this.setupForm.value.numbersOfColumns);

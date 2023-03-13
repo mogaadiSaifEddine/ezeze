@@ -1,4 +1,5 @@
 <mat-stepper #stepper [linear]="true">
+
     <mat-step>
         <ng-template matStepLabel>Shown to students</ng-template>
         <main>
@@ -13,6 +14,8 @@
 
         <button mat-flat-button color="primary" matStepperNext class="row mt-2">Next</button>
     </mat-step>
+
+
     <mat-step>
         <ng-template matStepLabel>Correct Values</ng-template>
         <main>
@@ -20,6 +23,7 @@
                 <tr *ngFor="let row of ARRAY_TEACHER let even = even; let odd = odd; let indexRow = index" [ngClass]="{ odd: odd, even: even }">
                     <td *ngFor="let field of row; let indexColumn= index">
                         <input type="text" (change)="keepData($event, indexRow, indexColumn, 'STUDENT')" [value]="ARRAY_TEACHER[indexRow][indexColumn] ?? ''">
+                        <input type="color">
                     </td>
                 </tr>
             </table>
@@ -28,4 +32,5 @@
         <button mat-flat-button matStepperPrevious class="col mt-2">Back</button>
         <button mat-flat-button color="primary" class="col mt-2" (click)="saveBlock()">Save</button>
     </mat-step>
+
 </mat-stepper>
