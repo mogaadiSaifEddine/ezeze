@@ -1,33 +1,39 @@
 <div class="header">
-    <button mat-icon-button class="right close-button" [mat-dialog-close]="true">
-        <mat-icon class="close-icon" color="warn">close</mat-icon>
-    </button>
-
+  <button mat-icon-button class="right close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon" color="warn">close</mat-icon>
+  </button>
 </div>
 <app-drag-drop *ngIf="data.currentExercise.type === TYPES.DRAG_DROP" [exercice]="data.currentExercise"></app-drag-drop>
 
 <app-correspondence *ngIf="data.currentExercise.type === TYPES.CORRESPONDANCE" [exercice]="data.currentExercise"></app-correspondence>
 
-<ines-text-under-image *ngIf="data.currentExercise.type === TYPES.TEXT_UNDER_IMAGE" [exercice]="data.currentExercise"></ines-text-under-image>
+<ines-text-under-image
+  *ngIf="data.currentExercise.type === TYPES.TEXT_UNDER_IMAGE"
+  [exercice]="data.currentExercise"></ines-text-under-image>
 
-<ines-csi-display 
-    *ngIf="data.currentExercise.type === TYPES.COLOR_SHAPES_IMAGES" 
-    [exercice]="data.currentExercise"
-></ines-csi-display>
+<ines-csi-display *ngIf="data.currentExercise.type === TYPES.COLOR_SHAPES_IMAGES" [exercice]="data.currentExercise"></ines-csi-display>
 
+<ines-general-tables-student-display
+  *ngIf="data.currentExercise.type === TYPES.GENERAL_TABLES"
+  [exercice]="data.currentExercise"></ines-general-tables-student-display>
 
-
-<ines-general-tables-student-display *ngIf="data.currentExercise.type === TYPES.GENERAL_TABLES" [exercice]="data.currentExercise"></ines-general-tables-student-display>
-
-<ines-stroke-answer-display *ngIf="data.currentExercise.type === TYPES.STROKE_WRONG_ANSWER" [exercice]="data.currentExercise"></ines-stroke-answer-display>
+<ines-stroke-answer-display
+  *ngIf="data.currentExercise.type === TYPES.STROKE_WRONG_ANSWER"
+  [exercice]="data.currentExercise"></ines-stroke-answer-display>
 
 <ines-word-display *ngIf="data.currentExercise.type === TYPES.STROKE_WRONG_WORD" [exercice]="data.currentExercise"></ines-word-display>
 
-<ines-equation-display *ngIf="data.currentExercise.type === TYPES.VERTICAL_EQUATION" [exercice]="data.currentExercise"></ines-equation-display>
+<ines-equation-display
+  *ngIf="data.currentExercise.type === TYPES.VERTICAL_EQUATION"
+  [exercice]="data.currentExercise"></ines-equation-display>
 
-<ines-paragraph-display *ngIf="data.currentExercise.type === TYPES.SEPARATE_TEXT" [exercice]="data.currentExercise"></ines-paragraph-display>
+<ines-paragraph-display
+  *ngIf="data.currentExercise.type === TYPES.SEPARATE_TEXT"
+  [exercice]="data.currentExercise"></ines-paragraph-display>
 
-<app-multiple-answers *ngIf="data.currentExercise.type === TYPES.MULTIPLE_RESPONSE" [exercice]="data.currentExercise"></app-multiple-answers>
+<app-multiple-answers
+  *ngIf="data.currentExercise.type === TYPES.MULTIPLE_RESPONSE"
+  [exercice]="data.currentExercise"></app-multiple-answers>
 
 <app-color-the-text *ngIf="data.currentExercise.type === TYPES.WORD_COLORATION" [exercice]="data.currentExercise"></app-color-the-text>
 
@@ -37,7 +43,9 @@
 
 <app-short-response *ngIf="data.currentExercise.type === TYPES.SHORT_RESPONSE" [exercice]="data.currentExercise"></app-short-response>
 
-<app-fill-empty-fields *ngIf="data.currentExercise.type === TYPES.FILL_EMPTY_FIELDS" [exercice]="data.currentExercise"></app-fill-empty-fields>
+<app-fill-empty-fields
+  *ngIf="data.currentExercise.type === TYPES.FILL_EMPTY_FIELDS"
+  [exercice]="data.currentExercise"></app-fill-empty-fields>
 
 <app-sequencing *ngIf="data.currentExercise.type === TYPES.SEQUENCING" [exercice]="data.currentExercise"></app-sequencing>
 
@@ -57,4 +65,9 @@
 
 <ines-fill-letters *ngIf="data.currentExercise.type === TYPES.FILL_LETTERS" [exercice]="data.currentExercise"></ines-fill-letters>
 
-<ines-math-string-display *ngIf="data.currentExercise.type === TYPES.MATH_COMPARE" [exercice]="data.currentExercise"></ines-math-string-display>
+<ines-math-string-display
+  *ngIf="data.currentExercise.type === TYPES.MATH_COMPARE"
+  [exercice]="data.currentExercise"></ines-math-string-display>
+<ines-word-coloration-display
+  *ngIf="data.currentExercise.type === TYPES.WORD_COLORATION_N"
+  [exercice]="data.currentExercise"></ines-word-coloration-display>
