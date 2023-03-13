@@ -4,7 +4,7 @@
   <app-correspondence *ngIf="!loading && currentExercise?.type === TYPES.CORRESPONDANCE" [exercice]="currentExercise" [isCheckMode]="isAnswerChecked" [(answer)]="answer"
     (canGoNext)="canGoNext($event)"></app-correspondence>
   <app-multiple-answers *ngIf="!loading && currentExercise?.type === TYPES.MULTIPLE_RESPONSE" [exercice]="currentExercise" [(answer)]="answer" (canGoNext)="canGoNext($event)"></app-multiple-answers>
-  <app-color-the-text *ngIf="!loading && currentExercise?.type === TYPES.WORD_COLORATION" [exercice]="currentExercise" [(answer)]="answer" (canGoNext)="canGoNext($event)"></app-color-the-text>
+  <!-- <app-color-the-text *ngIf="!loading && currentExercise?.type === TYPES.WORD_COLORATION" [exercice]="currentExercise" [(answer)]="answer" (canGoNext)="canGoNext($event)"></app-color-the-text> -->
 
 
   <ines-csi-display *ngIf="!loading && currentExercise?.type === TYPES.COLOR_SHAPES_IMAGES" [exercice]="currentExercise" [(answer)]="answer" (canGoNext)="canGoNext($event)"></ines-csi-display>
@@ -20,7 +20,7 @@
   <ines-word-display *ngIf="!loading && currentExercise?.type === TYPES.STROKE_WRONG_WORD" [exercice]="currentExercise" (canGoNext)="canGoNext($event)" [(answer)]="answer"></ines-word-display>
   <ines-math-string-display *ngIf="!loading && currentExercise?.type === TYPES.MATH_COMPARE" [exercice]="currentExercise" (canGoNext)="canGoNext($event)"
     [(answer)]="answer"></ines-math-string-display>
-    <ines-word-coloration-display *ngIf="!loading && currentExercise?.type === TYPES.WORD_COLORATION_N" [exercice]="currentExercise" (canGoNext)="canGoNext($event)"
+  <ines-word-coloration-display *ngIf="!loading && currentExercise?.type === TYPES.WORD_COLORATION" [exercice]="currentExercise" (canGoNext)="canGoNext($event)"
     [(answer)]="answer"></ines-word-coloration-display>
   <ines-composition-table-student-display *ngIf="!loading && currentExercise?.type === TYPES.COMPOSITION_TABLE" [exercice]="currentExercise" (canGoNext)="canGoNext($event)"
     [(answer)]="answer"></ines-composition-table-student-display>
