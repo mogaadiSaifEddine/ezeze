@@ -17,6 +17,7 @@ export class WordColorationDisplayComponent implements OnInit, OnDestroy {
   width = 10;
   CONTENT_ARRAY = []; // contains a copy of exercise blocks
   finalBoolean: boolean = false;
+  palette: string[] = [];
 
   constructor(private sanitizer: DomSanitizer) { }
 
@@ -28,11 +29,21 @@ export class WordColorationDisplayComponent implements OnInit, OnDestroy {
     this.exercice.blocks.forEach((block: any) => {
       if (block.exerciceBlockType === ExerciceBlockTypes.COLOR_PARAMS) {
         // rendering blockParams object usable
-        this.CONTENT_ARRAY = (JSON.parse(block.blockParams));
+        this.CONTENT_ARRAY.push(JSON.parse(block.blockParams));
         // setting default color to display to black
         this.CONTENT_ARRAY.forEach(element => element.crrentColor = '#000000');
       }
+      this.initPalette();
     });
+  }
+
+  initPalette() {
+    this.CONTENT_ARRAY.map(SENTENCE => {
+      SENTENCE.map(sentenceBlock => {
+        this.palette.push(sentenceBlock.color);
+      })
+    });
+    this.palette = this.palette.filter((item, index) => this.palette.indexOf(item) === index)
   }
 
   colorCurrentWordWithChosenColorFromPlatte(sentenceIndex: number, wordIndex: number) {
