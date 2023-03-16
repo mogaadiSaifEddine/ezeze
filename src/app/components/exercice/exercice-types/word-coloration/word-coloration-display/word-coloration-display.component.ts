@@ -31,7 +31,7 @@ export class WordColorationDisplayComponent implements OnInit, OnDestroy {
         // rendering blockParams object usable
         this.CONTENT_ARRAY.push(JSON.parse(block.blockParams));
         // setting default color to display to black
-        this.CONTENT_ARRAY.forEach(element => element.crrentColor = '#000000');
+        this.CONTENT_ARRAY.map(subArray => subArray.forEach(element => element.crrentColor = '#000000'));
       }
       this.initPalette();
     });
@@ -47,13 +47,13 @@ export class WordColorationDisplayComponent implements OnInit, OnDestroy {
   }
 
   colorCurrentWordWithChosenColorFromPlatte(sentenceIndex: number, wordIndex: number) {
-    this.CONTENT_ARRAY[wordIndex].crrentColor = this.cursorColor;
+    this.CONTENT_ARRAY[sentenceIndex][wordIndex].crrentColor = this.cursorColor;
     this.canGoNext.emit(true);
     this.verfyAnswer();
   }
 
   verfyAnswer() {
-    this.finalBoolean = this.CONTENT_ARRAY.every(element => element.color === element.crrentColor);
+    this.CONTENT_ARRAY.map(subArray => this.finalBoolean = subArray.every(element => element.color === element.crrentColor));
     this.answerChange.emit(this.finalBoolean);
   }
 
