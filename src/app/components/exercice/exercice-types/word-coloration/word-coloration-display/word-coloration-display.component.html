@@ -17,9 +17,8 @@
       <h4>Shoose color</h4>
       <!-- Colors -->
       <div class="btn-group d-flex gap" role="group">
-        <div *ngFor="let param of block.blockFinal">
+        <div *ngFor="let param of [{ color: '#000000' }].concat(block.blockParams)">
           <button
-            *ngIf="param.color !== '#000000'"
             type="button"
             class="btn color-btn btn-outline-primary"
             (click)="selectColor(param.color)"
@@ -28,7 +27,7 @@
       </div>
       <!-- Teacher sentence  -->
       <div class="d-flex gap">
-        <div *ngFor="let param of block.blockFinal; let j = index" (click)="colorText(i, j)" [ngStyle]="{ color: param.crrentColor }">
+        <div *ngFor="let param of block.blockParams; let j = index" (click)="colorText(i, j)" [ngStyle]="{ color: param.crrentColor }">
           {{ param.body + ' ' }}
         </div>
       </div>

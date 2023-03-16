@@ -32,11 +32,12 @@ export class WordColorationDisplayComponent implements OnInit, OnDestroy {
     this.exercice.blocks.forEach((block: any) => {
       if (block.exerciceBlockType === ExerciceBlockTypes.COLOR_PARAMS) {
         block.blockParams = <Array<any>>JSON.parse(block.blockParams);
-        block.blockFinal = <Array<any>>block.blockParams;
+        //block.blockFinal = <Array<any>>block.blockParams;
 
-        block.blockFinal.forEach((element) => {
+        block.blockParams.forEach((element) => {
           element.crrentColor = '#000000';
         });
+        console.table(block.blockParams);
       }
     });
   }
@@ -44,7 +45,7 @@ export class WordColorationDisplayComponent implements OnInit, OnDestroy {
     this.cursorColor = color;
   }
   colorText(i: number, j: number) {
-    this.exercice.blocks[i].blockFinal[j].crrentColor = this.cursorColor;
+    this.exercice.blocks[i].blockParams[j].crrentColor = this.cursorColor;
     this.canGoNext.emit(true);
     this.verfiAnswer();
   }
@@ -52,7 +53,7 @@ export class WordColorationDisplayComponent implements OnInit, OnDestroy {
     let answer = true;
 
     for (let block of this.exercice.blocks) {
-      if (block.blockFinal.some((el) => el.color !== el.crrentColor)) {
+      if (block.blockParams.some((el) => el.color !== el.crrentColor)) {
         answer = false;
         break;
       }
