@@ -48,7 +48,8 @@ import { TextUnderImageComponent } from './exercice-types/tables/text-under-imag
 import { InitEquationFormComponent } from './exercice-types/tables/vertical-equations/init-equation-form/init-equation-form.component';
 import { EquationLayoutBuilderComponent } from './exercice-types/tables/vertical-equations/equation-layout-builder/equation-layout-builder.component';
 import { EquationDisplayComponent } from './exercice-types/tables/vertical-equations/equation-display/equation-display.component';
-import { ColorSketchModule } from 'ngx-color/sketch';
+import { ColorSketchModule } from 'ngx-color/sketch'
+import { ColorTwitterModule } from 'ngx-color/twitter'; // <color-circle></color-circle>
 
 
 // MEDIROE
@@ -95,6 +96,9 @@ import { MathStringDisplayComponent } from './exercice-types/math_compare/math-s
 import { CsiBuilderComponent } from './exercice-types/color-shapes-and-images/csi-builder/csi-builder.component';
 import { CsiDisplayComponent } from './exercice-types/color-shapes-and-images/csi-display/csi-display.component';
 import { DragImgWordComponent } from './exercice-types/drag-img-word/drag-img-word.component';
+import { WordColorationBuilderComponent } from './exercice-types/word-coloration/word-coloration-builder/word-coloration-builder.component';
+import { WordColorationDisplayComponent } from './exercice-types/word-coloration/word-coloration-display/word-coloration-display.component';
+import { TableBuilderComponent } from './exercice-types/word-coloration/word-coloration-builder/table-builder/table-builder.component';
 
 @NgModule({
   imports: [
@@ -106,7 +110,8 @@ import { DragImgWordComponent } from './exercice-types/drag-img-word/drag-img-wo
     CommonModule,
     AngularEditorModule,
     ReactiveFormsModule,
-    ColorSketchModule
+    ColorSketchModule,
+    ColorTwitterModule,
   ],
   declarations: [
     DragSyllablesComponent,
@@ -160,7 +165,10 @@ import { DragImgWordComponent } from './exercice-types/drag-img-word/drag-img-wo
     MathStringDisplayComponent,
     CsiBuilderComponent,
     CsiDisplayComponent,
-    DragImgWordComponent
+    DragImgWordComponent,
+    WordColorationBuilderComponent,
+    WordColorationDisplayComponent,
+    TableBuilderComponent
   ],
   providers: [],
   exports: [
@@ -199,7 +207,8 @@ import { DragImgWordComponent } from './exercice-types/drag-img-word/drag-img-wo
     CompositionTableStudentDisplayComponent,
     ResizeInputDirective,
     WordDisplayComponent,
-    MathStringDisplayComponent
+    MathStringDisplayComponent,
+    WordColorationDisplayComponent,
 
   ]
 })

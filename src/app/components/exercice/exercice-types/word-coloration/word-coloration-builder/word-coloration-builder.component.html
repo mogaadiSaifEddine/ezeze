@@ -1,0 +1,28 @@
+<mat-card>
+  <header>
+    <h3>Word Coloration block</h3>
+    <a href="https://i.imgur.com/bwOedRQ.png" target="_blank" class="btn btn-default btn-circle" style="border-radius: 50%;"><i class="bi bi-question-circle"></i></a>
+  </header>
+  <mat-card-content>
+
+
+    <main>
+      <ng-template matStepLabel>Sentence setup</ng-template>
+
+      <form [formGroup]="setupForm" (ngSubmit)="buildTable()">
+        <div class="input-group">
+          <span class="input-group-text">Number of coloumns</span>
+          <input type="text" class="form-control" placeholder="Ex. 5" formControlName="numbersOfColumns">
+          <input class="btn btn-primary" type="submit" value="Build Table">
+        </div>
+      </form>
+    </main>
+
+    <section>
+      <ng-template matStepLabel>Sentence to display</ng-template>
+      <ines-table-builder></ines-table-builder>
+    </section>
+
+
+  </mat-card-content>
+</mat-card>

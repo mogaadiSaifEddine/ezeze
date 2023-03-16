@@ -1,0 +1,26 @@
+header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#sentenceSetup {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+#colorsGrid {
+    width: 100%;
+    max-width: 500px;
+
+    display: grid;
+    grid-gap: 1rem;
+    grid-auto-rows: auto;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+}

@@ -1,0 +1,34 @@
+<mat-card *ngIf="exercice.name">
+  <div class="question-container">
+    <mat-card-title [innerHTML]="exercice?.name" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }" style="font-size: 1rem !important"></mat-card-title>
+  </div>
+</mat-card>
+
+<mat-card>
+  <div class="question-container">
+    <div [innerHTML]="exercice?.question" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"></div>
+    <br />
+  </div>
+  <mat-card-content [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
+    <!-- Color Palette setup -->
+    <div class="btn-group d-flex gap" role="group">
+      <div *ngFor="let color of palette">
+        <button class="btn color-btn btn-outline" (click)="cursorColor = color;" [ngStyle]="{ background: color }"></button>
+      </div>
+    </div>
+    <hr>
+
+    <!-- DISPLAYING EACH BLOCK (akan, sentence) ON ITS OWN -->
+    <section [style.cursor]="cursor" *ngFor="let block of exercice.blocks; let sentenceIndex=index">
+
+      <!-- Teacher sentence  -->
+      <div class="d-flex gap">
+        <div *ngFor="let param of CONTENT_ARRAY[sentenceIndex]; let wordIndex=index" (click)="colorCurrentWordWithChosenColorFromPlatte(sentenceIndex, wordIndex)"
+          [ngStyle]="{ color: param.crrentColor }">
+          {{ param.body + ' ' }}
+        </div>
+      </div>
+
+    </section>
+  </mat-card-content>
+</mat-card>

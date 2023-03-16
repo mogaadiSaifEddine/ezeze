@@ -33,7 +33,7 @@ export class AddBlockComponent implements OnInit {
     LIKERT_SCALE: [ExerciceBlockTypes.INPUT_TEXT],
     MULTIPLE_RESPONSE: [ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.QUESTION],
     NUMERIC: [ExerciceBlockTypes.INPUT_NUMBER],
-    WORD_COLORATION: [ExerciceBlockTypes.COLOR, ExerciceBlockTypes.HIGHLIGHT_TEXT, ExerciceBlockTypes.BREAK],
+    WORD_COLORATION: [this.EXERCICE_BLOCK_TYPES.COLOR_PARAMS],
     SELECT_FROM_LIST: [ExerciceBlockTypes.TEXT, ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.BREAK],
     FILL_EMPTY_FIELDS: [ExerciceBlockTypes.TEXT, ExerciceBlockTypes.INPUT_TEXT, ExerciceBlockTypes.BREAK],
     DRAG_DROP: [ExerciceBlockTypes.DRAG_DROP_IMAGE_LIST],
@@ -66,7 +66,7 @@ export class AddBlockComponent implements OnInit {
     LIKERT_SCALE: () => this.showFieldsForLikertScale(),
     NUMERIC: () => this.showFieldsForNumeric(),
     CORRESPONDANCE: () => this.showFieldsForCorrespondance(),
-    WORD_COLORATION: () => this.showFieldsForWordColoration(),
+    WORD_COLORATION: () => this.showFieldsForDefault(),
     FILL_LETTERS: (): void => this.showFieldsForFillLetters(),
     MULTIPLE_CHOICE: (): void => {
       this.showFiledsForMultipleChoice();
@@ -86,8 +86,8 @@ export class AddBlockComponent implements OnInit {
     SEQUENCING: (): void => {
       this.showFiledsForSequencing();
     },
-    HOTSPOT: (): void => {},
-    DRAG_DROP: (): void => {},
+    HOTSPOT: (): void => { },
+    DRAG_DROP: (): void => { },
     DRAG_WORDS: (): void => {
       this.showFiledsForDragWords();
     },
@@ -108,7 +108,6 @@ export class AddBlockComponent implements OnInit {
     LINK_ARROW: (): void => {
       this.showFiledsForLinkArrow();
     },
-
     [Exercise_Types.DRAG_SYLLABLES]: function (): void {
       throw new Error('Function not implemented.');
     },
@@ -135,7 +134,7 @@ export class AddBlockComponent implements OnInit {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: { block: ExerciceBlock; exercice_type: string; rtl?: boolean },
     private dialogRef: MatDialogRef<AddBlockComponent>
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     console.log(this.x);
@@ -406,10 +405,10 @@ export class AddBlockComponent implements OnInit {
       .get('blockOrder')
       .valueChanges.subscribe(
         (val) =>
-          (this.fieldData.valueHolder =
-            val == 'img-to-text'
-              ? 'Veuiller saisir les valeurs correctes separées par un virgule'
-              : 'Veuiller saisir les imagesseparées par un virgule')
+        (this.fieldData.valueHolder =
+          val == 'img-to-text'
+            ? 'Veuiller saisir les valeurs correctes separées par un virgule'
+            : 'Veuiller saisir les imagesseparées par un virgule')
       );
   }
 

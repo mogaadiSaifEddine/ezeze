@@ -12,6 +12,7 @@ export interface ExerciceBlock {
   value?: string | boolean;
   blockOrder?: number;
   files?: any[];
-  blockParams?: Object | string | null | undefined;
+  blockParams?: Object | string | null | undefined |Array<any>;
   blockFileList?: any[];
+  blockFinal?:any
 }
