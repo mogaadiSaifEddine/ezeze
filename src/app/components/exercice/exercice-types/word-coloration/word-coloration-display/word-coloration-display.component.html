@@ -1,9 +1,6 @@
 <mat-card *ngIf="exercice.name">
   <div class="question-container">
-    <mat-card-title
-      [innerHTML]="exercice?.name"
-      [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }"
-      style="font-size: 1rem !important"></mat-card-title>
+    <mat-card-title [innerHTML]="exercice?.name" [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }" style="font-size: 1rem !important"></mat-card-title>
   </div>
 </mat-card>
 
@@ -13,24 +10,24 @@
     <br />
   </div>
   <mat-card-content [ngStyle]="exercice['rtl'] === true && { direction: 'rtl' }">
-    <section [style.cursor]="cursor" *ngFor="let block of exercice.blocks; let i = index">
-      <h4>Shoose color</h4>
-      <!-- Colors -->
+    <!-- DISPLAYING EACH BLOCK ON ITS OWN -->
+    <section [style.cursor]="cursor" *ngFor="let block of exercice.blocks; let sentenceIndex=index">
+
+      <!-- Color Palette setup -->
       <div class="btn-group d-flex gap" role="group">
-        <div *ngFor="let param of [{ color: '#000000' }].concat(block.blockParams)">
-          <button
-            type="button"
-            class="btn color-btn btn-outline-primary"
-            (click)="selectColor(param.color)"
-            [ngStyle]="{ background: param.color }"></button>
+        <div *ngFor="let param of CONTENT_ARRAY">
+          <button class="btn color-btn btn-outline" (click)="cursorColor = param.color;" [ngStyle]="{ background: param.color }"></button>
         </div>
       </div>
+      <hr>
+
       <!-- Teacher sentence  -->
       <div class="d-flex gap">
-        <div *ngFor="let param of block.blockParams; let j = index" (click)="colorText(i, j)" [ngStyle]="{ color: param.crrentColor }">
+        <div *ngFor="let param of CONTENT_ARRAY; let wordIndex=index" (click)="colorCurrentWordWithChosenColorFromPlatte(sentenceIndex, wordIndex)" [ngStyle]="{ color: param.crrentColor }">
           {{ param.body + ' ' }}
         </div>
       </div>
+
     </section>
   </mat-card-content>
 </mat-card>

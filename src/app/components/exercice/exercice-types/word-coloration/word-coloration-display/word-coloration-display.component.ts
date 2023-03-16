@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { AnswerFeedback, Exercice } from 'src/app/model/Exercice';
+import { Exercice } from 'src/app/model/Exercice';
 import { ExerciceBlockTypes } from 'src/app/model/ExerciceBlockTypes';
 import * as _ from 'lodash';
-import { ExerciceBlock } from 'src/app/model/ExerciceBlock';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 @Component({
   selector: 'ines-word-coloration-display',
@@ -14,62 +13,44 @@ export class WordColorationDisplayComponent implements OnInit, OnDestroy {
   @Input() answer: boolean;
   @Output() answerChange = new EventEmitter<boolean>();
   @Output() canGoNext = new EventEmitter<boolean>();
-  cursorColor = '';
+  cursorColor = '#000';
   width = 10;
-  color: string;
-  alpha = 1;
+  CONTENT_ARRAY = []; // contains a copy of exercise blocks
+  finalBoolean: boolean = false;
+
+  constructor(private sanitizer: DomSanitizer) { }
 
   get cursor(): SafeStyle {
     return this.sanitizer.bypassSecurityTrustStyle(this.makeCursor());
   }
-  constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
-    this.initExercice();
-  }
-
-  private initExercice() {
     this.exercice.blocks.forEach((block: any) => {
       if (block.exerciceBlockType === ExerciceBlockTypes.COLOR_PARAMS) {
-        block.blockParams = <Array<any>>JSON.parse(block.blockParams);
-        //block.blockFinal = <Array<any>>block.blockParams;
-
-        block.blockParams.forEach((element) => {
-          element.crrentColor = '#000000';
-        });
-        console.table(block.blockParams);
+        // rendering blockParams object usable
+        this.CONTENT_ARRAY = (JSON.parse(block.blockParams));
+        // setting default color to display to black
+        this.CONTENT_ARRAY.forEach(element => element.crrentColor = '#000000');
       }
     });
   }
-  selectColor(color: string) {
-    this.cursorColor = color;
-  }
-  colorText(i: number, j: number) {
-    this.exercice.blocks[i].blockParams[j].crrentColor = this.cursorColor;
+
+  colorCurrentWordWithChosenColorFromPlatte(sentenceIndex: number, wordIndex: number) {
+    this.CONTENT_ARRAY[wordIndex].crrentColor = this.cursorColor;
     this.canGoNext.emit(true);
-    this.verfiAnswer();
+    this.verfyAnswer();
   }
-  verfiAnswer() {
-    let answer = true;
 
-    for (let block of this.exercice.blocks) {
-      if (block.blockParams.some((el) => el.color !== el.crrentColor)) {
-        answer = false;
-        break;
-      }
-    }
-
-    this.answerChange.emit(answer);
+  verfyAnswer() {
+    this.finalBoolean = this.CONTENT_ARRAY.every(element => element.color === element.crrentColor);
+    this.answerChange.emit(this.finalBoolean);
   }
+
   makeCursor() {
-    const cursor = document.createElement('canvas'),
-      ctx = cursor.getContext('2d');
+    const cursor = document.createElement('canvas'), ctx = cursor.getContext('2d');
 
-    cursor.width = this.width;
-    cursor.height = this.width;
-    ctx.strokeStyle = this.cursorColor ?? 'black';
+    cursor.width = cursor.height = this.width;
     ctx.fillStyle = this.cursorColor ?? 'black';
-    ctx.globalAlpha = this.alpha;
     ctx.beginPath();
     ctx.arc(this.width / 2, this.width / 2, this.width / 2, 0, 2 * Math.PI);
     ctx.fill();
