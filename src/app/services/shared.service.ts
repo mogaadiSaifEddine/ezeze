@@ -29,4 +29,8 @@ export class SharedService {
 
     this.isLoading.next(false);
   }
+  replaceBreaksInQuestion(name : string){
+    return name.replace(/\W*(@BREAK)\W*/g,'<br>')
+  }
+ 
 }
